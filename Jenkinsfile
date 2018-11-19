@@ -32,7 +32,6 @@ def RELEASE_BRANCH = false
 // def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com, cc:fernando.rijocedeno@broadcom.com, cc:michael.bauer2@broadcom.com, cc:mark.ackert@broadcom.com, cc:daniel.kelosky@broadcom.com"
 def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com"
 
-
 /**
  * The result string for a successful build
  */
@@ -61,7 +60,7 @@ def GIT_USER_EMAIL = 'zowe.robot@gmail.com'
 /**
  * The base repository url for github
  */
-def GIT_REPO_URL = 'github.com/zowe/imperative.git'
+def GIT_REPO_URL = 'github.com/zowe/perf-timing.git'
 
 /**
  * The credentials id field for the authorization token for GitHub stored in Jenkins
