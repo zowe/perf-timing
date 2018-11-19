@@ -1,6 +1,16 @@
 {
   "extends": "tslint:latest",
+  "rulesDirectory": ["tslint-consistent-codestyle"],
   "rules": {
+    "no-static-this": true,
+    "naming-convention": [
+      true,
+      {"type": "member", "modifiers": "private", "leadingUnderscore": "require"},
+      {"type": "member", "modifiers": ["static", "readonly"], "format": "UPPER_CASE"},
+      {"type": "member", "modifiers": ["readonly"], "format": "camelCase"},
+      {"type": "class", "modifiers": "abstract", "prefix": "Abstract"}
+    ],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "one-line": false,

@@ -24,22 +24,22 @@ export class PerformanceTools {
      * This is the environmental variable that should be set to turn on
      * performance tests.
      */
-    public static readonly PERF_ENV_CHECK = "IMPERATIVE_ENABLE_PERFORMANCE";
+    public static readonly PERF_ENV_CHECK = "PERF_TIMING";
 
     /**
      * Private singleton reference to the PerformanceTools
      */
-    private static mInstance: PerformanceTools;
+    private static _instance: PerformanceTools;
 
     /**
      * Get the singleton PerformanceTools, create the class if necessary.
      */
     public static get instance(): PerformanceTools {
-        if (PerformanceTools.mInstance == null) {
-            PerformanceTools.mInstance = new PerformanceTools();
+        if (PerformanceTools._instance == null) {
+            PerformanceTools._instance = new PerformanceTools();
         }
 
-        return PerformanceTools.mInstance;
+        return PerformanceTools._instance;
     }
 
     /**
@@ -49,25 +49,25 @@ export class PerformanceTools {
     public readonly isPerfEnabled: boolean;
 
     // @TODO DOCUMENT
-    private functionTimers: Map<string,IFunctionTimer> = new Map();
+    private _functionTimers: Map<string,IFunctionTimer> = new Map();
 
     /**
      * This variable holds the import from the Node JS performance hooks
      * library.
      */
-    private readonly perfHooks: typeof perfHooks;
+    private readonly _perfHooks: typeof perfHooks;
 
     constructor() {
         // Check if performance utilities should be enabled.
         if(
             process.env[PerformanceTools.PERF_ENV_CHECK] &&
-            process.env[PerformanceTools.PERF_ENV_CHECK].toUpperCase() === "TRUE"
+            process.env[PerformanceTools.PERF_ENV_CHECK].toUpperCase() === "ENABLE"
         ) {
             this.isPerfEnabled = true;
 
             // Delay the require so we don't waste resources when performance
             // isn't needed.
-            this.perfHooks = require("perf_hooks");
+            this._perfHooks = require("perf_hooks");
 
             process.on("exit", () => {
                console.log("NODE EXIT OCCURING...PRINTING METRICS");
@@ -81,19 +81,19 @@ export class PerformanceTools {
 
     public clearMarks(name?: string) {
         if (this.isPerfEnabled) {
-            this.perfHooks.performance.clearMarks(name);
+            this._perfHooks.performance.clearMarks(name);
         }
     }
 
     public mark(name: string) {
         if (this.isPerfEnabled) {
-            this.perfHooks.performance.mark(name);
+            this._perfHooks.performance.mark(name);
         }
     }
 
     public measure(name: string, startMark: string, endMark: string) {
         if (this.isPerfEnabled) {
-            this.perfHooks.performance.measure(name, startMark, endMark);
+            this._perfHooks.performance.measure(name, startMark, endMark);
         }
     }
 
@@ -105,7 +105,7 @@ export class PerformanceTools {
             }
 
             // Throw an error if the timer already exists in the map.
-            if (this.functionTimers.has(name)) {
+            if (this._functionTimers.has(name)) {
                 throw new (require("./errors").TimerNameConflictError)(name);
             }
 
@@ -117,10 +117,10 @@ export class PerformanceTools {
                 totalCalls: 0
             };
 
-            this.functionTimers.set(name, observerObject);
+            this._functionTimers.set(name, observerObject);
 
             // Create a function observer
-            observerObject.observer = new this.perfHooks.PerformanceObserver((list) => {
+            observerObject.observer = new this._perfHooks.PerformanceObserver((list) => {
                 // const entries = list.getEntriesByName(fn.name);
                 const entries = list.getEntriesByName(fn.name);
 
@@ -133,7 +133,7 @@ export class PerformanceTools {
             observerObject.observer.observe({entryTypes: ["function"], buffered: true});
 
             // Wrap the function in a timer
-            return this.perfHooks.performance.timerify(fn);
+            return this._perfHooks.performance.timerify(fn);
         } else {
             // If performance is not enabled, we need to return the function
             // so original code doesn't get broken.
@@ -160,7 +160,7 @@ export class PerformanceTools {
                 timer = /timerified (.*)/g.exec(timer)[1];
             }
 
-            const timerRef = this.functionTimers.get(timer);
+            const timerRef = this._functionTimers.get(timer);
 
             if (timerRef !== undefined) {
                 timerRef.observer.disconnect();
@@ -184,7 +184,7 @@ export class PerformanceTools {
 
             // console.log(this.perfHooks.performance.nodeTiming);
 
-            const timing = this.perfHooks.performance.nodeTiming;
+            const timing = this._perfHooks.performance.nodeTiming;
 
             output += "Node Run Statistics\n";
             output += "-------------------\n";
@@ -199,7 +199,7 @@ export class PerformanceTools {
             output += "\nFunction Timers\n";
             output += "---------------\n";
 
-            const functionTimers = this.functionTimers.entries();
+            const functionTimers = this._functionTimers.entries();
 
             for (const [key, value] of functionTimers) {
                 output += `${key}:\n\tCalled: ${value.totalCalls}\n\tTotal Time: ${value.totalDuration}ms` +
