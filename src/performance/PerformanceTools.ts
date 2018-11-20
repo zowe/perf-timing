@@ -19,28 +19,45 @@ interface IFunctionTimer {
     totalCalls: number;
 }
 
+interface IMeaureTimer {
+    observer: perfHooks.PerformanceObserver;
+    measurements: IMeasurment[];
+}
+
+interface IMeasurment {
+    name: string;
+    startTime: number;
+    startMarkName: string;
+    endMarkName: string;
+    duration: number;
+}
+
+interface IPerfEnabled {
+    isPerfEnabled: boolean;
+}
+
 export class PerformanceTools {
     /**
      * This is the environmental variable that should be set to turn on
      * performance tests.
      */
-    public static readonly PERF_ENV_CHECK = "PERF_TIMING";
+    // public static readonly PERF_ENV_CHECK = "PERF_TIMING";
 
-    /**
-     * Private singleton reference to the PerformanceTools
-     */
-    private static _instance: PerformanceTools;
+    // /**
+    //  * Private singleton reference to the PerformanceTools
+    //  */
+    // private static _instance: PerformanceTools;
 
-    /**
-     * Get the singleton PerformanceTools, create the class if necessary.
-     */
-    public static get instance(): PerformanceTools {
-        if (PerformanceTools._instance == null) {
-            PerformanceTools._instance = new PerformanceTools();
-        }
+    // /**
+    //  * Get the singleton PerformanceTools, create the class if necessary.
+    //  */
+    // public static get instance(): PerformanceTools {
+    //     if (PerformanceTools._instance == null) {
+    //         PerformanceTools._instance = new PerformanceTools();
+    //     }
 
-        return PerformanceTools._instance;
-    }
+    //     return PerformanceTools._instance;
+    // }
 
     /**
      * @TODO DOCUMENT
@@ -50,6 +67,7 @@ export class PerformanceTools {
 
     // @TODO DOCUMENT
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
+    private _measureTimers: Map<string, number> = new Map();
 
     /**
      * This variable holds the import from the Node JS performance hooks
@@ -57,23 +75,20 @@ export class PerformanceTools {
      */
     private readonly _perfHooks: typeof perfHooks;
 
-    constructor() {
+    constructor(private readonly _manager: IPerfEnabled) { // @TODO Separate file for the interfaces
         // Check if performance utilities should be enabled.
-        if(
-            process.env[PerformanceTools.PERF_ENV_CHECK] &&
-            process.env[PerformanceTools.PERF_ENV_CHECK].toUpperCase() === "ENABLE"
-        ) {
+        if(this._manager.isPerfEnabled) {
             this.isPerfEnabled = true;
 
             // Delay the require so we don't waste resources when performance
             // isn't needed.
             this._perfHooks = require("perf_hooks");
 
-            process.on("exit", () => {
-               console.log("NODE EXIT OCCURING...PRINTING METRICS");
-               console.log("-------------------------------------");
-               this.outputMetrics();
-            });
+            // process.on("exit", () => {
+            //    console.log("NODE EXIT OCCURING...PRINTING METRICS");
+            //    console.log("-------------------------------------");
+            //    this.outputMetrics();
+            // });
         } else {
             this.isPerfEnabled = false;
         }
@@ -93,6 +108,13 @@ export class PerformanceTools {
 
     public measure(name: string, startMark: string, endMark: string) {
         if (this.isPerfEnabled) {
+            const obs = new this._perfHooks.PerformanceObserver((list, observer) => {
+                console.log(list.getEntriesByName(name));
+
+                observer.disconnect();
+            });
+            obs.observe({entryTypes: ["measure"]});
+
             this._perfHooks.performance.measure(name, startMark, endMark);
         }
     }
@@ -176,7 +198,7 @@ export class PerformanceTools {
     /**
      * Output raw performance metrics to a file. Should be the last call in execution.
      */
-    public outputMetrics() {
+    public getMetrics(): string {
         if (this.isPerfEnabled) {
             // @TODO All metrics should be stopped before reporting
 
@@ -206,7 +228,7 @@ export class PerformanceTools {
                     `\n\tAverage Time: ${value.totalDuration/value.totalCalls}ms\n\n`;
             }
 
-            console.log(output);
+            return output;
         }
     }
 }
