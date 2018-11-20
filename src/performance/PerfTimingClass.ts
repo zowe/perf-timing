@@ -61,6 +61,7 @@ export class PerfTimingClass implements IPerfEnabled {
         }
     }
 
+    // @TODO -> change to getter method
     public getApi(): PerformanceTools {
         if (this._managedApi == null) {
             // Defers the import until it is needed, will improve performance when 

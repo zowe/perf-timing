@@ -36,6 +36,9 @@ interface IMeasurment {
     duration: number;
 }
 
+//@TODO remove this
+console.log("here");
+
 export class PerformanceTools {
 
     // @TODO DOCUMENT
