@@ -12,6 +12,10 @@
 // Imported for typings. This will not be reflected in the generated code.
 import * as perfHooks from "perf_hooks";
 
+import {IPerfEnabled} from "./interfaces";
+
+// @TODO Separate file for the interfaces
+
 interface IFunctionTimer {
     observer: perfHooks.PerformanceObserver;
     originalFunction: (...args: any[]) => any;
@@ -32,38 +36,7 @@ interface IMeasurment {
     duration: number;
 }
 
-interface IPerfEnabled {
-    isPerfEnabled: boolean;
-}
-
 export class PerformanceTools {
-    /**
-     * This is the environmental variable that should be set to turn on
-     * performance tests.
-     */
-    // public static readonly PERF_ENV_CHECK = "PERF_TIMING";
-
-    // /**
-    //  * Private singleton reference to the PerformanceTools
-    //  */
-    // private static _instance: PerformanceTools;
-
-    // /**
-    //  * Get the singleton PerformanceTools, create the class if necessary.
-    //  */
-    // public static get instance(): PerformanceTools {
-    //     if (PerformanceTools._instance == null) {
-    //         PerformanceTools._instance = new PerformanceTools();
-    //     }
-
-    //     return PerformanceTools._instance;
-    // }
-
-    /**
-     * @TODO DOCUMENT
-     * Boolean that keeps track of if performance is enabled.
-     */
-    public readonly isPerfEnabled: boolean;
 
     // @TODO DOCUMENT
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
@@ -75,11 +48,9 @@ export class PerformanceTools {
      */
     private readonly _perfHooks: typeof perfHooks;
 
-    constructor(private readonly _manager: IPerfEnabled) { // @TODO Separate file for the interfaces
+    constructor(private readonly _manager: IPerfEnabled) {
         // Check if performance utilities should be enabled.
         if(this._manager.isPerfEnabled) {
-            this.isPerfEnabled = true;
-
             // Delay the require so we don't waste resources when performance
             // isn't needed.
             this._perfHooks = require("perf_hooks");
@@ -89,25 +60,23 @@ export class PerformanceTools {
             //    console.log("-------------------------------------");
             //    this.outputMetrics();
             // });
-        } else {
-            this.isPerfEnabled = false;
         }
     }
 
     public clearMarks(name?: string) {
-        if (this.isPerfEnabled) {
+        if (this._manager.isPerfEnabled) {
             this._perfHooks.performance.clearMarks(name);
         }
     }
 
     public mark(name: string) {
-        if (this.isPerfEnabled) {
+        if (this._manager.isPerfEnabled) {
             this._perfHooks.performance.mark(name);
         }
     }
 
     public measure(name: string, startMark: string, endMark: string) {
-        if (this.isPerfEnabled) {
+        if (this._manager.isPerfEnabled) {
             const obs = new this._perfHooks.PerformanceObserver((list, observer) => {
                 console.log(list.getEntriesByName(name));
 
@@ -120,7 +89,7 @@ export class PerformanceTools {
     }
 
     public timerify(fn: (...args: any[]) => any, name?: string) {
-        if (this.isPerfEnabled) {
+        if (this._manager.isPerfEnabled) {
             // Check if we should use the function name or the passed name for tracking.
             if (name == null) {
                 name = fn.name;
@@ -170,7 +139,7 @@ export class PerformanceTools {
      * @todo document
      */
     public untimerify(fn: ((...args: any[]) => any), name?: string) {
-        if (this.isPerfEnabled) {
+        if (this._manager.isPerfEnabled) {
             let timer = fn.name;
 
             // Extract the name of the function if necessary
@@ -199,12 +168,11 @@ export class PerformanceTools {
      * Output raw performance metrics to a file. Should be the last call in execution.
      */
     public getMetrics(): string {
-        if (this.isPerfEnabled) {
+        if (this._manager.isPerfEnabled) {
             // @TODO All metrics should be stopped before reporting
 
-            let output = "";
-
-            // console.log(this.perfHooks.performance.nodeTiming);
+            let output = "NODE EXIT OCCURING...PRINTING METRICS\n";
+            output += "-------------------------------------\n\n";
 
             const timing = this._perfHooks.performance.nodeTiming;
 

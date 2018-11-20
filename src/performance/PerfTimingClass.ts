@@ -1,9 +1,10 @@
 import { PerformanceTools } from './PerformanceTools';
+import { IPerfEnabled } from './interfaces';
 
 //////////////////////////////////////////
 /////////////// GLOBAL TYPING ////////////
 //////////////////////////////////////////
-const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerfTiming");
+const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerfTimingClass");
 
 declare module NodeJS {
     interface Global {
@@ -19,7 +20,7 @@ declare var global: NodeJS.Global
 /**
  * This class is a manager of all available performance tools
  */
-export class PerfTimingClass { // @TODO implements and separate file
+export class PerfTimingClass implements IPerfEnabled {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
     // to reduce overhead on getApi call
     public static readonly ENV_PREFIX = "PERF_TIMING";
@@ -30,6 +31,7 @@ export class PerfTimingClass { // @TODO implements and separate file
 
     private _managedApi: PerformanceTools;
 
+    // Document
     constructor() {
         if (
             process.env[PerfTimingClass.ENV_PREFIX] &&
@@ -61,7 +63,10 @@ export class PerfTimingClass { // @TODO implements and separate file
 
     public getApi(): PerformanceTools {
         if (this._managedApi == null) {
-            this._managedApi = new PerformanceTools(this);
+            // Defers the import until it is needed, will improve performance when 
+            // performance api hasn't yet been called.
+            const PerfImport: typeof PerformanceTools = require("./PerformanceTools").PerformanceTools;
+            this._managedApi = new PerfImport(this);
 
             if (this.isPerfEnabled) {
                 global[GLOBAL_SYMBOL].set(PerfTimingClass.INSTANCE_SYMBOL, this._managedApi);
@@ -71,12 +76,4 @@ export class PerfTimingClass { // @TODO implements and separate file
         // Can guarentee that this will be unique per package instance :)
         return this._managedApi;
     }
-
-    // public configure(name: string) {
-    //     if (global[GLOBAL_SYMBOL].has(name)) {
-    //         throw new Error ("CAN'T BE DUPLICATE, NEED ERROR CLASS");
-    //     }
-    // }
-
-    //TODO EXPORT CLASS HERE SOMEHOW
 }
