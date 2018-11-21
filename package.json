@@ -25,10 +25,13 @@
     "lint:tests": "tslint --format stylish -c ./tslint-tests.json \"**/__tests__/**/*.ts\"",
     "watch": "gulp watch"
   },
-  "dependencies": {},
+  "dependencies": {
+    "pkg-up": "^2.0.0"
+  },
   "devDependencies": {
     "@types/jest": "23.3.9",
     "@types/node": "8.10.37",
+    "@types/pkg-up": "^2.0.0",
     "jest": "23.6.0",
     "jest-environment-node": "23.4.0",
     "jest-environment-node-debug": "2.0.0",

@@ -23,8 +23,9 @@ interface IFunctionTimer {
     totalCalls: number;
 }
 
-interface IMeaureTimer {
+interface IMeasureTimer {
     observer: perfHooks.PerformanceObserver;
+    isConnected: boolean;
     measurements: IMeasurment[];
 }
 
@@ -36,14 +37,29 @@ interface IMeasurment {
     duration: number;
 }
 
-//@TODO remove this
-console.log("here");
+interface IFunctionMetric {
+    name: string;
+    calls: number;
+    totalDuration: number; // Both in ms
+    averageDuration: number;
+}
+interface IMetrics {
+    functions: IFunctionMetric[];
+    measurements: IMeasurmentMetric[];
+}
+interface IMeasurmentMetric {
+    name: string;
+    calls: number; // Number of measurements with this name
+    totalDuration: number; // Total time of measurements in ms
+    averageDuration: number; // Average time of measurements
+    data: IMeasurment[]; // The raw measurement data
+}
 
 export class PerformanceTools {
 
     // @TODO DOCUMENT
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
-    private _measureTimers: Map<string, number> = new Map();
+    private _measureTimers: Map<string,IMeasureTimer> = new Map();
 
     /**
      * This variable holds the import from the Node JS performance hooks
@@ -78,14 +94,47 @@ export class PerformanceTools {
         }
     }
 
+
+    // @TODO document
     public measure(name: string, startMark: string, endMark: string) {
         if (this._manager.isPerfEnabled) {
-            const obs = new this._perfHooks.PerformanceObserver((list, observer) => {
-                console.log(list.getEntriesByName(name));
+            let mapObject: IMeasureTimer;
 
-                observer.disconnect();
-            });
-            obs.observe({entryTypes: ["measure"]});
+            if (this._measureTimers.has(name)) {
+                mapObject = this._measureTimers.get(name);
+            } else {
+                // Create the map object when needed
+                mapObject = {
+                    observer: undefined,
+                    isConnected: false,
+                    measurements: []
+                };
+
+                this._measureTimers.set(name, mapObject);
+            }
+
+            if (!mapObject.isConnected) {
+                mapObject.observer = new this._perfHooks.PerformanceObserver((list) => {
+                    const entries = list.getEntriesByName(name);
+
+                    if (entries.length > 0) {
+                        for(const entry of entries) {
+                            mapObject.measurements.push({
+                                name: entry.name,
+                                startTime: entry.startTime,
+                                duration: entry.duration,
+                                startMarkName: startMark,
+                                endMarkName: endMark
+                            });
+                        }
+
+                        mapObject.observer.disconnect();
+                        mapObject.isConnected = false;
+                    }
+                });
+                mapObject.observer.observe({entryTypes: ["measure"], buffered: true});
+                mapObject.isConnected = true;
+            }
 
             this._perfHooks.performance.measure(name, startMark, endMark);
         }
@@ -115,7 +164,6 @@ export class PerformanceTools {
 
             // Create a function observer
             observerObject.observer = new this._perfHooks.PerformanceObserver((list) => {
-                // const entries = list.getEntriesByName(fn.name);
                 const entries = list.getEntriesByName(fn.name);
 
                 for (const entry of entries) {
@@ -170,37 +218,68 @@ export class PerformanceTools {
     /**
      * Output raw performance metrics to a file. Should be the last call in execution.
      */
-    public getMetrics(): string {
+    public getMetrics(): object {
         if (this._manager.isPerfEnabled) {
             // @TODO All metrics should be stopped before reporting
 
-            let output = "NODE EXIT OCCURING...PRINTING METRICS\n";
-            output += "-------------------------------------\n\n";
+            const output: IMetrics = { // @TODO separate file
+                functions: [],
+                measurements: []
+            };
 
-            const timing = this._perfHooks.performance.nodeTiming;
-
-            output += "Node Run Statistics\n";
-            output += "-------------------\n";
-            output += `Node Initialized in ${timing.nodeStart}ms\n`;
-            output += `V8 Platform Initialized in ${timing.v8Start}ms\n`;
-            output += `Process Bootstrapped in ${timing.bootstrapComplete}ms\n`;
-            output += `Process Loop Started in ${timing.loopStart}ms\n`;
-            output += `Process Loop Ended after ${timing.loopExit - timing.loopStart}ms\n`;
-            output += `Total Process Duration: ${timing.duration}ms\n`;
-
-            // All metrics should
-            output += "\nFunction Timers\n";
-            output += "---------------\n";
-
+            // Get function timer metrics
             const functionTimers = this._functionTimers.entries();
-
             for (const [key, value] of functionTimers) {
-                output += `${key}:\n\tCalled: ${value.totalCalls}\n\tTotal Time: ${value.totalDuration}ms` +
-                    `\n\tAverage Time: ${value.totalDuration/value.totalCalls}ms\n\n`;
+                output.functions.push({
+                    name: key,
+                    calls: value.totalCalls,
+                    totalDuration: value.totalDuration,
+                    averageDuration: value.totalDuration / value.totalCalls
+                });
+            }
+
+            // Get measurement metrics
+            const measureTimers = this._measureTimers.entries();
+            for (const [key, value] of measureTimers) {
+                let totalDuration = 0;
+
+                for (const measurement of value.measurements) {
+                    totalDuration += measurement.duration;
+                }
+
+                output.measurements.push({
+                    name: key,
+                    calls: value.measurements.length,
+                    totalDuration,
+                    averageDuration: totalDuration / value.measurements.length,
+                    data: value.measurements
+                });
             }
 
             return output;
         }
+
+        return {};
+    }
+
+    public getNodeTiming(): object {
+        if (this._manager.isPerfEnabled) {
+
+            const timing: any = this._perfHooks.performance.nodeTiming;
+
+            return {
+                bootstrapComplete: timing.bootstrapComplete,
+                duration: timing.duration,
+                environment: timing.environment,
+                loopStart: timing.loopStart,
+                loopExit: timing.loopExit,
+                nodeStart: timing.nodeStart,
+                startTime: timing.startTime,
+                v8Start: timing.v8Start
+            };
+        }
+
+        return {};
     }
 }
 

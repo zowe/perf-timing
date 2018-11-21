@@ -1,5 +1,7 @@
 import { PerformanceTools } from './PerformanceTools';
 import { IPerfEnabled } from './interfaces';
+import * as pkgUp from "pkg-up";
+import { isArray } from 'util';
 
 //////////////////////////////////////////
 /////////////// GLOBAL TYPING ////////////
@@ -24,7 +26,7 @@ export class PerfTimingClass implements IPerfEnabled {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
     // to reduce overhead on getApi call
     public static readonly ENV_PREFIX = "PERF_TIMING";
-    private static readonly INSTANCE_SYMBOL = Symbol("PerfTimingClass"); // used to uniquely identify the instance
+    private _instanceSymbol: symbol; // used to uniquely identify the instance
 
     public readonly isPerfEnabled: boolean;
     private readonly _isMainManager: boolean;
@@ -49,12 +51,30 @@ export class PerfTimingClass implements IPerfEnabled {
 
                 process.on("exit", () => {
                     const metrics = global[GLOBAL_SYMBOL].entries();
+                    const outputMetrics: any = {}; // @TODO proper typing
+
+                    // Get timing first to not skew the results
+                    outputMetrics.nodeTiming = this.getApi().getNodeTiming();
 
                     for(const [key, value] of metrics) {
-                        console.log(key);
-                        console.log(value.getMetrics());
+                        const symbolValue = key.toString();
+
+                        // Place into an array to handle the case where the same
+                        // package might have existed twice.
+
+                        if (!isArray(outputMetrics[symbolValue])) {
+                            outputMetrics[symbolValue] = [];
+                        }
+
+                        outputMetrics[symbolValue].push(value.getMetrics());
                     }
-                })
+
+                    console.dir(outputMetrics, {
+                        depth: 4,
+                        colors: true
+                    });
+                    console.log(JSON.stringify(outputMetrics)); // @TODO ensure there are no running timers before we print metrics
+                });
             }
         } else {
             this.isPerfEnabled = false;
@@ -64,13 +84,17 @@ export class PerfTimingClass implements IPerfEnabled {
     // @TODO -> change to getter method
     public getApi(): PerformanceTools {
         if (this._managedApi == null) {
-            // Defers the import until it is needed, will improve performance when 
+            // Defers the import until it is needed, will improve performance when
             // performance api hasn't yet been called.
             const PerfImport: typeof PerformanceTools = require("./PerformanceTools").PerformanceTools;
             this._managedApi = new PerfImport(this);
 
+
+            // Create a unique entry in the global map
             if (this.isPerfEnabled) {
-                global[GLOBAL_SYMBOL].set(PerfTimingClass.INSTANCE_SYMBOL, this._managedApi);
+                const pkg = require(pkgUp.sync());
+                this._instanceSymbol = Symbol(`${pkg.name}@${pkg.version}`);
+                global[GLOBAL_SYMBOL].set(this._instanceSymbol, this._managedApi);
             }
         }
 
