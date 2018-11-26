@@ -55,7 +55,7 @@ interface IMeasurmentMetric {
     data: IMeasurment[]; // The raw measurement data
 }
 
-export class PerformanceTools {
+export class PerformanceTools implements IPerformanceTools {
     // @TODO DOCUMENT
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
     private _measureTimers: Map<string,IMeasureTimer> = new Map();

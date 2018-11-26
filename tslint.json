@@ -38,12 +38,13 @@
           "public-instance-field",
           "protected-instance-field",
           "private-instance-field",
-          "constructor",
+          "public-constructor",
+          "protected-constructor",
+          "private-constructor",
           "public-instance-method",
           "protected-instance-method",
           "private-instance-method"
-        ],
-        "alphabetize": true
+        ]
       }
     ],
     "max-line-length": [
