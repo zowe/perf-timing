@@ -1,3 +1,5 @@
+import { INodeTiming } from "../../api/interfaces";
+
 /**
  * This interface defines the methods that should exist on any {@link PerformanceApi}
  * class. Once initially published, changes to the prototype's of these methods
@@ -18,7 +20,7 @@ export interface IPerformanceApi {
     /**
      * This method must exist on the managedApi of the main {@link PerfTimingClass}
      * management class. It must return the values specified in the {@link INodeTiming}
-     * interface.
+     * interface or void if performance is not enabled.
      */
-    getNodeTiming(): object;
+    getNodeTiming(): INodeTiming | void;
 }
