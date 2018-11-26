@@ -56,7 +56,6 @@ interface IMeasurmentMetric {
 }
 
 export class PerformanceTools {
-
     // @TODO DOCUMENT
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
     private _measureTimers: Map<string,IMeasureTimer> = new Map();
@@ -212,7 +211,7 @@ export class PerformanceTools {
     /**
      * Output raw performance metrics to a file. Should be the last call in execution.
      */
-    public getMetrics(): object {
+    public getMetrics(): object { // @TODO proper interface
         if (this._manager.isEnabled) {
             // @TODO All metrics should be stopped before reporting
 
@@ -256,7 +255,7 @@ export class PerformanceTools {
         return {};
     }
 
-    public getNodeTiming(): object {
+    public getNodeTiming(): object { // @TODO Proper Interface
         if (this._manager.isEnabled) {
 
             const timing: any = this._perfHooks.performance.nodeTiming;
