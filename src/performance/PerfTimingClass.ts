@@ -1,5 +1,5 @@
-import { PerformanceTools } from "./PerformanceTools";
 import { IEnabled, IPerformanceTools } from "./interfaces";
+import { PerformanceTools } from "./PerformanceTools";
 import * as pkgUp from "pkg-up";
 import { isArray } from "util";
 
@@ -45,7 +45,6 @@ export class PerfTimingClass implements IEnabled {
     public readonly isEnabled: boolean;
 
     private _instanceSymbol: symbol; // used to uniquely identify the instance
-    private readonly _isMainManager: boolean;
 
     private _managedApi: PerformanceTools;
 
@@ -61,15 +60,10 @@ export class PerfTimingClass implements IEnabled {
 
             // Check if the global scope has been created. If it hasn't been created
             // this is the first manager called so it will become the main manager.
-            if (global[GLOBAL_SYMBOL]) {
-                this._isMainManager = false;
-            } else {
-                this._isMainManager = true;
-
+            if (!global[GLOBAL_SYMBOL]) {
                 // Create the global map on first run
                 global[GLOBAL_SYMBOL] = new Map();
-
-                process.on("exit", this._savePerformanceResults);
+                process.on("exit", () => this._savePerformanceResults());
             }
         } else {
             // Performance was not enabled.

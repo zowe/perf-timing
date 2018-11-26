@@ -12,15 +12,39 @@
     ],
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "grouped-imports": false
+      }
+    ],
     "one-line": false,
     "space-within-parens": false,
     "no-var-requires": false,
     "trailing-comma": false,
     "space-before-function-paren": false,
-    "no-submodule-imports": [
+    "no-submodule-imports": true,
+    "member-ordering": [
       true,
-      "csv-parse/lib/sync"
+      {
+        "order": [
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "public-static-method",
+          "protetced-static-method",
+          "private-static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ],
+        "alphabetize": true
+      }
     ],
     "max-line-length": [
       true,
@@ -37,6 +61,8 @@
       true,
       2
     ],
+    "no-unnecessary-class": true,
+    "no-unused": true,
     "prefer-conditional-expression": false,
     "indent": [true, "spaces", 4],
     "whitespace": [true, "check-module"]
