@@ -12,7 +12,7 @@
 // Imported for typings. This will not be reflected in the generated code.
 import * as perfHooks from "perf_hooks";
 
-import {IPerfEnabled} from "./interfaces";
+import {IEnabled} from "./interfaces";
 
 // @TODO Separate file for the interfaces
 
@@ -67,29 +67,23 @@ export class PerformanceTools {
      */
     private readonly _perfHooks: typeof perfHooks;
 
-    constructor(private readonly _manager: IPerfEnabled) {
+    constructor(private readonly _manager: IEnabled) {
         // Check if performance utilities should be enabled.
-        if(this._manager.isPerfEnabled) {
+        if(this._manager.isEnabled) {
             // Delay the require so we don't waste resources when performance
             // isn't needed.
             this._perfHooks = require("perf_hooks");
-
-            // process.on("exit", () => {
-            //    console.log("NODE EXIT OCCURING...PRINTING METRICS");
-            //    console.log("-------------------------------------");
-            //    this.outputMetrics();
-            // });
         }
     }
 
     public clearMarks(name?: string) {
-        if (this._manager.isPerfEnabled) {
+        if (this._manager.isEnabled) {
             this._perfHooks.performance.clearMarks(name);
         }
     }
 
     public mark(name: string) {
-        if (this._manager.isPerfEnabled) {
+        if (this._manager.isEnabled) {
             this._perfHooks.performance.mark(name);
         }
     }
@@ -97,7 +91,7 @@ export class PerformanceTools {
 
     // @TODO document
     public measure(name: string, startMark: string, endMark: string) {
-        if (this._manager.isPerfEnabled) {
+        if (this._manager.isEnabled) {
             let mapObject: IMeasureTimer;
 
             if (this._measureTimers.has(name)) {
@@ -141,7 +135,7 @@ export class PerformanceTools {
     }
 
     public timerify(fn: (...args: any[]) => any, name?: string) {
-        if (this._manager.isPerfEnabled) {
+        if (this._manager.isEnabled) {
             // Check if we should use the function name or the passed name for tracking.
             if (name == null) {
                 name = fn.name;
@@ -190,7 +184,7 @@ export class PerformanceTools {
      * @todo document
      */
     public untimerify(fn: ((...args: any[]) => any), name?: string) {
-        if (this._manager.isPerfEnabled) {
+        if (this._manager.isEnabled) {
             let timer = fn.name;
 
             // Extract the name of the function if necessary
@@ -219,7 +213,7 @@ export class PerformanceTools {
      * Output raw performance metrics to a file. Should be the last call in execution.
      */
     public getMetrics(): object {
-        if (this._manager.isPerfEnabled) {
+        if (this._manager.isEnabled) {
             // @TODO All metrics should be stopped before reporting
 
             const output: IMetrics = { // @TODO separate file
@@ -263,7 +257,7 @@ export class PerformanceTools {
     }
 
     public getNodeTiming(): object {
-        if (this._manager.isPerfEnabled) {
+        if (this._manager.isEnabled) {
 
             const timing: any = this._perfHooks.performance.nodeTiming;
 

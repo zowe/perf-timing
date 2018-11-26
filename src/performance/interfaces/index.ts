@@ -1,1 +1,1 @@
-export * from "./IPerfEnabled";
+export * from "./IEnabled";

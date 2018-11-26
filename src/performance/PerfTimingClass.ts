@@ -1,7 +1,7 @@
-import { PerformanceTools } from './PerformanceTools';
-import { IPerfEnabled } from './interfaces';
+import { PerformanceTools } from "./PerformanceTools";
+import { IEnabled } from "./interfaces";
 import * as pkgUp from "pkg-up";
-import { isArray } from 'util';
+import { isArray } from "util";
 
 //////////////////////////////////////////
 /////////////// GLOBAL TYPING ////////////
@@ -14,7 +14,7 @@ declare module NodeJS {
     }
 }
 
-declare var global: NodeJS.Global
+declare var global: NodeJS.Global;
 //////////////////////////////////////////
 /////////////// END TYPING ///////////////
 //////////////////////////////////////////
@@ -22,13 +22,13 @@ declare var global: NodeJS.Global
 /**
  * This class is a manager of all available performance tools
  */
-export class PerfTimingClass implements IPerfEnabled {
+export class PerfTimingClass implements IEnabled {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
     // to reduce overhead on getApi call
     public static readonly ENV_PREFIX = "PERF_TIMING";
-    private _instanceSymbol: symbol; // used to uniquely identify the instance
+    public readonly isEnabled: boolean;
 
-    public readonly isPerfEnabled: boolean;
+    private _instanceSymbol: symbol; // used to uniquely identify the instance
     private readonly _isMainManager: boolean;
 
     private _managedApi: PerformanceTools;
@@ -37,9 +37,9 @@ export class PerfTimingClass implements IPerfEnabled {
     constructor() {
         if (
             process.env[PerfTimingClass.ENV_PREFIX] &&
-            process.env[PerfTimingClass.ENV_PREFIX].toUpperCase() === "ENABLE"
+            process.env[PerfTimingClass.ENV_PREFIX].toUpperCase() === "ENABLED"
         ) {
-            this.isPerfEnabled = true;
+            this.isEnabled = true;
 
             if (global[GLOBAL_SYMBOL]) {
                 this._isMainManager = false;
@@ -77,7 +77,7 @@ export class PerfTimingClass implements IPerfEnabled {
                 });
             }
         } else {
-            this.isPerfEnabled = false;
+            this.isEnabled = false;
         }
     }
 
@@ -91,7 +91,7 @@ export class PerfTimingClass implements IPerfEnabled {
 
 
             // Create a unique entry in the global map
-            if (this.isPerfEnabled) {
+            if (this.isEnabled) {
                 const pkg = require(pkgUp.sync());
                 this._instanceSymbol = Symbol(`${pkg.name}@${pkg.version}`);
                 global[GLOBAL_SYMBOL].set(this._instanceSymbol, this._managedApi);
