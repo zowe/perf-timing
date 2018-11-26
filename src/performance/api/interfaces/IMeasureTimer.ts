@@ -1,5 +1,8 @@
+import { PerformanceObserver } from "perf_hooks";
+import { IMeasurement } from "./IMeasurement";
+
 export interface IMeasureTimer {
-    observer: perfHooks.PerformanceObserver;
     isConnected: boolean;
-    measurements: IMeasurment[];
+    measurements: IMeasurement[];
+    observer: PerformanceObserver;
 }

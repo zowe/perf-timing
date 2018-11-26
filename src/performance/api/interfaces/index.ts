@@ -4,3 +4,4 @@ export * from "./IMeasurement";
 export * from "./IMeasurementMetric";
 export * from "./IMeasureTimer";
 export * from "./IMetrics";
+export * from "./INodeTiming";

@@ -1,7 +1,7 @@
-export interface IMeasurment {
-    name: string;
-    startTime: number;
-    startMarkName: string;
-    endMarkName: string;
+export interface IMeasurement {
     duration: number;
+    endMarkName: string;
+    name: string;
+    startMarkName: string;
+    startTime: number;
 }

@@ -1,7 +1,9 @@
-export interface IMeasurmentMetric {
-    name: string;
-    calls: number; // Number of measurements with this name
-    totalDuration: number; // Total time of measurements in ms
+import { IMeasurement } from "./IMeasurement";
+
+export interface IMeasurementMetric {
     averageDuration: number; // Average time of measurements
-    data: IMeasurment[]; // The raw measurement data
+    calls: number; // Number of measurements with this name
+    data: IMeasurement[]; // The raw measurement data
+    name: string;
+    totalDuration: number; // Total time of measurements in ms
 }

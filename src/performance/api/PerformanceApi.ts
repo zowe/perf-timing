@@ -9,13 +9,12 @@
 *
 */
 import { IEnabled, IPerformanceApi } from "../manager/interfaces";
-
-
-// @TODO Separate file for the interfaces
-
-
-
-
+import {
+    IFunctionTimer,
+    IMeasureTimer,
+    IMetrics,
+    INodeTiming
+} from "./interfaces";
 
 export class PerformanceApi implements IPerformanceApi {
     // @TODO DOCUMENT
@@ -219,7 +218,7 @@ export class PerformanceApi implements IPerformanceApi {
         return {};
     }
 
-    public getNodeTiming(): object { // @TODO Proper Interface
+    public getNodeTiming(): INodeTiming | void { // @TODO Proper Interface
         if (this._manager.isEnabled) {
 
             const timing: any = this._perfHooks.performance.nodeTiming;
@@ -236,7 +235,7 @@ export class PerformanceApi implements IPerformanceApi {
             };
         }
 
-        return {};
+        return;
     }
 }
 

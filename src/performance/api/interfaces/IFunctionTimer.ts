@@ -1,6 +1,8 @@
+import { PerformanceObserver } from "perf_hooks";
+
 export interface IFunctionTimer {
-    observer: perfHooks.PerformanceObserver;
+    observer: PerformanceObserver;
     originalFunction: (...args: any[]) => any;
-    totalDuration: number;
     totalCalls: number;
+    totalDuration: number;
 }
