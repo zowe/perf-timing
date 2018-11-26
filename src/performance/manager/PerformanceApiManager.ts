@@ -1,4 +1,4 @@
-import { IEnabled, IPerformanceApi } from "./interfaces";
+import { IPerformanceApi, IPerformanceApiManager } from "./interfaces";
 import { PerformanceApi } from "../api/PerformanceApi";
 import * as pkgUp from "pkg-up";
 import { isArray } from "util";
@@ -37,12 +37,13 @@ declare var global: NodeJS.Global;
 /**
  * This class is a manager of all available performance tools
  */
-export class PerformanceApiManager implements IEnabled {
+export class PerformanceApiManager implements IPerformanceApiManager {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
     // to reduce overhead on getApi call
     public static readonly ENV_ENABLED_KEY = "ENABLED";
     public static readonly ENV_PREFIX = "PERF_TIMING";
     public readonly isEnabled: boolean;
+    public readonly packageUUID: string;
 
     private _instanceSymbol: symbol; // used to uniquely identify the instance
 
@@ -57,6 +58,10 @@ export class PerformanceApiManager implements IEnabled {
         ) {
             // The environment was set so performance metrics are enabled.
             this.isEnabled = true;
+
+            // Generate the packageUUID
+            const pkg = require(pkgUp.sync());
+            this.packageUUID = `${pkg.name}@${pkg.version}`;
 
             // Check if the global scope has been created. If it hasn't been created
             // this is the first manager called so it will become the main manager.
@@ -81,8 +86,7 @@ export class PerformanceApiManager implements IEnabled {
 
             // Create a unique entry in the global map
             if (this.isEnabled) {
-                const pkg = require(pkgUp.sync());
-                this._instanceSymbol = Symbol(`${pkg.name}@${pkg.version}`);
+                this._instanceSymbol = Symbol(this.packageUUID);
 
                 // Save the managedApi in the global space. It has been typed so that
                 // changes to the wrapper methods of IPerformanceTools cannot be easily

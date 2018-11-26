@@ -8,7 +8,7 @@
 * Copyright Contributors to the Zowe Project.
 *
 */
-import { IEnabled, IPerformanceApi } from "../manager/interfaces";
+import { IPerformanceApi, IPerformanceApiManager } from "../manager/interfaces";
 import {
     IFunctionTimer,
     IMeasureTimer,
@@ -27,7 +27,7 @@ export class PerformanceApi implements IPerformanceApi {
      */
     private readonly _perfHooks: typeof import("perf_hooks");
 
-    constructor(private readonly _manager: IEnabled) {
+    constructor(private readonly _manager: IPerformanceApiManager) {
         // Check if performance utilities should be enabled.
         if(this._manager.isEnabled) {
             // Delay the require so we don't waste resources when performance
@@ -38,13 +38,17 @@ export class PerformanceApi implements IPerformanceApi {
 
     public clearMarks(name?: string) {
         if (this._manager.isEnabled) {
-            this._perfHooks.performance.clearMarks(name);
+            this._perfHooks.performance.clearMarks(
+                this._addPackageNamespace(name)
+            );
         }
     }
 
     public mark(name: string) {
         if (this._manager.isEnabled) {
-            this._perfHooks.performance.mark(name); // @TODO Ensure these marks are unique based on the package name and version
+            this._perfHooks.performance.mark(
+                this._addPackageNamespace(name)
+            );
         }
     }
 
@@ -67,18 +71,28 @@ export class PerformanceApi implements IPerformanceApi {
                 this._measureTimers.set(name, mapObject);
             }
 
+            // Remap the name to the unique package name. This will not be visible
+            // in the output of the command, but it will allow 2 instances of this
+            // package to not conflict accidentaly in their naming.
+            const namespaceName = this._addPackageNamespace(name);
+            const namespaceStartMark = this._addPackageNamespace(startMark);
+            const namespaceEndMark = this._addPackageNamespace(endMark);
+
+            // If the map object is already connected, we don't need to do anything.
+            // The metric will be picked up by the for loop in the observer.
             if (!mapObject.isConnected) {
                 mapObject.observer = new this._perfHooks.PerformanceObserver((list) => {
-                    const entries = list.getEntriesByName(name);
+                    const entries = list.getEntriesByName(namespaceName);
 
+                    // Loop through each entry and save the metrics
                     if (entries.length > 0) {
                         for(const entry of entries) {
                             mapObject.measurements.push({
                                 name: entry.name,
                                 startTime: entry.startTime,
                                 duration: entry.duration,
-                                startMarkName: startMark,
-                                endMarkName: endMark
+                                startMarkName: namespaceStartMark,
+                                endMarkName: namespaceEndMark
                             });
                         }
 
@@ -90,7 +104,7 @@ export class PerformanceApi implements IPerformanceApi {
                 mapObject.isConnected = true;
             }
 
-            this._perfHooks.performance.measure(name, startMark, endMark);
+            this._perfHooks.performance.measure(namespaceName, namespaceStartMark, namespaceEndMark);
         }
     }
 
@@ -237,5 +251,8 @@ export class PerformanceApi implements IPerformanceApi {
 
         return;
     }
-}
 
+    private _addPackageNamespace(name: string): string {
+        return `${this._manager.packageUUID}: ${name}`;
+    }
+}

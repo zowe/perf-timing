@@ -1,2 +1,2 @@
-export * from "./IEnabled";
+export * from "./IPerformanceApiManager";
 export * from "./IPerformanceApi";
