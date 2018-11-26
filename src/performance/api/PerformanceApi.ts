@@ -13,44 +13,9 @@ import { IEnabled, IPerformanceApi } from "../manager/interfaces";
 
 // @TODO Separate file for the interfaces
 
-interface IFunctionTimer {
-    observer: perfHooks.PerformanceObserver;
-    originalFunction: (...args: any[]) => any;
-    totalDuration: number;
-    totalCalls: number;
-}
 
-interface IMeasureTimer {
-    observer: perfHooks.PerformanceObserver;
-    isConnected: boolean;
-    measurements: IMeasurment[];
-}
 
-interface IMeasurment {
-    name: string;
-    startTime: number;
-    startMarkName: string;
-    endMarkName: string;
-    duration: number;
-}
 
-interface IFunctionMetric {
-    name: string;
-    calls: number;
-    totalDuration: number; // Both in ms
-    averageDuration: number;
-}
-interface IMetrics {
-    functions: IFunctionMetric[];
-    measurements: IMeasurmentMetric[];
-}
-interface IMeasurmentMetric {
-    name: string;
-    calls: number; // Number of measurements with this name
-    totalDuration: number; // Total time of measurements in ms
-    averageDuration: number; // Average time of measurements
-    data: IMeasurment[]; // The raw measurement data
-}
 
 export class PerformanceApi implements IPerformanceApi {
     // @TODO DOCUMENT
