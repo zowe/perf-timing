@@ -1,5 +1,5 @@
 import { PerformanceTools } from "./PerformanceTools";
-import { IEnabled } from "./interfaces";
+import { IEnabled, IPerformanceTools } from "./interfaces";
 import * as pkgUp from "pkg-up";
 import { isArray } from "util";
 
@@ -23,8 +23,7 @@ const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerfTimingClass");
  */
 declare namespace NodeJS {
     interface Global {
-        [GLOBAL_SYMBOL]: Map<symbol, PerformanceTools>; // @TODO change the second type to an interface
-                                                        // since each instance of the package may have differing implementations.
+        [GLOBAL_SYMBOL]: Map<symbol, IPerformanceTools>;
     }
 }
 
@@ -90,6 +89,10 @@ export class PerfTimingClass implements IEnabled {
             if (this.isEnabled) {
                 const pkg = require(pkgUp.sync());
                 this._instanceSymbol = Symbol(`${pkg.name}@${pkg.version}`);
+
+                // Save the managedApi in the global space. It has been typed so that
+                // changes to the wrapper methods of IPerformanceTools cannot be easily
+                // changed.
                 global[GLOBAL_SYMBOL].set(this._instanceSymbol, this._managedApi);
             }
         }

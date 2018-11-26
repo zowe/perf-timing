@@ -12,7 +12,7 @@
 // Imported for typings. This will not be reflected in the generated code.
 import * as perfHooks from "perf_hooks";
 
-import {IEnabled} from "./interfaces";
+import { IEnabled, IPerformanceTools } from "./interfaces";
 
 // @TODO Separate file for the interfaces
 
