@@ -1,4 +1,4 @@
-import { IEnabled, IPerformanceApi } from "../manager/interfaces";
+import { IEnabled, IPerformanceApi } from "./interfaces";
 import { PerformanceApi } from "../api/PerformanceApi";
 import * as pkgUp from "pkg-up";
 import { isArray } from "util";
@@ -6,7 +6,7 @@ import { isArray } from "util";
 //////////////////////////////////////////
 /////////////// GLOBAL TYPING ////////////
 //////////////////////////////////////////
-const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerfTimingClass");
+const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerformanceApiManager");
 
 // tslint:disable:no-namespace interface-name
 // We need to add stuff to the global scope so that one package can manage
@@ -19,7 +19,7 @@ const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerfTimingClass");
  * symbol. The first instance created will be the manager of all of these global
  * packages. This allows for a single `process.on('exit')` hook to be registered.
  *
- * @see {@link PerfTimingClass#_savePerformanceResults}
+ * @see {@link PerformanceApiManager#_savePerformanceResults}
  */
 declare namespace NodeJS {
     interface Global {
@@ -37,7 +37,7 @@ declare var global: NodeJS.Global;
 /**
  * This class is a manager of all available performance tools
  */
-export class PerfTimingClass implements IEnabled {
+export class PerformanceApiManager implements IEnabled {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
     // to reduce overhead on getApi call
     public static readonly ENV_ENABLED_KEY = "ENABLED";
@@ -52,8 +52,8 @@ export class PerfTimingClass implements IEnabled {
     constructor() {
         // First check if the environment prefx is set to the ENV_ENABLED_KEY value
         if (
-            process.env[PerfTimingClass.ENV_PREFIX] &&
-            process.env[PerfTimingClass.ENV_PREFIX].toUpperCase() === PerfTimingClass.ENV_ENABLED_KEY
+            process.env[PerformanceApiManager.ENV_PREFIX] &&
+            process.env[PerformanceApiManager.ENV_PREFIX].toUpperCase() === PerformanceApiManager.ENV_ENABLED_KEY
         ) {
             // The environment was set so performance metrics are enabled.
             this.isEnabled = true;

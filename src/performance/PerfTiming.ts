@@ -1,4 +1,4 @@
-import { PerfTimingClass } from "./manager/PerfTimingClass";
+import { PerformanceApiManager } from "./manager/PerformanceApiManager";
 
 /**
  * An instance of a {@link PerfTimingClass}. This object is the only thing
@@ -16,4 +16,4 @@ import { PerfTimingClass } from "./manager/PerfTimingClass";
  * }
  * ```
  */
-export const PerfTiming = new PerfTimingClass(); // tslint:disable-line:variable-name
+export const PerfTiming = new PerformanceApiManager(); // tslint:disable-line:variable-name
