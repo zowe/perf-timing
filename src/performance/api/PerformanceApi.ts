@@ -44,7 +44,7 @@ export class PerformanceApi implements IPerformanceApi {
 
     public mark(name: string) {
         if (this._manager.isEnabled) {
-            this._perfHooks.performance.mark(name);
+            this._perfHooks.performance.mark(name); // @TODO Ensure these marks are unique based on the package name and version
         }
     }
 

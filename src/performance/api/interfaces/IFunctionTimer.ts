@@ -1,7 +1,7 @@
-import { PerformanceObserver } from "perf_hooks";
+import { IPerformanceObserver } from "./IPerformanceObserver";
 
 export interface IFunctionTimer {
-    observer: PerformanceObserver;
+    observer: IPerformanceObserver;
     originalFunction: (...args: any[]) => any;
     totalCalls: number;
     totalDuration: number;
