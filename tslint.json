@@ -33,18 +33,17 @@
           "protected-static-field",
           "private-static-field",
           "public-static-method",
-          "protetced-static-method",
+          "protected-static-method",
           "private-static-method",
           "public-instance-field",
           "protected-instance-field",
           "private-instance-field",
-          "public-constructor",
-          "protected-constructor",
-          "private-constructor",
+          "constructor",
           "public-instance-method",
           "protected-instance-method",
           "private-instance-method"
-        ]
+        ],
+        "alphabetize": true
       }
     ],
     "max-line-length": [

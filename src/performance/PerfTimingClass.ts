@@ -40,8 +40,8 @@ declare var global: NodeJS.Global;
 export class PerfTimingClass implements IEnabled {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
     // to reduce overhead on getApi call
-    public static readonly ENV_PREFIX = "PERF_TIMING";
     public static readonly ENV_ENABLED_KEY = "ENABLED";
+    public static readonly ENV_PREFIX = "PERF_TIMING";
     public readonly isEnabled: boolean;
 
     private _instanceSymbol: symbol; // used to uniquely identify the instance
@@ -75,8 +75,8 @@ export class PerfTimingClass implements IEnabled {
         if (this._managedApi == null) {
             // Defers the import until it is needed, will improve performance when
             // performance api hasn't yet been called.
-            const PerfImport: typeof PerformanceTools = require("./PerformanceTools").PerformanceTools;
-            this._managedApi = new PerfImport(this);
+            const perfImport: typeof PerformanceTools = require("./PerformanceTools").PerformanceTools;
+            this._managedApi = new perfImport(this);
 
 
             // Create a unique entry in the global map
