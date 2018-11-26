@@ -1,4 +1,4 @@
-import { PerfTimingClass } from "./PerfTimingClass";
+import { PerfTimingClass } from "./manager/PerfTimingClass";
 
 /**
  * An instance of a {@link PerfTimingClass}. This object is the only thing

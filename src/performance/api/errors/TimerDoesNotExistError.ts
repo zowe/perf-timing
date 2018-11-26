@@ -9,7 +9,7 @@
  *                                                                                       *
  */
 
-import { PerformanceError } from "./PerformanceError";
+import { PerformanceApiError } from "./PerformanceApiError";
 
 /**
  * @TODO better documentation
@@ -17,7 +17,7 @@ import { PerformanceError } from "./PerformanceError";
  * This error is thrown when a function timer is attempted to be closed but no
  * timer exists currently.
  */
-export class TimerDoesNotExistError extends PerformanceError {
+export class TimerDoesNotExistError extends PerformanceApiError {
     constructor(name: string) {
         super(`A function timer with the name "${name}", does not exist. Please create the timer first.`);
     }

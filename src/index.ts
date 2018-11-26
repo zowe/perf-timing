@@ -8,7 +8,4 @@
 * Copyright Contributors to the Zowe Project.
 *
 */
-
-// export * from "./performance/errors";
-// export * from "./performance/PerformanceTools";
 export * from "./performance/PerfTiming";

@@ -8,11 +8,8 @@
 * Copyright Contributors to the Zowe Project.
 *
 */
+import { IEnabled, IPerformanceApi } from "../manager/interfaces";
 
-// Imported for typings. This will not be reflected in the generated code.
-import * as perfHooks from "perf_hooks";
-
-import { IEnabled, IPerformanceTools } from "./interfaces";
 
 // @TODO Separate file for the interfaces
 
@@ -55,7 +52,7 @@ interface IMeasurmentMetric {
     data: IMeasurment[]; // The raw measurement data
 }
 
-export class PerformanceTools implements IPerformanceTools {
+export class PerformanceApi implements IPerformanceApi {
     // @TODO DOCUMENT
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
     private _measureTimers: Map<string,IMeasureTimer> = new Map();
@@ -64,7 +61,7 @@ export class PerformanceTools implements IPerformanceTools {
      * This variable holds the import from the Node JS performance hooks
      * library.
      */
-    private readonly _perfHooks: typeof perfHooks;
+    private readonly _perfHooks: typeof import("perf_hooks");
 
     constructor(private readonly _manager: IEnabled) {
         // Check if performance utilities should be enabled.
@@ -142,7 +139,8 @@ export class PerformanceTools implements IPerformanceTools {
 
             // Throw an error if the timer already exists in the map.
             if (this._functionTimers.has(name)) {
-                throw new (require("./errors").TimerNameConflictError)(name);
+                const error: typeof import("./errors").TimerNameConflictError = require("./errors").TimerNameConflictError;
+                throw new error(name);
             }
 
             // Create the observer and store it in the map.
@@ -201,7 +199,8 @@ export class PerformanceTools implements IPerformanceTools {
                 timerRef.observer.disconnect();
                 return timerRef.originalFunction;
             } else {
-                throw new (require("./errors").TimerDoesNotExistError)(timer);
+                const error: typeof import("./errors").TimerDoesNotExistError = require("./errors").TimerDoesNotExistError;
+                throw new error(timer);
             }
         } else {
             return fn;

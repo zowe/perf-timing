@@ -9,7 +9,7 @@
  *                                                                                       *
  */
 
-export class PerformanceError extends Error {
+export class PerformanceApiError extends Error {
     constructor(message: string) {
         super(`Performance Error\n${message}`);
     }

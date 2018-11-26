@@ -1,5 +1,5 @@
-import { IEnabled, IPerformanceTools } from "./interfaces";
-import { PerformanceTools } from "./PerformanceTools";
+import { IEnabled, IPerformanceApi } from "../manager/interfaces";
+import { PerformanceApi } from "../api/PerformanceApi";
 import * as pkgUp from "pkg-up";
 import { isArray } from "util";
 
@@ -23,7 +23,7 @@ const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerfTimingClass");
  */
 declare namespace NodeJS {
     interface Global {
-        [GLOBAL_SYMBOL]: Map<symbol, IPerformanceTools>;
+        [GLOBAL_SYMBOL]: Map<symbol, IPerformanceApi>;
     }
 }
 
@@ -46,7 +46,7 @@ export class PerfTimingClass implements IEnabled {
 
     private _instanceSymbol: symbol; // used to uniquely identify the instance
 
-    private _managedApi: PerformanceTools;
+    private _managedApi: PerformanceApi;
 
     // Document
     constructor() {
@@ -71,12 +71,12 @@ export class PerfTimingClass implements IEnabled {
         }
     }
 
-    public getApi(): PerformanceTools {
+    public getApi(): PerformanceApi {
         if (this._managedApi == null) {
             // Defers the import until it is needed, will improve performance when
             // performance api hasn't yet been called.
-            const perfImport: typeof PerformanceTools = require("./PerformanceTools").PerformanceTools;
-            this._managedApi = new perfImport(this);
+            const performanceApi: typeof PerformanceApi = require("../api/PerformanceApi").PerformanceApi;
+            this._managedApi = new performanceApi(this);
 
 
             // Create a unique entry in the global map

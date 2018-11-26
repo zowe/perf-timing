@@ -1,5 +1,5 @@
 /**
- * This interface defines the methods that should exist on any {@link PerformanceTools}
+ * This interface defines the methods that should exist on any {@link PerformanceApi}
  * class. Once initially published, changes to the prototype's of these methods
  * should not be changed so easily. Any changes to the public facing operation
  * of these methods will result in incompatibilities with previous versions that
@@ -7,7 +7,7 @@
  * 
  * @see {PerfTimingClass#_savePerformanceResults}
  */
-export interface IPerformanceTools {
+export interface IPerformanceApi {
     /**
      * Called on each {@link PerformanceTools} object found in the global symbol
      * location. This method should return a JSON object of the metrics that

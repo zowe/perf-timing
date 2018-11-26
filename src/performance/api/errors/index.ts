@@ -9,15 +9,6 @@
  *                                                                                       *
  */
 
-import { PerformanceError } from "./PerformanceError";
-
-/**
- * @TODO BETTER DOCUMENT
- *
- * Error thrown when a timer in the functionTimers map already exists.
- */
-export class TimerNameConflictError extends PerformanceError {
-    constructor(name: string) {
-        super(`A timer with the name "${name} was previously created. Please create unique timer names.`);
-    }
-}
+export * from "./PerformanceApiError";
+export * from "./TimerNameConflictError";
+export * from "./TimerDoesNotExistError";
