@@ -10,8 +10,9 @@
 */
 import { PerformanceApiManager } from "./performance/manager/PerformanceApiManager";
 
+// @TODO edit the doc
 /**
- * An instance of a {@link PerfTimingClass}. This object is the only thing
+ * An instance of a {@link PerformanceApiManager}. This object is the only thing
  * intended to be directly imported by any dependents of this package.
  *
  * @example <caption>Usage</caption>

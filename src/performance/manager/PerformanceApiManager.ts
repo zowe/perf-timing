@@ -1,7 +1,9 @@
+// These imports have been carefully crafted to represent the libraries needed
+// when performance is disabled for performance reasons. Any additional runtime
+// objects needed when performance is enabled should be done dynamically.
 import { IPerformanceApi, IPerformanceApiManager } from "./interfaces";
 import { PerformanceApi } from "../api/PerformanceApi";
 import * as pkgUp from "pkg-up";
-import { isArray } from "util";
 import { ENV_PREFIX, GLOBAL_SYMBOL } from "../../constants";
 import { Environment } from "../../environment";
 
@@ -109,7 +111,7 @@ export class PerformanceApiManager implements IPerformanceApiManager {
             // Place into an array to handle the case where the same
             // package might have existed twice.
 
-            if (!isArray(outputMetrics[symbolValue])) {
+            if (outputMetrics[symbolValue] == null) {
                 outputMetrics[symbolValue] = [];
             }
 
@@ -124,7 +126,7 @@ export class PerformanceApiManager implements IPerformanceApiManager {
         // Require the IO utility at this point to reduce total number of
         // requires in the calling library when performance monitoring
         // is not enabled.
-        (await import("../../io/saveMetrics")).saveMetrics(outputMetrics);
+        (await import("../../io")).saveMetrics(outputMetrics);
 
         // @TODO ensure there are no running timers before we print metrics
     }
