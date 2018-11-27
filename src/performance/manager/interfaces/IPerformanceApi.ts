@@ -6,19 +6,19 @@ import { INodeTiming } from "../../api/interfaces";
  * should not be changed so easily. Any changes to the public facing operation
  * of these methods will result in incompatibilities with previous versions that
  * might be loaded and called upon exit of the main program.
- * 
- * @see {PerfTimingClass#_savePerformanceResults}
+ *
+ * @see {PerformanceApiManager#_savePerformanceResults}
  */
 export interface IPerformanceApi {
     /**
-     * Called on each {@link PerformanceTools} object found in the global symbol
+     * Called on each {@link PerformanceApi} object found in the global symbol
      * location. This method should return a JSON object of the metrics that
      * the particular performance class captured.
      */
     getMetrics(): object;
 
     /**
-     * This method must exist on the managedApi of the main {@link PerfTimingClass}
+     * This method must exist on the managedApi of the main {@link PerformanceApiManager}
      * management class. It must return the values specified in the {@link INodeTiming}
      * interface or void if performance is not enabled.
      */

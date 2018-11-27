@@ -2,12 +2,12 @@ import { IPerformanceApi, IPerformanceApiManager } from "./interfaces";
 import { PerformanceApi } from "../api/PerformanceApi";
 import * as pkgUp from "pkg-up";
 import { isArray } from "util";
+import { ENV_PREFIX, GLOBAL_SYMBOL } from "../../constants";
+import { Environment } from "../../environment";
 
 //////////////////////////////////////////
 /////////////// GLOBAL TYPING ////////////
 //////////////////////////////////////////
-const GLOBAL_SYMBOL = Symbol.for("org.zowe.PerformanceApiManager");
-
 // tslint:disable:no-namespace interface-name
 // We need to add stuff to the global scope so that one package can manage
 // all possible loaded packages. To do this, we need to disable a few rules.
@@ -30,7 +30,7 @@ declare namespace NodeJS {
 declare var global: NodeJS.Global;
 // tslint:enable
 
-//////////////////////////////////////////
+/////////////////////////////// ///////////
 /////////////// END TYPING ///////////////
 //////////////////////////////////////////
 
@@ -39,9 +39,9 @@ declare var global: NodeJS.Global;
  */
 export class PerformanceApiManager implements IPerformanceApiManager {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
-    // to reduce overhead on getApi call
-    public static readonly ENV_ENABLED_KEY = "ENABLED";
-    public static readonly ENV_PREFIX = "PERF_TIMING";
+    // @TODO to reduce overhead on getApi call
+    public static readonly ENV_ENABLED = `${ENV_PREFIX}_ENABLED`;
+    public static readonly ENV_ENABLED_KEY = "TRUE";
     public readonly isEnabled: boolean;
     public readonly packageUUID: string;
 
@@ -49,13 +49,10 @@ export class PerformanceApiManager implements IPerformanceApiManager {
 
     private _managedApi: PerformanceApi;
 
-    // Document
+    // @TODO Document
     constructor() {
-        // First check if the environment prefx is set to the ENV_ENABLED_KEY value
-        if (
-            process.env[PerformanceApiManager.ENV_PREFIX] &&
-            process.env[PerformanceApiManager.ENV_PREFIX].toUpperCase() === PerformanceApiManager.ENV_ENABLED_KEY
-        ) {
+        // First check if the environment prefix is set to the ENV_ENABLED_KEY value
+        if (Environment.getValue(PerformanceApiManager.ENV_ENABLED).toUpperCase() === PerformanceApiManager.ENV_ENABLED_KEY) {
             // The environment was set so performance metrics are enabled.
             this.isEnabled = true;
 
@@ -95,18 +92,18 @@ export class PerformanceApiManager implements IPerformanceApiManager {
             }
         }
 
-        // Can guarentee that this will be unique per package instance :)
+        // Can guarantee that this will be unique per package instance :)
         return this._managedApi;
     }
 
-    private _savePerformanceResults(): void {
+    private async _savePerformanceResults(): Promise<void> {
         const metrics = global[GLOBAL_SYMBOL].entries();
         const outputMetrics: any = {}; // @TODO proper typing
 
         // Get timing first to not skew the results
         outputMetrics.nodeTiming = this.getApi().getNodeTiming();
 
-        for(const [key, value] of metrics) {
+        for (const [key, value] of metrics) {
             const symbolValue = key.toString();
 
             // Place into an array to handle the case where the same
@@ -119,11 +116,19 @@ export class PerformanceApiManager implements IPerformanceApiManager {
             outputMetrics[symbolValue].push(value.getMetrics());
         }
 
-        // @TODO save to file
         console.dir(outputMetrics, {
             depth: 4,
             colors: true
         });
-        console.log(JSON.stringify(outputMetrics)); // @TODO ensure there are no running timers before we print metrics
+
+        // Require the IO utility at this point to reduce total number of
+        // requires in the calling library when performance monitoring
+        // is not enabled.
+        (await import("../../io/saveMetrics")).saveMetrics(outputMetrics);
+
+        // @TODO ensure there are no running timers before we print metrics
     }
 }
+
+// Register the PERF_TIMING_ENABLED variable
+Environment.register(PerformanceApiManager.ENV_ENABLED, "");

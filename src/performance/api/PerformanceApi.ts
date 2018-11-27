@@ -73,7 +73,7 @@ export class PerformanceApi implements IPerformanceApi {
 
             // Remap the name to the unique package name. This will not be visible
             // in the output of the command, but it will allow 2 instances of this
-            // package to not conflict accidentaly in their naming.
+            // package to not conflict accidentally in their naming.
             const namespaceName = this._addPackageNamespace(name);
             const namespaceStartMark = this._addPackageNamespace(startMark);
             const namespaceEndMark = this._addPackageNamespace(endMark);
@@ -232,7 +232,7 @@ export class PerformanceApi implements IPerformanceApi {
         return {};
     }
 
-    public getNodeTiming(): INodeTiming | void { // @TODO Proper Interface
+    public getNodeTiming(): INodeTiming | void {
         if (this._manager.isEnabled) {
 
             const timing: any = this._perfHooks.performance.nodeTiming;
