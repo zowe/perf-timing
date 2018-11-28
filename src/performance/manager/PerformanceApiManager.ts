@@ -32,7 +32,7 @@ declare namespace NodeJS {
 declare var global: NodeJS.Global;
 // tslint:enable
 
-/////////////////////////////// ///////////
+//////////////////////////////////////////
 /////////////// END TYPING ///////////////
 //////////////////////////////////////////
 
@@ -48,7 +48,6 @@ export class PerformanceApiManager implements IPerformanceApiManager {
     public readonly packageUUID: string;
 
     private _instanceSymbol: symbol; // used to uniquely identify the instance
-
     private _managedApi: PerformanceApi;
 
     // @TODO Document
