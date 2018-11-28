@@ -1,6 +1,6 @@
 {
   "extends": "tslint:latest",
-  "rulesDirectory": ["tslint-consistent-codestyle"],
+  "rulesDirectory": ["tslint-consistent-codestyle", "node_modules/tslint-eslint-rules/dist/rules"],
   "rules": {
     "no-static-this": true,
     "naming-convention": [
@@ -64,7 +64,8 @@
     "no-unnecessary-class": true,
     "no-unused": true,
     "prefer-conditional-expression": false,
-    "indent": [true, "spaces", 4],
+    "indent": false,
+    "ter-indent": [true, 4],
     "whitespace": [true, "check-module"]
   },
   "type-check": true
