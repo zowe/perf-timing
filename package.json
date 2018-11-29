@@ -20,6 +20,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "typedoc": "typedoc --options ./typedoc.json --plugin \"typedoc-plugin-example-tag\"",
     "lint": "npm run lint:src && npm run lint:tests",
     "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\"",
     "lint:tests": "tslint --format stylish -c ./tslint-tests.json \"**/__tests__/**/*.ts\"",
@@ -39,12 +40,12 @@
     "jest-environment-node-debug": "2.0.0",
     "jest-html-reporter": "2.4.2",
     "jest-junit": "5.2.0",
-    "jsdoc": "3.5.5",
     "ts-jest": "23.10.4",
     "tslint": "^5.11.0",
     "tslint-consistent-codestyle": "1.14.1",
     "tslint-eslint-rules": "^5.4.0",
-    "typedoc": "0.13.0",
+    "typedoc": "^0.13.0",
+    "typedoc-plugin-example-tag": "^1.0.2",
     "typescript": "3.1.6"
   },
   "engines": {

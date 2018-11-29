@@ -19,7 +19,7 @@ def INTEGRATION_RESULTS = "${TEST_RESULTS_FOLDER}/integration"
 /**
  * The name of the master branch
  */
-def MASTER_BRANCH = "master"
+def MASTER_BRANCH = "create-performance-class"
 
 /**
 * Is this a release branch? Temporary workaround that won't break everything horribly if we merge.
@@ -29,7 +29,8 @@ def RELEASE_BRANCH = false
 /**
  * List of people who will get all emails for master builds
  */
-def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com, cc:fernando.rijocedeno@broadcom.com, cc:michael.bauer2@broadcom.com, cc:mark.ackert@broadcom.com, cc:daniel.kelosky@broadcom.com"
+//def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com, cc:fernando.rijocedeno@broadcom.com, cc:michael.bauer2@broadcom.com, cc:mark.ackert@broadcom.com, cc:daniel.kelosky@broadcom.com"
+def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com"
 
 /**
  * The result string for a successful build
@@ -460,7 +461,8 @@ pipeline {
          * DESCRIPTION
          * -----------
          * Bumps the pre-release version in preparation for publishing to an npm
-         * registry. It will clean out any pending changes and switch to the real
+         * registry and updates the code documentation using `npm run typedoc`.
+         * It will clean out any pending changes and switch to the real
          * branch that was published (currently the pipeline would be in a
          * detached HEAD at the commit) before executing the npm command to bump
          * the version.
@@ -481,7 +483,7 @@ pipeline {
          *         Commit Message:
          *         Bumped pre-release version <VERSION_HERE> [ci skip]
          ************************************************************************/
-        stage('Bump Pre-release Version') {
+        stage('Create Release Build') {
             when {
                 allOf {
                     expression {
@@ -497,12 +499,13 @@ pipeline {
             }
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
-                    echo "Bumping Version"
+                    echo "Cleaning Repo"
 
                     // Blow away any pending changes and pull down the master branch...
                     // this should be the same as our current commit since concurrency builds are turned
                     // off for that branch
                     sh "git reset --hard HEAD"
+                    sh "git clean -f"
                     sh "git checkout ${MASTER_BRANCH}"
 
                     // Make sure that the revision of the build and the current revision of the MASTER_BRANCH match
@@ -519,6 +522,10 @@ pipeline {
                     sh "git config user.name \"${GIT_USER_NAME}\""
                     sh "git config user.email \"${GIT_USER_EMAIL}\""
                     sh "git config push.default simple"
+
+                    // Build the documentation before comitting
+                    echo "Building Documentation"
+                    sh "npm run typedoc"
 
                     // This script block does the version bump, and a git commit and tag
                     script {
@@ -538,7 +545,7 @@ pipeline {
 
                     script {
                         // We only get here if the source was updated
-                        GIT_SOURCE_UPDATED = "true"
+                        GIT_SOURCE_UPDATED = "false"
                     }
                 }
             }

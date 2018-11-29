@@ -14,12 +14,10 @@
  * without first being registered.
  *
  * @example
- * ```typescript
  * Environment.register("var1", "test");
  *
  * Environment.get("var1"); // returns the env setting or default
  * Environment.get("var2"); // throws error
- * ```
  */
 export class NotRegisteredError extends Error {
     /**

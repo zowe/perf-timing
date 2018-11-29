@@ -11,13 +11,11 @@
 
 /**
  * This error represents the condition where an environment variable was
- * registered twice, indicating a conflict.
+ * registered twice, indicating a conflict. I SHOULD SEE THIS
  *
  * @example
- * ```typescript
  * Environment.register("key1", "val");
  * Environment.register("key2", "val2"); // Throws error
- * ```
  */
 export class DuplicateVarError extends Error {
     /**
