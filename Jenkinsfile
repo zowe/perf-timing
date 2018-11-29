@@ -19,7 +19,7 @@ def INTEGRATION_RESULTS = "${TEST_RESULTS_FOLDER}/integration"
 /**
  * The name of the master branch
  */
-def MASTER_BRANCH = "create-performance-class"
+def MASTER_BRANCH = "master"
 
 /**
 * Is this a release branch? Temporary workaround that won't break everything horribly if we merge.
@@ -29,8 +29,7 @@ def RELEASE_BRANCH = false
 /**
  * List of people who will get all emails for master builds
  */
-//def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com, cc:fernando.rijocedeno@broadcom.com, cc:michael.bauer2@broadcom.com, cc:mark.ackert@broadcom.com, cc:daniel.kelosky@broadcom.com"
-def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com"
+def MASTER_RECIPIENTS_LIST = "cc:christopher.wright@broadcom.com, cc:fernando.rijocedeno@broadcom.com, cc:michael.bauer2@broadcom.com, cc:mark.ackert@broadcom.com, cc:daniel.kelosky@broadcom.com"
 
 /**
  * The result string for a successful build
@@ -547,7 +546,7 @@ pipeline {
 
                     script {
                         // We only get here if the source was updated
-                        GIT_SOURCE_UPDATED = "false"
+                        GIT_SOURCE_UPDATED = "true"
                     }
                 }
             }
