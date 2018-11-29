@@ -527,11 +527,13 @@ pipeline {
                     echo "Building Documentation"
                     sh "npm run typedoc"
 
+                    sh "git add ."
+
                     // This script block does the version bump, and a git commit and tag
                     script {
                         def baseVersion = sh returnStdout: true, script: 'node -e "console.log(require(\'./package.json\').version.split(\'-\')[0])"'
                         def preReleaseVersion = baseVersion.trim() + "-next." + new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC")) 
-                        sh "npm version ${preReleaseVersion} -m \"Bumped pre-release version to ${preReleaseVersion} [ci skip]\""
+                        sh "npm version ${preReleaseVersion} --force -m \"Bumped pre-release version to ${preReleaseVersion} [ci skip]\""
                     }
 
                     // For debugging purposes
