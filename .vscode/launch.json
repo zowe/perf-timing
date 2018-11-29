@@ -16,6 +16,15 @@
             "outFiles": [
                 "${workspaceFolder}/lib/**/*.js"
             ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "env": {
+                "PERF_TIMING": "ENABLE"
+            },
+            "name": "Launch Typedoc",
+            "program": "${workspaceFolder}\\scripts\\stripFilePaths.js",
         }
     ]
 }

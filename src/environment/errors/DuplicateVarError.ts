@@ -11,7 +11,9 @@
 
 /**
  * This error represents the condition where an environment variable was
- * registered twice, indicating a conflict. I SHOULD SEE THIS
+ * registered twice, indicating a conflict.
+ *
+ * @noInheritDoc
  *
  * @example
  * Environment.register("key1", "val");

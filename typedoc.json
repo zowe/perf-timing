@@ -3,5 +3,6 @@
     "exclude": "**/__tests__/**",
     "ignoreCompilerErrors": true,
     "mode": "file",
-    "plugin": ["typedoc-plugin-example-tag"]
+    "plugin": ["typedoc-plugin-example-tag"],
+    "excludeExternals": true
 }
