@@ -3,29 +3,12 @@
   "rulesDirectory": ["tslint-consistent-codestyle", "node_modules/tslint-eslint-rules/dist/rules"],
   "rules": {
     "completed-docs": true,
-    "no-static-this": true,
-    "naming-convention": [
+    "indent": false,
+    "jsdoc-format": true,
+    "max-line-length": [
       true,
-      {"type": "member", "modifiers": "private", "leadingUnderscore": "require"},
-      {"type": "member", "modifiers": ["static", "readonly"], "format": "UPPER_CASE"},
-      {"type": "member", "modifiers": ["readonly"], "format": "camelCase"},
-      {"type": "class", "modifiers": "abstract", "prefix": "Abstract"}
+      150
     ],
-    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
-    "object-literal-sort-keys": false,
-    "ordered-imports": [
-      true,
-      {
-        "import-sources-order": "any",
-        "grouped-imports": false
-      }
-    ],
-    "one-line": false,
-    "space-within-parens": false,
-    "no-var-requires": false,
-    "trailing-comma": false,
-    "space-before-function-paren": false,
-    "no-submodule-imports": true,
     "member-ordering": [
       true,
       {
@@ -47,9 +30,16 @@
         "alphabetize": true
       }
     ],
-    "max-line-length": [
+    "naming-convention": [
       true,
-      150
+      {"type": "member", "modifiers": "private", "leadingUnderscore": "require"},
+      {"type": "member", "modifiers": ["static", "readonly"], "format": "UPPER_CASE"},
+      {"type": "member", "modifiers": ["readonly"], "format": "camelCase"},
+      {"type": "class", "modifiers": "abstract", "prefix": "Abstract"}
+    ],
+    "no-consecutive-blank-lines": [
+      true,
+      2
     ],
     "no-magic-numbers": [
       true,
@@ -58,15 +48,26 @@
       1,
       2
     ],
-    "no-consecutive-blank-lines": [
-      true,
-      2
-    ],
+    "no-static-this": true,
+    "no-submodule-imports": true,
     "no-unnecessary-class": true,
     "no-unused": true,
+    "no-var-requires": false,
+    "object-literal-sort-keys": false,
+    "one-line": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "grouped-imports": false
+      }
+    ],
     "prefer-conditional-expression": false,
-    "indent": false,
+    "space-before-function-paren": false,
+    "space-within-parens": false,
     "ter-indent": [true, 4],
+    "trailing-comma": false,
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [true, "check-module"]
   },
   "type-check": true

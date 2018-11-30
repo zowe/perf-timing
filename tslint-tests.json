@@ -3,9 +3,9 @@
   "extends": "./tslint.json",
   "rules": {
     "no-implicit-dependencies": [true, "dev", "optional"],
+    "no-submodule-imports": false,
     "only-arrow-functions": false,
-    "space-before-function-paren": false,
-    "no-submodule-imports": false
+    "space-before-function-paren": false
   },
   "type-check": true,
   "linterOptions": {
