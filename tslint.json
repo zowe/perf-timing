@@ -2,6 +2,7 @@
   "extends": "tslint:latest",
   "rulesDirectory": ["tslint-consistent-codestyle", "node_modules/tslint-eslint-rules/dist/rules"],
   "rules": {
+    "completed-docs": true,
     "no-static-this": true,
     "naming-convention": [
       true,
