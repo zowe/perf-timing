@@ -75,7 +75,7 @@
         "requireReturn": false,
         "requireParamDescription": true,
         "requireReturnDescription": true,
-        "matchDescription": "^[A-Z][A-Za-z0-9\\s]*[.]$",
+        "matchDescription": "\\.$",
         "requireParamType": false,
         "requireReturnType": false
     }],

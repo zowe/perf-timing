@@ -38,6 +38,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -73,10 +75,6 @@
 					<h4 id="example">Example</h4>
 					<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"key1"</span>, <span class="hljs-string">"val"</span>);
 Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-string">"val2"</span>); <span class="hljs-comment">// Throws error</span></code></pre>
-					<dl class="tsd-comment-tags">
-						<dt>noinheritdoc</dt>
-						<dd></dd>
-					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -105,9 +103,12 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="duplicatevarerror.html#key" class="tsd-kind-icon">key</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="duplicatevarerror.html#message" class="tsd-kind-icon">message</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="duplicatevarerror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="duplicatevarerror.html#newvalue" class="tsd-kind-icon">new<wbr>Value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="duplicatevarerror.html#stack" class="tsd-kind-icon">stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="duplicatevarerror.html#value" class="tsd-kind-icon">value</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="duplicatevarerror.html#error" class="tsd-kind-icon">Error</a></li>
 							</ul>
 						</section>
@@ -126,7 +127,7 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/82429e0/src/environment/errors/DuplicateVarError.ts#L22">environment/errors/DuplicateVarError.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/errors/DuplicateVarError.ts#L20">environment/errors/DuplicateVarError.ts:20</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -168,6 +169,21 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/errors/DuplicateVarError.ts#L28">environment/errors/DuplicateVarError.ts:28</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The environment key in conflict</p>
+						</div>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="message" class="tsd-anchor"></a>
 					<h3>message</h3>
@@ -175,7 +191,7 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 					<aside class="tsd-sources">
 						<p>Inherited from Error.message</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:904</li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:904</li>
 						</ul>
 					</aside>
 				</section>
@@ -186,9 +202,24 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 					<aside class="tsd-sources">
 						<p>Inherited from Error.name</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:903</li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:903</li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="newvalue" class="tsd-anchor"></a>
+					<h3>new<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">new<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/errors/DuplicateVarError.ts#L28">environment/errors/DuplicateVarError.ts:28</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The new default value</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 					<a name="stack" class="tsd-anchor"></a>
@@ -198,9 +229,24 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 						<p>Inherited from Error.stack</p>
 						<p>Overrides Error.stack</p>
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:905</li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:905</li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="value" class="tsd-anchor"></a>
+					<h3>value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/errors/DuplicateVarError.ts#L28">environment/errors/DuplicateVarError.ts:28</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The current default value that was set</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="error" class="tsd-anchor"></a>
@@ -208,7 +254,7 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 					<div class="tsd-signature tsd-kind-icon">Error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ErrorConstructor</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/typescript/lib/lib.es5.d.ts:914</li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:914</li>
 						</ul>
 					</aside>
 				</section>
@@ -232,14 +278,23 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="duplicatevarerror.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="duplicatevarerror.html#key" class="tsd-kind-icon">key</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="duplicatevarerror.html#message" class="tsd-kind-icon">message</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 								<a href="duplicatevarerror.html#name" class="tsd-kind-icon">name</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="duplicatevarerror.html#newvalue" class="tsd-kind-icon">new<wbr>Value</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="duplicatevarerror.html#stack" class="tsd-kind-icon">stack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="duplicatevarerror.html#value" class="tsd-kind-icon">value</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 								<a href="duplicatevarerror.html#error" class="tsd-kind-icon">Error</a>
@@ -248,7 +303,7 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-is-not-exported">
+					<li class=" tsd-kind-class tsd-is-external tsd-is-not-exported">
 						<a href="environmentmanager.html" class="tsd-kind-icon">Environment<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -268,6 +323,9 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="timernameconflicterror.html" class="tsd-kind-icon">Timer<wbr>Name<wbr>Conflict<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/ifunctionmetric.html" class="tsd-kind-icon">IFunction<wbr>Metric</a>
@@ -299,6 +357,15 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#validdefaultsstrings" class="tsd-kind-icon">Valid<wbr>Defaults<wbr>Strings</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#validationfunction" class="tsd-kind-icon">Validation<wbr>Function</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#env_io" class="tsd-kind-icon">ENV_<wbr>IO</a>
 					</li>
@@ -311,7 +378,7 @@ Environment.register(<span class="hljs-string">"key2"</span>, <span class="hljs-
 					<li class=" tsd-kind-variable">
 						<a href="../globals.html#env_prefix" class="tsd-kind-icon">ENV_<wbr>PREFIX</a>
 					</li>
-					<li class=" tsd-kind-variable">
+					<li class=" tsd-kind-variable tsd-is-external">
 						<a href="../globals.html#environment" class="tsd-kind-icon">Environment</a>
 					</li>
 					<li class=" tsd-kind-variable">

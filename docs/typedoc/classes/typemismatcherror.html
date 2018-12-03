@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>NotRegisteredError | @zowe/perf-timing</title>
+	<title>TypeMismatchError | @zowe/perf-timing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="notregisterederror.html">NotRegisteredError</a>
+					<a href="typemismatcherror.html">TypeMismatchError</a>
 				</li>
 			</ul>
-			<h1>Class NotRegisteredError</h1>
+			<h1>Class TypeMismatchError</h1>
 		</div>
 	</div>
 </header>
@@ -69,14 +69,13 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>This error represents the condition when an environment variable was requested
-						without first being registered.</p>
+						<p>This error represents the condition when a getter function of the <a href="../globals.html#environment">Environment</a>,
+							like <a href="environmentmanager.html#getnumber">EnvironmentManager.getNumber</a>, is called and the type of the default didn&#39;t match
+						the method return value.</p>
 					</div>
 					<h4 id="example">Example</h4>
-					<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"var1"</span>, <span class="hljs-string">"test"</span>);
-
-Environment.get(<span class="hljs-string">"var1"</span>); <span class="hljs-comment">// returns the env setting or default</span>
-Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comment">// throws error</span></code></pre>
+					<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"TEST"</span>, <span class="hljs-string">"string"</span>);
+Environment.getNumber(<span class="hljs-string">"TEST"</span>); <span class="hljs-comment">// Throws TypeMismatchError</span></code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -86,7 +85,7 @@ Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comm
 						<span class="tsd-signature-type">Error</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">NotRegisteredError</span>
+								<span class="target">TypeMismatchError</span>
 							</li>
 						</ul>
 					</li>
@@ -99,17 +98,19 @@ Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comm
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="notregisterederror.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="typemismatcherror.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="notregisterederror.html#key" class="tsd-kind-icon">key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="notregisterederror.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="notregisterederror.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="notregisterederror.html#stack" class="tsd-kind-icon">stack</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="notregisterederror.html#error" class="tsd-kind-icon">Error</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="typemismatcherror.html#actualtype" class="tsd-kind-icon">actual<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="typemismatcherror.html#expectedtype" class="tsd-kind-icon">expected<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="typemismatcherror.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="typemismatcherror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="typemismatcherror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="typemismatcherror.html#stack" class="tsd-kind-icon">stack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="typemismatcherror.html#error" class="tsd-kind-icon">Error</a></li>
 							</ul>
 						</section>
 					</div>
@@ -121,13 +122,13 @@ Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comm
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Not<wbr>Registered<wbr>Error<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="notregisterederror.html" class="tsd-signature-type">NotRegisteredError</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Type<wbr>Mismatch<wbr>Error<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, expectedType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, actualType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typemismatcherror.html" class="tsd-signature-type">TypeMismatchError</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/errors/NotRegisteredError.ts#L22">environment/errors/NotRegisteredError.ts:22</a></li>
+									<li>Defined in environment/errors/TypeMismatchError.ts:21</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -141,12 +142,28 @@ Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comm
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The environment key that has not been registered.</p>
+											<p>The key in error.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>expectedType: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The expected type. Usually determined the type of call expected (getNumber, getString, etc).</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>actualType: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The actual type. Usually determined by the <code>typeof</code> the registered default.</p>
 										</div>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="notregisterederror.html" class="tsd-signature-type">NotRegisteredError</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="typemismatcherror.html" class="tsd-signature-type">TypeMismatchError</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -154,17 +171,47 @@ Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comm
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="actualtype" class="tsd-anchor"></a>
+					<h3>actual<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">actual<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in environment/errors/TypeMismatchError.ts:28</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The actual type. Usually determined by the <code>typeof</code> the registered default.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="expectedtype" class="tsd-anchor"></a>
+					<h3>expected<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">expected<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in environment/errors/TypeMismatchError.ts:28</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The expected type. Usually determined the type of call expected (getNumber, getString, etc).</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="key" class="tsd-anchor"></a>
 					<h3>key</h3>
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/errors/NotRegisteredError.ts#L27">environment/errors/NotRegisteredError.ts:27</a></li>
+							<li>Defined in environment/errors/TypeMismatchError.ts:28</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The environment key that has not been registered.</p>
+							<p>The key in error.</p>
 						</div>
 					</div>
 				</section>
@@ -230,33 +277,9 @@ Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comm
 					<li class=" tsd-kind-class tsd-is-external tsd-is-not-exported">
 						<a href="environmentmanager.html" class="tsd-kind-icon">Environment<wbr>Manager</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="notregisterederror.html" class="tsd-kind-icon">Not<wbr>Registered<wbr>Error</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="notregisterederror.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="notregisterederror.html#key" class="tsd-kind-icon">key</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="notregisterederror.html#message" class="tsd-kind-icon">message</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
-								<a href="notregisterederror.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-								<a href="notregisterederror.html#stack" class="tsd-kind-icon">stack</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
-								<a href="notregisterederror.html#error" class="tsd-kind-icon">Error</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="performanceapi.html" class="tsd-kind-icon">Performance<wbr>Api</a>
 					</li>
@@ -272,9 +295,39 @@ Environment.get(<span class="hljs-string">"var2"</span>); <span class="hljs-comm
 					<li class=" tsd-kind-class">
 						<a href="timernameconflicterror.html" class="tsd-kind-icon">Timer<wbr>Name<wbr>Conflict<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-class">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
 						<a href="typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="typemismatcherror.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="typemismatcherror.html#actualtype" class="tsd-kind-icon">actual<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="typemismatcherror.html#expectedtype" class="tsd-kind-icon">expected<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="typemismatcherror.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="typemismatcherror.html#message" class="tsd-kind-icon">message</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="typemismatcherror.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+								<a href="typemismatcherror.html#stack" class="tsd-kind-icon">stack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="typemismatcherror.html#error" class="tsd-kind-icon">Error</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/ifunctionmetric.html" class="tsd-kind-icon">IFunction<wbr>Metric</a>
 					</li>

@@ -20,7 +20,7 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "typedoc": "typedoc --options ./typedoc.json --plugin \"typedoc-plugin-example-tag,typedoc-plugin-nojekyll\"",
+    "typedoc": "typedoc --options ./typedoc.json --internal-aliases external --external-aliases internal --plugin \"typedoc-plugin-example-tag,typedoc-plugin-nojekyll,typedoc-plugin-internal-external\"",
     "posttypedoc": "node ./scripts/stripFilePaths.js",
     "lint": "npm run lint:src && npm run lint:tests",
     "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\" --project \"tsconfig.json\"",
@@ -47,6 +47,7 @@
     "tslint-eslint-rules": "^5.4.0",
     "typedoc": "^0.13.0",
     "typedoc-plugin-example-tag": "^1.0.2",
+    "typedoc-plugin-internal-external": "^1.0.10",
     "typedoc-plugin-nojekyll": "^1.0.1",
     "typedoc-plugin-sourcefile-url": "^1.0.3",
     "typescript": "^3.2.1"

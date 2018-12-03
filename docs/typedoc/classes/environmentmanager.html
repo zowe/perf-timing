@@ -38,6 +38,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -64,6 +66,15 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Manages environmental variables needed by the application. It should be noted
+							that while this class is not exported, a singleton object is exported via
+						<a href="../globals.html#environment">Environment</a>.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -79,13 +90,15 @@
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported"><a href="environmentmanager.html#_environment" class="tsd-kind-icon">_environment</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported"><a href="environmentmanager.html#_registered" class="tsd-kind-icon">_registered</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported"><a href="environmentmanager.html#_validateregistered" class="tsd-kind-icon">_validate<wbr>Registered</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="environmentmanager.html#getnumber" class="tsd-kind-icon">get<wbr>Number</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="environmentmanager.html#getstring" class="tsd-kind-icon">get<wbr>String</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="environmentmanager.html#getvalue" class="tsd-kind-icon">get<wbr>Value</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-not-exported"><a href="environmentmanager.html#register" class="tsd-kind-icon">register</a></li>
 							</ul>
@@ -96,19 +109,26 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
-					<a name="_environment" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _environment</h3>
-					<div class="tsd-signature tsd-kind-icon">_environment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="_registered" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _registered</h3>
+					<div class="tsd-signature tsd-kind-icon">_registered<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/82429e0/src/environment/Environment.ts#L2">environment/Environment.ts:2</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/Environment.ts#L40">environment/Environment.ts:40</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Internal object that stores default environment values as a key in
+								the underlying object. Environmental variables must be registered
+							in this object before retrieval.</p>
+						</div>
+					</div>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-index-signature">
-								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5>
+								<h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><a href="../globals.html#validdefaults" class="tsd-signature-type">ValidDefaults</a></h5>
 							</li>
 						</ul>
 					</div>
@@ -116,6 +136,44 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+					<a name="_validateregistered" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _validate<wbr>Registered</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">_validate<wbr>Registered<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, typeMatch<span class="tsd-signature-symbol">?: </span><a href="../globals.html#validdefaultsstrings" class="tsd-signature-type">ValidDefaultsStrings</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/Environment.ts#L177">environment/Environment.ts:177</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Validates that an environment key is registered and optionally is a
+									certain type.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The key to validate internally.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> typeMatch: <a href="../globals.html#validdefaultsstrings" class="tsd-signature-type">ValidDefaultsStrings</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A string to do a <code>typeof</code> compare.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
 					<a name="getnumber" class="tsd-anchor"></a>
 					<h3>get<wbr>Number</h3>
@@ -126,16 +184,91 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/82429e0/src/environment/Environment.ts#L28">environment/Environment.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/Environment.ts#L61">environment/Environment.ts:61</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the numeric value of an environmental variable.</p>
+								</div>
+								<h4 id="example">Example</h4>
+								<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"SOME_KEY"</span>, <span class="hljs-number">5</span>);
+
+<span class="hljs-comment">// Logs the numeric value of process.env["SOME_KEY"] if it is set and is a number.</span>
+<span class="hljs-comment">// otherwise the number 5 will be logged.</span>
+<span class="hljs-built_in">console</span>.log(Environment.getNumber(<span class="hljs-string">"SOME_KEY"</span>));</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p><a href="notregisterederror.html">NotRegisteredError</a> when <code>key</code> was not registered using <a href="environmentmanager.html#register">register</a>.</p>
+									</dd>
+									<dt>throws</dt>
+									<dd><p><a href="typemismatcherror.html">TypeMismatchError</a> when <code>key</code> was not registered as a number.</p>
+									</dd>
+									<dt>see</dt>
+									<dd><p><a href="environmentmanager.html#getvalue">getValue</a></p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The environment key to retrieve.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>The numeric value of the environment variable.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+					<a name="getstring" class="tsd-anchor"></a>
+					<h3>get<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>String<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/Environment.ts#L92">environment/Environment.ts:92</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the string value of an environmental variable.</p>
+								</div>
+								<h4 id="example">Example</h4>
+								<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"SOME_KEY"</span>, <span class="hljs-string">"THIS IS A TEST"</span>);
+
+<span class="hljs-comment">// Logs the numeric value of process.env["SOME_KEY"] if it is set.</span>
+<span class="hljs-comment">// otherwise "THIS IS A TEST" will be logged.</span>
+<span class="hljs-built_in">console</span>.log(Environment.getNumber(<span class="hljs-string">"SOME_KEY"</span>));</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p><a href="notregisterederror.html">NotRegisteredError</a> when <code>key</code> was not registered using <a href="environmentmanager.html#register">register</a>.</p>
+									</dd>
+									<dt>throws</dt>
+									<dd><p><a href="typemismatcherror.html">TypeMismatchError</a> when <code>key</code> was not registered as a string.</p>
+									</dd>
+									<dt>see</dt>
+									<dd><p><a href="environmentmanager.html#getvalue">getValue</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The environment key to retrieve.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The string value of the environment variable.</p>
 						</li>
 					</ul>
 				</section>
@@ -143,22 +276,55 @@
 					<a name="getvalue" class="tsd-anchor"></a>
 					<h3>get<wbr>Value</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Value<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Value<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, validationFunction<span class="tsd-signature-symbol">?: </span><a href="../globals.html#validationfunction" class="tsd-signature-type">ValidationFunction</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/82429e0/src/environment/Environment.ts#L18">environment/Environment.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/Environment.ts#L124">environment/Environment.ts:124</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the string value of an environment variable.</p>
+								</div>
+								<p>When called, this method will search for <code>key</code> in the environment. If
+									a value was found, it will be returned from <code>process.env[key]</code>. When no
+									value was found for <code>key</code>, the value that was specified in the second
+								paramter of <a href="environmentmanager.html#register">register</a> will be returned.</p>
+								<p>An environment variable must be first registered through the <a href="environmentmanager.html#register">register</a>
+									method. Any attempts to access a non-registered variable will lead to a
+								<a href="notregisterederror.html">NotRegisteredError</a>.</p>
+								<h4 id="example">Example</h4>
+								<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"SOME_KEY"</span>, <span class="hljs-string">"TEST"</span>);
+
+<span class="hljs-comment">// Logs the value of process.env["SOME_KEY"] if it exists</span>
+<span class="hljs-comment">// Logs "TEST" otherwise.</span>
+<span class="hljs-built_in">console</span>.log(Environment.getValue(<span class="hljs-string">"SOME_KEY"</span>));</code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p><a href="notregisterederror.html">NotRegisteredError</a> when <code>key</code> was not registered using <a href="environmentmanager.html#register">register</a>.</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The environment key to retrieve.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> validationFunction: <a href="../globals.html#validationfunction" class="tsd-signature-type">ValidationFunction</a><span class="tsd-signature-symbol"> =&nbsp;this._validateRegistered.bind(this)</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The validation scheme to use.</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>The string value of the environment variable.</p>
 						</li>
 					</ul>
 				</section>
@@ -166,25 +332,55 @@
 					<a name="register" class="tsd-anchor"></a>
 					<h3>register</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">register<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, defaultValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="environmentmanager.html" class="tsd-signature-type">EnvironmentManager</a></li>
+						<li class="tsd-signature tsd-kind-icon">register<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, defaultValue<span class="tsd-signature-symbol">: </span><a href="../globals.html#validdefaults" class="tsd-signature-type">ValidDefaults</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="environmentmanager.html" class="tsd-signature-type">EnvironmentManager</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/82429e0/src/environment/Environment.ts#L5">environment/Environment.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/8ccde58/src/environment/Environment.ts#L160">environment/Environment.ts:160</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Registers an environmental variable to the application.</p>
+								</div>
+								<p>Prior to any <code>getValue</code> method calls, an environmental must be registered
+									to the application with a default value. The default value will ensure
+									that type checking happens on the typed methods and that a valid value
+								is always returned by those methods in the absence of the environment key.</p>
+								<h4 id="example">Example</h4>
+								<pre><code class="language-typescript">Environment
+  .register(<span class="hljs-string">"A"</span>, <span class="hljs-number">5</span>)
+  .register(<span class="hljs-string">"B"</span>, <span class="hljs-string">"Hello"</span>)
+  .register(<span class="hljs-string">"C"</span>, <span class="hljs-string">"World"</span>)
+
+<span class="hljs-comment">// The environmental variables process.env.A, process.env.B, process.env.C</span>
+<span class="hljs-comment">// are now registered in the application with defaults of 5, "Hello" and "World"</span>
+<span class="hljs-comment">// respectively.</span></code></pre>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p><a href="duplicatevarerror.html">DuplicateVarError</a> when <code>key</code> was already registered in the application.</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>key: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The key to register.</p>
+									</div>
 								</li>
 								<li>
-									<h5>defaultValue: <span class="tsd-signature-type">string</span></h5>
+									<h5>defaultValue: <a href="../globals.html#validdefaults" class="tsd-signature-type">ValidDefaults</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The default value that is returned when not present in the environment.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="environmentmanager.html" class="tsd-signature-type">EnvironmentManager</a></h4>
+							<p>A reference to the class for method chaining.</p>
 						</li>
 					</ul>
 				</section>
@@ -205,14 +401,20 @@
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-is-not-exported">
+					<li class="current tsd-kind-class tsd-is-external tsd-is-not-exported">
 						<a href="environmentmanager.html" class="tsd-kind-icon">Environment<wbr>Manager</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
-								<a href="environmentmanager.html#_environment" class="tsd-kind-icon">_environment</a>
+								<a href="environmentmanager.html#_registered" class="tsd-kind-icon">_registered</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
+								<a href="environmentmanager.html#_validateregistered" class="tsd-kind-icon">_validate<wbr>Registered</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
 								<a href="environmentmanager.html#getnumber" class="tsd-kind-icon">get<wbr>Number</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
+								<a href="environmentmanager.html#getstring" class="tsd-kind-icon">get<wbr>String</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-not-exported">
 								<a href="environmentmanager.html#getvalue" class="tsd-kind-icon">get<wbr>Value</a>
@@ -241,6 +443,9 @@
 					</li>
 					<li class=" tsd-kind-class">
 						<a href="timernameconflicterror.html" class="tsd-kind-icon">Timer<wbr>Name<wbr>Conflict<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/ifunctionmetric.html" class="tsd-kind-icon">IFunction<wbr>Metric</a>
@@ -272,6 +477,15 @@
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
 					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#validdefaultsstrings" class="tsd-kind-icon">Valid<wbr>Defaults<wbr>Strings</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#validationfunction" class="tsd-kind-icon">Validation<wbr>Function</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#env_io" class="tsd-kind-icon">ENV_<wbr>IO</a>
 					</li>
@@ -284,7 +498,7 @@
 					<li class=" tsd-kind-variable">
 						<a href="../globals.html#env_prefix" class="tsd-kind-icon">ENV_<wbr>PREFIX</a>
 					</li>
-					<li class=" tsd-kind-variable">
+					<li class=" tsd-kind-variable tsd-is-external">
 						<a href="../globals.html#environment" class="tsd-kind-icon">Environment</a>
 					</li>
 					<li class=" tsd-kind-variable">

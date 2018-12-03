@@ -14,9 +14,11 @@ const ENV_IO_MAX_HISTORY = `${ENV_IO}_MAX_HISTORY`;
 // Environment variable that will be used to determine where files are saved.
 const ENV_IO_SAVE_DIR = `${ENV_IO}_SAVE_DIR`;
 
+// tslint:disable:no-magic-numbers
 Environment
-    .register(ENV_IO_MAX_HISTORY, "5")
+    .register(ENV_IO_MAX_HISTORY, 5)
     .register(ENV_IO_SAVE_DIR, `${os.homedir()}/.perf-timing`);
+// tslint:enable:no-magic-numbers
 
 
 export function saveMetrics(data: object) { // @TODO proper typing and document

@@ -24,7 +24,7 @@ export class NotRegisteredError extends Error {
      * Construct the error.
      * @param key The environment key that has not been registered.
      */
-    constructor(key: string) {
+    constructor(public key: string) {
         super(`The environment variable "${key}" has not been registered! It must be registered before the value can be retrieved.`);
     }
 }
