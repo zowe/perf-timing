@@ -445,7 +445,7 @@ pipeline {
         /************************************************************************
          * STAGE
          * -----
-         * Bump Pre-release Version
+         * Create Release Build
          *
          * TIMEOUT
          * -------

@@ -59,7 +59,7 @@ function sanitizeFile(fileName) {
  * on the extension.
  * 
  * @param {string} base The base directory
- * @param {srting} ext The file extension to filter
+ * @param {string} ext The file extension to filter
  */
 async function recursiveSearch(base,ext) {
     const files = fs.readdirSync(base);

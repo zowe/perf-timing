@@ -22,6 +22,7 @@
 export class DuplicateVarError extends Error {
     /**
      * Construct the error.
+     *
      * @param key The environment key in conflict
      * @param value The current default value that was set
      * @param newValue The new default value

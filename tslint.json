@@ -48,6 +48,7 @@
       1,
       2
     ],
+    "no-redundant-jsdoc": true,
     "no-static-this": true,
     "no-submodule-imports": true,
     "no-unnecessary-class": true,
@@ -67,6 +68,17 @@
     "space-within-parens": false,
     "ter-indent": [true, 4],
     "trailing-comma": false,
+    "valid-jsdoc": [true, {
+        "prefer": {
+          "return": "returns"
+        },
+        "requireReturn": false,
+        "requireParamDescription": true,
+        "requireReturnDescription": true,
+        "matchDescription": "^[A-Z][A-Za-z0-9\\s]*[.]$",
+        "requireParamType": false,
+        "requireReturnType": false
+    }],
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [true, "check-module"]
   },
