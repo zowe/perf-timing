@@ -14,7 +14,7 @@
                 {{#if url}}
                     <li>Defined in <a href="{{url}}">{{fileName}}:{{line}}</a></li>
                 {{else}}
-                    <li>Defined in {{fileName}}:{{line}}</li>
+                    <li>Defined in {{stripAbsolute fileName}}:{{line}}</li>
                 {{/if}}
             {{/each}}
         </ul>
