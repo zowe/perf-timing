@@ -120,60 +120,61 @@ export class Rule extends Lint.Rules.AbstractRule {
 
         const headerCommentFormat = this._getHeaderComment(sourceFile);
 
-            // First get all the comments available in the file. We do this to ensure
-            // that no duplication exists.
+        // First get all the comments available in the file. We do this to ensure
+        // that no duplication exists.
         const comments: ts.CommentRange[] = this._getComments(sourceFile, text);
 
-        if (sourceFile.fileName.indexOf("Environment.ts") !== -1) {
-            console.log(comments);
-        }
-
-            // Next we will filter out those comments that do not match our file
-            // input.
+        // Next we will filter out those comments that do not match our file
+        // input.
         const passingComments: ts.CommentRange[] = [];
 
         for (const comment of comments) {
             const commentContent = text.substring(comment.pos, comment.end);
 
-                // Verify that the range matches
+            // Verify that the range matches
             if (/^\/\*\!/.test(commentContent) || this.headingRegExp.test(commentContent)) {
                 passingComments.push(comment);
             }
         }
 
-            // Check that we had at least one possible valid comment.
-            // If there were none, the fix is to just create it at the start.
+        // Check that we had at least one possible valid comment.
+        // If there were none, the fix is to just create it at the start.
         if (passingComments.length <= 0) {
             failures.push(new Lint.RuleFailure(
-                    sourceFile,
-                    offset,
-                    offset,
-                    Rule.MISSING_HEADER_FAILURE_STRING,
-                    this.ruleName,
+                sourceFile,
+                offset,
+                offset,
+                Rule.MISSING_HEADER_FAILURE_STRING,
+                this.ruleName,
+                [
+                    this._trimLeadingBlanks(text, offset),
                     Lint.Replacement.appendText(offset, headerCommentFormat)
-                ));
+                ]
+            ));
         } else {
-                // For every comment after the first license one, mark it as an error
-                // with the fix to remove the duplicate.
+            // For every comment after the first license one, mark it as an error
+            // with the fix to remove the duplicate.
             for (let i = 1; i < passingComments.length; i++) {
                 const badComment = passingComments[i];
 
+                const regex = new RegExp(`.{${badComment.end}}(\\s*)`, "ms");
+                const endLen = regex.exec(text)[1].length;
+
                 failures.push(new Lint.RuleFailure(
-                        sourceFile,
-                        badComment.pos,
-                        badComment.end,
-                        Rule.DUPLICATE_LICENSE_COMMENT_STRING,
-                        this.ruleName,
-                        Lint.Replacement.deleteFromTo(badComment.pos, badComment.end)
-                    ));
+                    sourceFile,
+                    badComment.pos,
+                    badComment.end,
+                    Rule.DUPLICATE_LICENSE_COMMENT_STRING,
+                    this.ruleName,
+                    Lint.Replacement.deleteFromTo(badComment.pos, badComment.end + endLen)
+                ));
             }
 
-                // Now we only have to check the first comment for validity
+            // Now we only have to check the first comment for validity
             const checkComment = passingComments[0];
 
-                // Header comment must be first of the file.
+            // Header comment must be first of the file.
             if (checkComment.pos !== offset) {
-                // @TODO prevent multiple new lines from being added
                 failures.push(new Lint.RuleFailure(
                     sourceFile,
                     checkComment.pos,
@@ -181,15 +182,19 @@ export class Rule extends Lint.Rules.AbstractRule {
                     Rule.INVALID_LICENCE_LOCATION_STRING,
                     this.ruleName,
                     [
-                        Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end),
+                        this._trimLeadingBlanks(text, offset),
+                        Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end + 2),
                         Lint.Replacement.appendText(offset, headerCommentFormat)
                     ]
                 ));
             } else if (text.substring(checkComment.pos, checkComment.end) !== headerCommentFormat.trim()) {
-                    // Ensure that the license text of the first valid comment matches
-                    // what we would place there dynamically. This is where we handle
-                    // a case where the comment starting with /*! didn't match the loaded file.
-                    // Also catches when a comment has /* and the license, we will flag the missing !
+                const regex = new RegExp(`.{${checkComment.end}}(\\s*)`, "ms");
+                const endLen = regex.exec(text)[1].length;
+
+                // Ensure that the license text of the first valid comment matches
+                // what we would place there dynamically. This is where we handle
+                // a case where the comment starting with /*! didn't match the loaded file.
+                // Also catches when a comment has /* and the license, we will flag the missing !
                 failures.push(new Lint.RuleFailure(
                     sourceFile,
                     checkComment.pos,
@@ -197,7 +202,7 @@ export class Rule extends Lint.Rules.AbstractRule {
                     Rule.INVALID_LICENSE_TEXT_STRING,
                     this.ruleName,
                     [
-                        Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end),
+                        Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end + endLen),
                         Lint.Replacement.appendText(offset, headerCommentFormat)
                     ]
                 ));
@@ -228,7 +233,14 @@ export class Rule extends Lint.Rules.AbstractRule {
      * @returns Comments present with in the source file
      */
     private _getComments(sourceFile: ts.SourceFile, text: string): ts.CommentRange[] {
-        return ts.forEachChild(sourceFile, this._walkTree.bind(this, text));
+        return this._walkTree(text, sourceFile).filter(
+            // Filter out duplicate start positions after finished walking
+            (value, index, self) =>
+                index === self.findIndex(
+                    (firstObject) =>
+                        firstObject.pos === value.pos
+                )
+        );
     }
 
     /**
@@ -247,8 +259,25 @@ export class Rule extends Lint.Rules.AbstractRule {
                 ...this.headingContents.split(/\r?\n/g).map((line) => ` * ${line}`.replace(/\s+$/, "")),
                 " */",
             ].join(lineEnding) +
-            lineEnding
+            lineEnding.repeat(2)
         );
+    }
+
+    /**
+     * Trims leading blanks before creating a comment.
+     *
+     * @param text The text to trim
+     * @param offset The offset accounting for the shebang
+     *
+     * @returns The delete method that will take place
+     */
+    private _trimLeadingBlanks(text: string, offset: number): Lint.Replacement {
+        // Cheap way of getting the starting blank lines minus the shebang present
+        // by just using js trim functions.
+        const replaceRange = text.substring(offset);
+        const newRange = replaceRange.trimLeft();
+
+        return Lint.Replacement.deleteFromTo(offset, replaceRange.length - newRange.length - 1);
     }
 
     /**
@@ -260,9 +289,17 @@ export class Rule extends Lint.Rules.AbstractRule {
      * @returns The comments for the given node and all it's children.
      */
     private _walkTree(text: string, node: ts.Node): ts.CommentRange[] {
-        const comments = ts.getLeadingCommentRanges(text, node.getFullStart()) || [];
+        const children = node.getChildren();
 
-        ts.forEachChild(node, this._walkTree.bind(this, text));
-        return comments.concat(ts.forEachChild(node, this._walkTree.bind(this, text)));
+        let comments: ts.CommentRange[] = [];
+
+        for (const child of children) {
+            comments = comments.concat(
+                ts.getLeadingCommentRanges(text, child.getFullStart()) || [],
+                this._walkTree(text, child)
+            );
+        }
+
+        return comments;
     }
 }

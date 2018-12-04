@@ -50,9 +50,6 @@ class EnvironmentManager {
      */
     private _registered: {[key: string]: ValidDefaults} = {};
 
-    /*!
-     * BS
-     */
     /**
      * Gets the numeric value of an environmental variable.
      *

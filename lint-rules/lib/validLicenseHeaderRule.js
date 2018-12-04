@@ -59,32 +59,39 @@ class Rule extends Lint.Rules.AbstractRule {
         // Check that we had at least one possible valid comment.
         // If there were none, the fix is to just create it at the start.
         if (passingComments.length <= 0) {
-            failures.push(new Lint.RuleFailure(sourceFile, offset, offset, Rule.MISSING_HEADER_FAILURE_STRING, this.ruleName, Lint.Replacement.appendText(offset, headerCommentFormat)));
+            failures.push(new Lint.RuleFailure(sourceFile, offset, offset, Rule.MISSING_HEADER_FAILURE_STRING, this.ruleName, [
+                this._trimLeadingBlanks(text, offset),
+                Lint.Replacement.appendText(offset, headerCommentFormat)
+            ]));
         }
         else {
             // For every comment after the first license one, mark it as an error
             // with the fix to remove the duplicate.
             for (let i = 1; i < passingComments.length; i++) {
                 const badComment = passingComments[i];
-                failures.push(new Lint.RuleFailure(sourceFile, badComment.pos, badComment.end, Rule.DUPLICATE_LICENSE_COMMENT_STRING, this.ruleName, Lint.Replacement.deleteFromTo(badComment.pos, badComment.end)));
+                const regex = new RegExp(`.{${badComment.end}}(\\s*)`, "ms");
+                const endLen = regex.exec(text)[1].length;
+                failures.push(new Lint.RuleFailure(sourceFile, badComment.pos, badComment.end, Rule.DUPLICATE_LICENSE_COMMENT_STRING, this.ruleName, Lint.Replacement.deleteFromTo(badComment.pos, badComment.end + endLen)));
             }
             // Now we only have to check the first comment for validity
             const checkComment = passingComments[0];
             // Header comment must be first of the file.
             if (checkComment.pos !== offset) {
-                // @TODO prevent multiple new lines from being added
                 failures.push(new Lint.RuleFailure(sourceFile, checkComment.pos, checkComment.end, Rule.INVALID_LICENCE_LOCATION_STRING, this.ruleName, [
-                    Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end),
+                    this._trimLeadingBlanks(text, offset),
+                    Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end + 2),
                     Lint.Replacement.appendText(offset, headerCommentFormat)
                 ]));
             }
             else if (text.substring(checkComment.pos, checkComment.end) !== headerCommentFormat.trim()) {
+                const regex = new RegExp(`.{${checkComment.end}}(\\s*)`, "ms");
+                const endLen = regex.exec(text)[1].length;
                 // Ensure that the license text of the first valid comment matches
                 // what we would place there dynamically. This is where we handle
                 // a case where the comment starting with /*! didn't match the loaded file.
                 // Also catches when a comment has /* and the license, we will flag the missing !
                 failures.push(new Lint.RuleFailure(sourceFile, checkComment.pos, checkComment.end, Rule.INVALID_LICENSE_TEXT_STRING, this.ruleName, [
-                    Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end),
+                    Lint.Replacement.deleteFromTo(checkComment.pos, checkComment.end + endLen),
                     Lint.Replacement.appendText(offset, headerCommentFormat)
                 ]));
             }
@@ -102,9 +109,23 @@ class Rule extends Lint.Rules.AbstractRule {
         const maybeCarriageReturn = sourceFile.text[sourceFile.getLineEndOfPosition(0)] === "\r" ? "\r" : "";
         return `${maybeCarriageReturn}\n`;
     }
+    /**
+     * Get block comments within a source file.
+     * @param sourceFile Source file passed by tslint.
+     * @param text Text of the source file.
+     *
+     * @returns Comments present with in the source file
+     */
     _getComments(sourceFile, text) {
-        return ts.forEachChild(sourceFile, this._walkTree.bind(this, text));
+        return this._walkTree(text, sourceFile).filter(
+        // Filter out duplicate start positions after finished walking
+        (value, index, self) => index === self.findIndex((firstObject) => firstObject.pos === value.pos));
     }
+    /**
+     * Get the header comment for the license loaded.
+     * @param sourceFile Source file passed by tslint.
+     * @returns The exact header comment to place in the file.
+     */
     _getHeaderComment(sourceFile) {
         const lineEnding = this._generateLineEnding(sourceFile);
         return ([
@@ -115,10 +136,38 @@ class Rule extends Lint.Rules.AbstractRule {
             ...this.headingContents.split(/\r?\n/g).map((line) => ` * ${line}`.replace(/\s+$/, "")),
             " */",
         ].join(lineEnding) +
-            lineEnding);
+            lineEnding.repeat(2));
     }
+    /**
+     * Trims leading blanks before creating a comment.
+     *
+     * @param text The text to trim
+     * @param offset The offset accounting for the shebang
+     *
+     * @returns The delete method that will take place
+     */
+    _trimLeadingBlanks(text, offset) {
+        // Cheap way of getting the starting blank lines minus the shebang present
+        // by just using js trim functions.
+        const replaceRange = text.substring(offset);
+        const newRange = replaceRange.trimLeft();
+        return Lint.Replacement.deleteFromTo(offset, replaceRange.length - newRange.length - 1);
+    }
+    /**
+     * Walk the tree in search of comments.
+     *
+     * @param text The tree text.
+     * @param node The current node.
+     *
+     * @returns The comments for the given node and all it's children.
+     */
     _walkTree(text, node) {
-        return ts.getLeadingCommentRanges(text, node.getFullStart()) || [];
+        const children = node.getChildren();
+        let comments = [];
+        for (const child of children) {
+            comments = comments.concat(ts.getLeadingCommentRanges(text, child.getFullStart()) || [], this._walkTree(text, child));
+        }
+        return comments;
     }
 }
 /**
