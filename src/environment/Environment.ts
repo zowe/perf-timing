@@ -9,11 +9,6 @@
  *
  */
 
- /*!
-  * bogus
-  */
-
-
 /**
  * Represents the valid types that may be registered in the environment.
  *
@@ -55,6 +50,9 @@ class EnvironmentManager {
      */
     private _registered: {[key: string]: ValidDefaults} = {};
 
+    /*!
+     * BS
+     */
     /**
      * Gets the numeric value of an environmental variable.
      *

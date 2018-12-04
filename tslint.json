@@ -79,7 +79,7 @@
         "requireParamType": false,
         "requireReturnType": false
     }],
-    "valid-license-header": [true, "LICENSE_HEADER", "enforce-trailing-newline"],
+    "valid-license-header": [true, "LICENSE_HEADER"],
     "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [true, "check-module"]
   },
