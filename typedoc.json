@@ -4,5 +4,6 @@
     "ignoreCompilerErrors": true,
     "mode": "file",
     "plugin": ["typedoc-plugin-example-tag"],
-    "excludeExternals": false
+    "excludeExternals": false,
+    "theme": "./typedoc-theme"
 }
