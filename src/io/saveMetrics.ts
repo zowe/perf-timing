@@ -4,14 +4,27 @@ import * as mkdirp from "mkdirp";
 import * as fs from "fs";
 import * as os from "os";
 
-// Prefix for IO related items
+/**
+ * Environment key prefix for IO related options.
+ *
+ * @internal
+ */
 const ENV_IO = `${ENV_PREFIX}_IO`;
 
-// Environment variable that will be checked to see how many historical entries
-// should be kept.
+/**
+ * Environment key prefix for the max history value. Max history refers to the
+ * max number of log entries to keep when performance is enabled.
+ *
+ * @internal
+ */
 const ENV_IO_MAX_HISTORY = `${ENV_IO}_MAX_HISTORY`;
 
-// Environment variable that will be used to determine where files are saved.
+// @TODO need to test the save dir
+/**
+ * Environment key prefix for where the logs are saved.
+ *
+ * @internal
+ */
 const ENV_IO_SAVE_DIR = `${ENV_IO}_SAVE_DIR`;
 
 // tslint:disable:no-magic-numbers
@@ -20,8 +33,22 @@ Environment
     .register(ENV_IO_SAVE_DIR, `${os.homedir()}/.perf-timing`);
 // tslint:enable:no-magic-numbers
 
-
-export function saveMetrics(data: object) { // @TODO proper typing and document
+// @TODO proper typing
+/**
+ * Save metrics into the next log file.
+ *
+ * Upon execution this function will first roll any logs based on the value
+ * present within environmental {@link ENV_IO_MAX_HISTORY} variable. The directory
+ * that is checked will be determined from the {@link ENV_IO_SAVE_DIR} value.
+ *
+ * @param data The object data to save in a file.
+ *
+ * @todo This function needs to be enhanced so that an environment variable can
+ * influence the file name.
+ *
+ * @internal
+ */
+export function saveMetrics(data: object) {
     // @FUTURE This is where file save location will be determined by
     // @FUTURE environment settings for aggregation at a later time.
     const directory = Environment.getValue(ENV_IO_SAVE_DIR);
@@ -58,6 +85,8 @@ export function saveMetrics(data: object) { // @TODO proper typing and document
  * Recursively create the save directory if needed.
  *
  * @param directory The directory that will be created
+ *
+ * @internal
  */
 function createDirectory(directory: string) {
     // @FUTURE When Node 8 is no longer supported, this function should be
@@ -71,6 +100,10 @@ function createDirectory(directory: string) {
  *
  * @param directory The directory of the file
  * @param index The index of the file in the history
+ *
+ * @returns The formatted file name that will be saved
+ *
+ * @internal
  */
 function getMetricFileName(directory: string, index: number) {
     return `${directory}/metrics.${index}.json`;
