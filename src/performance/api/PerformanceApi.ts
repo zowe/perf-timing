@@ -1,3 +1,14 @@
+/*!
+ * This program and the accompanying materials are made available under the terms of the
+ * Eclipse Public License v2.0 which accompanies this distribution, and is available at
+ * https://www.eclipse.org/legal/epl-v20.html
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ *
+ * Copyright Contributors to the Zowe Project.
+ *
+ */
+
 /*
 * This program and the accompanying materials are made available under the terms of the
 * Eclipse Public License v2.0 which accompanies this distribution, and is available at
@@ -42,6 +53,73 @@ export class PerformanceApi implements IPerformanceApi {
                 this._addPackageNamespace(name)
             );
         }
+    }
+
+    /**
+     * Output raw performance metrics to a file. Should be the last call in execution.
+     */
+    public getMetrics(): object { // @TODO proper interface
+        if (this._manager.isEnabled) {
+            // @TODO All metrics should be stopped before reporting
+
+            const output: IMetrics = { // @TODO separate file
+                functions: [],
+                measurements: []
+            };
+
+            // Get function timer metrics
+            const functionTimers = this._functionTimers.entries();
+            for (const [key, value] of functionTimers) {
+                output.functions.push({
+                    name: key,
+                    calls: value.totalCalls,
+                    totalDuration: value.totalDuration,
+                    averageDuration: value.totalDuration / value.totalCalls
+                });
+            }
+
+            // Get measurement metrics
+            const measureTimers = this._measureTimers.entries();
+            for (const [key, value] of measureTimers) {
+                let totalDuration = 0;
+
+                for (const measurement of value.measurements) {
+                    totalDuration += measurement.duration;
+                }
+
+                output.measurements.push({
+                    name: key,
+                    calls: value.measurements.length,
+                    totalDuration,
+                    averageDuration: totalDuration / value.measurements.length,
+                    data: value.measurements
+                });
+            }
+
+            return output;
+        }
+
+        return {};
+    }
+
+    public getNodeTiming(): INodeTiming | void {
+        if (this._manager.isEnabled) {
+
+            const timing: any = this._perfHooks.performance.nodeTiming;
+
+            return {
+                bootstrapComplete: timing.bootstrapComplete,
+                duration: timing.duration,
+                environment: timing.environment,
+                loopStart: timing.loopStart,
+                loopExit: timing.loopExit,
+                nodeStart: timing.nodeStart,
+                startTime: timing.startTime,
+                v8Start: timing.v8Start
+            };
+        }
+
+        return;
     }
 
     public mark(name: string) {
@@ -183,73 +261,6 @@ export class PerformanceApi implements IPerformanceApi {
         } else {
             return fn;
         }
-    }
-
-    /**
-     * Output raw performance metrics to a file. Should be the last call in execution.
-     */
-    public getMetrics(): object { // @TODO proper interface
-        if (this._manager.isEnabled) {
-            // @TODO All metrics should be stopped before reporting
-
-            const output: IMetrics = { // @TODO separate file
-                functions: [],
-                measurements: []
-            };
-
-            // Get function timer metrics
-            const functionTimers = this._functionTimers.entries();
-            for (const [key, value] of functionTimers) {
-                output.functions.push({
-                    name: key,
-                    calls: value.totalCalls,
-                    totalDuration: value.totalDuration,
-                    averageDuration: value.totalDuration / value.totalCalls
-                });
-            }
-
-            // Get measurement metrics
-            const measureTimers = this._measureTimers.entries();
-            for (const [key, value] of measureTimers) {
-                let totalDuration = 0;
-
-                for (const measurement of value.measurements) {
-                    totalDuration += measurement.duration;
-                }
-
-                output.measurements.push({
-                    name: key,
-                    calls: value.measurements.length,
-                    totalDuration,
-                    averageDuration: totalDuration / value.measurements.length,
-                    data: value.measurements
-                });
-            }
-
-            return output;
-        }
-
-        return {};
-    }
-
-    public getNodeTiming(): INodeTiming | void {
-        if (this._manager.isEnabled) {
-
-            const timing: any = this._perfHooks.performance.nodeTiming;
-
-            return {
-                bootstrapComplete: timing.bootstrapComplete,
-                duration: timing.duration,
-                environment: timing.environment,
-                loopStart: timing.loopStart,
-                loopExit: timing.loopExit,
-                nodeStart: timing.nodeStart,
-                startTime: timing.startTime,
-                v8Start: timing.v8Start
-            };
-        }
-
-        return;
     }
 
     private _addPackageNamespace(name: string): string {

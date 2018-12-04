@@ -20,10 +20,12 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "build:rules": "tsc --build ./lint-rules/tsconfig.json",
     "typedoc": "typedoc --options ./typedoc.json --internal-aliases external --external-aliases internal --plugin \"typedoc-plugin-example-tag,typedoc-plugin-nojekyll,typedoc-plugin-internal-external\"",
     "lint": "npm run lint:src && npm run lint:tests",
     "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\" --project \"tsconfig.json\"",
     "lint:tests": "tslint --format stylish -c ./tslint-tests.json \"**/__tests__/**/*.ts\" --project \"tsconfig.json\"",
+    "lint:rules": "tslint --format stylish -c ./lint-rules/tslint.json \"./lint-rules/src/**/*.ts\" --project ./lint-rules/tsconfig.json",
     "watch": "gulp watch"
   },
   "dependencies": {
@@ -41,6 +43,7 @@
     "jest-html-reporter": "2.4.2",
     "jest-junit": "5.2.0",
     "ts-jest": "23.10.4",
+    "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-consistent-codestyle": "1.14.1",
     "tslint-eslint-rules": "^5.4.0",
