@@ -22,7 +22,7 @@
     "build": "tsc",
     "build:rules": "tsc --build ./lint-rules/tsconfig.json",
     "typedoc": "typedoc --options ./typedoc.json --internal-aliases external --external-aliases internal --plugin \"typedoc-plugin-example-tag,typedoc-plugin-nojekyll,typedoc-plugin-internal-external\"",
-    "lint": "npm run lint:src && npm run lint:tests",
+    "lint": "npm run lint:rules && npm run lint:src && npm run lint:tests",
     "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\" --project \"tsconfig.json\"",
     "lint:tests": "tslint --format stylish -c ./tslint-tests.json \"**/__tests__/**/*.ts\" --project \"tsconfig.json\"",
     "lint:rules": "tslint --format stylish -c ./lint-rules/tslint.json \"./lint-rules/src/**/*.ts\" --project ./lint-rules/tsconfig.json",
