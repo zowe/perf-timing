@@ -9,35 +9,28 @@
  *
  */
 
-
 import { ENV_PREFIX } from "../constants";
 import { Environment } from "../environment";
 import * as mkdirp from "mkdirp";
 import * as fs from "fs";
 import * as os from "os";
 
-/**
- * Environment key prefix for IO related options.
- *
- * @internal
- */
-const ENV_IO = `${ENV_PREFIX}_IO`;
 
 /**
  * Environment key prefix for the max history value. Max history refers to the
  * max number of log entries to keep when performance is enabled.
  *
- * @internal
+ * @external
  */
-const ENV_IO_MAX_HISTORY = `${ENV_IO}_MAX_HISTORY`;
+const ENV_IO_MAX_HISTORY = `${ENV_PREFIX}_IO_MAX_HISTORY`;
 
 // @TODO need to test the save dir
 /**
  * Environment key prefix for where the logs are saved.
  *
- * @internal
+ * @external
  */
-const ENV_IO_SAVE_DIR = `${ENV_IO}_SAVE_DIR`;
+const ENV_IO_SAVE_DIR = `${ENV_PREFIX}_IO_SAVE_DIR`;
 
 // tslint:disable:no-magic-numbers
 Environment

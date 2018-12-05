@@ -16,6 +16,7 @@
     ],
     "psi-header.lang-config": [
         {
+            "begin": "/*!",
             "language": "typescript",
             "prefix": " *",
             "forceToTop": true,

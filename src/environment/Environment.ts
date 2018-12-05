@@ -78,6 +78,7 @@ class EnvironmentManager {
             value = this._registered[key] as number;
         }
 
+
         return value;
     }
 

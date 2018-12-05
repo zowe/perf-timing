@@ -9,10 +9,18 @@
  *
  */
 
-
- /**
-  * @TODO fill this out
-  */
+/**
+ * This is the environmental prefix that will be added to any configuration
+ * settings for performance.
+ *
+ * @external
+ */
 export const ENV_PREFIX = "PERF_TIMING";
-export const GLOBAL_SYMBOL = Symbol.for("org.zowe.perf-timing");
 
+
+/**
+ * Symbol used to ensure uniqueness across all possible instances of this package.
+ *
+ * @internal
+ */
+export const GLOBAL_SYMBOL = Symbol.for("org.zowe.perf-timing");
