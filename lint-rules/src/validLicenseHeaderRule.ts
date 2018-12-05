@@ -95,13 +95,14 @@ export class Rule extends Lint.Rules.AbstractRule {
         // Define the regular expression to match
         const fileLines = this.headingContents.split("\n");
         let regexString = "";
+
         for(const line of fileLines) {
-            regexString += `${line}.*`;
+            regexString += `${line.trim()}[\\S\\s]*`;
         }
 
         regexString += "\\n\\s*\\*\\/";
 
-        this.headingRegExp = new RegExp(regexString, "s");
+        this.headingRegExp = new RegExp(regexString);
     }
 
     /**
@@ -157,7 +158,7 @@ export class Rule extends Lint.Rules.AbstractRule {
             for (let i = 1; i < passingComments.length; i++) {
                 const badComment = passingComments[i];
 
-                const regex = new RegExp(`.{${badComment.end}}(\\s*)`, "ms");
+                const regex = new RegExp(`[\\S\\s]{${badComment.end}}(\\s*)`, "m");
                 const endLen = regex.exec(text)[1].length;
 
                 failures.push(new Lint.RuleFailure(
@@ -188,7 +189,7 @@ export class Rule extends Lint.Rules.AbstractRule {
                     ]
                 ));
             } else if (text.substring(checkComment.pos, checkComment.end) !== headerCommentFormat.trim()) {
-                const regex = new RegExp(`.{${checkComment.end}}(\\s*)`, "ms");
+                const regex = new RegExp(`[\\S\\s]{${checkComment.end}}(\\s*)`, "m");
                 const endLen = regex.exec(text)[1].length;
 
                 // Ensure that the license text of the first valid comment matches
