@@ -9,22 +9,16 @@
  *
  */
 
-
 import { PerformanceApiManager } from "./performance/manager/PerformanceApiManager";
 
-// @TODO edit the doc
 /**
- * An instance of a {@link PerformanceApiManager}. This object is the only thing
- * intended to be directly imported by any dependents of this package.
+ * An instance of a {@link PerformanceApiManager}. Public functionality is exported
+ * under this name.
  *
- * @example
- * import { PerfTiming } from "@zowe/perf-timing";
+ * [[include:environment.md]]
  *
- * if (PerfTiming.isEnabled) {
- *   // Do stuff with PerfTiming
- *   PerfTiming.getApi().mark("start");
- *   PerfTiming.getApi().mark("end");
- *   PerfTiming.getApi().measure("beginning to end", "start", "end");
- * }
+ * [[include:index.PerfTiming.measure.md]]
+ *
+ * [[include:index.PerfTiming.timerify.md]]
  */
 export const PerfTiming = new PerformanceApiManager(); // tslint:disable-line:variable-name
