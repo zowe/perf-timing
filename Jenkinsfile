@@ -202,6 +202,39 @@ pipeline {
         /************************************************************************
          * STAGE
          * -----
+         * Lint
+         *
+         * TIMEOUT
+         * -------
+         * 10 Minutes
+         *
+         * EXECUTION CONDITIONS
+         * --------------------
+         * - SHOULD_BUILD is true
+         * - The build is still successful
+         *
+         * DESCRIPTION
+         * -----------
+         * Executes the `npm run lint` command to generate the application code.
+         *
+         ************************************************************************/
+        stage('lint') {
+            when {
+                expression {
+                    return SHOULD_BUILD == 'true'
+                }
+            }
+            steps {
+                timeout(time: 10, unit: 'MINUTES') {
+                    echo 'Lint'
+                    sh 'npm run lint'
+                }
+            }
+        }
+
+        /************************************************************************
+         * STAGE
+         * -----
          * Build
          *
          * TIMEOUT
