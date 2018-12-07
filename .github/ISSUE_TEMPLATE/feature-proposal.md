@@ -13,11 +13,15 @@ A clear and concise description of what the problem is. Ex. I'm always frustrate
 
 ### Workarounds
 
-If a work around for the problem exists, clearly describe that here. Otherwise, omit this section.
+- If a work around for the problem exists, clearly describe that here. Otherwise, omit this section.
 
 ## Solution
 
 A clear and concise description of what the proposed solution is. Ex. I would like this package to do [...]
+
+### Use Cases
+- I can now do x using y
+- I am able to see this metric.
 
 ### Proposed Infrastructure
 
@@ -36,9 +40,3 @@ import { PerfTiming } from "@zowe/perf-timing";
 
 PerfTiming.getApi().doSomething();
 ```
-
-### Use Cases
-
-A list of use cases that this solution enables:
-- I can now do x using y
-- I am able to see this metric.
