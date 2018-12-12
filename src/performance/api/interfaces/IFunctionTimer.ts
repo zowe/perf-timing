@@ -9,10 +9,11 @@
  *
  */
 
-
 import { IPerformanceObserver } from "./IPerformanceObserver";
+import { PerformanceEntry } from "perf_hooks";
 
 export interface IFunctionTimer {
+    entries: PerformanceEntry[];
     observer: IPerformanceObserver;
     originalFunction: (...args: any[]) => any;
     totalCalls: number;

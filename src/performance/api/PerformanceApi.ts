@@ -66,7 +66,8 @@ export class PerformanceApi implements IPerformanceApi {
                     name: key,
                     calls: value.totalCalls,
                     totalDuration: value.totalDuration,
-                    averageDuration: value.totalDuration / value.totalCalls
+                    averageDuration: value.totalDuration / value.totalCalls,
+                    entries: value.entries
                 });
             }
 
@@ -75,16 +76,16 @@ export class PerformanceApi implements IPerformanceApi {
             for (const [key, value] of measureTimers) {
                 let totalDuration = 0;
 
-                for (const measurement of value.measurements) {
-                    totalDuration += measurement.duration;
+                for (const entry of value.entries) {
+                    totalDuration += entry.duration;
                 }
 
                 output.measurements.push({
                     name: key,
-                    calls: value.measurements.length,
+                    calls: value.entries.length,
                     totalDuration,
-                    averageDuration: totalDuration / value.measurements.length,
-                    data: value.measurements
+                    averageDuration: totalDuration / value.entries.length,
+                    entries: value.entries
                 });
             }
 
@@ -168,7 +169,7 @@ export class PerformanceApi implements IPerformanceApi {
                 mapObject = {
                     observer: undefined,
                     isConnected: false,
-                    measurements: []
+                    entries: []
                 };
 
                 this._measureTimers.set(name, mapObject);
@@ -190,7 +191,7 @@ export class PerformanceApi implements IPerformanceApi {
                     // Loop through each entry and save the metrics
                     if (entries.length > 0) {
                         for(const entry of entries) {
-                            mapObject.measurements.push({
+                            mapObject.entries.push({
                                 name: entry.name,
                                 startTime: entry.startTime,
                                 duration: entry.duration,
@@ -227,6 +228,7 @@ export class PerformanceApi implements IPerformanceApi {
             // Create the observer and store it in the map.
             const observerObject: IFunctionTimer = {
                 observer: undefined,
+                entries: [],
                 originalFunction: fn,
                 totalDuration: 0,
                 totalCalls: 0
@@ -241,6 +243,7 @@ export class PerformanceApi implements IPerformanceApi {
                 for (const entry of entries) {
                     observerObject.totalDuration += entry.duration;
                     observerObject.totalCalls++;
+                    observerObject.entries.push(entry);
                 }
             });
 

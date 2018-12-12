@@ -14,7 +14,7 @@ import { IMeasurement } from "./IMeasurement";
 import { IPerformanceObserver } from "./IPerformanceObserver";
 
 export interface IMeasureTimer {
+    entries: IMeasurement[];
     isConnected: boolean;
-    measurements: IMeasurement[];
     observer: IPerformanceObserver;
 }

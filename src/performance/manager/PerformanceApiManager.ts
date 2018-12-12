@@ -130,11 +130,6 @@ export class PerformanceApiManager implements IPerformanceApiManager {
             outputMetrics[symbolValue].push(value.getMetrics());
         }
 
-        console.dir(outputMetrics, {
-            depth: 4,
-            colors: true
-        });
-
         // Require the IO utility at this point to reduce total number of
         // requires in the calling library when performance monitoring
         // is not enabled.
