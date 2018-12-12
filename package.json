@@ -21,6 +21,7 @@
   "scripts": {
     "build": "tsc",
     "build:rules": "tsc --build ./lint-rules/tsconfig.json",
+    "pretypedoc": "ts-node ./docs/build-utilities/typedoc-includes/buildIncludes.ts",
     "typedoc": "typedoc --options ./typedoc.json --internal-aliases external --external-aliases internal --plugin \"typedoc-plugin-example-tag,typedoc-plugin-nojekyll,typedoc-plugin-internal-external\"",
     "lint": "npm run lint:rules && npm run lint:src && npm run lint:tests",
     "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\" --project \"tsconfig.json\"",

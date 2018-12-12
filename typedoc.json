@@ -5,6 +5,6 @@
     "mode": "file",
     "plugin": ["typedoc-plugin-example-tag"],
     "excludeExternals": false,
-    "includes": "./docs/typedoc-includes",
-    "theme": "./typedoc-theme"
+    "includes": "./docs/build-utilities/typedoc-includes/resolved",
+    "theme": "./docs/build-utilities/typedoc-theme"
 }
