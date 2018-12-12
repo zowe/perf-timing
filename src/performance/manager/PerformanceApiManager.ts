@@ -70,7 +70,7 @@ export class PerformanceApiManager implements IPerformanceApiManager {
             this.isEnabled = true;
 
             // Generate the packageUUID
-            const pkg = require(pkgUp.sync());
+            const pkg = require(pkgUp.sync() || pkgUp.sync(__dirname));
             this.packageUUID = `${pkg.name}@${pkg.version}`;
 
             // Check if the global scope has been created. If it hasn't been created
