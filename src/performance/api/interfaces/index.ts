@@ -17,3 +17,5 @@ export * from "./IMeasurementMetric";
 export * from "./IMeasureTimer";
 export * from "./IMetrics";
 export * from "./INodeTiming";
+export * from "./IPerformanceObserver";
+export * from "./ISystemInformation";

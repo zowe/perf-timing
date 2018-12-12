@@ -15,7 +15,8 @@ import {
     IFunctionTimer,
     IMeasureTimer,
     IMetrics,
-    INodeTiming
+    INodeTiming,
+    ISystemInformation
 } from "./interfaces";
 
 export class PerformanceApi implements IPerformanceApi {
@@ -107,6 +108,39 @@ export class PerformanceApi implements IPerformanceApi {
                 nodeStart: timing.nodeStart,
                 startTime: timing.startTime,
                 v8Start: timing.v8Start
+            };
+        }
+
+        return;
+    }
+
+    public getSysInfo(): ISystemInformation | void {
+        if (this._manager.isEnabled) {
+            // Dynamically import os so that this process doesn't have to bother
+            // if performance is not enabled.
+            const os: typeof import("os") = require("os");
+
+            const freeMem = os.freemem();
+            const totalMem = os.totalmem();
+
+            return {
+                argv: process.argv,
+                cpus: os.cpus(),
+                loadavg: os.loadavg(), // On windows this will always be [0, 0, 0]
+                memory: {
+                    free: freeMem,
+                    total: totalMem,
+                    usage: totalMem - freeMem,
+                    usagePercentage: ((totalMem - freeMem) / totalMem) * 100 // tslint:disable-line:no-magic-numbers
+                },
+                network: {
+                    hostname: os.hostname(),
+                    interfaces: os.networkInterfaces()
+                },
+                os: `${os.type()} ${os.arch()} ${os.release()}`,
+                platform: os.platform(),
+                shell: os.userInfo().shell,
+                uptime: os.uptime()
             };
         }
 

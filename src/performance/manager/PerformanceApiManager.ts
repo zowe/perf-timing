@@ -115,6 +115,7 @@ export class PerformanceApiManager implements IPerformanceApiManager {
 
         // Get timing first to not skew the results
         outputMetrics.nodeTiming = this.getApi().getNodeTiming();
+        outputMetrics.systemInfo = this.getApi().getSysInfo();
 
         for (const [key, value] of metrics) {
             const symbolValue = key.toString();
