@@ -9,9 +9,24 @@
  *
  */
 
-import * as fs from "fs";
+// Since this is internal build only, doesn't matter if we require stuff in
+// dev dependencies
+import * as fs from "fs-extra"; // tslint:disable-line:no-implicit-dependencies
 import * as path from "path";
-import * as mkdirp from "mkdirp";
+
+/**
+ * This is the directory to use as the root of our documentation source. All
+ * includes will be resolved for files within this directory relative to each
+ * file processed.
+ */
+const sourceBase = `${__dirname}/src`;
+
+/**
+ * This is the directory where all files in the sourceBase will be output after
+ * being processed. The directory structure of sourceBase will be maintained
+ * with includes filled out.
+ */
+const outputBase = `${__dirname}/resolved`;
 
 /**
  * Recurse through all files present in a directory. If a file is a directory
@@ -20,31 +35,31 @@ import * as mkdirp from "mkdirp";
  *
  * @param directory The absolute directory path to recurse through.
  */
-function recurseDirectory(directory: string) {
-    const files = fs.readdirSync(directory);
+async function recurseDirectory(directory: string) {
+    const files = await fs.readdir(directory);
 
     for (const file of files) {
         const resolvedFile = `${directory}/${file}`;
-        const stat = fs.statSync(resolvedFile);
+        const stat = await fs.stat(resolvedFile);
 
         if (stat.isFile() && path.parse(resolvedFile).ext === ".md") {
             const finalText = resolveIncludes(
-                fs.readFileSync(resolvedFile).toString(),
+                (await fs.readFile(resolvedFile)).toString(),
                 resolvedFile,
                 []
             );
 
-            const saveLocation = path.join(__dirname, path.relative(__dirname, resolvedFile).replace("src", "resolved"));
-            mkdirp.sync(path.join(saveLocation, "../"));
+            const saveLocation = path.join(outputBase, path.relative(sourceBase, resolvedFile));
+            // mkdirp.sync(path.join(saveLocation, "../"));
 
             console.log(`RESOLVED INCLUDES IN: ${saveLocation}`); //tslint:disable-line
 
-            fs.writeFileSync(saveLocation, finalText, {
+            await fs.outputFile(saveLocation, finalText, {
                 flag: "w+"
             });
 
         } else if(stat.isDirectory()) {
-            recurseDirectory(resolvedFile);
+            await recurseDirectory(resolvedFile);
         }
     }
 }
@@ -94,5 +109,10 @@ function resolveIncludes(text: string, relativeTo: string, stack: string[] = [])
     return text;
 }
 
-// Start the recursion in the proper source. Saved files will exist under ./resolved
-recurseDirectory(`${__dirname}/src`);
+(async () => {
+    // Clear out the previous content
+    await fs.emptyDir(outputBase);
+
+    // Start the recursion in the proper source. Saved files will exist under ./resolved
+    await recurseDirectory(sourceBase);
+})();
