@@ -13,11 +13,23 @@
 import { PerformanceApiError } from "./PerformanceApiError";
 
 /**
- * @TODO BETTER DOCUMENT
+ * Thrown when a duplicate function timer would have been created.
  *
- * Error thrown when a timer in the functionTimers map already exists.
+ * @external
+ *
+ * @example
+ * function test() {
+ *   // does stuff
+ * }
+ *
+ * PerfTiming.getApi().timerify(test);
+ * PerfTiming.getApi().timerify(test);
  */
 export class TimerNameConflictError extends PerformanceApiError {
+    /**
+     * Construct the error message.
+     * @param name The name of the timer that would be a duplicate.
+     */
     constructor(name: string) {
         super(`A timer with the name "${name} was previously created. Please create unique timer names.`);
     }

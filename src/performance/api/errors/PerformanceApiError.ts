@@ -9,8 +9,16 @@
  *
  */
 
-
+ /**
+  * Base error for issues thrown by the Performance API.
+  *
+  * @external
+  */
 export class PerformanceApiError extends Error {
+    /**
+     * Construct the error.
+     * @param message Message sent by the child.
+     */
     constructor(message: string) {
         super(`Performance Error\n${message}`);
     }

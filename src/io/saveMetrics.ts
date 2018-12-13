@@ -15,7 +15,6 @@ import * as mkdirp from "mkdirp";
 import * as fs from "fs";
 import * as os from "os";
 
-
 /**
  * Environment key prefix for the max history value. Max history refers to the
  * max number of log entries to keep when performance is enabled.
@@ -97,7 +96,7 @@ function createDirectory(directory: string) {
     // @FUTURE When Node 8 is no longer supported, this function should be
     // @FUTURE changed to use the recursive property on mkdirSync
     // @FUTURE until then, use the mkdirp package for simplicity
-    mkdirp.sync(directory);
+    mkdirp.sync(directory); // @TODO switch to fs-extra
 }
 
 /**

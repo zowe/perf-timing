@@ -283,7 +283,7 @@ export class PerformanceApi implements IPerformanceApi {
                 timerRef.observer.disconnect();
                 return timerRef.originalFunction;
             } else {
-                const error: typeof import("./errors").TimerDoesNotExistError = require("./errors").TimerDoesNotExistError;
+                const error: typeof import("./errors").TimerDoesNotExistError = require("./errors").TimerDoesNotExistError; // @TODO import type at top
                 throw new error(timer);
             }
         } else {

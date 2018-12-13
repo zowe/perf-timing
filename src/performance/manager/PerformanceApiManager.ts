@@ -78,7 +78,7 @@ export class PerformanceApiManager implements IPerformanceApiManager {
             if (!global[GLOBAL_SYMBOL]) {
                 // Create the global map on first run
                 global[GLOBAL_SYMBOL] = new Map();
-                process.on("exit", () => this._savePerformanceResults());
+                process.on("exit", () => this._savePerformanceResults()); // @TODO log any errors that might have been thrown
             }
         } else {
             // Performance was not enabled.

@@ -9,7 +9,6 @@
  *
  */
 
-
 /**
  * This error represents the condition when an environment variable was requested
  * without first being registered.

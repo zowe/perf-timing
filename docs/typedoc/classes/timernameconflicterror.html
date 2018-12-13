@@ -68,12 +68,16 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-					<dl class="tsd-comment-tags">
-						<dt>todo</dt>
-						<dd><p>BETTER DOCUMENT</p>
-							<p>Error thrown when a timer in the functionTimers map already exists.</p>
-						</dd>
-					</dl>
+					<div class="lead">
+						<p>Thrown when a duplicate function timer would have been created.</p>
+					</div>
+					<h4 id="example">Example</h4>
+					<pre><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// does stuff</span>
+}
+
+PerfTiming.getApi().timerify(test);
+PerfTiming.getApi().timerify(test);</code></pre>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -123,13 +127,23 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="performanceapierror.html">PerformanceApiError</a>.<a href="performanceapierror.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/errors/TimerNameConflictError.ts#L20">performance/api/errors/TimerNameConflictError.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/399873c/src/performance/api/errors/TimerNameConflictError.ts#L28">performance/api/errors/TimerNameConflictError.ts:28</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Construct the error message.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The name of the timer that would be a duplicate.</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="timernameconflicterror.html" class="tsd-signature-type">TimerNameConflictError</a></h4>

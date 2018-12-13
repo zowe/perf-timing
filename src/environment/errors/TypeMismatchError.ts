@@ -9,7 +9,6 @@
  *
  */
 
-
  /**
   * This error represents the condition when a getter function of the {@link Environment},
   * like {@link EnvironmentManager.getNumber}, is called and the type of the default didn't match

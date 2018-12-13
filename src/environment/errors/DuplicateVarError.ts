@@ -9,7 +9,6 @@
  *
  */
 
-
 /**
  * This error represents the condition where an environment variable was
  * registered twice, indicating a conflict.

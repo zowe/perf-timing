@@ -9,16 +9,26 @@
  *
  */
 
-
 import { PerformanceApiError } from "./PerformanceApiError";
 
-/**
- * @TODO better documentation
- *
- * This error is thrown when a function timer is attempted to be closed but no
- * timer exists currently.
- */
+ /**
+  * Thrown when a function timer was removed that was never added.
+  *
+  * @external
+  *
+  * @example
+  * function bad() {
+  *   // Does stuff
+  * }
+  *
+  * bad = PerfTiming.getApi().untimerify(bad);
+  */
 export class TimerDoesNotExistError extends PerformanceApiError {
+
+    /**
+     * Construct the error object with a specific message.
+     * @param name The name of the timer that was not found.
+     */
     constructor(name: string) {
         super(`A function timer with the name "${name}", does not exist. Please create the timer first.`);
     }

@@ -9,7 +9,6 @@
  *
  */
 
-
 export * from "./DuplicateVarError";
 export * from "./NotRegisteredError";
 export * from "./TypeMismatchError";

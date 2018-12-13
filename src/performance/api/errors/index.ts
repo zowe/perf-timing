@@ -9,7 +9,6 @@
  *
  */
 
-
 export * from "./PerformanceApiError";
 export * from "./TimerNameConflictError";
 export * from "./TimerDoesNotExistError";
