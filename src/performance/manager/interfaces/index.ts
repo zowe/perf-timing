@@ -12,3 +12,4 @@
 
 export * from "./IPerformanceApiManager";
 export * from "./IPerformanceApi";
+export * from "./IPerformanceMetrics";

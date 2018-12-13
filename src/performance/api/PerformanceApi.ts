@@ -113,11 +113,11 @@ export class PerformanceApi implements IPerformanceApi {
     /**
      * Output raw performance metrics to a file. Should be the last call in execution.
      */
-    public getMetrics(): object { // @TODO proper interface
+    public getMetrics(): IMetrics | {} {
         if (this._manager.isEnabled) {
             // @TODO All metrics should be stopped before reporting
 
-            const output: IMetrics = { // @TODO separate file
+            const output: IMetrics = {
                 functions: [],
                 measurements: []
             };

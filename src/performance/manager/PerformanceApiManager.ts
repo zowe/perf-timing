@@ -13,7 +13,7 @@
 // These imports have been carefully crafted to represent the libraries needed
 // when performance is disabled for performance reasons. Any additional runtime
 // objects needed when performance is enabled should be done dynamically.
-import { IPerformanceApi, IPerformanceApiManager } from "./interfaces";
+import { IPerformanceApi, IPerformanceApiManager, IPerformanceMetrics } from "./interfaces";
 import { PerformanceApi } from "../api/PerformanceApi";
 import * as pkgUp from "pkg-up";
 import { ENV_PREFIX, GLOBAL_SYMBOL } from "../../constants";
@@ -111,11 +111,13 @@ export class PerformanceApiManager implements IPerformanceApiManager {
 
     private async _savePerformanceResults(): Promise<void> {
         const metrics = global[GLOBAL_SYMBOL].entries();
-        const outputMetrics: any = {}; // @TODO proper typing
 
         // Get timing first to not skew the results
-        outputMetrics.nodeTiming = this.getApi().getNodeTiming();
-        outputMetrics.systemInfo = this.getApi().getSysInfo();
+        const outputMetrics: IPerformanceMetrics = {
+            nodeTiming: this.getApi().getNodeTiming(),
+            systemInformation: this.getApi().getSysInfo(),
+            metrics: {}
+        };
 
         for (const [key, value] of metrics) {
             const symbolValue = key.toString();
@@ -123,11 +125,11 @@ export class PerformanceApiManager implements IPerformanceApiManager {
             // Place into an array to handle the case where the same
             // package might have existed twice.
 
-            if (outputMetrics[symbolValue] == null) {
-                outputMetrics[symbolValue] = [];
+            if (outputMetrics.metrics[symbolValue] == null) {
+                outputMetrics.metrics[symbolValue] = [];
             }
 
-            outputMetrics[symbolValue].push(value.getMetrics());
+            outputMetrics.metrics[symbolValue].push(value.getMetrics());
         }
 
         // Require the IO utility at this point to reduce total number of
