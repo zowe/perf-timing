@@ -9,7 +9,6 @@
  *
  */
 
-
 import { IPerformanceApi, IPerformanceApiManager } from "../manager/interfaces";
 import {
     IFunctionTimer,
@@ -19,8 +18,20 @@ import {
     ISystemInformation
 } from "./interfaces";
 
+/**
+ * The underlying api that provides hooks into
+ * {@link https://nodejs.org/dist/latest-v10.x/docs/api/perf_hooks.html Node's Performance Timing APIs}.
+ *
+ * Use this class in place of relying on Node's experimental APIs.
+ */
 export class PerformanceApi implements IPerformanceApi {
 
+    /**
+     * Internal method for getting the errors that can be thrown. It is smart
+     * and will only do the require once and cache the results for later calls.
+     *
+     * @internal
+     */
     private static get _errors(): typeof PerformanceApi._errorImport {
         if (!PerformanceApi._errorImport) {
             PerformanceApi._errorImport = require("./errors");
@@ -29,17 +40,45 @@ export class PerformanceApi implements IPerformanceApi {
         return PerformanceApi._errorImport;
     }
 
+    /**
+     * Cache of loaded error objects. Only populated on first call to {@link PerformanceApi._errors}
+     *
+     * @internal
+     */
     private static _errorImport: typeof import("./errors");
-    // @TODO DOCUMENT
+
+    /**
+     * Internal map of all created function timers. The key represents the name
+     * and the value is an {@link IFunctionTimer} instance.
+     *
+     * @internal
+     */
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
+
+    /**
+     * Internal map of all created measurement timers. The key represents the name
+     * and the value is an {@link IMeasureTimer} instance.
+     *
+     * @internal
+     */
     private _measureTimers: Map<string,IMeasureTimer> = new Map();
 
     /**
      * This variable holds the import from the Node JS performance hooks
      * library.
+     *
+     * @internal
      */
     private readonly _perfHooks: typeof import("perf_hooks");
 
+    /**
+     * Construct the performance API. The constructor is not intended to be used
+     * by any class except for the {@link PerformanceApiManager} of this class.
+     *
+     * @internal
+     *
+     * @param _manager The manager of this API class.
+     */
     constructor(private readonly _manager: IPerformanceApiManager) {
         // Check if performance utilities should be enabled.
         if(this._manager.isEnabled) {
