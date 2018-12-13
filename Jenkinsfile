@@ -737,9 +737,9 @@ pipeline {
                             echo "Sending out email with details"
                             emailext(
                                     subject: subject,
-                                    mimeType: "text/html",
                                     to: recipients,
                                     body: "${details} ${consoleOutput}",
+                                    mimeType: "text/html",
                                     recipientProviders: [[$class: 'DevelopersRecipientProvider'],
                                                          [$class: 'UpstreamComitterRecipientProvider'],
                                                          [$class: 'CulpritsRecipientProvider'],

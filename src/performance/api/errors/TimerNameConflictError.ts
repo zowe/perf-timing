@@ -22,8 +22,8 @@ import { PerformanceApiError } from "./PerformanceApiError";
  *   // does stuff
  * }
  *
- * PerfTiming.getApi().timerify(test);
- * PerfTiming.getApi().timerify(test);
+ * PerfTiming.getApi().watch(test);
+ * PerfTiming.getApi().watch(test);
  */
 export class TimerNameConflictError extends PerformanceApiError {
     /**

@@ -48,6 +48,20 @@ export class PerformanceApi implements IPerformanceApi {
     private static _errorImport: typeof import("./errors");
 
     /**
+     * Created for consistent reference to Node Performance Timing API.
+     *
+     * @see {@link PerformanceApi.watch}
+     */
+    public timerify = this.watch;
+
+    /**
+     * Created for consistent reference to Node Performance Timing API.
+     *
+     * @see {@link PerformanceApi.unwatch}
+     */
+    public untimerify = this.unwatch;
+
+    /**
      * Internal map of all created function timers. The key represents the name
      * and the value is an {@link IFunctionTimer} instance.
      *
@@ -261,7 +275,39 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
-    public timerify(fn: (...args: any[]) => any, name?: string) {
+    /**
+     * This method will close an observer that was opened through the {@link PerformanceTools#timerify}
+     * function.
+     *
+     * @todo document
+     */
+    public unwatch(fn: ((...args: any[]) => any), name?: string) {
+        if (this._manager.isEnabled) {
+            let timer = fn.name;
+
+            // Extract the name of the function if necessary
+            if (name != null) {
+                timer = name;
+            } else {
+                // When timerifing(?) functions, node will prepend the function
+                // name with timerified . This regex will strip out that name
+                timer = /timerified (.*)/g.exec(timer)[1];
+            }
+
+            const timerRef = this._functionTimers.get(timer);
+
+            if (timerRef !== undefined) {
+                timerRef.observer.disconnect();
+                return timerRef.originalFunction;
+            } else {
+                throw new PerformanceApi._errors.TimerDoesNotExistError(timer);
+            }
+        } else {
+            return fn;
+        }
+    }
+
+    public watch(fn: (...args: any[]) => any, name?: string) {
         if (this._manager.isEnabled) {
             // Check if we should use the function name or the passed name for tracking.
             if (name == null) {
@@ -302,38 +348,6 @@ export class PerformanceApi implements IPerformanceApi {
         } else {
             // If performance is not enabled, we need to return the function
             // so original code doesn't get broken.
-            return fn;
-        }
-    }
-
-    /**
-     * This method will close an observer that was opened through the {@link PerformanceTools#timerify}
-     * function.
-     *
-     * @todo document
-     */
-    public untimerify(fn: ((...args: any[]) => any), name?: string) {
-        if (this._manager.isEnabled) {
-            let timer = fn.name;
-
-            // Extract the name of the function if necessary
-            if (name != null) {
-                timer = name;
-            } else {
-                // When timerifing(?) functions, node will prepend the function
-                // name with timerified . This regex will strip out that name
-                timer = /timerified (.*)/g.exec(timer)[1];
-            }
-
-            const timerRef = this._functionTimers.get(timer);
-
-            if (timerRef !== undefined) {
-                timerRef.observer.disconnect();
-                return timerRef.originalFunction;
-            } else {
-                throw new PerformanceApi._errors.TimerDoesNotExistError(timer);
-            }
-        } else {
             return fn;
         }
     }
