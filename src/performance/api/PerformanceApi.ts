@@ -20,6 +20,16 @@ import {
 } from "./interfaces";
 
 export class PerformanceApi implements IPerformanceApi {
+
+    private static get _errors(): typeof PerformanceApi._errorImport {
+        if (!PerformanceApi._errorImport) {
+            PerformanceApi._errorImport = require("./errors");
+        }
+
+        return PerformanceApi._errorImport;
+    }
+
+    private static _errorImport: typeof import("./errors");
     // @TODO DOCUMENT
     private _functionTimers: Map<string,IFunctionTimer> = new Map();
     private _measureTimers: Map<string,IMeasureTimer> = new Map();
@@ -221,8 +231,7 @@ export class PerformanceApi implements IPerformanceApi {
 
             // Throw an error if the timer already exists in the map.
             if (this._functionTimers.has(name)) {
-                const error: typeof import("./errors").TimerNameConflictError = require("./errors").TimerNameConflictError;
-                throw new error(name);
+                throw new PerformanceApi._errors.TimerNameConflictError(name);
             }
 
             // Create the observer and store it in the map.
@@ -283,8 +292,7 @@ export class PerformanceApi implements IPerformanceApi {
                 timerRef.observer.disconnect();
                 return timerRef.originalFunction;
             } else {
-                const error: typeof import("./errors").TimerDoesNotExistError = require("./errors").TimerDoesNotExistError; // @TODO import type at top
-                throw new error(timer);
+                throw new PerformanceApi._errors.TimerDoesNotExistError(timer);
             }
         } else {
             return fn;
