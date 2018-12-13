@@ -688,7 +688,7 @@ pipeline {
                         def subject = "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
                         def consoleOutput = """
                         <p>Branch: <b>${BRANCH_NAME}</b></p>
-                        <p>Check console output at "<a href="${RUN_DISPLAY_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>
+                        <p>Check console output at <a href="${RUN_DISPLAY_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
                         """
 
                         def details = ""
