@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IMeasurement | @zowe/perf-timing</title>
+	<title>ISystemInformation | @zowe/perf-timing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="imeasurement.html">IMeasurement</a>
+					<a href="isysteminformation.html">ISystemInformation</a>
 				</li>
 			</ul>
-			<h1>Interface IMeasurement</h1>
+			<h1>Interface ISystemInformation</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IMeasurement</span>
+						<span class="target">ISystemInformation</span>
 					</li>
 				</ul>
 			</section>
@@ -81,11 +81,15 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imeasurement.html#duration" class="tsd-kind-icon">duration</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imeasurement.html#endmarkname" class="tsd-kind-icon">end<wbr>Mark<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imeasurement.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imeasurement.html#startmarkname" class="tsd-kind-icon">start<wbr>Mark<wbr>Name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imeasurement.html#starttime" class="tsd-kind-icon">start<wbr>Time</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#argv" class="tsd-kind-icon">argv</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#cpus" class="tsd-kind-icon">cpus</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#loadavg" class="tsd-kind-icon">loadavg</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#memory" class="tsd-kind-icon">memory</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#network" class="tsd-kind-icon">network</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#os" class="tsd-kind-icon">os</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#platform" class="tsd-kind-icon">platform</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#shell" class="tsd-kind-icon">shell</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="isysteminformation.html#uptime" class="tsd-kind-icon">uptime</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,52 +98,92 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="duration" class="tsd-anchor"></a>
-					<h3>duration</h3>
-					<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="argv" class="tsd-anchor"></a>
+					<h3>argv</h3>
+					<div class="tsd-signature tsd-kind-icon">argv<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/IMeasurement.ts#L14">performance/api/interfaces/IMeasurement.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L27">performance/api/interfaces/ISystemInformation.ts:27</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="endmarkname" class="tsd-anchor"></a>
-					<h3>end<wbr>Mark<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">end<wbr>Mark<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="cpus" class="tsd-anchor"></a>
+					<h3>cpus</h3>
+					<div class="tsd-signature tsd-kind-icon">cpus<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">cpus</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/IMeasurement.ts#L15">performance/api/interfaces/IMeasurement.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L28">performance/api/interfaces/ISystemInformation.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="name" class="tsd-anchor"></a>
-					<h3>name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="loadavg" class="tsd-anchor"></a>
+					<h3>loadavg</h3>
+					<div class="tsd-signature tsd-kind-icon">loadavg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">loadavg</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/IMeasurement.ts#L16">performance/api/interfaces/IMeasurement.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L29">performance/api/interfaces/ISystemInformation.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="startmarkname" class="tsd-anchor"></a>
-					<h3>start<wbr>Mark<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">start<wbr>Mark<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="memory" class="tsd-anchor"></a>
+					<h3>memory</h3>
+					<div class="tsd-signature tsd-kind-icon">memory<span class="tsd-signature-symbol">:</span> <a href="isystemmemory.html" class="tsd-signature-type">ISystemMemory</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/IMeasurement.ts#L17">performance/api/interfaces/IMeasurement.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L30">performance/api/interfaces/ISystemInformation.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="starttime" class="tsd-anchor"></a>
-					<h3>start<wbr>Time</h3>
-					<div class="tsd-signature tsd-kind-icon">start<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="network" class="tsd-anchor"></a>
+					<h3>network</h3>
+					<div class="tsd-signature tsd-kind-icon">network<span class="tsd-signature-symbol">:</span> <a href="isystemnetwork.html" class="tsd-signature-type">ISystemNetwork</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/IMeasurement.ts#L18">performance/api/interfaces/IMeasurement.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L31">performance/api/interfaces/ISystemInformation.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="os" class="tsd-anchor"></a>
+					<h3>os</h3>
+					<div class="tsd-signature tsd-kind-icon">os<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L32">performance/api/interfaces/ISystemInformation.ts:32</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="platform" class="tsd-anchor"></a>
+					<h3>platform</h3>
+					<div class="tsd-signature tsd-kind-icon">platform<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L33">performance/api/interfaces/ISystemInformation.ts:33</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="shell" class="tsd-anchor"></a>
+					<h3>shell</h3>
+					<div class="tsd-signature tsd-kind-icon">shell<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L34">performance/api/interfaces/ISystemInformation.ts:34</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="uptime" class="tsd-anchor"></a>
+					<h3>uptime</h3>
+					<div class="tsd-signature tsd-kind-icon">uptime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/1ed2681/src/performance/api/interfaces/ISystemInformation.ts#L35">performance/api/interfaces/ISystemInformation.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -191,30 +235,9 @@
 					<li class=" tsd-kind-interface">
 						<a href="imeasuretimer.html" class="tsd-kind-icon">IMeasure<wbr>Timer</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="imeasurement.html" class="tsd-kind-icon">IMeasurement</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imeasurement.html#duration" class="tsd-kind-icon">duration</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imeasurement.html#endmarkname" class="tsd-kind-icon">end<wbr>Mark<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imeasurement.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imeasurement.html#startmarkname" class="tsd-kind-icon">start<wbr>Mark<wbr>Name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imeasurement.html#starttime" class="tsd-kind-icon">start<wbr>Time</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="imeasurementmetric.html" class="tsd-kind-icon">IMeasurement<wbr>Metric</a>
 					</li>
@@ -233,9 +256,42 @@
 					<li class=" tsd-kind-interface">
 						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#argv" class="tsd-kind-icon">argv</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#cpus" class="tsd-kind-icon">cpus</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#loadavg" class="tsd-kind-icon">loadavg</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#memory" class="tsd-kind-icon">memory</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#network" class="tsd-kind-icon">network</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#os" class="tsd-kind-icon">os</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#platform" class="tsd-kind-icon">platform</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#shell" class="tsd-kind-icon">shell</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="isysteminformation.html#uptime" class="tsd-kind-icon">uptime</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="isystemmemory.html" class="tsd-kind-icon">ISystem<wbr>Memory</a>
 					</li>
