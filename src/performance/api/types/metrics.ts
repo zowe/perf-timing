@@ -9,10 +9,7 @@
  *
  */
 
-import { IMetric } from "..";
+import { IMeasurement, IMetric, IRequiredMetrics } from "../interfaces";
 
-import { PerformanceEntry } from "perf_hooks";
-import { IMeasurement } from "../interfaces";
-
-export type FunctionMetric = IMetric<PerformanceEntry>;
+export type FunctionMetric = IMetric<IRequiredMetrics>;
 export type MeasurementMetric = IMetric<IMeasurement>;

@@ -14,7 +14,7 @@ import {
     IFunctionTimer,
     IMetric,
     IMetrics,
-    IMetricTimer,
+    ICollectionObserver,
     INodeTiming,
     IRequiredMetrics,
     ISystemInformation
@@ -52,7 +52,7 @@ export class PerformanceApi implements IPerformanceApi {
     private static _errorImport: typeof import("./errors");
 
     // @TODO Document
-    private static _aggregateData<T extends IRequiredMetrics>(map: Map<string, IMetricTimer<T>>): Array<IMetric<T>> {
+    private static _aggregateData<T extends IRequiredMetrics>(map: Map<string, ICollectionObserver<T>>): Array<IMetric<T>> {
         const timers = map.entries();
         const output: Array<IMetric<T>> = [];
 

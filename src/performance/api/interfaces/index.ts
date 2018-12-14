@@ -12,7 +12,7 @@
 
 export * from "./IFunctionTimer";
 export * from "./IMeasurement";
-export * from "./IMetricTimer";
+export * from "./ICollectionObserver";
 export * from "./IMetric";
 export * from "./IMetrics";
 export * from "./INodeTiming";

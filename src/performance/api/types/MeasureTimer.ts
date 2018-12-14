@@ -11,11 +11,11 @@
 
 import {
     IMeasurement,
-    IMetricTimer
+    ICollectionObserver
 } from "../interfaces";
 
 /**
  *
  * @internal
  */
-export type MeasureTimer = IMetricTimer<IMeasurement>;
+export type MeasureTimer = ICollectionObserver<IMeasurement>;
