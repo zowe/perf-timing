@@ -11,5 +11,14 @@
 
 import { IMeasurementEntry, IMetric, IPerformanceEntry } from "../interfaces";
 
+/**
+ * Data collected for all functions that were monitored with the
+ * {@link PerformanceApi.watch} function.
+ */
 export type FunctionMetric = IMetric<IPerformanceEntry>;
+
+/**
+ * Data collected for all measurements taken through the
+ * {@link PerformanceApi.measure} function.
+ */
 export type MeasurementMetric = IMetric<IMeasurementEntry>;
