@@ -11,32 +11,51 @@
 
 import { IRequiredMetrics } from "./IRequiredMetrics";
 
+/**
+ * Data captured for a specific metric name.
+ *
+ * The common fields present for all metrics exist in this interface with the
+ * entries being an array of a type that extends {@link IRequiredMetrics}
+ *
+ * @param T The object type of entry data. The type presented must contain the
+ *          required fields present in the {@link IRequiredMetrics} interface
+ *          for proper statistical analysis of results by the
+ *          {@link PerformanceApi.getMetrics} function.
+ */
 export interface IMetric <T extends IRequiredMetrics> {
     /**
-     * The average duration (in milliseconds) spent in each call of the function.
+     * The average duration (in milliseconds) of each entry present {@link IMetric.entries}.
      */
     averageDuration: number;
 
     /**
-     * The total number of calls to the function.
+     * The total number of {@link IMetric.entries} captured.
      */
     calls: number;
 
     /**
-     * The raw data provided by node for each function call.
+     * Collection of all metrics entries captured for the {@link IMetric.name}
+     * within a specific group (e.g function metrics, measurement metrics, etc).
      *
-     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceentry Node Documentation}
+     * Some metrics may be an instance of a Node
+     * {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceentry PerformanceEntry}.
+     * For information about those formats, see the Node documentation linked.
      */
     entries: T[];
 
     /**
-     * The name of the function timer. Equivalent to the function name or the name
-     * variable passed into {@link PerformanceApi.watch}.
+     * The name of the metric.
+     *
+     * This name is guaranteed to be unique within a measurement group. When a metric
+     * generation function is called in {@link PerformanceApi}, the name of the
+     * metric will be used as a lookup key to see if the new measurement should
+     * be aggregated with previous measurements.
      */
     name: string;
 
     /**
-     * The total time (in milliseconds) spent in the function call.
+     * The total time (in milliseconds) represented by the sum of the durations
+     * of each entry within {@link IMetric.entries}.
      */
     totalDuration: number;
 }

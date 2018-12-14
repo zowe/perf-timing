@@ -9,5 +9,10 @@
  *
  */
 
-export * from "./MeasureTimer";
-export * from "./metrics";
+import { IMetric } from "..";
+
+import { PerformanceEntry } from "perf_hooks";
+import { IMeasurement } from "../interfaces";
+
+export type FunctionMetric = IMetric<PerformanceEntry>;
+export type MeasurementMetric = IMetric<IMeasurement>;

@@ -90,24 +90,26 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface"><a href="interfaces/ifunctionmetric.html" class="tsd-kind-icon">IFunction<wbr>Metric</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/imeasuretimer.html" class="tsd-kind-icon">IMeasure<wbr>Timer</a></li>
+								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/imeasurement.html" class="tsd-kind-icon">IMeasurement</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/imeasurementmetric.html" class="tsd-kind-icon">IMeasurement<wbr>Metric</a></li>
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/imetric.html" class="tsd-kind-icon">IMetric</a></li>
+								<li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/imetrictimer.html" class="tsd-kind-icon">IMetric<wbr>Timer</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/imetrics.html" class="tsd-kind-icon">IMetrics</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/inodetiming.html" class="tsd-kind-icon">INode<wbr>Timing</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iperformanceapi.html" class="tsd-kind-icon">IPerformance<wbr>Api</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iperformanceapimanager.html" class="tsd-kind-icon">IPerformance<wbr>Api<wbr>Manager</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a></li>
+								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/irequiredmetrics.html" class="tsd-kind-icon">IRequired<wbr>Metrics</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a></li>
 								<li class="tsd-kind-interface tsd-is-not-exported"><a href="interfaces/isystemmemory.html" class="tsd-kind-icon">ISystem<wbr>Memory</a></li>
 								<li class="tsd-kind-interface tsd-is-not-exported"><a href="interfaces/isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-external tsd-is-not-exported">
+						<section class="tsd-index-section tsd-is-external">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-is-external"><a href="globals.html#measuretimer" class="tsd-kind-icon">Measure<wbr>Timer</a></li>
 								<li class="tsd-kind-type-alias tsd-is-external tsd-is-not-exported"><a href="globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a></li>
 								<li class="tsd-kind-type-alias tsd-is-external tsd-is-not-exported"><a href="globals.html#validdefaultsstrings" class="tsd-kind-icon">Valid<wbr>Defaults<wbr>Strings</a></li>
 								<li class="tsd-kind-type-alias tsd-is-external tsd-is-not-exported"><a href="globals.html#validationfunction" class="tsd-kind-icon">Validation<wbr>Function</a></li>
@@ -128,7 +130,6 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-is-external tsd-is-not-exported"><a href="globals.html#createdirectory" class="tsd-kind-icon">create<wbr>Directory</a></li>
 								<li class="tsd-kind-function tsd-is-external tsd-is-not-exported"><a href="globals.html#getmetricfilename" class="tsd-kind-icon">get<wbr>Metric<wbr>File<wbr>Name</a></li>
 								<li class="tsd-kind-function tsd-is-external"><a href="globals.html#savemetrics" class="tsd-kind-icon">save<wbr>Metrics</a></li>
 							</ul>
@@ -136,15 +137,27 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-external tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-is-external">
+					<a name="measuretimer" class="tsd-anchor"></a>
+					<h3>Measure<wbr>Timer</h3>
+					<div class="tsd-signature tsd-kind-icon">Measure<wbr>Timer<span class="tsd-signature-symbol">:</span> <a href="interfaces/imetrictimer.html" class="tsd-signature-type">IMetricTimer</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/imeasurement.html" class="tsd-signature-type">IMeasurement</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/types/MeasureTimer.ts#L21">performance/api/types/MeasureTimer.ts:21</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
 					<a name="validdefaults" class="tsd-anchor"></a>
 					<h3>Valid<wbr>Defaults</h3>
 					<div class="tsd-signature tsd-kind-icon">Valid<wbr>Defaults<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/environment/Environment.ts#L17">environment/Environment.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/environment/Environment.ts#L17">environment/Environment.ts:17</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -159,7 +172,7 @@
 					<div class="tsd-signature tsd-kind-icon">Valid<wbr>Defaults<wbr>Strings<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"string"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"number"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/environment/Environment.ts#L24">environment/Environment.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/environment/Environment.ts#L24">environment/Environment.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -174,7 +187,7 @@
 					<div class="tsd-signature tsd-kind-icon">Validation<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/environment/Environment.ts#L36">environment/Environment.ts:36</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/environment/Environment.ts#L36">environment/Environment.ts:36</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -222,7 +235,7 @@
 					<div class="tsd-signature tsd-kind-icon">ENV_<wbr>IO_<wbr>MAX_<wbr>HISTORY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;${ENV_PREFIX}_IO_MAX_HISTORY&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/io/saveMetrics.ts#L24">io/saveMetrics.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/io/saveMetrics.ts#L24">io/saveMetrics.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -238,7 +251,7 @@
 					<div class="tsd-signature tsd-kind-icon">ENV_<wbr>IO_<wbr>SAVE_<wbr>DIR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;${ENV_PREFIX}_IO_SAVE_DIR&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/io/saveMetrics.ts#L32">io/saveMetrics.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/io/saveMetrics.ts#L32">io/saveMetrics.ts:32</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -253,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">ENV_<wbr>PREFIX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"PERF_TIMING"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;PERF_TIMING&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/constants.ts#L18">constants.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/constants.ts#L18">constants.ts:18</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -269,7 +282,7 @@
 					<div class="tsd-signature tsd-kind-icon">Environment<span class="tsd-signature-symbol">:</span> <a href="classes/environmentmanager.html" class="tsd-signature-type">EnvironmentManager</a><span class="tsd-signature-symbol"> =&nbsp;new EnvironmentManager()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/environment/Environment.ts#L206">environment/Environment.ts:206</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/environment/Environment.ts#L206">environment/Environment.ts:206</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -284,7 +297,7 @@
 					<div class="tsd-signature tsd-kind-icon">GLOBAL_<wbr>SYMBOL<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unique symbol</span><span class="tsd-signature-symbol"> =&nbsp;Symbol.for(&quot;org.zowe.perf-timing&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/constants.ts#L26">constants.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/constants.ts#L26">constants.ts:26</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -299,7 +312,7 @@
 					<div class="tsd-signature tsd-kind-icon">Perf<wbr>Timing<span class="tsd-signature-symbol">:</span> <a href="classes/performanceapimanager.html" class="tsd-signature-type">PerformanceApiManager</a><span class="tsd-signature-symbol"> =&nbsp;new PerformanceApiManager()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/index.ts#L24">index.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/index.ts#L25">index.ts:25</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -307,6 +320,7 @@
 							<p>An instance of a <a href="classes/performanceapimanager.html">PerformanceApiManager</a>. Public functionality is exported
 							under this name.</p>
 						</div>
+						<p>Usage of public stuff should be done with <code>import * as perf_timing from &quot;@zowe/perf-timing/public&quot;</code> &lt;-- @TODO need to implement that</p>
 						<h3 id="environmental-variables">Environmental Variables</h3>
 						<!-- Fix needs sent to typedoc to allow for sub includes. For now a direct link will do-->
 						<p>THIS IS A TEST from environment.md</p>
@@ -359,44 +373,13 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<div class="tsd-signature tsd-kind-icon">global<span class="tsd-signature-symbol">:</span> <a href="interfaces/nodejs.global.html" class="tsd-signature-type">Global</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/performance/manager/PerformanceApiManager.ts#L44">performance/manager/PerformanceApiManager.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/manager/PerformanceApiManager.ts#L47">performance/manager/PerformanceApiManager.ts:47</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-is-external tsd-is-not-exported">
-					<a name="createdirectory" class="tsd-anchor"></a>
-					<h3>create<wbr>Directory</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-is-external tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Directory<span class="tsd-signature-symbol">(</span>directory<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/io/saveMetrics.ts#L95">io/saveMetrics.ts:95</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Recursively create the save directory if needed.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>directory: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The directory that will be created</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-is-external tsd-is-not-exported">
 					<a name="getmetricfilename" class="tsd-anchor"></a>
 					<h3>get<wbr>Metric<wbr>File<wbr>Name</h3>
@@ -407,7 +390,7 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/io/saveMetrics.ts#L112">io/saveMetrics.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/io/saveMetrics.ts#L94">io/saveMetrics.ts:94</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -439,13 +422,13 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<a name="savemetrics" class="tsd-anchor"></a>
 					<h3>save<wbr>Metrics</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">save<wbr>Metrics<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">save<wbr>Metrics<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="interfaces/iperformancemetrics.html" class="tsd-signature-type">IPerformanceMetrics</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/io/saveMetrics.ts#L55">io/saveMetrics.ts:55</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/io/saveMetrics.ts#L55">io/saveMetrics.ts:55</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -465,7 +448,7 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>data: <span class="tsd-signature-type">object</span></h5>
+									<h5>data: <a href="interfaces/iperformancemetrics.html" class="tsd-signature-type">IPerformanceMetrics</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The object data to save in a file.</p>
 									</div>
@@ -517,20 +500,17 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li class=" tsd-kind-class">
 						<a href="classes/typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/ifunctionmetric.html" class="tsd-kind-icon">IFunction<wbr>Metric</a>
-					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="interfaces/ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/imeasuretimer.html" class="tsd-kind-icon">IMeasure<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/imeasurement.html" class="tsd-kind-icon">IMeasurement</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/imeasurementmetric.html" class="tsd-kind-icon">IMeasurement<wbr>Metric</a>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/imetric.html" class="tsd-kind-icon">IMetric</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/imetrictimer.html" class="tsd-kind-icon">IMetric<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/imetrics.html" class="tsd-kind-icon">IMetrics</a>
@@ -545,7 +525,13 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 						<a href="interfaces/iperformanceapimanager.html" class="tsd-kind-icon">IPerformance<wbr>Api<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="interfaces/irequiredmetrics.html" class="tsd-kind-icon">IRequired<wbr>Metrics</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
@@ -555,6 +541,9 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="interfaces/isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external">
+						<a href="globals.html#measuretimer" class="tsd-kind-icon">Measure<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>
@@ -585,9 +574,6 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#global" class="tsd-kind-icon">global</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
-						<a href="globals.html#createdirectory" class="tsd-kind-icon">create<wbr>Directory</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
 						<a href="globals.html#getmetricfilename" class="tsd-kind-icon">get<wbr>Metric<wbr>File<wbr>Name</a>

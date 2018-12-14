@@ -9,9 +9,7 @@
  *
  */
 
-import { IMetric } from "./IMetric";
-import { PerformanceEntry } from "perf_hooks";
-import { IMeasurement } from "./IMeasurement";
+import { FunctionMetric, MeasurementMetric } from "../types";
 
 /**
  * Performance metrics captured by an instance of {@link PerformanceApi}.
@@ -22,12 +20,12 @@ export interface IMetrics {
      *
      * @see {@link PerformanceApi.watch}
      */
-    functions: Array<IMetric<PerformanceEntry>>;
+    functions: FunctionMetric[];
 
     /**
      * A collection of all measurement metrics gathered.
      *
      * @see {@link PerformanceApi.measure}
      */
-    measurements: Array<IMetric<IMeasurement>>;
+    measurements: MeasurementMetric[];
 }

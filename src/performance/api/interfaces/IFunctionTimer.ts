@@ -13,7 +13,8 @@ import { IMetricTimer } from "./IMetricTimer";
 import { PerformanceEntry } from "perf_hooks";
 
 /**
- * A reference to a timer object created when using {@link PerformanceApi.watch}
+ * Properties of a named function timer that was created with the
+ * {@link PerformanceApi.watch} function.
  *
  * @internal
  */

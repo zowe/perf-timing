@@ -123,7 +123,7 @@ export class PerformanceApi implements IPerformanceApi {
      */
     constructor(private readonly _manager: IPerformanceApiManager) {
         // Check if performance utilities should be enabled.
-        if(this._manager.isEnabled) {
+        if (this._manager.isEnabled) {
             // Delay the require so we don't waste resources when performance
             // isn't needed.
             this._perfHooks = require("perf_hooks");
@@ -249,7 +249,7 @@ export class PerformanceApi implements IPerformanceApi {
 
                     // Loop through each entry and save the metrics
                     if (entries.length > 0) {
-                        for(const entry of entries) {
+                        for (const entry of entries) {
                             mapObject.entries.push({
                                 name: entry.name,
                                 startTime: entry.startTime,
@@ -263,7 +263,7 @@ export class PerformanceApi implements IPerformanceApi {
                         mapObject.isConnected = false;
                     }
                 });
-                mapObject.observer.observe({entryTypes: ["measure"], buffered: true});
+                mapObject.observer.observe({ entryTypes: ["measure"], buffered: true });
                 mapObject.isConnected = true;
             }
 
@@ -336,7 +336,7 @@ export class PerformanceApi implements IPerformanceApi {
                 }
             });
 
-            observerObject.observer.observe({entryTypes: ["function"], buffered: true});
+            observerObject.observer.observe({ entryTypes: ["function"], buffered: true });
             observerObject.isConnected = true;
 
             // Wrap the function in a timer

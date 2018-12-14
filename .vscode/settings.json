@@ -47,7 +47,6 @@
         "@?FIXME",
         "@?FUTURE"
     ],
-    "tslint.autoFixOnSave": true,
     "cSpell.words": [
         "timerified",
         "timerify",

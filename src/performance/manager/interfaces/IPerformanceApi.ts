@@ -9,8 +9,8 @@
  *
  */
 
-
-import { INodeTiming } from "../../api/interfaces";
+import { INodeTiming, ISystemInformation } from "../../api/interfaces";
+import { IPerformanceMetrics } from "./IPerformanceMetrics";
 
 /**
  * This interface defines the methods that should exist on any {@link PerformanceApi}
@@ -27,7 +27,7 @@ export interface IPerformanceApi {
      * location. This method should return a JSON object of the metrics that
      * the particular performance class captured.
      */
-    getMetrics(): object;
+    getMetrics(): IPerformanceMetrics | {};
 
     /**
      * This method must exist on the managedApi of the main {@link PerformanceApiManager}
@@ -35,4 +35,6 @@ export interface IPerformanceApi {
      * interface or void if performance is not enabled.
      */
     getNodeTiming(): INodeTiming | void;
+
+    getSysInfo(): ISystemInformation | void;
 }

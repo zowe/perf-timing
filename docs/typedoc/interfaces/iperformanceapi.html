@@ -105,6 +105,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="iperformanceapi.html#getmetrics" class="tsd-kind-icon">get<wbr>Metrics</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="iperformanceapi.html#getnodetiming" class="tsd-kind-icon">get<wbr>Node<wbr>Timing</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="iperformanceapi.html#getsysinfo" class="tsd-kind-icon">get<wbr>Sys<wbr>Info</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,13 +117,13 @@
 					<a name="getmetrics" class="tsd-anchor"></a>
 					<h3>get<wbr>Metrics</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Metrics<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Metrics<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="iperformancemetrics.html" class="tsd-signature-type">IPerformanceMetrics</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">__type</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/performance/manager/interfaces/IPerformanceApi.ts#L30">performance/manager/interfaces/IPerformanceApi.ts:30</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/manager/interfaces/IPerformanceApi.ts#L30">performance/manager/interfaces/IPerformanceApi.ts:30</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -132,7 +133,10 @@
 									the particular performance class captured.</p>
 								</div>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="iperformancemetrics.html" class="tsd-signature-type">IPerformanceMetrics</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">__type</span>
+							</h4>
 						</li>
 					</ul>
 				</section>
@@ -146,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/90ed12c/src/performance/manager/interfaces/IPerformanceApi.ts#L37">performance/manager/interfaces/IPerformanceApi.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/manager/interfaces/IPerformanceApi.ts#L37">performance/manager/interfaces/IPerformanceApi.ts:37</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -157,6 +161,26 @@
 								</div>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="inodetiming.html" class="tsd-signature-type">INodeTiming</a>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">void</span>
+							</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="getsysinfo" class="tsd-anchor"></a>
+					<h3>get<wbr>Sys<wbr>Info</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Sys<wbr>Info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="isysteminformation.html" class="tsd-signature-type">ISystemInformation</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/manager/interfaces/IPerformanceApi.ts#L39">performance/manager/interfaces/IPerformanceApi.ts:39</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="isysteminformation.html" class="tsd-signature-type">ISystemInformation</a>
 								<span class="tsd-signature-symbol"> | </span>
 								<span class="tsd-signature-type">void</span>
 							</h4>
@@ -202,20 +226,17 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="ifunctionmetric.html" class="tsd-kind-icon">IFunction<wbr>Metric</a>
-					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="imeasuretimer.html" class="tsd-kind-icon">IMeasure<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="imeasurement.html" class="tsd-kind-icon">IMeasurement</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="imeasurementmetric.html" class="tsd-kind-icon">IMeasurement<wbr>Metric</a>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="imetric.html" class="tsd-kind-icon">IMetric</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="imetrictimer.html" class="tsd-kind-icon">IMetric<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="imetrics.html" class="tsd-kind-icon">IMetrics</a>
@@ -234,6 +255,9 @@
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
 								<a href="iperformanceapi.html#getnodetiming" class="tsd-kind-icon">get<wbr>Node<wbr>Timing</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="iperformanceapi.html#getsysinfo" class="tsd-kind-icon">get<wbr>Sys<wbr>Info</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -242,7 +266,13 @@
 						<a href="iperformanceapimanager.html" class="tsd-kind-icon">IPerformance<wbr>Api<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="irequiredmetrics.html" class="tsd-kind-icon">IRequired<wbr>Metrics</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
@@ -252,6 +282,9 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-is-external">
+						<a href="../globals.html#measuretimer" class="tsd-kind-icon">Measure<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
 						<a href="../globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>
@@ -282,9 +315,6 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="../globals.html#global" class="tsd-kind-icon">global</a>
-					</li>
-					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
-						<a href="../globals.html#createdirectory" class="tsd-kind-icon">create<wbr>Directory</a>
 					</li>
 					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
 						<a href="../globals.html#getmetricfilename" class="tsd-kind-icon">get<wbr>Metric<wbr>File<wbr>Name</a>

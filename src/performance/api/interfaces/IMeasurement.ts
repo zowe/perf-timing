@@ -10,7 +10,10 @@
  */
 
 /**
- * An individual measurement produced from a single call to {@link PerformanceApi.measure}.
+ * A representation of a single measurement from Point A to Point B.
+ *
+ * A measurement object is created by a call to {@link PerformanceApi.measure} and
+ * all measurements of the same name are aggregated into a single {@link MeasurementMetric}.
  */
 export interface IMeasurement {
     /**
