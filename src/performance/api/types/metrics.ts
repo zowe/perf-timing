@@ -9,7 +9,7 @@
  *
  */
 
-import { IMeasurement, IMetric, IRequiredMetrics } from "../interfaces";
+import { IMeasurementEntry, IMetric, IPerformanceEntry } from "../interfaces";
 
-export type FunctionMetric = IMetric<IRequiredMetrics>;
-export type MeasurementMetric = IMetric<IMeasurement>;
+export type FunctionMetric = IMetric<IPerformanceEntry>;
+export type MeasurementMetric = IMetric<IMeasurementEntry>;

@@ -10,20 +10,20 @@
  */
 
 import { IPerformanceObserver } from "./IPerformanceObserver";
-import { IRequiredMetrics } from "./IRequiredMetrics";
+import { IPerformanceEntry } from "./IPerformanceEntry";
 
 /**
  * A collection observer is a base object responsible for keeping references
  * to the underlying Node performance observer object.
  *
  * @param T The object type of entry data. The type presented must contain the
- *          required fields present in the {@link IRequiredMetrics} interface
+ *          required fields present in the {@link IPerformanceEntry} interface
  *          for proper statistical analysis of results by the
  *          {@link PerformanceApi.getMetrics} function.
- * 
+ *
  * @internal
  */
-export interface ICollectionObserver<T extends IRequiredMetrics> {
+export interface ICollectionObserver<T extends IPerformanceEntry> {
     /**
      * A collection of performance data captured by the node performance observer.
      */

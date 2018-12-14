@@ -9,36 +9,22 @@
  *
  */
 
+import { IPerformanceEntry } from "./IPerformanceEntry";
+
 /**
  * A representation of a single measurement from Point A to Point B.
  *
  * A measurement object is created by a call to {@link PerformanceApi.measure} and
  * all measurements of the same name are aggregated into a single {@link MeasurementMetric}.
  */
-export interface IMeasurement {
-    /**
-     * The time taken (in milliseconds) to get from the starting mark to the
-     * ending mark.
-     */
-    duration: number;
-
+export interface IMeasurementEntry extends IPerformanceEntry {
     /**
      * The name of the end mark that was captured.
      */
     endMarkName: string;
 
     /**
-     * The name of the measurement.
-     */
-    name: string;
-
-    /**
      * The name of the starting mark that was captured.
      */
     startMarkName: string;
-
-    /**
-     * The time at which the starting mark was captured.
-     */
-    startTime: number;
 }

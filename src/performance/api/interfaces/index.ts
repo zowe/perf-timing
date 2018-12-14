@@ -11,11 +11,11 @@
 
 
 export * from "./IFunctionTimer";
-export * from "./IMeasurement";
+export * from "./IMeasurementEntry";
 export * from "./ICollectionObserver";
 export * from "./IMetric";
 export * from "./IMetrics";
 export * from "./INodeTiming";
 export * from "./IPerformanceObserver";
-export * from "./IRequiredMetrics";
+export * from "./IPerformanceEntry";
 export * from "./ISystemInformation";

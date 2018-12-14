@@ -10,12 +10,12 @@
  */
 
 import {
-    IMeasurement,
-    ICollectionObserver
+    ICollectionObserver,
+    IMeasurementEntry
 } from "../interfaces";
 
 /**
  *
  * @internal
  */
-export type MeasureTimer = ICollectionObserver<IMeasurement>;
+export type MeasureTimer = ICollectionObserver<IMeasurementEntry>;

@@ -9,20 +9,20 @@
  *
  */
 
-import { IRequiredMetrics } from "./IRequiredMetrics";
+import { IPerformanceEntry } from "./IPerformanceEntry";
 
 /**
  * Data captured for a specific metric name.
  *
  * The common fields present for all metrics exist in this interface with the
- * entries being an array of a type that extends {@link IRequiredMetrics}
+ * entries being an array of a type that extends {@link IPerformanceEntry}
  *
  * @param T The object type of entry data. The type presented must contain the
- *          required fields present in the {@link IRequiredMetrics} interface
+ *          required fields present in the {@link IPerformanceEntry} interface
  *          for proper statistical analysis of results by the
  *          {@link PerformanceApi.getMetrics} function.
  */
-export interface IMetric <T extends IRequiredMetrics> {
+export interface IMetric <T extends IPerformanceEntry> {
     /**
      * The average duration (in milliseconds) of each entry present {@link IMetric.entries}.
      */

@@ -13,9 +13,21 @@
 /**
  * This interface is a wrapper around the NodeJS PerformanceObserver class.
  *
- * @see https://nodejs.org/dist/latest-v10.x/docs/api/perf_hooks.html#perf_hooks_class_performanceobserver
+ * Since the {@link https://nodejs.org/api/perf_hooks.html Node Performance Timing API}
+ * is an experimental feature, this interface was created to wrap the
+ * {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver PerformanceObserver}
+ * into a stable public API.
+ *
+ * @internal
  */
 export interface IPerformanceObserver {
+    /**
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver PerformanceObserver}
+     */
     disconnect(): void;
+
+    /**
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver PerformanceObserver}
+     */
     observe(options: { buffered?: boolean, entryTypes: string[] }): void;
 }

@@ -9,39 +9,39 @@
  *
  */
 
-import { IRequiredMetrics } from './IRequiredMetrics';
+import { IPerformanceEntry } from "./IPerformanceEntry";
 
 /**
  * The collection of various node performance metric information.
- * 
+ *
  * Since the {@link https://nodejs.org/api/perf_hooks.html Node Performance Timing API}
  * is an experimental feature, this interface was created to wrap the
  * {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performancenodetiming_extends_performanceentry PerformanceNodeTiming}
  * into a stable public API.
  */
-export interface INodeTiming extends IRequiredMetrics {
+export interface INodeTiming extends IPerformanceEntry {
     /**
-     * The high resolution millisecond timestamp at which the Node.js process completed bootstrapping.
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performancenodetiming_extends_performanceentry PerformanceNodeTiming}
      */
     bootstrapComplete: number;
 
     /**
-     * The high resolution millisecond timestamp at which the Node.js event loop exited.
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performancenodetiming_extends_performanceentry PerformanceNodeTiming}
      */
     loopExit: number;
 
     /**
-     * The high resolution millisecond timestamp at which the Node.js event loop started.
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performancenodetiming_extends_performanceentry PerformanceNodeTiming}
      */
     loopStart: number;
 
     /**
-     * The high resolution millisecond timestamp at which the Node.js process was initialized.
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performancenodetiming_extends_performanceentry PerformanceNodeTiming}
      */
     nodeStart: number;
 
     /**
-     * The high resolution millisecond timestamp at which the V8 platform was initialized.
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performancenodetiming_extends_performanceentry PerformanceNodeTiming}
      */
     v8Start: number;
 }

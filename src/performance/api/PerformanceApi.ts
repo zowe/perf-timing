@@ -11,12 +11,12 @@
 
 import { IPerformanceApi, IPerformanceApiManager } from "../manager/interfaces";
 import {
+    ICollectionObserver,
     IFunctionTimer,
     IMetric,
     IMetrics,
-    ICollectionObserver,
     INodeTiming,
-    IRequiredMetrics,
+    IPerformanceEntry,
     ISystemInformation
 } from "./interfaces";
 
@@ -52,7 +52,7 @@ export class PerformanceApi implements IPerformanceApi {
     private static _errorImport: typeof import("./errors");
 
     // @TODO Document
-    private static _aggregateData<T extends IRequiredMetrics>(map: Map<string, ICollectionObserver<T>>): Array<IMetric<T>> {
+    private static _aggregateData<T extends IPerformanceEntry>(map: Map<string, ICollectionObserver<T>>): Array<IMetric<T>> {
         const timers = map.entries();
         const output: Array<IMetric<T>> = [];
 

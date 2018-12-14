@@ -10,7 +10,7 @@
  */
 
 import { ICollectionObserver } from "./ICollectionObserver";
-import { IRequiredMetrics } from "./IRequiredMetrics";
+import { IPerformanceEntry } from "./IPerformanceEntry";
 
 /**
  * Properties of a named function timer that was created with the
@@ -18,7 +18,7 @@ import { IRequiredMetrics } from "./IRequiredMetrics";
  *
  * @internal
  */
-export interface IFunctionTimer extends ICollectionObserver<IRequiredMetrics> {
+export interface IFunctionTimer extends ICollectionObserver<IPerformanceEntry> {
     /**
      * The original function that was watched. Used by {@link PerformanceApi.unwatch}
      * to reinstate the original function when requested.
