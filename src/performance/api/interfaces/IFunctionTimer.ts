@@ -9,36 +9,18 @@
  *
  */
 
-import { IPerformanceObserver } from "./IPerformanceObserver";
+import { IMetricTimer } from "./IMetricTimer";
 import { PerformanceEntry } from "perf_hooks";
 
 /**
  * A reference to a timer object created when using {@link PerformanceApi.watch}
+ *
+ * @internal
  */
-export interface IFunctionTimer {
-    /**
-     * The node performance entries collected for each call of a watched function.
-     */
-    entries: PerformanceEntry[];
-
-    /**
-     * The observer capturing the {@link IFunctionTimer.entries}
-     */
-    observer: IPerformanceObserver;
-
+export interface IFunctionTimer extends IMetricTimer<PerformanceEntry> {
     /**
      * The original function that was watched. Used by {@link PerformanceApi.unwatch}
      * to reinstate the original function when requested.
      */
     originalFunction: (...args: any[]) => any;
-
-    /**
-     * The total number of calls to the watched function.
-     */
-    totalCalls: number;
-
-    /**
-     * The total duration (in milliseconds) spent in the watched function.
-     */
-    totalDuration: number;
 }

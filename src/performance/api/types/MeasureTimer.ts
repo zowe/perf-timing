@@ -9,8 +9,13 @@
  *
  */
 
+import {
+    IMeasurement,
+    IMetricTimer
+} from "../interfaces";
 
-export * from "./errors";
-export * from "./interfaces";
-export * from "./PerformanceApi";
-export * from "./types";
+/**
+ *
+ * @internal
+ */
+export type MeasureTimer = IMetricTimer<IMeasurement>;

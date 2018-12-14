@@ -10,12 +10,12 @@
  */
 
 
-export * from "./IFunctionMetric";
 export * from "./IFunctionTimer";
 export * from "./IMeasurement";
-export * from "./IMeasurementMetric";
-export * from "./IMeasureTimer";
+export * from "./IMetricTimer";
+export * from "./IMetric";
 export * from "./IMetrics";
 export * from "./INodeTiming";
 export * from "./IPerformanceObserver";
+export * from "./IRequiredMetrics";
 export * from "./ISystemInformation";

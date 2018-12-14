@@ -9,8 +9,5 @@
  *
  */
 
-
-export * from "./errors";
-export * from "./interfaces";
-export * from "./PerformanceApi";
-export * from "./types";
+export * from "./api";
+export * from "./manager";

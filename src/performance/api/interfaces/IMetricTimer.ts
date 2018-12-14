@@ -9,8 +9,11 @@
  *
  */
 
+import { IPerformanceObserver } from "./IPerformanceObserver";
+import { IRequiredMetrics } from "./IRequiredMetrics";
 
-export * from "./errors";
-export * from "./interfaces";
-export * from "./PerformanceApi";
-export * from "./types";
+export interface IMetricTimer<T extends IRequiredMetrics> {
+    entries: T[];
+    isConnected: boolean;
+    observer: IPerformanceObserver;
+}

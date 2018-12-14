@@ -9,12 +9,14 @@
  *
  */
 
-import { PerformanceEntry } from "perf_hooks";
-
-export interface IFunctionMetric {
-    averageDuration: number;
-    calls: number;
-    entries: PerformanceEntry[];
-    name: string;
-    totalDuration: number; // Both in ms
+/**
+ * Represents the required metrics to be present in a metric entry.
+ *
+ * @internal
+ */
+export interface IRequiredMetrics {
+    /**
+     * The total time (in milliseconds) represented by a metric.
+     */
+    duration: number;
 }

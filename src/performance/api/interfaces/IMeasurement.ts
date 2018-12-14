@@ -9,11 +9,33 @@
  *
  */
 
-
+/**
+ * An individual measurement produced from a single call to {@link PerformanceApi.measure}.
+ */
 export interface IMeasurement {
+    /**
+     * The time taken (in milliseconds) to get from the starting mark to the
+     * ending mark.
+     */
     duration: number;
+
+    /**
+     * The name of the end mark that was captured.
+     */
     endMarkName: string;
+
+    /**
+     * The name of the measurement.
+     */
     name: string;
+
+    /**
+     * The name of the starting mark that was captured.
+     */
     startMarkName: string;
+
+    /**
+     * The time at which the starting mark was captured.
+     */
     startTime: number;
 }

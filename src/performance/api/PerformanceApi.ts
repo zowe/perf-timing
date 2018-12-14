@@ -12,11 +12,15 @@
 import { IPerformanceApi, IPerformanceApiManager } from "../manager/interfaces";
 import {
     IFunctionTimer,
-    IMeasureTimer,
+    IMetric,
     IMetrics,
+    IMetricTimer,
     INodeTiming,
+    IRequiredMetrics,
     ISystemInformation
 } from "./interfaces";
+
+import { MeasureTimer } from "./types";
 
 /**
  * The underlying api that provides hooks into
@@ -47,6 +51,30 @@ export class PerformanceApi implements IPerformanceApi {
      */
     private static _errorImport: typeof import("./errors");
 
+    // @TODO Document
+    private static _aggregateData<T extends IRequiredMetrics>(map: Map<string, IMetricTimer<T>>): Array<IMetric<T>> {
+        const timers = map.entries();
+        const output: Array<IMetric<T>> = [];
+
+        for (const [key, value] of timers) {
+            let totalDuration = 0;
+
+            for (const entry of value.entries) {
+                totalDuration += entry.duration;
+            }
+
+            output.push({
+                name: key,
+                calls: value.entries.length,
+                totalDuration,
+                averageDuration: totalDuration / value.entries.length,
+                entries: value.entries
+            });
+        }
+
+        return output;
+    }
+
     /**
      * Created for consistent reference to Node Performance Timing API.
      *
@@ -67,15 +95,15 @@ export class PerformanceApi implements IPerformanceApi {
      *
      * @internal
      */
-    private _functionTimers: Map<string,IFunctionTimer> = new Map();
+    private _functionTimers: Map<string, IFunctionTimer> = new Map();
 
     /**
      * Internal map of all created measurement timers. The key represents the name
-     * and the value is an {@link IMeasureTimer} instance.
+     * and the value is an {@link MeasureTimer} instance.
      *
      * @internal
      */
-    private _measureTimers: Map<string,IMeasureTimer> = new Map();
+    private _measureTimers: Map<string, MeasureTimer> = new Map();
 
     /**
      * This variable holds the import from the Node JS performance hooks
@@ -116,43 +144,10 @@ export class PerformanceApi implements IPerformanceApi {
     public getMetrics(): IMetrics | {} {
         if (this._manager.isEnabled) {
             // @TODO All metrics should be stopped before reporting
-
-            const output: IMetrics = {
-                functions: [],
-                measurements: []
+            return {
+                functions: PerformanceApi._aggregateData(this._functionTimers),
+                measurements: PerformanceApi._aggregateData(this._measureTimers)
             };
-
-            // Get function timer metrics
-            const functionTimers = this._functionTimers.entries();
-            for (const [key, value] of functionTimers) {
-                output.functions.push({
-                    name: key,
-                    calls: value.totalCalls,
-                    totalDuration: value.totalDuration,
-                    averageDuration: value.totalDuration / value.totalCalls,
-                    entries: value.entries
-                });
-            }
-
-            // Get measurement metrics
-            const measureTimers = this._measureTimers.entries();
-            for (const [key, value] of measureTimers) {
-                let totalDuration = 0;
-
-                for (const entry of value.entries) {
-                    totalDuration += entry.duration;
-                }
-
-                output.measurements.push({
-                    name: key,
-                    calls: value.entries.length,
-                    totalDuration,
-                    averageDuration: totalDuration / value.entries.length,
-                    entries: value.entries
-                });
-            }
-
-            return output;
         }
 
         return {};
@@ -223,7 +218,7 @@ export class PerformanceApi implements IPerformanceApi {
     // @TODO document
     public measure(name: string, startMark: string, endMark: string) {
         if (this._manager.isEnabled) {
-            let mapObject: IMeasureTimer;
+            let mapObject: MeasureTimer;
 
             if (this._measureTimers.has(name)) {
                 mapObject = this._measureTimers.get(name);
@@ -248,6 +243,7 @@ export class PerformanceApi implements IPerformanceApi {
             // If the map object is already connected, we don't need to do anything.
             // The metric will be picked up by the for loop in the observer.
             if (!mapObject.isConnected) {
+                // Create the observer that will capture the metrics.
                 mapObject.observer = new this._perfHooks.PerformanceObserver((list) => {
                     const entries = list.getEntriesByName(namespaceName);
 
@@ -298,6 +294,7 @@ export class PerformanceApi implements IPerformanceApi {
 
             if (timerRef !== undefined) {
                 timerRef.observer.disconnect();
+                timerRef.isConnected = false;
                 return timerRef.originalFunction;
             } else {
                 throw new PerformanceApi._errors.TimerDoesNotExistError(timer);
@@ -314,6 +311,7 @@ export class PerformanceApi implements IPerformanceApi {
                 name = fn.name;
             }
 
+            // @TODO allow for a name to be reconnected if the observer has been disconnected.
             // Throw an error if the timer already exists in the map.
             if (this._functionTimers.has(name)) {
                 throw new PerformanceApi._errors.TimerNameConflictError(name);
@@ -322,10 +320,9 @@ export class PerformanceApi implements IPerformanceApi {
             // Create the observer and store it in the map.
             const observerObject: IFunctionTimer = {
                 observer: undefined,
+                isConnected: false,
                 entries: [],
-                originalFunction: fn,
-                totalDuration: 0,
-                totalCalls: 0
+                originalFunction: fn
             };
 
             this._functionTimers.set(name, observerObject);
@@ -335,13 +332,12 @@ export class PerformanceApi implements IPerformanceApi {
                 const entries = list.getEntriesByName(fn.name);
 
                 for (const entry of entries) {
-                    observerObject.totalDuration += entry.duration;
-                    observerObject.totalCalls++;
                     observerObject.entries.push(entry);
                 }
             });
 
             observerObject.observer.observe({entryTypes: ["function"], buffered: true});
+            observerObject.isConnected = true;
 
             // Wrap the function in a timer
             return this._perfHooks.performance.timerify(fn);

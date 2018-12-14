@@ -8,12 +8,13 @@
  * Copyright Contributors to the Zowe Project.
  *
  */
-
 import { PerformanceApiManager } from "./performance/manager";
 
 /**
  * An instance of a {@link PerformanceApiManager}. Public functionality is exported
  * under this name.
+ *
+ * Usage of public stuff should be done with `import * as perf_timing from "@zowe/perf-timing/public"` <-- @TODO need to implement that
  *
  * [[include:environment.md]]
  *

@@ -9,6 +9,9 @@
  *
  */
 
+ // @TODO a new manager should be created for each different package that could be created
+ // @TODO this is hard because every time we would have to look up the tree on getApi which
+ // @TODO is probably really slow. Need to figure out a good way to do this kind of lookup.
 
 // These imports have been carefully crafted to represent the libraries needed
 // when performance is disabled for performance reasons. Any additional runtime
