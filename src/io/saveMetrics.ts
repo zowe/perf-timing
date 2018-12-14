@@ -11,9 +11,9 @@
 
 import { ENV_PREFIX } from "../constants";
 import { Environment } from "../environment";
-import * as mkdirp from "mkdirp";
-import * as fs from "fs";
+import * as fs from "fs-extra";
 import * as os from "os";
+import { IPerformanceMetrics } from "../performance/manager";
 
 /**
  * Environment key prefix for the max history value. Max history refers to the
@@ -52,51 +52,33 @@ Environment
  *
  * @internal
  */
-export function saveMetrics(data: object) {
+export function saveMetrics(data: IPerformanceMetrics) {
     // @FUTURE This is where file save location will be determined by
     // @FUTURE environment settings for aggregation at a later time.
     const directory = Environment.getValue(ENV_IO_SAVE_DIR);
 
-    // If the directory doesn't exist, then no logs will need to roll.
-    if (fs.existsSync(directory)) {
-        // Prior to saving roll any metrics beforehand
-        // Get the starting index
-        let historyIndex = Environment.getNumber(ENV_IO_MAX_HISTORY);
+    fs.ensureDirSync(directory);
 
-        const lastFile = getMetricFileName(directory, historyIndex);
+    // Prior to saving roll any metrics beforehand
+    // Get the starting index
+    let historyIndex = Environment.getNumber(ENV_IO_MAX_HISTORY);
 
-        // Delete the last file when history limit has been reached
-        if (fs.existsSync(lastFile)) {
-            fs.unlinkSync(lastFile);
+    const lastFile = getMetricFileName(directory, historyIndex);
+
+    // Delete the last file when history limit has been reached
+    fs.removeSync(lastFile);
+
+    // Move all historical logs down by 1
+    while (historyIndex-- > 0) {
+        const fileName = getMetricFileName(directory, historyIndex);
+
+        if (fs.existsSync(fileName)) {
+            fs.renameSync(fileName, getMetricFileName(directory, historyIndex + 1));
         }
-
-        // Move all historical logs down by 1
-        while(historyIndex-- > 0) {
-            const fileName = getMetricFileName(directory, historyIndex);
-            if (fs.existsSync(fileName)) {
-                fs.renameSync(fileName, getMetricFileName(directory, historyIndex + 1));
-            }
-        }
-    } else {
-        createDirectory(directory);
     }
 
     // Write the first metric
     fs.writeFileSync(getMetricFileName(directory, 1), JSON.stringify(data));
-}
-
-/**
- * Recursively create the save directory if needed.
- *
- * @param directory The directory that will be created
- *
- * @internal
- */
-function createDirectory(directory: string) {
-    // @FUTURE When Node 8 is no longer supported, this function should be
-    // @FUTURE changed to use the recursive property on mkdirSync
-    // @FUTURE until then, use the mkdirp package for simplicity
-    mkdirp.sync(directory); // @TODO switch to fs-extra
 }
 
 /**

@@ -30,15 +30,14 @@
     "watch": "gulp watch"
   },
   "dependencies": {
-    "mkdirp": "^0.5.1",
-    "pkg-up": "^2.0.0"
+    "fs-extra": "7.0.1",
+    "pkg-up": "2.0.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "^5.0.4",
+    "@types/fs-extra": "5.0.4",
     "@types/jest": "23.3.9",
-    "@types/mkdirp": "^0.5.2",
     "@types/node": "8.10.37",
-    "@types/pkg-up": "^2.0.0",
+    "@types/pkg-up": "2.0.0",
     "fs-extra": "^7.0.1",
     "jest": "23.6.0",
     "jest-environment-node": "23.4.0",

@@ -9,7 +9,7 @@
  *
  */
 
-import { PerformanceApiManager } from "./performance/manager/PerformanceApiManager";
+import { PerformanceApiManager } from "./performance/manager";
 
 /**
  * An instance of a {@link PerformanceApiManager}. Public functionality is exported
