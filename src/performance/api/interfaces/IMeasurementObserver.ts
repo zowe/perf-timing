@@ -15,5 +15,7 @@ import { IMeasurementEntry } from "./IMeasurementEntry";
 /**
  * Properties of a named measurement observer that was created with the
  * {@link PerformanceApi.measure} function.
+ *
+ * @internal
  */
 export interface IMeasurementObserver extends ICollectionObserver<IMeasurementEntry>{}

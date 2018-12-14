@@ -217,7 +217,7 @@ export class PerformanceApi implements IPerformanceApi {
     // @TODO document
     public measure(name: string, startMark: string, endMark: string) {
         if (this._manager.isEnabled) {
-            let mapObject: MeasureTimer;
+            let mapObject: IMeasurementObserver;
 
             if (this._measureTimers.has(name)) {
                 mapObject = this._measureTimers.get(name);
