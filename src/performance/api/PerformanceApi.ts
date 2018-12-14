@@ -12,15 +12,14 @@
 import { IPerformanceApi, IPerformanceApiManager } from "../manager/interfaces";
 import {
     ICollectionObserver,
-    IFunctionTimer,
+    IFunctionObserver,
+    IMeasurementObserver,
     IMetric,
     IMetrics,
     INodeTiming,
     IPerformanceEntry,
     ISystemInformation
 } from "./interfaces";
-
-import { MeasureTimer } from "./types";
 
 /**
  * The underlying api that provides hooks into
@@ -91,19 +90,19 @@ export class PerformanceApi implements IPerformanceApi {
 
     /**
      * Internal map of all created function timers. The key represents the name
-     * and the value is an {@link IFunctionTimer} instance.
+     * and the value is an {@link IFunctionObserver} instance.
      *
      * @internal
      */
-    private _functionTimers: Map<string, IFunctionTimer> = new Map();
+    private _functionTimers: Map<string, IFunctionObserver> = new Map(); // @TODO change to observer
 
     /**
      * Internal map of all created measurement timers. The key represents the name
-     * and the value is an {@link MeasureTimer} instance.
+     * and the value is an {@link IMeasurementObserver} instance.
      *
      * @internal
      */
-    private _measureTimers: Map<string, MeasureTimer> = new Map();
+    private _measureTimers: Map<string, IMeasurementObserver> = new Map(); // @TODO change to observer
 
     /**
      * This variable holds the import from the Node JS performance hooks
@@ -318,7 +317,7 @@ export class PerformanceApi implements IPerformanceApi {
             }
 
             // Create the observer and store it in the map.
-            const observerObject: IFunctionTimer = {
+            const observerObject: IFunctionObserver = {
                 observer: undefined,
                 isConnected: false,
                 entries: [],

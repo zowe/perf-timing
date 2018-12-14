@@ -9,5 +9,4 @@
  *
  */
 
-export * from "./MeasureTimer";
 export * from "./metrics";

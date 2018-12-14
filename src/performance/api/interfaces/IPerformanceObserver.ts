@@ -9,7 +9,6 @@
  *
  */
 
-
 /**
  * This interface is a wrapper around the NodeJS PerformanceObserver class.
  *

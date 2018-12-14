@@ -13,12 +13,12 @@ import { ICollectionObserver } from "./ICollectionObserver";
 import { IPerformanceEntry } from "./IPerformanceEntry";
 
 /**
- * Properties of a named function timer that was created with the
+ * Properties of a named function observer that was created with the
  * {@link PerformanceApi.watch} function.
  *
  * @internal
  */
-export interface IFunctionTimer extends ICollectionObserver<IPerformanceEntry> {
+export interface IFunctionObserver extends ICollectionObserver<IPerformanceEntry> {
     /**
      * The original function that was watched. Used by {@link PerformanceApi.unwatch}
      * to reinstate the original function when requested.

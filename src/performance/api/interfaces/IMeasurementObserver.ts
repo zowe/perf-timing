@@ -9,13 +9,11 @@
  *
  */
 
-import {
-    ICollectionObserver,
-    IMeasurementEntry
-} from "../interfaces";
+import { ICollectionObserver } from "./ICollectionObserver";
+import { IMeasurementEntry } from "./IMeasurementEntry";
 
 /**
- *
- * @internal
+ * Properties of a named measurement observer that was created with the
+ * {@link PerformanceApi.measure} function.
  */
-export type MeasureTimer = ICollectionObserver<IMeasurementEntry>;
+export interface IMeasurementObserver extends ICollectionObserver<IMeasurementEntry>{}
