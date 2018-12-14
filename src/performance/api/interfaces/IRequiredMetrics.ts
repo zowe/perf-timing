@@ -16,7 +16,17 @@
  */
 export interface IRequiredMetrics {
     /**
-     * The total time (in milliseconds) represented by a metric.
+     * The total number of milliseconds elapsed for this metric.
      */
     duration: number;
+
+    /**
+     * The high resolution millisecond timestamp marking the starting time of the Performance Entry.
+     */
+    startTime: number;
+
+    /**
+     * The name of the metric.
+     */
+    name: string;
 }

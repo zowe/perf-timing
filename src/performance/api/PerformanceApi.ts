@@ -156,14 +156,14 @@ export class PerformanceApi implements IPerformanceApi {
     public getNodeTiming(): INodeTiming | void {
         if (this._manager.isEnabled) {
 
-            const timing: any = this._perfHooks.performance.nodeTiming;
+            const timing = this._perfHooks.performance.nodeTiming;
 
             return {
                 bootstrapComplete: timing.bootstrapComplete,
                 duration: timing.duration,
-                environment: timing.environment,
                 loopStart: timing.loopStart,
                 loopExit: timing.loopExit,
+                name: timing.name,
                 nodeStart: timing.nodeStart,
                 startTime: timing.startTime,
                 v8Start: timing.v8Start

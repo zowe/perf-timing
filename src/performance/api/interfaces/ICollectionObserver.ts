@@ -15,7 +15,7 @@ import { IRequiredMetrics } from "./IRequiredMetrics";
 /**
  * A collection observer is a base object responsible for keeping references
  * to the underlying Node performance observer object.
- * 
+ *
  * @param T The object type of entry data. The type presented must contain the
  *          required fields present in the {@link IRequiredMetrics} interface
  *          for proper statistical analysis of results by the
