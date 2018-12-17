@@ -76,7 +76,7 @@
         "requireReturn": false,
         "requireParamDescription": true,
         "requireReturnDescription": true,
-        "matchDescription": "[^\\.]*\\.\\r?\\n",
+        "matchDescription": "[^.]*\\.(\\r?\\n|$)",
         "requireParamType": false,
         "requireReturnType": false
     }],

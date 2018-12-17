@@ -299,14 +299,14 @@ export class PerformanceApi implements IPerformanceApi {
 
     /**
      * The measure method is used to create a new measurement between 2 marks.
-     * 
+     *
      * The measurement name does not have to be unique. Using the same name will add another entry
      * to the corresponding name present in the {@link IMetrics.measurements} array in the
      * formatted run output.
-     * 
+     *
      * **For example:**
      * Assume that the measure method was called like so:
-     * 
+     *
      * ```TypeScript
      * // marks were created above
      * // api instantiated as api
@@ -315,9 +315,9 @@ export class PerformanceApi implements IPerformanceApi {
      * api.measure("name2", "start3", "end3");
      * api.measure("name1", "start4", "end4");
      * ```
-     * 
+     *
      * The final result of {@link getMetrics} would look something like this:
-     * 
+     *
      * ```JSON
      * {
      *   "measurements": [
