@@ -22,6 +22,18 @@ import {
 } from "./interfaces";
 
 /**
+ * A type that generically defines all collection observer maps that are defined
+ * to the Performance API.
+ *
+ * @param T The type of observer stored in the map. The observer must be an
+ *          {@link ICollectionObserver} type with entries adhering to the
+ *          {@link IPerformanceEntry} interface.
+ *
+ * @internal
+ */
+type CollectionMap<T extends ICollectionObserver<IPerformanceEntry>> = Map<string, T>;
+
+/**
  * The underlying api that provides hooks into
  * {@link https://nodejs.org/dist/latest-v10.x/docs/api/perf_hooks.html Node's Performance Timing APIs}.
  *
@@ -50,24 +62,45 @@ export class PerformanceApi implements IPerformanceApi {
      */
     private static _errorImport: typeof import("./errors");
 
-    // @TODO Document
-    private static _aggregateData<T extends IPerformanceEntry>(map: Map<string, ICollectionObserver<T>>): Array<IMetric<T>> {
-        const timers = map.entries();
+    /**
+     * Aggregate all entries present in a {@link CollectionMap} into an array output.
+     *
+     * Each item present in the map will correspond to a single entry in the final array output. The
+     * strings will now become the name property and each data point will be stored in the final
+     * object. The statistical analysis present is generated from the IPerformanceEntry instances
+     * present in the entries portion of that element.
+     *
+     *
+     * @param map A {@link CollectionMap} of observers containing entries to process.
+     * @param T The type representing the raw data stored in the observer. It is important that this
+     *          data extends {@link IPerformanceEntry} for proper data processing.
+     *
+     * @returns An array of {@link IMetric} data points representing each key/value present in the
+     *          CollectionMap.
+     *
+     * @internal
+     */
+    private static _aggregateData<T extends IPerformanceEntry>(map: CollectionMap<ICollectionObserver<T>>): Array<IMetric<T>> {
+        // Get all observers present within the map.
+        const observers = map.entries();
         const output: Array<IMetric<T>> = [];
 
-        for (const [key, value] of timers) {
+        // Loop through each observer in the map
+        for (const [name, observer] of observers) {
             let totalDuration = 0;
 
-            for (const entry of value.entries) {
+            // Calculate the total duration represented by all entries
+            for (const entry of observer.entries) {
                 totalDuration += entry.duration;
             }
 
+            // Create the data point for the map using the key as the name
             output.push({
-                name: key,
-                calls: value.entries.length,
+                name,
+                calls: observer.entries.length,
                 totalDuration,
-                averageDuration: totalDuration / value.entries.length,
-                entries: value.entries
+                averageDuration: totalDuration / observer.entries.length,
+                entries: observer.entries
             });
         }
 
@@ -94,7 +127,7 @@ export class PerformanceApi implements IPerformanceApi {
      *
      * @internal
      */
-    private _functionTimers: Map<string, IFunctionObserver> = new Map(); // @TODO change to observer
+    private _functionObservers: CollectionMap<IFunctionObserver> = new Map();
 
     /**
      * Internal map of all created measurement timers. The key represents the name
@@ -102,7 +135,7 @@ export class PerformanceApi implements IPerformanceApi {
      *
      * @internal
      */
-    private _measureTimers: Map<string, IMeasurementObserver> = new Map(); // @TODO change to observer
+    private _measurementObservers: CollectionMap<IMeasurementObserver> = new Map();
 
     /**
      * This variable holds the import from the Node JS performance hooks
@@ -129,10 +162,23 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
+    /**
+     * Clears marks created using {@link mark}.
+     *
+     * This method does nothing if the Performance API is not enabled. It also takes advantage
+     * of the namespace applied within mark; however, if name is not specified, all marks
+     * will be cleared from all package.
+     *
+     * @param name The name of the mark to clear. If not specified, all marks are
+     *             cleared.
+     *
+     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_clearmarks_name clearMarks()}
+     */
     public clearMarks(name?: string) {
         if (this._manager.isEnabled) {
+            // Add the namespace to the mark for uniqueness across packages
             this._perfHooks.performance.clearMarks(
-                this._addPackageNamespace(name)
+                name ? this._addPackageNamespace(name) : undefined
             );
         }
     }
@@ -144,14 +190,17 @@ export class PerformanceApi implements IPerformanceApi {
         if (this._manager.isEnabled) {
             // @TODO All metrics should be stopped before reporting
             return {
-                functions: PerformanceApi._aggregateData(this._functionTimers),
-                measurements: PerformanceApi._aggregateData(this._measureTimers)
+                functions: PerformanceApi._aggregateData(this._functionObservers),
+                measurements: PerformanceApi._aggregateData(this._measurementObservers)
             };
         }
 
         return {};
     }
 
+    /**
+     * 
+     */
     public getNodeTiming(): INodeTiming | void {
         if (this._manager.isEnabled) {
 
@@ -219,8 +268,8 @@ export class PerformanceApi implements IPerformanceApi {
         if (this._manager.isEnabled) {
             let mapObject: IMeasurementObserver;
 
-            if (this._measureTimers.has(name)) {
-                mapObject = this._measureTimers.get(name);
+            if (this._measurementObservers.has(name)) {
+                mapObject = this._measurementObservers.get(name);
             } else {
                 // Create the map object when needed
                 mapObject = {
@@ -229,7 +278,7 @@ export class PerformanceApi implements IPerformanceApi {
                     entries: []
                 };
 
-                this._measureTimers.set(name, mapObject);
+                this._measurementObservers.set(name, mapObject);
             }
 
             // Remap the name to the unique package name. This will not be visible
@@ -289,7 +338,7 @@ export class PerformanceApi implements IPerformanceApi {
                 timer = /timerified (.*)/g.exec(timer)[1];
             }
 
-            const timerRef = this._functionTimers.get(timer);
+            const timerRef = this._functionObservers.get(timer);
 
             if (timerRef !== undefined) {
                 timerRef.observer.disconnect();
@@ -312,7 +361,7 @@ export class PerformanceApi implements IPerformanceApi {
 
             // @TODO allow for a name to be reconnected if the observer has been disconnected.
             // Throw an error if the timer already exists in the map.
-            if (this._functionTimers.has(name)) {
+            if (this._functionObservers.has(name)) {
                 throw new PerformanceApi._errors.TimerNameConflictError(name);
             }
 
@@ -324,7 +373,7 @@ export class PerformanceApi implements IPerformanceApi {
                 originalFunction: fn
             };
 
-            this._functionTimers.set(name, observerObject);
+            this._functionObservers.set(name, observerObject);
 
             // Create a function observer
             observerObject.observer = new this._perfHooks.PerformanceObserver((list) => {
