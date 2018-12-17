@@ -9,13 +9,13 @@
  *
  */
 
-import { PerformanceApi } from "../../api";
+import { IPerformanceApi } from "./IPerformanceApi";
 
  /**
   * All performance metrics collected during a single application run.
   */
 export interface IPerformanceMetrics {
-    metrics: {[key: string]: Array<ReturnType<PerformanceApi["getMetrics"]>>};
-    nodeTiming: ReturnType<PerformanceApi["getNodeTiming"]>;
-    systemInformation: ReturnType<PerformanceApi["getSysInfo"]>;
+    metrics: {[key: string]: Array<ReturnType<IPerformanceApi["getMetrics"]>>};
+    nodeTiming: ReturnType<IPerformanceApi["getNodeTiming"]>;
+    systemInformation: ReturnType<IPerformanceApi["getSysInfo"]>;
 }

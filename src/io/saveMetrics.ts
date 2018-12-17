@@ -37,7 +37,6 @@ Environment
     .register(ENV_IO_SAVE_DIR, `${os.homedir()}/.perf-timing`);
 // tslint:enable:no-magic-numbers
 
-// @TODO proper typing
 /**
  * Save metrics into the next log file.
  *

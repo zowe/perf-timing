@@ -183,10 +183,17 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
-    /**
-     * Output raw performance metrics to a file. Should be the last call in execution.
-     */
-    public getMetrics(): IMetrics | {} {
+     /**
+      * Aggregate metrics that have been captured for this instance of the API
+      * and return them back in a data format.
+      *
+      * @returns An object representing metrics that have been prepared to be
+      *          written to a file.
+      *
+      * @throws {@link PerformanceNotCapturedError} when the method is called and performance captures
+      *                                             are not enabled.
+      */
+    public getMetrics(): IMetrics {
         if (this._manager.isEnabled) {
             // @TODO All metrics should be stopped before reporting
             return {
@@ -194,16 +201,21 @@ export class PerformanceApi implements IPerformanceApi {
                 measurements: PerformanceApi._aggregateData(this._measurementObservers)
             };
         }
-
-        return {};
+        else {
+            throw new PerformanceApi._errors.PerformanceNotCapturedError();
+        }
     }
 
     /**
-     * 
+     * Get the node timing information provided by the underlying node APIs.
+     *
+     * @returns The node timing information.
+     *
+     * @throws {@link PerformanceNotCapturedError} when the method is called and performance captures
+     *                                             are not enabled.
      */
-    public getNodeTiming(): INodeTiming | void {
+    public getNodeTiming(): INodeTiming {
         if (this._manager.isEnabled) {
-
             const timing = this._perfHooks.performance.nodeTiming;
 
             return {
@@ -216,12 +228,21 @@ export class PerformanceApi implements IPerformanceApi {
                 startTime: timing.startTime,
                 v8Start: timing.v8Start
             };
+        } else {
+            throw new PerformanceApi._errors.PerformanceNotCapturedError();
         }
-
-        return;
     }
 
-    public getSysInfo(): ISystemInformation | void {
+    /**
+     * Gathers and returns valuable system information to help understand the environment
+     * where the data was captured.
+     *
+     * @returns System information formatted in an object ready to write to a file.
+     *
+     * @throws {@link PerformanceNotCapturedError} when the method is called and performance captures
+     *                                             are not enabled.
+     */
+    public getSysInfo(): ISystemInformation {
         if (this._manager.isEnabled) {
             // Dynamically import os so that this process doesn't have to bother
             // if performance is not enabled.
@@ -249,9 +270,9 @@ export class PerformanceApi implements IPerformanceApi {
                 shell: os.userInfo().shell,
                 uptime: os.uptime()
             };
+        } else {
+            throw new PerformanceApi._errors.PerformanceNotCapturedError();
         }
-
-        return;
     }
 
     public mark(name: string) {
@@ -319,12 +340,6 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
-    /**
-     * This method will close an observer that was opened through the {@link PerformanceTools#timerify}
-     * function.
-     *
-     * @todo document
-     */
     public unwatch(fn: ((...args: any[]) => any), name?: string) {
         if (this._manager.isEnabled) {
             let timer = fn.name;

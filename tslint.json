@@ -70,7 +70,8 @@
     "trailing-comma": false,
     "valid-jsdoc": [true, {
         "prefer": {
-          "return": "returns"
+          "return": "returns",
+          "throw": "throws"
         },
         "requireReturn": false,
         "requireParamDescription": true,
