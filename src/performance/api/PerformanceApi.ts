@@ -35,7 +35,7 @@ type CollectionMap<T extends ICollectionObserver<IPerformanceEntry>> = Map<strin
 
 /**
  * The underlying api that provides hooks into
- * {@link https://nodejs.org/dist/latest-v10.x/docs/api/perf_hooks.html Node's Performance Timing APIs}.
+ * {@link https://nodejs.org/api/perf_hooks.html Node's Performance Timing APIs}.
  *
  * Use this class in place of relying on Node's experimental APIs.
  */
@@ -172,7 +172,7 @@ export class PerformanceApi implements IPerformanceApi {
      * @param name The name of the mark to clear. If not specified, all marks are
      *             cleared.
      *
-     * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_clearmarks_name clearMarks()}
+     * @see https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_clearmarks_name
      */
     public clearMarks(name?: string) {
         if (this._manager.isEnabled) {
@@ -195,7 +195,7 @@ export class PerformanceApi implements IPerformanceApi {
       */
     public getMetrics(): IMetrics {
         if (this._manager.isEnabled) {
-            // @TODO All metrics should be stopped before reporting
+            // @TODO All metrics should be stopped before reporting, i.e ensure that the observers are disconnected before collecting
             return {
                 functions: PerformanceApi._aggregateData(this._functionObservers),
                 measurements: PerformanceApi._aggregateData(this._measurementObservers)
@@ -275,6 +275,18 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
+    /**
+     * Creates a mark entry in the Performance Timeline. The time between 2 marks
+     * created with this function can be measured in the {@link measure} function.
+     *
+     * @param name The name of the mark to create. This name will be prefixed with
+     *             the namespace calculated by {@link _addPackageNamespace} to
+     *             avoid conflicts in the data. This doesn't change how the mark
+     *             is referenced. When referencing the mark in the {@link measure}
+     *             function, you must use the name passed into this function.
+     *
+     * @see https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_mark_name
+     */
     public mark(name: string) {
         if (this._manager.isEnabled) {
             this._perfHooks.performance.mark(
