@@ -279,6 +279,8 @@ export class PerformanceApi implements IPerformanceApi {
      * Creates a mark entry in the Performance Timeline. The time between 2 marks
      * created with this function can be measured in the {@link measure} function.
      *
+     * If performance monitoring is not enabled, this function will do nothing.
+     *
      * @param name The name of the mark to create. This name will be prefixed with
      *             the namespace calculated by {@link _addPackageNamespace} to
      *             avoid conflicts in the data. This doesn't change how the mark
@@ -295,8 +297,55 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
-
-    // @TODO document
+    /**
+     * The measure method is used to create a new measurement between 2 marks.
+     * 
+     * The measurement name does not have to be unique. Using the same name will add another entry
+     * to the corresponding name present in the {@link IMetrics.measurements} array in the
+     * formatted run output.
+     * 
+     * **For example:**
+     * Assume that the measure method was called like so:
+     * 
+     * ```TypeScript
+     * // marks were created above
+     * // api instantiated as api
+     * api.measure("name1", "start1", "end1");
+     * api.measure("name2", "start2", "end2");
+     * api.measure("name2", "start3", "end3");
+     * api.measure("name1", "start4", "end4");
+     * ```
+     * 
+     * The final result of {@link getMetrics} would look something like this:
+     * 
+     * ```JSON
+     * {
+     *   "measurements": [
+     *     {
+     *       "name": "name1",
+     *       "entries": [
+     *         {"startMark": "start1", "endMark": "end1"},
+     *         {"startMark": "start4", "endMark": "end4"}
+     *       ]
+     *     },
+     *     {
+     *       "name": "name2",
+     *       "entries": [
+     *         {"startMark": "start2", "endMark": "end2"},
+     *         {"startMark": "start3", "endMark": "end3"}
+     *       ]
+     *     }
+     *   ]
+     * }
+     * ```
+     *
+     * @TODO **INCLUDE USAGE HERE LATER**
+     *
+     * @param name The name of the measurement. Use this to track multiple measurements under
+     *             the same final array output.
+     * @param startMark The name of the start mark created with {@link mark}
+     * @param endMark The name of the end mark created with {@link measure}
+     */
     public measure(name: string, startMark: string, endMark: string) {
         if (this._manager.isEnabled) {
             let mapObject: IMeasurementObserver;
