@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IMetricTimer | @zowe/perf-timing</title>
+	<title>ICollectionObserver | @zowe/perf-timing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,21 +56,37 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="imetrictimer.html">IMetricTimer</a>
+					<a href="icollectionobserver.html">ICollectionObserver</a>
 				</li>
 			</ul>
-			<h1>Interface IMetricTimer&lt;T&gt;</h1>
+			<h1>Interface ICollectionObserver&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A collection observer is a base object responsible for keeping references
+						to the underlying Node performance observer object.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-type-parameters">
 				<h3>Type parameters</h3>
 				<ul class="tsd-type-parameters">
 					<li>
-						<h4>T<span class="tsd-signature-symbol">: </span><a href="irequiredmetrics.html" class="tsd-signature-type">IRequiredMetrics</a></h4>
+						<h4>T<span class="tsd-signature-symbol">: </span><a href="iperformanceentry.html" class="tsd-signature-type">IPerformanceEntry</a></h4>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>The object type of entry data. The type presented must contain the
+									required fields present in the <a href="iperformanceentry.html">IPerformanceEntry</a> interface
+									for proper statistical analysis of results by the
+								<a href="../classes/performanceapi.html#getmetrics">PerformanceApi.getMetrics</a> function.</p>
+							</div>
+						</div>
 					</li>
 				</ul>
 			</section>
@@ -78,10 +94,13 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IMetricTimer</span>
+						<span class="target">ICollectionObserver</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="ifunctiontimer.html" class="tsd-signature-type">IFunctionTimer</a>
+								<a href="ifunctionobserver.html" class="tsd-signature-type">IFunctionObserver</a>
+							</li>
+							<li>
+								<a href="imeasurementobserver.html" class="tsd-signature-type">IMeasurementObserver</a>
 							</li>
 						</ul>
 					</li>
@@ -94,9 +113,9 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetrictimer.html#entries" class="tsd-kind-icon">entries</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetrictimer.html#isconnected" class="tsd-kind-icon">is<wbr>Connected</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetrictimer.html#observer" class="tsd-kind-icon">observer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icollectionobserver.html#entries" class="tsd-kind-icon">entries</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icollectionobserver.html#isconnected" class="tsd-kind-icon">is<wbr>Connected</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="icollectionobserver.html#observer" class="tsd-kind-icon">observer</a></li>
 							</ul>
 						</section>
 					</div>
@@ -110,9 +129,14 @@
 					<div class="tsd-signature tsd-kind-icon">entries<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/IMetricTimer.ts#L16">performance/api/interfaces/IMetricTimer.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/ICollectionObserver.ts#L30">performance/api/interfaces/ICollectionObserver.ts:30</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A collection of performance data captured by the node performance observer.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="isconnected" class="tsd-anchor"></a>
@@ -120,9 +144,15 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Connected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/IMetricTimer.ts#L17">performance/api/interfaces/IMetricTimer.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/ICollectionObserver.ts#L36">performance/api/interfaces/ICollectionObserver.ts:36</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is the current node performance observer connected. If it is not connected,
+							then a new one must be created to continue collection under this observer.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="observer" class="tsd-anchor"></a>
@@ -130,9 +160,14 @@
 					<div class="tsd-signature tsd-kind-icon">observer<span class="tsd-signature-symbol">:</span> <a href="iperformanceobserver.html" class="tsd-signature-type">IPerformanceObserver</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/IMetricTimer.ts#L18">performance/api/interfaces/IMetricTimer.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/ICollectionObserver.ts#L41">performance/api/interfaces/ICollectionObserver.ts:41</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The underlying performance observer responsible for collecting metrics.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -173,33 +208,36 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="imeasurement.html" class="tsd-kind-icon">IMeasurement</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="imetric.html" class="tsd-kind-icon">IMetric</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="imetrictimer.html" class="tsd-kind-icon">IMetric<wbr>Timer</a>
+					<li class="current tsd-kind-interface tsd-has-type-parameter tsd-is-external">
+						<a href="icollectionobserver.html" class="tsd-kind-icon">ICollection<wbr>Observer</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetrictimer.html#entries" class="tsd-kind-icon">entries</a>
+								<a href="icollectionobserver.html#entries" class="tsd-kind-icon">entries</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetrictimer.html#isconnected" class="tsd-kind-icon">is<wbr>Connected</a>
+								<a href="icollectionobserver.html#isconnected" class="tsd-kind-icon">is<wbr>Connected</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetrictimer.html#observer" class="tsd-kind-icon">observer</a>
+								<a href="icollectionobserver.html#observer" class="tsd-kind-icon">observer</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="ifunctionobserver.html" class="tsd-kind-icon">IFunction<wbr>Observer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="imeasuremententry.html" class="tsd-kind-icon">IMeasurement<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="imeasurementobserver.html" class="tsd-kind-icon">IMeasurement<wbr>Observer</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="imetric.html" class="tsd-kind-icon">IMetric</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="imetrics.html" class="tsd-kind-icon">IMetrics</a>
 					</li>
@@ -213,13 +251,13 @@
 						<a href="iperformanceapimanager.html" class="tsd-kind-icon">IPerformance<wbr>Api<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
+						<a href="iperformanceentry.html" class="tsd-kind-icon">IPerformance<wbr>Entry</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
+						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="irequiredmetrics.html" class="tsd-kind-icon">IRequired<wbr>Metrics</a>
+						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
@@ -230,8 +268,14 @@
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external">
-						<a href="../globals.html#measuretimer" class="tsd-kind-icon">Measure<wbr>Timer</a>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#collectionmap" class="tsd-kind-icon">Collection<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#functionmetric" class="tsd-kind-icon">Function<wbr>Metric</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#measurementmetric" class="tsd-kind-icon">Measurement<wbr>Metric</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
 						<a href="../globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>

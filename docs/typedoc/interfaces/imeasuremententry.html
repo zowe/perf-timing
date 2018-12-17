@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IRequiredMetrics | @zowe/perf-timing</title>
+	<title>IMeasurementEntry | @zowe/perf-timing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="irequiredmetrics.html">IRequiredMetrics</a>
+					<a href="imeasuremententry.html">IMeasurementEntry</a>
 				</li>
 			</ul>
-			<h1>Interface IRequiredMetrics</h1>
+			<h1>Interface IMeasurementEntry</h1>
 		</div>
 	</div>
 </header>
@@ -69,15 +69,22 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Represents the required metrics to be present in a metric entry.</p>
+						<p>A representation of a single measurement from Point A to Point B.</p>
 					</div>
+					<p>A measurement object is created by a call to <a href="../classes/performanceapi.html#measure">PerformanceApi.measure</a> and
+					all measurements of the same name are aggregated into a single <a href="../globals.html#measurementmetric">MeasurementMetric</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IRequiredMetrics</span>
+						<a href="iperformanceentry.html" class="tsd-signature-type">IPerformanceEntry</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">IMeasurementEntry</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -88,7 +95,11 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="irequiredmetrics.html#duration" class="tsd-kind-icon">duration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="imeasuremententry.html#duration" class="tsd-kind-icon">duration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imeasuremententry.html#endmarkname" class="tsd-kind-icon">end<wbr>Mark<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="imeasuremententry.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imeasuremententry.html#startmarkname" class="tsd-kind-icon">start<wbr>Mark<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="imeasuremententry.html#starttime" class="tsd-kind-icon">start<wbr>Time</a></li>
 							</ul>
 						</section>
 					</div>
@@ -96,19 +107,88 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="duration" class="tsd-anchor"></a>
 					<h3>duration</h3>
 					<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from <a href="iperformanceentry.html">IPerformanceEntry</a>.<a href="iperformanceentry.html#duration">duration</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/IRequiredMetrics.ts#L21">performance/api/interfaces/IRequiredMetrics.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/IPerformanceEntry.ts#L27">performance/api/interfaces/IPerformanceEntry.ts:27</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceentry" class="external">PerformanceEntry</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="endmarkname" class="tsd-anchor"></a>
+					<h3>end<wbr>Mark<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">end<wbr>Mark<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/IMeasurementEntry.ts#L24">performance/api/interfaces/IMeasurementEntry.ts:24</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The total time (in milliseconds) represented by a metric.</p>
+							<p>The name of the end mark that was captured.</p>
 						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="iperformanceentry.html">IPerformanceEntry</a>.<a href="iperformanceentry.html#name">name</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/IPerformanceEntry.ts#L32">performance/api/interfaces/IPerformanceEntry.ts:32</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceentry" class="external">PerformanceEntry</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="startmarkname" class="tsd-anchor"></a>
+					<h3>start<wbr>Mark<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Mark<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/IMeasurementEntry.ts#L29">performance/api/interfaces/IMeasurementEntry.ts:29</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name of the starting mark that was captured.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="starttime" class="tsd-anchor"></a>
+					<h3>start<wbr>Time</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="iperformanceentry.html">IPerformanceEntry</a>.<a href="iperformanceentry.html#starttime">startTime</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/IPerformanceEntry.ts#L37">performance/api/interfaces/IPerformanceEntry.ts:37</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceentry" class="external">PerformanceEntry</a></p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 			</section>
@@ -150,17 +230,41 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a>
+					<li class=" tsd-kind-interface tsd-has-type-parameter tsd-is-external">
+						<a href="icollectionobserver.html" class="tsd-kind-icon">ICollection<wbr>Observer</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="imeasurement.html" class="tsd-kind-icon">IMeasurement</a>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="ifunctionobserver.html" class="tsd-kind-icon">IFunction<wbr>Observer</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="imeasuremententry.html" class="tsd-kind-icon">IMeasurement<wbr>Entry</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="imeasuremententry.html#duration" class="tsd-kind-icon">duration</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="imeasuremententry.html#endmarkname" class="tsd-kind-icon">end<wbr>Mark<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="imeasuremententry.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="imeasuremententry.html#startmarkname" class="tsd-kind-icon">start<wbr>Mark<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="imeasuremententry.html#starttime" class="tsd-kind-icon">start<wbr>Time</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="imeasurementobserver.html" class="tsd-kind-icon">IMeasurement<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="imetric.html" class="tsd-kind-icon">IMetric</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="imetrictimer.html" class="tsd-kind-icon">IMetric<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="imetrics.html" class="tsd-kind-icon">IMetrics</a>
@@ -175,23 +279,14 @@
 						<a href="iperformanceapimanager.html" class="tsd-kind-icon">IPerformance<wbr>Api<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
+						<a href="iperformanceentry.html" class="tsd-kind-icon">IPerformance<wbr>Entry</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
 						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-is-external">
-						<a href="irequiredmetrics.html" class="tsd-kind-icon">IRequired<wbr>Metrics</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="irequiredmetrics.html#duration" class="tsd-kind-icon">duration</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
 					</li>
@@ -201,8 +296,14 @@
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external">
-						<a href="../globals.html#measuretimer" class="tsd-kind-icon">Measure<wbr>Timer</a>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#collectionmap" class="tsd-kind-icon">Collection<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#functionmetric" class="tsd-kind-icon">Function<wbr>Metric</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#measurementmetric" class="tsd-kind-icon">Measurement<wbr>Metric</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
 						<a href="../globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>

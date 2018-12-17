@@ -71,11 +71,10 @@
 					<div class="lead">
 						<p>This interface is a wrapper around the NodeJS PerformanceObserver class.</p>
 					</div>
-					<dl class="tsd-comment-tags">
-						<dt>see</dt>
-						<dd><p><a href="https://nodejs.org/dist/latest-v10.x/docs/api/perf_hooks.html#perf_hooks_class_performanceobserver">https://nodejs.org/dist/latest-v10.x/docs/api/perf_hooks.html#perf_hooks_class_performanceobserver</a></p>
-						</dd>
-					</dl>
+					<p>Since the <a href="https://nodejs.org/api/perf_hooks.html" class="external">Node Performance Timing API</a>
+						is an experimental feature, this interface was created to wrap the
+						<a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver" class="external">PerformanceObserver</a>
+					into a stable public API.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -112,9 +111,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/IPerformanceObserver.ts#L19">performance/api/interfaces/IPerformanceObserver.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/IPerformanceObserver.ts#L26">performance/api/interfaces/IPerformanceObserver.ts:26</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver" class="external">PerformanceObserver</a></p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -129,9 +135,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/IPerformanceObserver.ts#L20">performance/api/interfaces/IPerformanceObserver.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/IPerformanceObserver.ts#L31">performance/api/interfaces/IPerformanceObserver.ts:31</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver" class="external">PerformanceObserver</a></p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -189,17 +202,20 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter tsd-is-external">
+						<a href="icollectionobserver.html" class="tsd-kind-icon">ICollection<wbr>Observer</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a>
+						<a href="ifunctionobserver.html" class="tsd-kind-icon">IFunction<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="imeasurement.html" class="tsd-kind-icon">IMeasurement</a>
+						<a href="imeasuremententry.html" class="tsd-kind-icon">IMeasurement<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="imeasurementobserver.html" class="tsd-kind-icon">IMeasurement<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="imetric.html" class="tsd-kind-icon">IMetric</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="imetrictimer.html" class="tsd-kind-icon">IMetric<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="imetrics.html" class="tsd-kind-icon">IMetrics</a>
@@ -214,11 +230,14 @@
 						<a href="iperformanceapimanager.html" class="tsd-kind-icon">IPerformance<wbr>Api<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="iperformanceentry.html" class="tsd-kind-icon">IPerformance<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class="current tsd-kind-interface tsd-is-external">
 						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
 						<ul>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
@@ -231,9 +250,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="irequiredmetrics.html" class="tsd-kind-icon">IRequired<wbr>Metrics</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
 					</li>
@@ -243,8 +259,14 @@
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external">
-						<a href="../globals.html#measuretimer" class="tsd-kind-icon">Measure<wbr>Timer</a>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#collectionmap" class="tsd-kind-icon">Collection<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#functionmetric" class="tsd-kind-icon">Function<wbr>Metric</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#measurementmetric" class="tsd-kind-icon">Measurement<wbr>Metric</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
 						<a href="../globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>

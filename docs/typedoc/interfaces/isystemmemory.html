@@ -66,6 +66,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Operating system memory information gathered by node.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -98,9 +105,14 @@
 					<div class="tsd-signature tsd-kind-icon">free<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/ISystemInformation.ts#L20">performance/api/interfaces/ISystemInformation.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/ISystemInformation.ts#L38">performance/api/interfaces/ISystemInformation.ts:38</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The total bytes of free memory.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
 					<a name="total" class="tsd-anchor"></a>
@@ -108,9 +120,14 @@
 					<div class="tsd-signature tsd-kind-icon">total<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/ISystemInformation.ts#L21">performance/api/interfaces/ISystemInformation.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/ISystemInformation.ts#L43">performance/api/interfaces/ISystemInformation.ts:43</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The total bytes of installed memory.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
 					<a name="usage" class="tsd-anchor"></a>
@@ -118,9 +135,14 @@
 					<div class="tsd-signature tsd-kind-icon">usage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/ISystemInformation.ts#L22">performance/api/interfaces/ISystemInformation.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/ISystemInformation.ts#L48">performance/api/interfaces/ISystemInformation.ts:48</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The total bytes of used memory.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
 					<a name="usagepercentage" class="tsd-anchor"></a>
@@ -128,9 +150,14 @@
 					<div class="tsd-signature tsd-kind-icon">usage<wbr>Percentage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/4bc5ec9/src/performance/api/interfaces/ISystemInformation.ts#L23">performance/api/interfaces/ISystemInformation.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f8d0fb5/src/performance/api/interfaces/ISystemInformation.ts#L53">performance/api/interfaces/ISystemInformation.ts:53</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The percentage of installed memory that is used.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -171,17 +198,20 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter tsd-is-external">
+						<a href="icollectionobserver.html" class="tsd-kind-icon">ICollection<wbr>Observer</a>
+					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="ifunctiontimer.html" class="tsd-kind-icon">IFunction<wbr>Timer</a>
+						<a href="ifunctionobserver.html" class="tsd-kind-icon">IFunction<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="imeasurement.html" class="tsd-kind-icon">IMeasurement</a>
+						<a href="imeasuremententry.html" class="tsd-kind-icon">IMeasurement<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-is-external">
+						<a href="imeasurementobserver.html" class="tsd-kind-icon">IMeasurement<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="imetric.html" class="tsd-kind-icon">IMetric</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="imetrictimer.html" class="tsd-kind-icon">IMetric<wbr>Timer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="imetrics.html" class="tsd-kind-icon">IMetrics</a>
@@ -196,13 +226,13 @@
 						<a href="iperformanceapimanager.html" class="tsd-kind-icon">IPerformance<wbr>Api<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
+						<a href="iperformanceentry.html" class="tsd-kind-icon">IPerformance<wbr>Entry</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
+						<a href="iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-external">
-						<a href="irequiredmetrics.html" class="tsd-kind-icon">IRequired<wbr>Metrics</a>
+						<a href="iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
@@ -231,8 +261,14 @@
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external">
-						<a href="../globals.html#measuretimer" class="tsd-kind-icon">Measure<wbr>Timer</a>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external tsd-is-not-exported">
+						<a href="../globals.html#collectionmap" class="tsd-kind-icon">Collection<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#functionmetric" class="tsd-kind-icon">Function<wbr>Metric</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#measurementmetric" class="tsd-kind-icon">Measurement<wbr>Metric</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
 						<a href="../globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>
