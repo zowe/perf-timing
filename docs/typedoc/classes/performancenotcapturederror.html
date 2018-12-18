@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IMetric | @zowe/perf-timing</title>
+	<title>PerformanceNotCapturedError | @zowe/perf-timing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="imetric.html">IMetric</a>
+					<a href="performancenotcapturederror.html">PerformanceNotCapturedError</a>
 				</li>
 			</ul>
-			<h1>Interface IMetric&lt;T&gt;</h1>
+			<h1>Class PerformanceNotCapturedError</h1>
 		</div>
 	</div>
 </header>
@@ -69,33 +69,27 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Data captured for a specific metric name.</p>
+						<p>Thrown when metric output methods were called and performance was not enabled.</p>
 					</div>
-					<p>The common fields present for all metrics exist in this interface with the
-					entries being an array of a type that extends <a href="iperformanceentry.html">IPerformanceEntry</a></p>
+					<h4 id="example">Example</h4>
+					<pre><code class="language-typescript"><span class="hljs-keyword">const</span> perfApi = <span class="hljs-keyword">new</span> PerformanceApi({enabled: <span class="hljs-literal">false</span>, packageUUID: <span class="hljs-string">"bogus"</span>});
+
+<span class="hljs-comment">// Calling these methods will cause this error to be thrown.</span>
+perfApi.getMetrics();
+perfApi.getNodeTiming();
+perfApi.getSysInfo();</code></pre>
 				</div>
-			</section>
-			<section class="tsd-panel tsd-type-parameters">
-				<h3>Type parameters</h3>
-				<ul class="tsd-type-parameters">
-					<li>
-						<h4>T<span class="tsd-signature-symbol">: </span><a href="iperformanceentry.html" class="tsd-signature-type">IPerformanceEntry</a></h4>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>The object type of entry data. The type presented must contain the
-									required fields present in the <a href="iperformanceentry.html">IPerformanceEntry</a> interface
-									for proper statistical analysis of results by the
-								<a href="../classes/performanceapi.html#getmetrics">PerformanceApi.getMetrics</a> function.</p>
-							</div>
-						</div>
-					</li>
-				</ul>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IMetric</span>
+						<a href="performanceapierror.html" class="tsd-signature-type">PerformanceApiError</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">PerformanceNotCapturedError</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -104,103 +98,78 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="performancenotcapturederror.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetric.html#averageduration" class="tsd-kind-icon">average<wbr>Duration</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetric.html#calls" class="tsd-kind-icon">calls</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetric.html#entries" class="tsd-kind-icon">entries</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetric.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imetric.html#totalduration" class="tsd-kind-icon">total<wbr>Duration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="performancenotcapturederror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="performancenotcapturederror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="performancenotcapturederror.html#stack" class="tsd-kind-icon">stack</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Performance<wbr>Not<wbr>Captured<wbr>Error<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="performancenotcapturederror.html" class="tsd-signature-type">PerformanceNotCapturedError</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides <a href="performanceapierror.html">PerformanceApiError</a>.<a href="performanceapierror.html#constructor">constructor</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/b9bc48e/src/performance/api/errors/PerformanceNotCapturedError.ts#L25">performance/api/errors/PerformanceNotCapturedError.ts:25</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="performancenotcapturederror.html" class="tsd-signature-type">PerformanceNotCapturedError</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="averageduration" class="tsd-anchor"></a>
-					<h3>average<wbr>Duration</h3>
-					<div class="tsd-signature tsd-kind-icon">average<wbr>Duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="message" class="tsd-anchor"></a>
+					<h3>message</h3>
+					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.message</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/b9bc48e/src/performance/api/interfaces/IMetric.ts#L29">performance/api/interfaces/IMetric.ts:29</a></li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:904</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The average duration (in milliseconds) of each entry present <a href="imetric.html#entries">IMetric.entries</a>.</p>
-						</div>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="calls" class="tsd-anchor"></a>
-					<h3>calls</h3>
-					<div class="tsd-signature tsd-kind-icon">calls<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/b9bc48e/src/performance/api/interfaces/IMetric.ts#L34">performance/api/interfaces/IMetric.ts:34</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The total number of <a href="imetric.html#entries">IMetric.entries</a> captured.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="entries" class="tsd-anchor"></a>
-					<h3>entries</h3>
-					<div class="tsd-signature tsd-kind-icon">entries<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/b9bc48e/src/performance/api/interfaces/IMetric.ts#L44">performance/api/interfaces/IMetric.ts:44</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Collection of all metrics entries captured for the <a href="imetric.html#name">IMetric.name</a>
-							within a specific group (e.g function metrics, measurement metrics, etc).</p>
-						</div>
-						<p>Some metrics may be an instance of a Node
-							<a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceentry" class="external">PerformanceEntry</a>.
-						For information about those formats, see the Node documentation linked.</p>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
 					<h3>name</h3>
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.name</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/b9bc48e/src/performance/api/interfaces/IMetric.ts#L54">performance/api/interfaces/IMetric.ts:54</a></li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:903</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The name of the metric.</p>
-						</div>
-						<p>This name is guaranteed to be unique within a measurement group. When a metric
-							generation function is called in <a href="../classes/performanceapi.html">PerformanceApi</a>, the name of the
-							metric will be used as a lookup key to see if the new measurement should
-						be aggregated with previous measurements.</p>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="totalduration" class="tsd-anchor"></a>
-					<h3>total<wbr>Duration</h3>
-					<div class="tsd-signature tsd-kind-icon">total<wbr>Duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+					<a name="stack" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stack</h3>
+					<div class="tsd-signature tsd-kind-icon">stack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
+						<p>Inherited from Error.stack</p>
+						<p>Overrides Error.stack</p>
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/b9bc48e/src/performance/api/interfaces/IMetric.ts#L60">performance/api/interfaces/IMetric.ts:60</a></li>
+							<li>Defined in node_modules/typedoc/node_modules/typescript/lib/lib.es5.d.ts:905</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The total time (in milliseconds) represented by the sum of the durations
-							of each entry within <a href="imetric.html#entries">IMetric.entries</a>.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -216,23 +185,20 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-has-type-parameter">
-						<a href="imetric.html" class="tsd-kind-icon">IMetric</a>
+					<li class="current tsd-kind-class">
+						<a href="performancenotcapturederror.html" class="tsd-kind-icon">Performance<wbr>Not<wbr>Captured<wbr>Error</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetric.html#averageduration" class="tsd-kind-icon">average<wbr>Duration</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="performancenotcapturederror.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetric.html#calls" class="tsd-kind-icon">calls</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="performancenotcapturederror.html#message" class="tsd-kind-icon">message</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetric.html#entries" class="tsd-kind-icon">entries</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="performancenotcapturederror.html#name" class="tsd-kind-icon">name</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetric.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="imetric.html#totalduration" class="tsd-kind-icon">total<wbr>Duration</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+								<a href="performancenotcapturederror.html#stack" class="tsd-kind-icon">stack</a>
 							</li>
 						</ul>
 					</li>
