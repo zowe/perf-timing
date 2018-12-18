@@ -36,10 +36,20 @@ import { Environment } from "../../environment";
  * symbol. The first instance created will be the manager of all of these global
  * packages. This allows for a single `process.on('exit')` hook to be registered.
  *
- * @see {@link PerformanceApiManager#_savePerformanceResults}
+ * @see {@link PerformanceApiManager._savePerformanceResults}
  */
 declare namespace NodeJS {
+    /**
+     * The global node interface.
+     */
     interface Global {
+        /**
+         * A single global symbol is used to track all instances of an {@link IPerformanceApi}
+         * in a map. The key is a symbol defined by each manager and the value is the managed
+         * api. When gathering metrics during `process.on('exit')`, each of these apis {@link IPerformanceApi.getMetrics}
+         * method will be called and will produce a new entry in the {@link IPerformanceMetrics.metrics}
+         * object.
+         */
         [GLOBAL_SYMBOL]: Map<symbol, IPerformanceApi>;
     }
 }
@@ -52,7 +62,7 @@ declare var global: NodeJS.Global;
 //////////////////////////////////////////
 
 /**
- * This class is a manager of all available performance tools
+ * This class is a manager of all available performance tools. @TODO document this top level heavily
  */
 export class PerformanceApiManager implements IPerformanceApiManager {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
@@ -62,7 +72,17 @@ export class PerformanceApiManager implements IPerformanceApiManager {
     public readonly isEnabled: boolean;
     public readonly packageUUID: string;
 
-    private _instanceSymbol: symbol; // used to uniquely identify the instance
+    /**
+     * A symbol to uniquely identify the {@link _managedApi} in the {@link NodeJS.Global}
+     * symbol.
+     * 
+     * @internal
+     */
+    private _instanceSymbol: symbol;
+
+    /**
+     * A reference to the performance api that is managed by this specific manager.
+     */
     private _managedApi: PerformanceApi;
 
     // @TODO Document
@@ -89,6 +109,11 @@ export class PerformanceApiManager implements IPerformanceApiManager {
         }
     }
 
+    /**
+     * Gets the {@link _managedApi}.
+     * 
+     * @returns The performance api that is managed by this class.
+     */
     public getApi(): PerformanceApi {
         if (this._managedApi == null) {
             // Defers the import until it is needed, will improve performance when
@@ -112,15 +137,34 @@ export class PerformanceApiManager implements IPerformanceApiManager {
         return this._managedApi;
     }
 
+    /**
+     * Responsible for gathering and saving all metrics present within the
+     * environment.
+     * 
+     * This method is only called by `process.on('exit')` defined in the {@link constructor} of the
+     * main manager. The nodeTiming and systemInformation portions of the {@link IPerformanceMetrics}
+     * object are gathered from the {@link _managedApi} of this manager.
+     * 
+     * Metrics are gathered by examining each API present in the {@link NodeJS.global} object. This
+     * design comes from the fact that there could be multiple instances of the PerfTiming package
+     * due to how npm dependencies work. So the main manager can find out about all possible metrics
+     * and output them in a single file as opposed to each manager creating it's own file. It is
+     * because of this fact that the methods in {@link IPerformanceApi} must not change too often for 
+     * compatibility reasons.
+     *
+     * @returns a promise of completion.
+     * 
+     * @internal
+     */
     private async _savePerformanceResults(): Promise<void> {
-        const metrics = global[GLOBAL_SYMBOL].entries();
-
         // Get timing first to not skew the results
         const outputMetrics: IPerformanceMetrics = {
             nodeTiming: this.getApi().getNodeTiming(),
             systemInformation: this.getApi().getSysInfo(),
             metrics: {}
         };
+
+        const metrics = global[GLOBAL_SYMBOL].entries();
 
         for (const [key, value] of metrics) {
             const symbolValue = key.toString();

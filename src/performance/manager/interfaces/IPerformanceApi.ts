@@ -9,7 +9,7 @@
  *
  */
 
-import { INodeTiming, ISystemInformation, IMetrics } from "../../api/interfaces";
+import { IMetrics, INodeTiming, ISystemInformation } from "../../api/interfaces";
 
 /**
  * This interface defines the methods that should exist on any {@link PerformanceApi}
@@ -18,7 +18,7 @@ import { INodeTiming, ISystemInformation, IMetrics } from "../../api/interfaces"
  * of these methods will result in incompatibilities with previous versions that
  * might be loaded and called upon exit of the main program.
  *
- * @see {PerformanceApiManager#_savePerformanceResults}
+ * @see {PerformanceApiManager._savePerformanceResults}
  */
 export interface IPerformanceApi {
     /**

@@ -9,11 +9,10 @@
  *
  */
 
-
 /**
  * This interface defines the properties that a {@link PerformanceApiManager}
- * must expose to its managed {@link PerformanceTools} instance. This interface
- * must be implemented by any manager object passed to the {@link PerformanceTools}
+ * must expose to its managed {@link PerformanceApi} instance. This interface
+ * must be implemented by any manager object passed to the {@link PerformanceApi}
  * constructor of this package. By default, the {@link PerformanceApiManager}
  * will implement this interface.
  */
