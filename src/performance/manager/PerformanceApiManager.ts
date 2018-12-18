@@ -62,20 +62,46 @@ declare var global: NodeJS.Global;
 //////////////////////////////////////////
 
 /**
- * This class is a manager of all available performance tools. @TODO document this top level heavily
+ * The manager responsible for the {@link PerformanceApi} created by the current package instance.
+ *
+ * **NOTE:**
+ *
+ * This class is not intended to be instantiated directly. It should be accessed
+ * through the {@link PerfTiming} variable instantiated by this package. Failure
+ * to do so will result in lost metrics in the final file output.
  */
 export class PerformanceApiManager implements IPerformanceApiManager {
     // @TODO recommend wrapping stuff since we forward up requests through dummy object
     // @TODO to reduce overhead on getApi call
+
+    /**
+     * The environment variable that will be checked to determine if performance
+     * is enabled.
+     */
     public static readonly ENV_ENABLED = `${ENV_PREFIX}_ENABLED`;
+
+    /**
+     * The value that the environment variable must be in order for performance
+     * gathering to be enabled.
+     */
     public static readonly ENV_ENABLED_KEY = "TRUE";
+
+    /**
+     * A boolean set by the {@link constructor} indicating if performance is enabled.
+     */
     public readonly isEnabled: boolean;
+
+    /**
+     * The unique identifier of this current package instance. This will be the
+     * `name@version` of the closest package.json relative to the location of the
+     * first file that imported this package.
+     */
     public readonly packageUUID: string;
 
     /**
      * A symbol to uniquely identify the {@link _managedApi} in the {@link NodeJS.Global}
      * symbol.
-     * 
+     *
      * @internal
      */
     private _instanceSymbol: symbol;
@@ -85,7 +111,15 @@ export class PerformanceApiManager implements IPerformanceApiManager {
      */
     private _managedApi: PerformanceApi;
 
-    // @TODO Document
+    /**
+     * The constructor will instantiate this manager and determine if performance monitoring is
+     * enabled.
+     *
+     * If the monitoring is enabled, it will also calculate the name of the global symbol. Also, if
+     * the global symbol has not been instantiated, this manager will be the default one and will
+     * be the one responsible for saving all data to the files.
+     *
+     */
     constructor() {
         // First check if the environment prefix is set to the ENV_ENABLED_KEY value
         if (Environment.getValue(PerformanceApiManager.ENV_ENABLED).toUpperCase() === PerformanceApiManager.ENV_ENABLED_KEY) {
@@ -111,7 +145,20 @@ export class PerformanceApiManager implements IPerformanceApiManager {
 
     /**
      * Gets the {@link _managedApi}.
-     * 
+     *
+     * **NOTE:**
+     *
+     * It is recommended that calls to the getApi method are contained within an if check to see
+     * if performance is enabled. This method will provide the least overhead for when performance
+     * is disabled but will add a some overhead when performance is enabled.
+     *
+     * **NOTE:**
+     *
+     * If performance is not enabled, this method will still return a {@link PerformanceApi}
+     * object and all methods can still be called the same way with performance enabled or disabled.
+     * With this in mind, it is not required that calls to this method are wrapped in a check to see
+     * if this is enabled, but it is still recommended.
+     *
      * @returns The performance api that is managed by this class.
      */
     public getApi(): PerformanceApi {
@@ -140,20 +187,20 @@ export class PerformanceApiManager implements IPerformanceApiManager {
     /**
      * Responsible for gathering and saving all metrics present within the
      * environment.
-     * 
+     *
      * This method is only called by `process.on('exit')` defined in the {@link constructor} of the
      * main manager. The nodeTiming and systemInformation portions of the {@link IPerformanceMetrics}
      * object are gathered from the {@link _managedApi} of this manager.
-     * 
+     *
      * Metrics are gathered by examining each API present in the {@link NodeJS.global} object. This
      * design comes from the fact that there could be multiple instances of the PerfTiming package
      * due to how npm dependencies work. So the main manager can find out about all possible metrics
      * and output them in a single file as opposed to each manager creating it's own file. It is
-     * because of this fact that the methods in {@link IPerformanceApi} must not change too often for 
+     * because of this fact that the methods in {@link IPerformanceApi} must not change too often for
      * compatibility reasons.
      *
      * @returns a promise of completion.
-     * 
+     *
      * @internal
      */
     private async _savePerformanceResults(): Promise<void> {

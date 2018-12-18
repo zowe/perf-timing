@@ -13,10 +13,10 @@ import { PerformanceApiError } from "./PerformanceApiError";
 
 /**
  * Thrown when metric output methods were called and performance was not enabled.
- * 
+ *
  * @example
  * const perfApi = new PerformanceApi({enabled: false, packageUUID: "bogus"});
- * 
+ *
  * // Calling these methods will cause this error to be thrown.
  * perfApi.getMetrics();
  * perfApi.getNodeTiming();

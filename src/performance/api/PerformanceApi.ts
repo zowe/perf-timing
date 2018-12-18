@@ -38,6 +38,12 @@ type CollectionMap<T extends ICollectionObserver<IPerformanceEntry>> = Map<strin
  * {@link https://nodejs.org/api/perf_hooks.html Node's Performance Timing APIs}.
  *
  * Use this class in place of relying on Node's experimental APIs.
+ *
+ * **NOTE:**
+ *
+ * This class is not intended to be instantiated directly. It should be accessed
+ * through the {@link PerfTiming} variable instantiated by this package. Failure
+ * to do so will result in lost metrics in the final file output.
  */
 export class PerformanceApi implements IPerformanceApi {
 
