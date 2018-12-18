@@ -492,6 +492,93 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
+    /**
+     * Wraps a function in a node monitoring function. This allows metrics to be captured about the
+     * watched function.
+     *
+     * Watching a function allows the collection of the following items:
+     *
+     * * The total number of calls to the function while watched.
+     * * The time each individual call took and the parameters sent in.
+     * * The total time spent in the function across all calls.
+     * * The average time per function call.
+     *
+     * **NOTE:**
+     *
+     * For proper time tracking to occur, the watch function will return the original function wrapped
+     * in a Node tracking function. It is important that the original implementation of the passed
+     * function be set equal to the return value of this method for metrics to be gathered. Unlike
+     * most languages, there is no way for a parameter to be truly passed by reference in JavaScript.
+     * Had this been the case, this function would have directly modified the reference in the first
+     * parameter so no extra work would have to be done by the programmer.
+     *
+     * **NOTE:**
+     *
+     * Since Node only uses the function name as the measurement name, it is recommended to ensure
+     * that the fn.name passed into this function is unique compared to all functions that you are
+     * watching (including those from other packages). Failure to do so will result in a measurement
+     * being applied to multiple watches.
+     *
+     * **For Example:** In the code example below, a call to either of the functions will result
+     * in both watches capturing the call.
+     *
+     * ```TypeScript
+     * import { PerfTiming } from "@zowe/perf-timing";
+     *
+     * let fn1 = function test() {
+     *   console.log("fn1");
+     * }
+     *
+     * let fn2 = function test() {
+     *   console.log("fn2");
+     * }
+     *
+     * fn1 = PerfTiming.getApi().watch(fn1, "name 1");
+     * fn2 = PerfTiming.getApi().watch(fn2, "name 2");
+     *
+     * // The below line will log fn1 but will trigger a metric entry in the watch
+     * // for both fn1 and fn2 because fn1.name === fn2.name. To counteract this,
+     * // simply choose a different name between the two functions.
+     * fn1();
+     * ```
+     *
+     * **NOTE:**
+     *
+     * It is recommended to first check manually if performance is enabled before using the watch
+     * and unwatch methods for performance reasons.
+     *
+     * @example
+     * // Track time spent in require calls
+     * import { PerfTiming } from "@zowe/perf-timing";
+     *
+     * if (PerfTiming.enabled) {
+     *   const Module = require("module");
+     *   // Store the reference to the original require.
+     *   const originalRequire = Module.prototype.require;
+     *
+     *   // Watch a wrapper named function so we can be sure that not just
+     *   // any anonymous function gets checked.
+     *   Module.prototype.require = PerfTiming.getApi().timerify(function NodeModuleLoader() {
+     *     return originalRequire.apply(this, arguments);
+     *   });
+     * }
+     *
+     * // Continue your application code. Also note, there is no need to unwatch a function.
+     * // If a function is not unwatched, this will be handled internally by the data collection
+     * // functions.
+     *
+     * @param fn The function to watch. This function will be sent into the
+     *           {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_timerify_fn Node Timerify}
+     *           function. This will wrap the function passed in a monitoring function.
+     * @param name An optional name to give the timer. If the name is not specified, then the value
+     *             of fn.name will be used for tracking.
+     *
+     * @returns The watched function (that must replace the original implementation) or the value of
+     *          fn if performance is not enabled.
+     *
+     * @throws {@link TimerNameConflictError} when there is already an active timer of the evaluated
+     *         name.
+     */
     public watch(fn: (...args: any[]) => any, name?: string) {
         if (this._manager.isEnabled) {
             // Check if we should use the function name or the passed name for tracking.
@@ -536,7 +623,13 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
-    private _addPackageNamespace(name: string): string {
-        return `${this._manager.packageUUID}: ${name}`;
+    /**
+     * Gets a namespace scoped string from an input string.
+     *
+     * @param value The string to prepend the namespace to.
+     * @returns The value with the namespace.
+     */
+    private _addPackageNamespace(value: string): string {
+        return `${this._manager.packageUUID}: ${value}`;
     }
 }
