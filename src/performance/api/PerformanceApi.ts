@@ -346,20 +346,20 @@ export class PerformanceApi implements IPerformanceApi {
      *
      * @example
      * import { PerfTiming } from "@zowe/perf-timing";
-     * 
+     *
      * // Assume package is example@1.0.0
-     * 
+     *
      * // Tracked internally by node as "example@1.0.0: before loop"
      * PerfTiming.getApi().mark("before loop");  node as "example@1.0.0: before loop"
-     * 
+     *
      * for (let i = 0; i < 10000; i++) {}
-     * 
+     *
      * // Tracked internally by node as "example@1.0.0: after loop"
      * PerfTiming.getApi().mark("after loop"); // This will be tracked by node as "example@1.0.0: after loop"
-     * 
+     *
      * // References the internally tracked "before loop" and "after loop" marks and creates a measurement
      * // tracked internally as "example@1.0.0: loop".
-     * PerfTiming.measure("loop", "before loop", "after loop"); 
+     * PerfTiming.measure("loop", "before loop", "after loop");
      *
      * @param name The name of the measurement. Use this to track multiple measurements under
      *             the same final array output.
@@ -421,6 +421,50 @@ export class PerformanceApi implements IPerformanceApi {
         }
     }
 
+    /**
+     * Unwatch a function that was {@link watch}ed. It performance is not enabled, it will return
+     * the function passed as parameter 1.
+     *
+     * It is recommended to first check manually if performance is enabled before using the watch
+     * and unwatch methods for performance reasons.
+     *
+     * @example
+     * import { PerfTiming } from "@zowe/perf-timing";
+     *
+     * let fn = () => "test";
+     *
+     * fn = PerfTiming.getApi().watch(fn);
+     *
+     * fn();
+     *
+     * fn = PerfTiming.getApi().unwatch(fn);
+     *
+     * @example
+     * // Recommended to check if performance is enabled first due to the need
+     * // to assign values.
+     * import { PerfTiming } from "@zowe/perf-timing";
+     *
+     * let fn = () => "test";
+     *
+     * if (PerfTiming.enabled) // Check if performance is enabled before assigning
+     *   fn = PerfTiming.getApi().watch(fn);
+     *
+     * fn();
+     *
+     * if (PerfTiming.enabled) // Check if performance is enabled before assigning
+     *   fn = PerfTiming.getApi().unwatch(fn);
+     *
+     *
+     * @param fn The function to unwatch.
+     * @param name The name that the observer was given, only relevant if the observer was given a name
+     *             on the {@link watch}. If omitted, the value of fn.name will be used as the name.
+     *
+     * @returns The original implementation of the function that was wrapped in watch or the value
+     *          of fn if performance is not enabled.
+     *
+     * @throws {@link TimerDoesNotExistError} when performance is enabled and there isn't an observer
+     *         with the name passed into the function.
+     */
     public unwatch(fn: ((...args: any[]) => any), name?: string) {
         if (this._manager.isEnabled) {
             let timer = fn.name;
