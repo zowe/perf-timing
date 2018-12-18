@@ -304,6 +304,11 @@ export class PerformanceApi implements IPerformanceApi {
      * to the corresponding name present in the {@link IMetrics.measurements} array in the
      * formatted run output.
      *
+     * Also, just like {@link mark} and {@link clearMarks} the names passed into this function are
+     * prefixed with a package namespace. This is due to the possibility of multiple instances of
+     * the performance api being present because of being part of multiple dependencies of a project.
+     * The namespace will attempt to reduce the clashes between packages.
+     *
      * **For example:**
      * Assume that the measure method was called like so:
      *
@@ -339,12 +344,27 @@ export class PerformanceApi implements IPerformanceApi {
      * }
      * ```
      *
-     * @TODO **INCLUDE USAGE HERE LATER**
+     * @example
+     * import { PerfTiming } from "@zowe/perf-timing";
+     * 
+     * // Assume package is example@1.0.0
+     * 
+     * // Tracked internally by node as "example@1.0.0: before loop"
+     * PerfTiming.getApi().mark("before loop");  node as "example@1.0.0: before loop"
+     * 
+     * for (let i = 0; i < 10000; i++) {}
+     * 
+     * // Tracked internally by node as "example@1.0.0: after loop"
+     * PerfTiming.getApi().mark("after loop"); // This will be tracked by node as "example@1.0.0: after loop"
+     * 
+     * // References the internally tracked "before loop" and "after loop" marks and creates a measurement
+     * // tracked internally as "example@1.0.0: loop".
+     * PerfTiming.measure("loop", "before loop", "after loop"); 
      *
      * @param name The name of the measurement. Use this to track multiple measurements under
      *             the same final array output.
      * @param startMark The name of the start mark created with {@link mark}
-     * @param endMark The name of the end mark created with {@link measure}
+     * @param endMark The name of the end mark created with {@link mark}
      */
     public measure(name: string, startMark: string, endMark: string) {
         if (this._manager.isEnabled) {
