@@ -356,16 +356,16 @@ export class PerformanceApi implements IPerformanceApi {
      * // Assume package is example@1.0.0
      *
      * // Tracked internally by node as "example@1.0.0: before loop"
-     * PerfTiming.getApi().mark("before loop");  node as "example@1.0.0: before loop"
+     * PerfTiming.api.mark("before loop");
      *
      * for (let i = 0; i < 10000; i++) {}
      *
      * // Tracked internally by node as "example@1.0.0: after loop"
-     * PerfTiming.getApi().mark("after loop"); // This will be tracked by node as "example@1.0.0: after loop"
+     * PerfTiming.api.mark("after loop"); // This will be tracked by node as "example@1.0.0: after loop"
      *
      * // References the internally tracked "before loop" and "after loop" marks and creates a measurement
      * // tracked internally as "example@1.0.0: loop".
-     * PerfTiming.measure("loop", "before loop", "after loop");
+     * PerfTiming.api.measure("loop", "before loop", "after loop");
      *
      * @param name The name of the measurement. Use this to track multiple measurements under
      *             the same final array output.
@@ -439,11 +439,11 @@ export class PerformanceApi implements IPerformanceApi {
      *
      * let fn = () => "test";
      *
-     * fn = PerfTiming.getApi().watch(fn);
+     * fn = PerfTiming.api.watch(fn);
      *
      * fn();
      *
-     * fn = PerfTiming.getApi().unwatch(fn);
+     * fn = PerfTiming.api.unwatch(fn);
      *
      * @example
      * // Recommended to check if performance is enabled first due to the need
@@ -453,12 +453,12 @@ export class PerformanceApi implements IPerformanceApi {
      * let fn = () => "test";
      *
      * if (PerfTiming.enabled) // Check if performance is enabled before assigning
-     *   fn = PerfTiming.getApi().watch(fn);
+     *   fn = PerfTiming.api.watch(fn);
      *
      * fn();
      *
      * if (PerfTiming.enabled) // Check if performance is enabled before assigning
-     *   fn = PerfTiming.getApi().unwatch(fn);
+     *   fn = PerfTiming.api.unwatch(fn);
      *
      *
      * @param fn The function to unwatch.
@@ -539,8 +539,8 @@ export class PerformanceApi implements IPerformanceApi {
      *   console.log("fn2");
      * }
      *
-     * fn1 = PerfTiming.getApi().watch(fn1, "name 1");
-     * fn2 = PerfTiming.getApi().watch(fn2, "name 2");
+     * fn1 = PerfTiming.api.watch(fn1, "name 1");
+     * fn2 = PerfTiming.api.watch(fn2, "name 2");
      *
      * // The below line will log fn1 but will trigger a metric entry in the watch
      * // for both fn1 and fn2 because fn1.name === fn2.name. To counteract this,
@@ -564,7 +564,7 @@ export class PerformanceApi implements IPerformanceApi {
      *
      *   // Watch a wrapper named function so we can be sure that not just
      *   // any anonymous function gets checked.
-     *   Module.prototype.require = PerfTiming.getApi().timerify(function NodeModuleLoader() {
+     *   Module.prototype.require = PerfTiming.api.timerify(function NodeModuleLoader() {
      *     return originalRequire.apply(this, arguments);
      *   });
      * }

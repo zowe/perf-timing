@@ -21,7 +21,7 @@ import { PerformanceApiError } from "./PerformanceApiError";
   *   // Does stuff
   * }
   *
-  * bad = PerfTiming.getApi().unwatch(bad);
+  * bad = PerfTiming.api.unwatch(bad);
   */
 export class TimerDoesNotExistError extends PerformanceApiError {
 
