@@ -10,18 +10,8 @@
  */
 import { PerformanceApiManager } from "./performance/manager";
 
-// @TODO pickup here after break
-
 /**
  * An instance of a {@link PerformanceApiManager}. Public functionality is exported
  * under this name.
- *
- * Usage of public stuff should be done with `import * as perf_timing from "@zowe/perf-timing/public"` <-- @TODO need to implement that
- *
- * [[include:environment.md]]
- *
- * [[include:index.PerfTiming.measure.md]]
- *
- * [[include:index.PerfTiming.timerify.md]]
  */
 export const PerfTiming = new PerformanceApiManager(); // tslint:disable-line:variable-name

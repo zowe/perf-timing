@@ -43,14 +43,13 @@ async function recurseDirectory(directory: string) {
         const stat = await fs.stat(resolvedFile);
 
         if (stat.isFile() && path.parse(resolvedFile).ext === ".md") {
-            const finalText = resolveIncludes(
+            const finalText = `<!-- \n DO NOT MODIFY!\n Generated from ${path.resolve(resolvedFile)}\n-->\n` + resolveIncludes(
                 (await fs.readFile(resolvedFile)).toString(),
                 resolvedFile,
                 []
             );
 
             const saveLocation = path.join(outputBase, path.relative(sourceBase, resolvedFile));
-            // mkdirp.sync(path.join(saveLocation, "../"));
 
             console.log(`RESOLVED INCLUDES IN: ${saveLocation}`); //tslint:disable-line
 

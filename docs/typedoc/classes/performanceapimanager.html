@@ -104,8 +104,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="performanceapimanager.html#_api" class="tsd-kind-icon">_api</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="performanceapimanager.html#_instancesymbol" class="tsd-kind-icon">_instance<wbr>Symbol</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="performanceapimanager.html#_managedapi" class="tsd-kind-icon">_managed<wbr>Api</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="performanceapimanager.html#isenabled" class="tsd-kind-icon">is<wbr>Enabled</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="performanceapimanager.html#packageuuid" class="tsd-kind-icon">packageUUID</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="performanceapimanager.html#env_enabled" class="tsd-kind-icon">ENV_<wbr>ENABLED</a></li>
@@ -113,10 +113,15 @@
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="performanceapimanager.html#api" class="tsd-kind-icon">api</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="performanceapimanager.html#_saveperformanceresults" class="tsd-kind-icon">_save<wbr>Performance<wbr>Results</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapimanager.html#getapi" class="tsd-kind-icon">get<wbr>Api</a></li>
 							</ul>
 						</section>
 					</div>
@@ -134,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L112">performance/manager/PerformanceApiManager.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L109">performance/manager/PerformanceApiManager.ts:109</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -153,34 +158,34 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_api" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _api</h3>
+					<div class="tsd-signature tsd-kind-icon">_api<span class="tsd-signature-symbol">:</span> <a href="performanceapi.html" class="tsd-signature-type">PerformanceApi</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L101">performance/manager/PerformanceApiManager.ts:101</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A reference to the performance api that is managed by this specific manager.</p>
+						</div>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 					<a name="_instancesymbol" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _instance<wbr>Symbol</h3>
 					<div class="tsd-signature tsd-kind-icon">_instance<wbr>Symbol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">symbol</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L107">performance/manager/PerformanceApiManager.ts:107</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L109">performance/manager/PerformanceApiManager.ts:109</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A symbol to uniquely identify the <a href="performanceapimanager.html#_managedapi">_managedApi</a> in the <a href="../interfaces/nodejs.global.html">NodeJS.Global</a>
+							<p>A symbol to uniquely identify the <a href="performanceapimanager.html#_api">_api</a> in the <a href="../interfaces/nodejs.global.html">NodeJS.Global</a>
 							symbol.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_managedapi" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _managed<wbr>Api</h3>
-					<div class="tsd-signature tsd-kind-icon">_managed<wbr>Api<span class="tsd-signature-symbol">:</span> <a href="performanceapi.html" class="tsd-signature-type">PerformanceApi</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L112">performance/manager/PerformanceApiManager.ts:112</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A reference to the performance api that is managed by this specific manager.</p>
 						</div>
 					</div>
 				</section>
@@ -191,7 +196,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/iperformanceapimanager.html">IPerformanceApiManager</a>.<a href="../interfaces/iperformanceapimanager.html#isenabled">isEnabled</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L92">performance/manager/PerformanceApiManager.ts:92</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L89">performance/manager/PerformanceApiManager.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -207,7 +212,7 @@
 					<aside class="tsd-sources">
 						<p>Implementation of <a href="../interfaces/iperformanceapimanager.html">IPerformanceApiManager</a>.<a href="../interfaces/iperformanceapimanager.html#packageuuid">packageUUID</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L99">performance/manager/PerformanceApiManager.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L96">performance/manager/PerformanceApiManager.ts:96</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -224,7 +229,7 @@
 					<div class="tsd-signature tsd-kind-icon">ENV_<wbr>ENABLED<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;${ENV_PREFIX}_ENABLED&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L81">performance/manager/PerformanceApiManager.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L78">performance/manager/PerformanceApiManager.ts:78</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -240,7 +245,7 @@
 					<div class="tsd-signature tsd-kind-icon">ENV_<wbr>ENABLED_<wbr>KEY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"TRUE"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;TRUE&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L87">performance/manager/PerformanceApiManager.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L84">performance/manager/PerformanceApiManager.ts:84</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -252,56 +257,23 @@
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
-					<a name="_saveperformanceresults" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _save<wbr>Performance<wbr>Results</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">_save<wbr>Performance<wbr>Results<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="api" class="tsd-anchor"></a>
+					<h3>api</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> api<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="performanceapi.html" class="tsd-signature-type">PerformanceApi</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L206">performance/manager/PerformanceApiManager.ts:206</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L161">performance/manager/PerformanceApiManager.ts:161</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Responsible for gathering and saving all metrics present within the
-									environment.</p>
-								</div>
-								<p>This method is only called by <code>process.on(&#39;exit&#39;)</code> defined in the <a href="performanceapimanager.html#constructor">constructor</a> of the
-									main manager. The nodeTiming and systemInformation portions of the <a href="../interfaces/iperformancemetrics.html">IPerformanceMetrics</a>
-								object are gathered from the <a href="performanceapimanager.html#_managedapi">_managedApi</a> of this manager.</p>
-								<p>Metrics are gathered by examining each API present in the {@link NodeJS.global} object. This
-									design comes from the fact that there could be multiple instances of the PerfTiming package
-									due to how npm dependencies work. So the main manager can find out about all possible metrics
-									and output them in a single file as opposed to each manager creating it&#39;s own file. It is
-									because of this fact that the methods in <a href="../interfaces/iperformanceapi.html">IPerformanceApi</a> must not change too often for
-								compatibility reasons.</p>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>a promise of completion.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getapi" class="tsd-anchor"></a>
-					<h3>get<wbr>Api</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Api<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="performanceapi.html" class="tsd-signature-type">PerformanceApi</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ad89a02/src/performance/manager/PerformanceApiManager.ts#L164">performance/manager/PerformanceApiManager.ts:164</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets the <a href="performanceapimanager.html#_managedapi">_managedApi</a>.</p>
+									<p>Gets the <a href="performanceapimanager.html#_api">_api</a>.</p>
 								</div>
 								<p><strong>NOTE:</strong></p>
 								<p>It is recommended that calls to the getApi method are contained within an if check to see
@@ -315,6 +287,42 @@
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="performanceapi.html" class="tsd-signature-type">PerformanceApi</a></h4>
 							<p>The performance api that is managed by this class.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_saveperformanceresults" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _save<wbr>Performance<wbr>Results</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_save<wbr>Performance<wbr>Results<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/796ccdd/src/performance/manager/PerformanceApiManager.ts#L203">performance/manager/PerformanceApiManager.ts:203</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Responsible for gathering and saving all metrics present within the
+									environment.</p>
+								</div>
+								<p>This method is only called by <code>process.on(&#39;exit&#39;)</code> defined in the <a href="performanceapimanager.html#constructor">constructor</a> of the
+									main manager. The nodeTiming and systemInformation portions of the <a href="../interfaces/iperformancemetrics.html">IPerformanceMetrics</a>
+								object are gathered from the <a href="performanceapimanager.html#_api">_api</a> of this manager.</p>
+								<p>Metrics are gathered by examining each API present in the {@link NodeJS.global} object. This
+									design comes from the fact that there could be multiple instances of the PerfTiming package
+									due to how npm dependencies work. So the main manager can find out about all possible metrics
+									and output them in a single file as opposed to each manager creating it&#39;s own file. It is
+									because of this fact that the methods in <a href="../interfaces/iperformanceapi.html">IPerformanceApi</a> must not change too often for
+								compatibility reasons.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>a promise of completion.</p>
 						</li>
 					</ul>
 				</section>
@@ -338,11 +346,11 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="performanceapimanager.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="performanceapimanager.html#_api" class="tsd-kind-icon">_api</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="performanceapimanager.html#_instancesymbol" class="tsd-kind-icon">_instance<wbr>Symbol</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="performanceapimanager.html#_managedapi" class="tsd-kind-icon">_managed<wbr>Api</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="performanceapimanager.html#isenabled" class="tsd-kind-icon">is<wbr>Enabled</a>
@@ -356,11 +364,11 @@
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
 								<a href="performanceapimanager.html#env_enabled_key" class="tsd-kind-icon">ENV_<wbr>ENABLED_<wbr>KEY</a>
 							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="performanceapimanager.html#api" class="tsd-kind-icon">api</a>
+							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private tsd-is-external">
 								<a href="performanceapimanager.html#_saveperformanceresults" class="tsd-kind-icon">_save<wbr>Performance<wbr>Results</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="performanceapimanager.html#getapi" class="tsd-kind-icon">get<wbr>Api</a>
 							</li>
 						</ul>
 					</li>

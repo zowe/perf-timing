@@ -18,7 +18,7 @@ for (i = 0; i <= 10000; i++){
 import { PerfTiming } from "@zowe/perf-timing";
 
 // Store the api in a variable for shorthand use
-const api = PerfTiming.getApi();
+const api = PerfTiming.api;
 
 // Marks point A
 api.mark("A");

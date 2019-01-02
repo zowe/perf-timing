@@ -71,9 +71,6 @@ declare var global: NodeJS.Global;
  * to do so will result in lost metrics in the final file output.
  */
 export class PerformanceApiManager implements IPerformanceApiManager {
-    // @TODO recommend wrapping stuff since we forward up requests through dummy object
-    // @TODO to reduce overhead on getApi call
-
     /**
      * The environment variable that will be checked to determine if performance
      * is enabled.
@@ -99,17 +96,17 @@ export class PerformanceApiManager implements IPerformanceApiManager {
     public readonly packageUUID: string;
 
     /**
-     * A symbol to uniquely identify the {@link _managedApi} in the {@link NodeJS.Global}
+     * A reference to the performance api that is managed by this specific manager.
+     */
+    private _api: PerformanceApi;
+
+    /**
+     * A symbol to uniquely identify the {@link _api} in the {@link NodeJS.Global}
      * symbol.
      *
      * @internal
      */
     private _instanceSymbol: symbol;
-
-    /**
-     * A reference to the performance api that is managed by this specific manager.
-     */
-    private _managedApi: PerformanceApi;
 
     /**
      * The constructor will instantiate this manager and determine if performance monitoring is
@@ -144,7 +141,7 @@ export class PerformanceApiManager implements IPerformanceApiManager {
     }
 
     /**
-     * Gets the {@link _managedApi}.
+     * Gets the {@link _api}.
      *
      * **NOTE:**
      *
@@ -161,12 +158,12 @@ export class PerformanceApiManager implements IPerformanceApiManager {
      *
      * @returns The performance api that is managed by this class.
      */
-    public getApi(): PerformanceApi {
-        if (this._managedApi == null) {
+    public get api(): PerformanceApi {
+        if (this._api == null) {
             // Defers the import until it is needed, will improve performance when
             // performance api hasn't yet been called.
             const performanceApi: typeof PerformanceApi = require("../api/PerformanceApi").PerformanceApi;
-            this._managedApi = new performanceApi(this);
+            this._api = new performanceApi(this);
 
 
             // Create a unique entry in the global map
@@ -176,12 +173,12 @@ export class PerformanceApiManager implements IPerformanceApiManager {
                 // Save the managedApi in the global space. It has been typed so that
                 // changes to the wrapper methods of IPerformanceTools cannot be easily
                 // changed.
-                global[GLOBAL_SYMBOL].set(this._instanceSymbol, this._managedApi);
+                global[GLOBAL_SYMBOL].set(this._instanceSymbol, this._api);
             }
         }
 
         // Can guarantee that this will be unique per package instance :)
-        return this._managedApi;
+        return this._api;
     }
 
     /**
@@ -190,7 +187,7 @@ export class PerformanceApiManager implements IPerformanceApiManager {
      *
      * This method is only called by `process.on('exit')` defined in the {@link constructor} of the
      * main manager. The nodeTiming and systemInformation portions of the {@link IPerformanceMetrics}
-     * object are gathered from the {@link _managedApi} of this manager.
+     * object are gathered from the {@link _api} of this manager.
      *
      * Metrics are gathered by examining each API present in the {@link NodeJS.global} object. This
      * design comes from the fact that there could be multiple instances of the PerfTiming package
@@ -206,8 +203,8 @@ export class PerformanceApiManager implements IPerformanceApiManager {
     private async _savePerformanceResults(): Promise<void> {
         // Get timing first to not skew the results
         const outputMetrics: IPerformanceMetrics = {
-            nodeTiming: this.getApi().getNodeTiming(),
-            systemInformation: this.getApi().getSysInfo(),
+            nodeTiming: this.api.getNodeTiming(),
+            systemInformation: this.api.getSysInfo(),
             metrics: {}
         };
 

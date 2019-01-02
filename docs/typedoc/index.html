@@ -64,8 +64,121 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="perf-timing-library">Perf Timing Library</h1>
-				<p>Need to fill this out!</p>
+				<!--
+ DO NOT MODIFY!
+ Generated from C:\Users\WRICH04\Documents\GitHub\perf-timing\docs\build-utilities\typedoc-includes\src\README.md
+-->
+				<h1 id="performance-timing-utility">Performance Timing Utility</h1>
+				<p>The performance timing utility can be used to diagnose problem areas and bottlenecks in applications.</p>
+				<h2 id="installing">Installing</h2>
+				<p>Install as a dependency via npm: <code>npm install @zowe/perf-timing --save</code></p>
+				<h2 id="overview">Overview</h2>
+				<p>This library provides functions that are called within a node application. These functions gather metrics on the run times of the application. Some of the metrics that can be captured are:</p>
+				<ul>
+					<li>How long an application spends requiring other modules before execution.</li>
+					<li>How much time elapsed in a block of an application.</li>
+					<li>How many times a specific function was called and the average time taken per call.</li>
+					<li>How many times a specific block was called as well as the total and average time elapsed in the block.</li>
+				</ul>
+				<p>Once the desired metric gathering calls are in place, performance measurements will need to be enabled.</p>
+				<p>By default, the utility will not capture metrics, allowing the application to run normally without the performance overhead of capturing performance metrics. To enable metric gathering, the environmental variable, <code>PERF_TIMING_ENABLED</code>, must be set to true. When the application is finished executing, metrics will be output in a JSON file in the directory specified by the <code>PERF_TIMING_IO_SAVE_DIR</code> environmental variable. For more information on all the environmental variables, see the section below.</p>
+				<h3 id="environmental-variables">Environmental Variables</h3>
+				<p>The <code>zowe/@perf-timing</code> library is controlled by the following environmental variables.</p>
+				<p><strong>NOTE:</strong> All environmental variables are prefixed with <code>PERF_TIMING</code>.</p>
+				<h4 id="performance-variables">Performance Variables</h4>
+				<p>The following environmental variables affect the operation of the library.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Variable Name</th>
+							<th>Type</th>
+							<th>Default Value</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>PERF_TIMING_ENABLED</code></td>
+							<td>BOOLEAN</td>
+							<td>&quot;&quot;</td>
+							<td>Setting this variable to <code>TRUE</code> will enable the performance metric gathering. Any value besides <code>TRUE</code> will leave performance monitoring disabled. For implications of this, please see the various method documentation in the <a href="classes/performanceapi.html">PerformanceApi</a> class</td>
+						</tr>
+				</tbody></table>
+				<h4 id="io-variables">IO Variables</h4>
+				<p>The following environmental variables affect the io operations of the library.</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Variable Name</th>
+							<th>Type</th>
+							<th>Default Value</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>PERF_TIMING_IO_MAX_HISTORY</code></td>
+							<td>INTEGER</td>
+							<td>5</td>
+							<td>Changes how many historical data logs are kept by the library. When a new log is created, it is created as metrics.1.json. Existing log numbers are incremented by one and the last one is deleted when needed.</td>
+						</tr>
+						<tr>
+							<td><code>PERF_TIMING_IO_SAVE_DIR</code></td>
+							<td>STRING</td>
+							<td>~/.perf-timing</td>
+							<td>Changes where the metric logs are saved. If the directory doesn&#39;t exist, it is created.</td>
+						</tr>
+				</tbody></table>
+				<p><strong>EXAMPLE:</strong> Keep the last 10 metric runs in a specified directory.</p>
+				<p><strong>Linux:</strong></p>
+				<pre><code class="language-sh">PERF_TIMING_ENABLED=TRUE PERF_TIMING_IO_MAX_HISTORY=10 PERF_TIMING_IO_SAVE_DIR=/path/to/save/location node /path/to/your/app.js</code></pre>
+				<p><strong>Windows:</strong></p>
+				<pre><code class="language-bat"><span class="hljs-built_in">setlocal</span>
+    <span class="hljs-built_in">set</span> PERF_TIMING_ENABLED=TRUE
+    <span class="hljs-built_in">set</span> PERF_TIMING_IO_MAX_HISTORY=<span class="hljs-number">10</span>
+    <span class="hljs-built_in">set</span> PERF_TIMING_IO_SAVE_DIR=C:\<span class="hljs-built_in">path</span>\to\save\location
+    <span class="hljs-keyword">call</span> node C:\<span class="hljs-built_in">path</span>\to\your\app.js
+<span class="hljs-built_in">endlocal</span></code></pre>
+				<h3 id="measuring-code-execution-time">Measuring Code Execution Time</h3>
+				<p>As performance issues arise in a node application, the next step is to find out where the performance issues are happening. One way to look for issues is to see how long a given piece of code takes to execute. <code>@zowe/perf-timing</code> provides a means to measure the time it takes to execute a piece of code.</p>
+				<p>As an example, say that you have an application that loops 10000 times and increments a counter variable.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">let</span> value = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">10000</span>; i++){
+    value++
+}</code></pre>
+				<p><code>@zowe/perf-timing</code> provides APIs that can track the time taken to execute this list.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { PerfTiming } <span class="hljs-keyword">from</span> <span class="hljs-string">"@zowe/perf-timing"</span>;
+
+<span class="hljs-comment">// Store the api in a variable for shorthand use</span>
+<span class="hljs-keyword">const</span> api = PerfTiming.api;
+
+<span class="hljs-comment">// Marks point A</span>
+api.mark(<span class="hljs-string">"A"</span>);
+
+<span class="hljs-keyword">let</span> value = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+
+<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">10000</span>; i++){
+    value++
+}
+
+<span class="hljs-comment">// Marks point B</span>
+api.mark(<span class="hljs-string">"B"</span>);
+
+<span class="hljs-comment">/*
+ * Creates a measurement of the time from A to B named "Point A to B". Note
+ * that the string "Point A to B" can be measured infinitely. Every measurement
+ * of the same name will maintain a reference of each call and a few overall
+ * statistics.
+ */</span>
+api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>);</code></pre>
+				<p>Now the time from <code>A</code> to <code>B</code> will be saved upon exit of the application.</p>
+				<ul>
+					<li>See <a href="classes/performanceapi.html#mark">PerformanceApi.mark</a></li>
+					<li>See <a href="classes/performanceapi.html#measure">PerformanceApi.measure</a></li>
+				</ul>
+				<h3 id="measuring-time-spent-in-a-specific-function">Measuring Time Spent in a Specific Function</h3>
+				<p>Another way that issues could </p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
