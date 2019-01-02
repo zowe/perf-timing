@@ -178,7 +178,58 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li>See <a href="classes/performanceapi.html#measure">PerformanceApi.measure</a></li>
 				</ul>
 				<h3 id="measuring-time-spent-in-a-specific-function">Measuring Time Spent in a Specific Function</h3>
-				<p>Another way that issues could </p>
+				<p>Another utility that the tool provides is a hook into a specific function call. This is done by watching the function.</p>
+				<p>While a function is watched, each call will be monitored by node and saved when the application exits. The following metrics are gathered while a function is watched:</p>
+				<ul>
+					<li>The number of calls.</li>
+					<li>The average elapsed time of each call.</li>
+					<li>The total time spent in the function.</li>
+					<li>An array of each call to the function. Each entry contains the following<ul>
+							<li>Parameters</li>
+							<li>Operation start time</li>
+							<li>Total time taken</li>
+						</ul>
+					</li>
+				</ul>
+				<p><strong>Example:</strong></p>
+				<p>Say that you have this code in your application:</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">const</span> math = {
+    double: <span class="hljs-function">(<span class="hljs-params">x: <span class="hljs-built_in">number</span></span>) =&gt;</span> <span class="hljs-number">2</span> * x;
+}
+
+<span class="hljs-keyword">let</span> i: <span class="hljs-built_in">number</span>;
+
+<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${i}</span> doubled is <span class="hljs-subst">${math.double(i)}</span>`</span>);
+}</code></pre>
+				<p>The <code>math.double</code> function can be watched by <code>@zowe/perf-timing</code>.</p>
+				<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { PerfTiming } <span class="hljs-keyword">from</span> <span class="hljs-string">"@zowe/perf-timing"</span>;
+
+<span class="hljs-keyword">const</span> math = {
+    double: <span class="hljs-function">(<span class="hljs-params">x: <span class="hljs-built_in">number</span></span>) =&gt;</span> <span class="hljs-number">2</span> * x;
+}
+
+<span class="hljs-comment">// It's always better to check if performance is enabled before</span>
+<span class="hljs-comment">// modifying function variables with watch.</span>
+<span class="hljs-keyword">if</span> (PerfTiming.enabled) {
+    <span class="hljs-comment">// Anonymous functions should be given a name.</span>
+    <span class="hljs-comment">// This can be done by naming the function or passing the name parm. Our arrow</span>
+    <span class="hljs-comment">// function has already been named double by definition.</span>
+    math.double = PerfTiming.api.watch(math.double);
+}
+
+<span class="hljs-keyword">let</span> i: <span class="hljs-built_in">number</span>;
+
+<span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-comment">// Now every call to double will be tracked by the utility and metrics</span>
+    <span class="hljs-comment">// will be saved on application exit.</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${i}</span> doubled is <span class="hljs-subst">${math.double(i)}</span>`</span>);
+}</code></pre>
+				<p>This technique can also be combined with the point to point measurements for a complete picture of an application execution.</p>
+				<ul>
+					<li>See <a href="classes/performanceapi.html#watch">PerformanceApi.watch</a></li>
+					<li>See <a href="classes/performanceapi.html#unwatch">PerformanceApi.unwatch</a></li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
