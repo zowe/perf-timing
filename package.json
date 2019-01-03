@@ -28,7 +28,9 @@
     "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\" --project \"tsconfig.json\"",
     "lint:tests": "tslint --format stylish -c ./tslint-tests.json \"**/__tests__/**/*.ts\" --project \"tsconfig.json\"",
     "lint:rules": "tslint --format stylish -c ./lint-rules/tslint.json \"./lint-rules/src/**/*.ts\" --project ./lint-rules/tsconfig.json",
-    "watch": "gulp watch"
+    "test": "npm run test:unit && npm run test:integration",
+    "test:integration": "env-cmd ./__tests__/config/integration/.env.js --no-override jest -c ./__tests__/config/integration/jest.config.json",
+    "test:unit": "env-cmd ./__tests__/config/unit/.env.js --no-override jest -c ./__tests__/config/unit/jest.config.json"
   },
   "dependencies": {
     "fs-extra": "7.0.1",
@@ -36,76 +38,28 @@
   },
   "devDependencies": {
     "@types/fs-extra": "5.0.4",
-    "@types/jest": "23.3.9",
+    "@types/jest": "23.3.11",
     "@types/node": "8.10.37",
     "@types/pkg-up": "2.0.0",
-    "fs-extra": "^7.0.1",
+    "env-cmd": "^8.0.2",
     "jest": "23.6.0",
-    "jest-environment-node": "23.4.0",
-    "jest-environment-node-debug": "2.0.0",
     "jest-html-reporter": "2.4.2",
     "jest-junit": "5.2.0",
+    "jest-stare": "^1.9.1",
     "ncp": "^2.0.0",
-    "ts-jest": "23.10.4",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
+    "ts-jest": "23.10.5",
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
     "tslint-consistent-codestyle": "1.14.1",
-    "tslint-eslint-rules": "^5.4.0",
-    "typedoc": "^0.13.0",
-    "typedoc-plugin-example-tag": "^1.0.2",
-    "typedoc-plugin-internal-external": "^1.0.10",
-    "typedoc-plugin-nojekyll": "^1.0.1",
-    "typedoc-plugin-sourcefile-url": "^1.0.3",
-    "typescript": "^3.2.1"
+    "tslint-eslint-rules": "5.4.0",
+    "typedoc": "0.13.0",
+    "typedoc-plugin-example-tag": "1.0.2",
+    "typedoc-plugin-internal-external": "1.0.10",
+    "typedoc-plugin-nojekyll": "1.0.1",
+    "typedoc-plugin-sourcefile-url": "1.0.3",
+    "typescript": "3.2.1"
   },
   "engines": {
     "node": ">=8.5.0"
-  },
-  "jest-html-reporter": {
-    "pageTitle": "Perf Timing Tests",
-    "outputPath": "__tests__/__results__/unit/results.html",
-    "includeFailureMsg": true,
-    "executionMode": "reporter"
-  },
-  "jest-junit": {
-    "output": "./__tests__/__results__/junit/junit.xml"
-  },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "__tests__/__snapshots__/"
-    ],
-    "transform": {
-      ".(ts)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testResultsProcessor": "jest-junit",
-    "reporters": [
-      "default",
-      "jest-html-reporter"
-    ],
-    "testRegex": "(test|spec)\\.ts$",
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/__results__"
-    ],
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "packages/**/*.ts",
-      "!**/__tests__/**",
-      "!packages/**/doc/**/I*.ts",
-      "!**/index.ts",
-      "!__tests__/"
-    ],
-    "mapCoverage": true,
-    "collectCoverage": false,
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "cobertura"
-    ],
-    "coverageDirectory": "<rootDir>/__tests__/__results__/unit/coverage"
   }
 }

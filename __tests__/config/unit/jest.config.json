@@ -1,0 +1,27 @@
+{
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+        "src/**/*.ts",
+        "!**/__tests__/**",
+        "!src/**/doc/**/I*.ts",
+        "!__tests__/"
+    ],
+    "coverageDirectory": "<rootDir>/__tests__/__results__/unit/coverage",
+    "coverageReporters": [
+        "json",
+        "lcov",
+        "text",
+        "cobertura"
+    ],
+    "preset": "./__tests__/config/jest.preset.json",
+    "rootDir": "../../../",
+    "modulePathIgnorePatterns": [
+        "__tests__/__snapshots__/"
+    ],
+    "testPathIgnorePatterns": [
+        "/node_modules/",
+        "<rootDir>/__tests__/__results__",
+        "integration"
+    ],
+    "testRegex": "unit\\.test\\.(ts|js)"
+}
