@@ -213,7 +213,7 @@ pipeline {
          * Executes the `npm run lint` command to generate the application code.
          *
          ************************************************************************/
-        stage('lint') {
+        stage('Lint') {
             when {
                 expression {
                     return SHOULD_BUILD == 'true'
