@@ -7,11 +7,6 @@
 def TEST_RESULTS_FOLDER = "__tests__/__results__/ci"
 
 /**
- * The location of the unit test results
- */
-def UNIT_RESULTS = "${TEST_RESULTS_FOLDER}/unit"
-
-/**
  * The location of the integration test results
  */
 def INTEGRATION_RESULTS = "${TEST_RESULTS_FOLDER}/integration"
@@ -287,26 +282,9 @@ pipeline {
          *
          * ENVIRONMENT VARIABLES
          * ---------------------
-         * JEST_JUNIT_OUTPUT:
-         * Configures the jest junit reporter's output location.
-         *
-         * JEST_SUITE_NAME:
-         * Configures the test suite name.
-         *
-         * JEST_JUNIT_ANCESTOR_SEPARATOR
-         * Configures the separator used for nested describe blocks.
-         *
-         * JEST_JUNIT_CLASSNAME:
-         * Configures how test class names are output.
-         *
-         * JEST_JUNIT_TITLE:
-         * Configures the title of the tests.
-         *
-         * JEST_HTML_REPORTER_OUTPUT_PATH:
-         * Configures the jest html reporter's output location.
-         *
-         * JEST_HTML_REPORTER_PAGE_TITLE:
-         * Configures the jset html reporter's page title.
+         * TEST_RESULTS:
+         * A constant value that indicates where test results are output. This
+         * directory is determined by the unit test configuration.
          *
          * DESCRIPTION
          * -----------
@@ -319,64 +297,58 @@ pipeline {
          * HTML: Unit Test Report
          * HTML: Unit Test Code Coverage Report
          ************************************************************************/
-        // stage('Test: Unit') {
-        //     when {
-        //         expression {
-        //             return SHOULD_BUILD == 'true'
-        //         }
-        //     }
-        //     environment {
-        //         JEST_JUNIT_OUTPUT = "${UNIT_RESULTS}/junit.xml"
-        //         JEST_SUITE_NAME = "Unit Tests"
-        //         JEST_JUNIT_ANCESTOR_SEPARATOR = " > "
-        //         JEST_JUNIT_CLASSNAME="Unit.{classname}"
-        //         JEST_JUNIT_TITLE="{title}"
-        //         JEST_HTML_REPORTER_OUTPUT_PATH = "${UNIT_RESULTS}/index.html"
-        //         JEST_HTML_REPORTER_PAGE_TITLE = "${BRANCH_NAME} - Unit Test"
-        //     }
-        //     steps {
-        //         timeout(time: 10, unit: 'MINUTES') {
-        //             echo 'Unit Test'
-        //             sh "npm run test:unit"
+        stage('Test: Unit') {
+            when {
+                expression {
+                    return SHOULD_BUILD == 'true'
+                }
+            }
+            environment {
+                TEST_RESULTS = "__tests__/__results__/unit"
+            }
+            steps {
+                timeout(time: 10, unit: 'MINUTES') {
+                    echo 'Unit Test'
+                    sh "npm run test:unit"
 
-        //             // Capture test report
-        //             junit JEST_JUNIT_OUTPUT
+                    // Capture test report
+                    junit "${TEST_RESULTS}/junit/junit.xml"
 
-        //             cobertura autoUpdateHealth: false,
-        //                     autoUpdateStability: false,
-        //                     coberturaReportFile: '__tests__/__results__/unit/coverage/cobertura-coverage.xml',
-        //                     conditionalCoverageTargets: '70, 0, 0',
-        //                     failUnhealthy: false,
-        //                     failUnstable: false,
-        //                     lineCoverageTargets: '80, 0, 0',
-        //                     maxNumberOfBuilds: 20,
-        //                     methodCoverageTargets: '80, 0, 0',
-        //                     onlyStable: false,
-        //                     sourceEncoding: 'ASCII',
-        //                     zoomCoverageChart: false
+                    cobertura autoUpdateHealth: false,
+                            autoUpdateStability: false,
+                            coberturaReportFile: "${TEST_RESULTS}/coverage/cobertura-coverage.xml",
+                            conditionalCoverageTargets: '70, 0, 0',
+                            failUnhealthy: false,
+                            failUnstable: false,
+                            lineCoverageTargets: '80, 0, 0',
+                            maxNumberOfBuilds: 20,
+                            methodCoverageTargets: '80, 0, 0',
+                            onlyStable: false,
+                            sourceEncoding: 'ASCII',
+                            zoomCoverageChart: false
 
 
-        //             // Publish HTML report
-        //             publishHTML(target: [
-        //                     allowMissing         : false,
-        //                     alwaysLinkToLastBuild: true,
-        //                     keepAll              : true,
-        //                     reportDir            : UNIT_RESULTS,
-        //                     reportFiles          : 'index.html',
-        //                     reportName           : 'Imperative - Unit Test Report'
-        //             ])
+                    // Publish HTML report
+                    publishHTML(target: [
+                            allowMissing         : false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll              : true,
+                            reportDir            : "${TEST_RESULTS}/html",
+                            reportFiles          : 'index.html',
+                            reportName           : 'Imperative - Unit Test Report'
+                    ])
 
-        //             publishHTML(target: [
-        //                     allowMissing         : false,
-        //                     alwaysLinkToLastBuild: true,
-        //                     keepAll              : true,
-        //                     reportDir            : "__tests__/__results__/unit/coverage/lcov-report",
-        //                     reportFiles          : 'index.html',
-        //                     reportName           : 'Imperative - Unit Test Coverage Report'
-        //             ])
-        //         }
-        //     }
-        // }
+                    publishHTML(target: [
+                            allowMissing         : false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll              : true,
+                            reportDir            : "${TEST_RESULTS}/coverage/lcov-report",
+                            reportFiles          : 'index.html',
+                            reportName           : 'Imperative - Unit Test Coverage Report'
+                    ])
+                }
+            }
+        }
 
         /************************************************************************
          * STAGE
