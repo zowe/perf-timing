@@ -314,8 +314,8 @@ pipeline {
                     // Capture test report
                     junit "${TEST_RESULTS}/junit/junit.xml"
 
-                    cobertura autoUpdateHealth: false,
-                            autoUpdateStability: false,
+                    cobertura autoUpdateHealth: true,
+                            autoUpdateStability: true,
                             coberturaReportFile: "${TEST_RESULTS}/coverage/cobertura-coverage.xml",
                             classCoverageTargets: '85, 80, 75',
                             conditionalCoverageTargets: '70, 65, 60',
