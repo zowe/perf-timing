@@ -1,20 +1,20 @@
 ### Measuring Time Spent in a Specific Function
 
-Another utility that the tool provides is a hook into a specific function call. This is done by watching the function.
+Another utility that the tool provides is a hook into a specific function call. The utility hooks into the function call by watching the function.
 
 While a function is watched, each call will be monitored by node and saved when the application exits. The following metrics are gathered while a function is watched:
 
 - The number of calls.
 - The average elapsed time of each call.
 - The total time spent in the function.
-- An array of each call to the function. Each entry contains the following
+- An array of each call to the function. Each entry contains the following data:
   - Parameters
   - Operation start time
   - Total time taken
 
 **Example:**
 
-Say that you have this code in your application:
+You have the following code in your application:
 
 ```TypeScript
 const math = {
@@ -55,7 +55,7 @@ for(i = 0; i <= 1000; i++) {
 }
 ```
 
-This technique can also be combined with the point to point measurements for a complete picture of an application execution.
+You can combine this technique with the point to point measurements for a complete picture of an application execution.
 
 - See {@link PerformanceApi.watch}
 - See {@link PerformanceApi.unwatch}

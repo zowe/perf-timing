@@ -1,8 +1,8 @@
 ### Environmental Variables
 
-The `zowe/@perf-timing` library is controlled by the following environmental variables.
+The `zowe/@perf-timing` library is controlled by the following environmental variables:
 
-**NOTE:** All environmental variables are prefixed with `PERF_TIMING`.
+**Note:** All environmental variables are prefixed with `PERF_TIMING`.
 
 <meta name="include" content="./performance/environment.md"/>
 

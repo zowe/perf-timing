@@ -1,13 +1,13 @@
 #### IO Variables
 
-The following environmental variables affect the io operations of the library.
+The following environmental variables affect the io operations of the library:
 
 | Variable Name | Type | Default Value | Description |
 |---------------|------|---------------|-------------|
-| `PERF_TIMING_IO_MAX_HISTORY` | INTEGER | 5 | Changes how many historical data logs are kept by the library. When a new log is created, it is created as metrics.1.json. Existing log numbers are incremented by one and the last one is deleted when needed. |
-| `PERF_TIMING_IO_SAVE_DIR` | STRING | ~/.perf-timing | Changes where the metric logs are saved. If the directory doesn't exist, it is created. |
+| `PERF_TIMING_IO_MAX_HISTORY` | INTEGER | 5 | Defines how many historical data log files that the library retains. When the library creates a log file, it is named metrics.1.json. Existing log numbers are incremented by one and the last log file is deleted as needed. |
+| `PERF_TIMING_IO_SAVE_DIR` | STRING | ~/.perf-timing | Defines where to save the metric log files. If the directory does not exist, the library creates the directory. |
 
-**EXAMPLE:** Keep the last 10 metric runs in a specified directory.
+**Example:** Retain the last 10 metric runs in a specified directory.
 
 **Linux:**
 

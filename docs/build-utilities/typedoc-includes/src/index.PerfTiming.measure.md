@@ -1,7 +1,7 @@
 ### Measuring Code Execution Time
-As performance issues arise in a node application, the next step is to find out where the performance issues are happening. One way to look for issues is to see how long a given piece of code takes to execute. `@zowe/perf-timing` provides a means to measure the time it takes to execute a piece of code.
+As you discover performance issues within in a node application, the next step is to identify where the performance issues are occurring. One way to identify for issues is to examine how much time elapsed for a given piece of code to execute. `@zowe/perf-timing` provides a means to measure the time it takes to execute a piece of code.
 
-As an example, say that you have an application that loops 10000 times and increments a counter variable.
+For example, you have an application that loops 10,000 times and increments a counter variable.
 
 ```TypeScript
 let value = 0;
@@ -42,7 +42,7 @@ api.mark("B");
 api.measure("Point A to B", "A", "B");
 ```
 
-Now the time from `A` to `B` will be saved upon exit of the application.
+The time from `api.mark("A")` to `api.mark("B")` is saved when the application exits if `PERF_TIMING_ENABLED` is true.
 
 - See {@link PerformanceApi.mark}
 - See {@link PerformanceApi.measure}
