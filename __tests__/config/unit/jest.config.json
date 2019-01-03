@@ -13,11 +13,11 @@
         "text",
         "cobertura"
     ],
-    "preset": "./__tests__/config/jest.preset.json",
-    "rootDir": "../../../",
     "modulePathIgnorePatterns": [
         "__tests__/__snapshots__/"
     ],
+    "preset": "./__tests__/config/jest.preset.json",
+    "rootDir": "../../../",
     "testPathIgnorePatterns": [
         "/node_modules/",
         "<rootDir>/__tests__/__results__",

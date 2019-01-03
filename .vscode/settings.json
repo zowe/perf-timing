@@ -52,5 +52,6 @@
         "timerifing",
         "timerify",
         "untimerify"
-    ]
+    ],
+    "jest.pathToJest": "npm run test:unit -- --coverage=false"
 }

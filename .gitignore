@@ -59,3 +59,5 @@ imperative_debug.log
 /__tests__/__results__/
 
 /docs/build-utilities/typedoc-includes/resolved
+
+jest-stare
