@@ -5,9 +5,10 @@
     "no-implicit-dependencies": [true, "dev", "optional"],
     "no-submodule-imports": false,
     "only-arrow-functions": false,
-    "space-before-function-paren": false
+    "space-before-function-paren": false,
+    "completed-docs": false
   },
-  "type-check": true,
+  "type-check": false,
   "linterOptions": {
     "exclude": ["**/node_modules/**/*", "__tests__/__results__/**", "**/*.d.ts"]
   }

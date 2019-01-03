@@ -26,8 +26,8 @@ describe("Environment", () => {
             .register("test_string", testString)
             .register("test_number", testNumber);
 
-        expect((Environment as any)._registered["test_string"]).toBe(testString);
-        expect((Environment as any)._registered["test_number"]).toBe(testNumber);
+        expect((Environment as any)._registered.test_string).toBe(testString);
+        expect((Environment as any)._registered.test_number).toBe(testNumber);
     });
 
     it("should get values out of the environment", () => {
@@ -40,7 +40,7 @@ describe("Environment", () => {
             .register("NUMBER3", 1)
             .register("STRING1", "30")
             .register("STRING2", "Murray")
-            .register("STRING3", "")
+            .register("STRING3", "");
 
         // Add variables to the environment
         process.env.NUMBER1 = "58";
@@ -68,7 +68,7 @@ describe("Environment", () => {
 
         expect(Environment.getValue("STRING3")).toBe("");
         expect(Environment.getString("STRING3")).toBe("");
-        
+
         // Clean up after our test
         delete process.env.NUMBER1;
         delete process.env.NUMBER2;
