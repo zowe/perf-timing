@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`constants should have all constants unchanged 1`] = `
+Object {
+  "ENV_PREFIX": "PERF_TIMING",
+  "GLOBAL_SYMBOL": Symbol(org.zowe.perf-timing),
+}
+`;
