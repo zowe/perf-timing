@@ -531,7 +531,7 @@ pipeline {
 
                     // Build the documentation before comitting
                     echo "Building Documentation"
-                    sh "npm run typedoc"
+                    sh "npm run doc"
 
                     sh "git add ."
 
