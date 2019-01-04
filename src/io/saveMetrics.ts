@@ -68,7 +68,7 @@ export function saveMetrics(data: IPerformanceMetrics) {
     fs.removeSync(lastFile);
 
     // Move all historical logs down by 1
-    while (historyIndex-- > 0) {
+    while (--historyIndex > 0) {
         const fileName = getMetricFileName(directory, historyIndex);
 
         if (fs.existsSync(fileName)) {
