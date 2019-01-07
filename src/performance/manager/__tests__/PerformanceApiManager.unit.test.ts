@@ -159,7 +159,35 @@ describe("PerformanceApiManager", () => {
 
     describe("ensure that only one class acts as the main manager.", () => {
         it("should register only one metric gathering event", () => {
-            pending();
+            const managerArray: PerformanceApiManager[] = [];
+
+            const mocks = getMockWrapper({
+                pkgUpSync: pkgUp.sync,
+                processOn: process.on
+            });
+
+            const numTestJson = 4;
+
+            setEnv("true");
+
+            for(let i = 1; i <= numTestJson; i++) {
+                const testPath = path.join(__dirname, "test-json", `package.${i}.json`);
+                const testJson = require(testPath);
+
+                mocks.pkgUpSync.mockReturnValueOnce(testPath);
+
+                const manager = new PerformanceApiManager();
+
+                managerArray.push(manager);
+
+                expect(manager.packageUUID).toBe(`${testJson.name}@${testJson.version}`);
+                expect(mocks.processOn).toHaveBeenCalledTimes(1);
+            }
+
+            // Ensure that the first manager created is the one that has the save called
+            (managerArray[0] as any)._savePerformanceResults = jest.fn();
+            mocks.processOn.mock.calls[0][1]();
+            expect((managerArray[0] as any)._savePerformanceResults).toHaveBeenCalledTimes(1);
         });
 
         it("should register manager's api in the global space when requested", () => {
