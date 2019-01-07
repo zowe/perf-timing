@@ -134,4 +134,28 @@ describe("PerformanceApiManager", () => {
             expect((new PerformanceApiManager()).isEnabled).toBe(true);
         }
     });
+
+    describe("ensure that only one class acts as the main manager.", () => {
+        it("should register only one metric gathering event", () => {
+            pending();
+        });
+
+        it("should register manager's api in the global space when requested", () => {
+            pending();
+        });
+    });
+
+    describe("savePerformanceResults", () => {
+        it("should save when there is just one manager", () => {
+            pending();
+        });
+
+        it("should save when there are multiple managers. (no name conflicts)", () => {
+            pending();
+        });
+
+        it("should save when there are multiple managers. (some name conflicts)", () => {
+            pending();
+        });
+    });
 });
