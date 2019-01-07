@@ -56,7 +56,7 @@ interface ISystemMemory {
 /**
  * Information about the system and environment that can be retrieved by node.
  */
-export interface ISystemInformation {
+export interface ISystemInformation { // @TODO probably should encapsulate the type definitions from node
     /**
      * The arguments passed into the process.
      */

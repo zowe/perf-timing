@@ -36,6 +36,8 @@ import { Environment } from "../../environment";
  * symbol. The first instance created will be the manager of all of these global
  * packages. This allows for a single `process.on('exit')` hook to be registered.
  *
+ * @internal
+ *
  * @see {@link PerformanceApiManager._savePerformanceResults}
  */
 declare namespace NodeJS {
@@ -54,7 +56,12 @@ declare namespace NodeJS {
     }
 }
 
-declare var global: NodeJS.Global;
+/**
+ * This variable is exported so that unit tests can have access to the type.
+ *
+ * @internal
+ */
+export declare var global: NodeJS.Global;
 // tslint:enable
 
 //////////////////////////////////////////
