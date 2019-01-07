@@ -7,6 +7,17 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Debug Test",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+            "args": [
+                "-c",
+                "${workspaceFolder}/__tests__/config/debug/jest.config.json",
+                "${fileBasename}"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "env": {
                 "PERF_TIMING": "ENABLE"
             },
