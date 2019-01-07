@@ -166,7 +166,42 @@ describe("PerformanceApiManager", () => {
     });
 
     it("should create one api object", () => {
-        pending();
+        const mocks = getMockWrapper({
+            pkgUpSync: pkgUp.sync
+        });
+
+        // Check that the api is initialized only once for a manager
+        const disabledManager = new PerformanceApiManager();
+
+        expect(disabledManager.api).toBeInstanceOf(PerformanceApi);
+        expect(disabledManager.api).toBeInstanceOf(PerformanceApi);
+        expect(disabledManager.api).toBeInstanceOf(PerformanceApi);
+
+        expect(PerformanceApi).toHaveBeenCalledTimes(1);
+
+        jest.clearAllMocks();
+
+        // Perform the same checks when on the main manager
+        setEnv("true");
+        mocks.pkgUpSync.mockReturnValueOnce(getTestPath(1));
+
+        // Hook a jest fn in place of the map so we can easily check that set
+        // was only called once.
+        (global[GLOBAL_SYMBOL] as any) = {
+            set: jest.fn()
+        };
+
+        const enabledManager = new PerformanceApiManager();
+
+        expect(enabledManager.api).toBeInstanceOf(PerformanceApi);
+        expect(enabledManager.api).toBeInstanceOf(PerformanceApi);
+        expect(enabledManager.api).toBeInstanceOf(PerformanceApi);
+
+        expect(PerformanceApi).toHaveBeenCalledTimes(1);
+
+        expect(getGlobal().set).toHaveBeenCalledTimes(1);
+        expect(getGlobal().set).toHaveBeenCalledWith((enabledManager as any)._instanceSymbol, (enabledManager as any)._api);
+
     });
 
     describe("ensure that only one class acts as the main manager.", () => {
