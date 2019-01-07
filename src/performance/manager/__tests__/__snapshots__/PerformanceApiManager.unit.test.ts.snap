@@ -1,19 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PerformanceApiManager savePerformanceResults should save when there are multiple managers. (no name conflicts) 1`] = `
+Object {
+  "metrics": Object {
+    "Symbol(package1@1.5.0)": Array [
+      "manager 0: manager.api.getMetrics()",
+    ],
+    "Symbol(package2@2.15.1)": Array [
+      "manager 1: manager.api.getMetrics()",
+    ],
+    "Symbol(package3@0.1.4)": Array [
+      "manager 2: manager.api.getMetrics()",
+    ],
+    "Symbol(package4@1.10.4)": Array [
+      "manager 3: manager.api.getMetrics()",
+    ],
+  },
+  "nodeTiming": "manager 0: manager.api.getNodeTiming()",
+  "systemInformation": "manager 0: manager.api.getSysInfo()",
+}
+`;
+
+exports[`PerformanceApiManager savePerformanceResults should save when there are multiple managers. (some name conflicts) 1`] = `
+Object {
+  "metrics": Object {
+    "Symbol(package1@1.5.0)": Array [
+      "manager 0: manager.api.getMetrics()",
+      "manager 4: manager.api.getMetrics()",
+    ],
+    "Symbol(package2@2.15.1)": Array [
+      "manager 1: manager.api.getMetrics()",
+      "manager 5: manager.api.getMetrics()",
+    ],
+    "Symbol(package3@0.1.4)": Array [
+      "manager 2: manager.api.getMetrics()",
+    ],
+    "Symbol(package4@1.10.4)": Array [
+      "manager 3: manager.api.getMetrics()",
+    ],
+  },
+  "nodeTiming": "manager 0: manager.api.getNodeTiming()",
+  "systemInformation": "manager 0: manager.api.getSysInfo()",
+}
+`;
+
 exports[`PerformanceApiManager savePerformanceResults should save when there is just one manager 1`] = `
 Object {
   "metrics": Object {
     "Symbol(package1@1.5.0)": Array [
-      Object {
-        "testGetMetricsReturn": "get metrics works",
-      },
+      "manager 0: manager.api.getMetrics()",
     ],
   },
-  "nodeTiming": Object {
-    "testNodeTiming": "node timing works",
-  },
-  "systemInformation": Object {
-    "testSysInfoReturn": "sys info works",
-  },
+  "nodeTiming": "manager 0: manager.api.getNodeTiming()",
+  "systemInformation": "manager 0: manager.api.getSysInfo()",
 }
 `;

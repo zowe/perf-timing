@@ -24,6 +24,10 @@ import { saveMetrics } from "../../../io";
 declare var global: _GlobalType;
 
 describe("PerformanceApiManager", () => {
+    // The total number of test json files available
+    const NUM_JSON = 4;
+
+    // Need to remember this so that we can replace the function after this test is done
     const processOnFunction = process.on;
 
     // Shorthand for getting the global symbol for purposes of this test.
@@ -38,6 +42,16 @@ describe("PerformanceApiManager", () => {
         if (global[GLOBAL_SYMBOL]) {
             delete global[GLOBAL_SYMBOL];
         }
+    };
+
+    /**
+     * Calls the function registered to process.on("exit") by an api manager.
+     * @param process The process mock instance where process.on exit was called
+     * 
+     * @returns the process call that is executed in the case that there might be a promise.
+     */
+    const triggerExit = (process: jest.Mock<any>) => {
+        return process.mock.calls[0][1]();
     };
 
     /**
@@ -125,7 +139,7 @@ describe("PerformanceApiManager", () => {
 
         // Test that the right function was added
         _testManager._savePerformanceResults = jest.fn();
-        mocks.processOn.mock.calls[0][1]();
+        triggerExit(mocks.processOn);
         expect(_testManager._savePerformanceResults).toHaveBeenCalled();
 
         // Test that the api works as expected
@@ -219,7 +233,7 @@ describe("PerformanceApiManager", () => {
                 processOn: process.on
             });
 
-            const numTestJson = 4;
+            const numTestJson = NUM_JSON;
 
             for(let i = 1; i <= numTestJson; i++) {
                 const testPath = getTestPath(i);
@@ -237,12 +251,12 @@ describe("PerformanceApiManager", () => {
 
             // Ensure that the first manager created is the one that has the save called
             (managerArray[0] as any)._savePerformanceResults = jest.fn();
-            mocks.processOn.mock.calls[0][1]();
+            triggerExit(mocks.processOn);
             expect((managerArray[0] as any)._savePerformanceResults).toHaveBeenCalledTimes(1);
         });
 
         it("should register manager's api in the global space when requested", () => {
-            const numJson = 4;
+            const numJson = NUM_JSON;
             const mocks = getMockWrapper({
                 pkgUpSync: pkgUp.sync
             });
@@ -272,50 +286,45 @@ describe("PerformanceApiManager", () => {
     });
 
     describe("savePerformanceResults", () => {
-        const mocks = getMockWrapper({
-            pkgUpSync: pkgUp.sync,
-            saveMetrics
-        });
-
         beforeEach(() => {
             setEnv("true");
         });
 
-        it("should save when there is just one manager", async () => {
-            mocks.pkgUpSync.mockReturnValue(getTestPath(1));
+        const testMap: Map<string, number> = new Map([
+            ["should save when there is just one manager", 1],
+            ["should save when there are multiple managers. (no name conflicts)", NUM_JSON],
+            ["should save when there are multiple managers. (some name conflicts)", NUM_JSON + 2],
+        ]);
 
-            const manager = new PerformanceApiManager();
-            const mockApi = getMockWrapper(manager.api);
+        for(const [name, numLoops] of testMap) {
+            it(name, async () => {
+                const mocks = getMockWrapper({
+                    pkgUpSync: pkgUp.sync,
+                    processOn: process.on,
+                    saveMetrics
+                });
 
-            const nodeTimingReturn = {
-                testNodeTiming: "node timing works"
-            };
+                for (let i = 0; i < numLoops; i++) {
+                    mocks.pkgUpSync.mockReturnValueOnce(getTestPath(i % NUM_JSON + 1));
 
-            const sysInfoReturn = {
-                testSysInfoReturn: "sys info works"
-            };
+                    const manager = new PerformanceApiManager();
+                    const managerApi = getMockWrapper(manager.api);
 
-            const getMetricsReturn = {
-                testGetMetricsReturn: "get metrics works"
-            };
+                    managerApi.getMetrics.mockReturnValue(`manager ${i}: manager.api.getMetrics()`);
+                    managerApi.getNodeTiming.mockReturnValue(`manager ${i}: manager.api.getNodeTiming()`);
+                    managerApi.getSysInfo.mockReturnValue(`manager ${i}: manager.api.getSysInfo()`);
+                }
 
-            mockApi.getNodeTiming.mockReturnValue(nodeTimingReturn);
-            mockApi.getSysInfo.mockReturnValue(sysInfoReturn);
-            mockApi.getMetrics.mockReturnValue(getMetricsReturn);
+                // Simulate the process exit call
+                await triggerExit(mocks.processOn);
 
-            await (manager as any)._savePerformanceResults();
-            expect(mocks.saveMetrics).toHaveBeenCalledTimes(1);
-
-            // Check that the object written matches the one saved in the snapshot.
-            expect(mocks.saveMetrics.mock.calls[0][0]).toMatchSnapshot();
-        });
-
-        it("should save when there are multiple managers. (no name conflicts)", () => {
-            pending();
-        });
-
-        it("should save when there are multiple managers. (some name conflicts)", () => {
-            pending();
-        });
+                expect(mocks.saveMetrics).toHaveBeenCalledTimes(1);
+                
+                // Validate that the manager was the one that called the function
+                expect(mocks.saveMetrics.mock.calls[0][0].nodeTiming).toContain("manager 0:");
+                expect(mocks.saveMetrics.mock.calls[0][0].systemInformation).toContain("manager 0:");
+                expect(mocks.saveMetrics.mock.calls[0][0]).toMatchSnapshot();
+            });
+        }
     });
 });
