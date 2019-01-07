@@ -119,6 +119,8 @@ describe("PerformanceApiManager", () => {
         expect(_testManager._savePerformanceResults).toHaveBeenCalled();
 
         // Test that the api works as expected
+        expect(getGlobal().get(_testManager._instanceSymbol)).toBeUndefined();
+
         expect(testManager.api).toBeInstanceOf(PerformanceApi);
         expect(PerformanceApi).toHaveBeenCalledWith(testManager);
 
