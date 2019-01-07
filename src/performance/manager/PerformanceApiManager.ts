@@ -65,7 +65,7 @@ declare var global: NodeJS.Global;
 
 /**
  * Exported so tests can make use of the global type defined here.
- * 
+ *
  * @internal
  */
 export type _GlobalType = typeof global;

@@ -14,4 +14,4 @@ describe("constants", () => {
         // We check that constants remained unchanged by validating the snapshot is unchanged.
         expect(require("../constants")).toMatchSnapshot();
     });
-})
+});
