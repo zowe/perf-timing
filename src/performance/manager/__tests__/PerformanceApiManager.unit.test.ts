@@ -89,13 +89,13 @@ describe("PerformanceApiManager", () => {
     it("should construct with performance enabled", () => {
         setEnv(PerformanceApiManager.ENV_ENABLED_KEY);
 
+        const testPath = path.join(__dirname, "test-json/package.1.json");
+        const json = require(testPath);
+
         const mocks = getMockWrapper({
             pkgUpSync: pkgUp.sync,
             processOn: process.on
         });
-
-        const testPath = path.join(__dirname, "test-json/package.1.json");
-        const json = require(testPath);
 
         mocks.pkgUpSync.mockReturnValue(testPath);
 
@@ -133,6 +133,28 @@ describe("PerformanceApiManager", () => {
             setEnv(testCase);
             expect((new PerformanceApiManager()).isEnabled).toBe(true);
         }
+    });
+
+    it("should default to the perf-timing package symbol when no package was found", () => {
+        setEnv("true");
+
+        const mocks = getMockWrapper({
+            pkgUpSync: pkgUp.sync
+        });
+
+        const testPath = path.join(__dirname, "test-json", "package.2.json");
+        const testJson = require(testPath);
+
+        mocks.pkgUpSync.mockReturnValueOnce(undefined).mockReturnValueOnce(testPath);
+
+        const testManager = new PerformanceApiManager();
+
+        expect(testManager.isEnabled).toBe(true);
+        expect(testManager.packageUUID).toBe(`${testJson.name}@${testJson.version}`);
+
+        expect(mocks.pkgUpSync).toHaveBeenCalledTimes(2);
+        expect(mocks.pkgUpSync).toHaveBeenNthCalledWith(1);
+        expect(mocks.pkgUpSync).toHaveBeenNthCalledWith(2, path.resolve(__dirname, "../"));
     });
 
     describe("ensure that only one class acts as the main manager.", () => {
