@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PerformanceApiManager savePerformanceResults should save when there is just one manager 1`] = `
+Object {
+  "metrics": Object {
+    "Symbol(package1@1.5.0)": Array [
+      Object {
+        "testGetMetricsReturn": "get metrics works",
+      },
+    ],
+  },
+  "nodeTiming": Object {
+    "testNodeTiming": "node timing works",
+  },
+  "systemInformation": Object {
+    "testSysInfoReturn": "sys info works",
+  },
+}
+`;

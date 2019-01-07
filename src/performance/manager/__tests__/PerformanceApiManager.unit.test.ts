@@ -11,6 +11,7 @@
 
 jest.mock("../../api/PerformanceApi");
 jest.mock("pkg-up");
+jest.mock("../../../io");
 
 import { PerformanceApi } from "../../api/PerformanceApi";
 import { _GlobalType, PerformanceApiManager } from "../PerformanceApiManager";
@@ -18,6 +19,7 @@ import { GLOBAL_SYMBOL } from "../../../constants";
 import * as pkgUp from "pkg-up";
 import * as path from "path";
 import { getMockWrapper } from "../../../../__tests__/utilities/types/MockWrapper";
+import { saveMetrics } from "../../../io";
 
 declare var global: _GlobalType;
 
@@ -270,8 +272,42 @@ describe("PerformanceApiManager", () => {
     });
 
     describe("savePerformanceResults", () => {
-        it("should save when there is just one manager", () => {
-            pending();
+        const mocks = getMockWrapper({
+            pkgUpSync: pkgUp.sync,
+            saveMetrics
+        });
+
+        beforeEach(() => {
+            setEnv("true");
+        });
+
+        it("should save when there is just one manager", async () => {
+            mocks.pkgUpSync.mockReturnValue(getTestPath(1));
+
+            const manager = new PerformanceApiManager();
+            const mockApi = getMockWrapper(manager.api);
+
+            const nodeTimingReturn = {
+                testNodeTiming: "node timing works"
+            };
+
+            const sysInfoReturn = {
+                testSysInfoReturn: "sys info works"
+            };
+
+            const getMetricsReturn = {
+                testGetMetricsReturn: "get metrics works"
+            };
+
+            mockApi.getNodeTiming.mockReturnValue(nodeTimingReturn);
+            mockApi.getSysInfo.mockReturnValue(sysInfoReturn);
+            mockApi.getMetrics.mockReturnValue(getMetricsReturn);
+
+            await (manager as any)._savePerformanceResults();
+            expect(mocks.saveMetrics).toHaveBeenCalledTimes(1);
+
+            // Check that the object written matches the one saved in the snapshot.
+            expect(mocks.saveMetrics.mock.calls[0][0]).toMatchSnapshot();
         });
 
         it("should save when there are multiple managers. (no name conflicts)", () => {

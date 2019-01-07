@@ -19,6 +19,8 @@ export type MockWrapper<T> = {
 
 /**
  * This function takes an object passed into it and converts the type to a {@link MockWrapper}.
+ * 
+ * **Note:** the object passed can be an instance object if the instance was auto-mocked through jest.
  *
  * @param mock The object consisting of jest mocks.
  *
