@@ -39,6 +39,14 @@ describe("PerformanceApiManager", () => {
     };
 
     /**
+     * Get the path of a test json file.
+     *
+     * @param index The package.${index}.json value to get.
+     * @returns a formulated path.
+     */
+    const getTestPath = (index: number) => path.join(__dirname, "test-json", `package.${index}.json`);
+
+    /**
      * Sets the value of the environmental variable {@link PerformanceApiManager.ENV_ENABLED}
      * to the value passed.
      *
@@ -89,7 +97,7 @@ describe("PerformanceApiManager", () => {
     it("should construct with performance enabled", () => {
         setEnv(PerformanceApiManager.ENV_ENABLED_KEY);
 
-        const testPath = path.join(__dirname, "test-json/package.1.json");
+        const testPath = getTestPath(1);
         const json = require(testPath);
 
         const mocks = getMockWrapper({
@@ -142,7 +150,7 @@ describe("PerformanceApiManager", () => {
             pkgUpSync: pkgUp.sync
         });
 
-        const testPath = path.join(__dirname, "test-json", "package.2.json");
+        const testPath = getTestPath(2);
         const testJson = require(testPath);
 
         mocks.pkgUpSync.mockReturnValueOnce(undefined).mockReturnValueOnce(testPath);
@@ -157,7 +165,15 @@ describe("PerformanceApiManager", () => {
         expect(mocks.pkgUpSync).toHaveBeenNthCalledWith(2, path.resolve(__dirname, "../"));
     });
 
+    it("should create one api object", () => {
+        pending();
+    });
+
     describe("ensure that only one class acts as the main manager.", () => {
+        beforeEach(() => {
+            setEnv("true");
+        });
+
         it("should register only one metric gathering event", () => {
             const managerArray: PerformanceApiManager[] = [];
 
@@ -168,10 +184,8 @@ describe("PerformanceApiManager", () => {
 
             const numTestJson = 4;
 
-            setEnv("true");
-
             for(let i = 1; i <= numTestJson; i++) {
-                const testPath = path.join(__dirname, "test-json", `package.${i}.json`);
+                const testPath = getTestPath(i);
                 const testJson = require(testPath);
 
                 mocks.pkgUpSync.mockReturnValueOnce(testPath);
@@ -191,7 +205,32 @@ describe("PerformanceApiManager", () => {
         });
 
         it("should register manager's api in the global space when requested", () => {
-            pending();
+            const numJson = 4;
+            const mocks = getMockWrapper({
+                pkgUpSync: pkgUp.sync
+            });
+            const managers: PerformanceApiManager[] = [];
+
+            // we loop more times than we have packages so that a package name@version
+            // will be repeated a bit. This allows us to see that we don't have
+            // possible clash problems.
+            const testLoops = numJson + 2;
+
+            // Initialize every manager
+            for(let i = 0; i < testLoops; i++) {
+                mocks.pkgUpSync.mockReturnValueOnce(getTestPath(i % numJson + 1));
+                managers.push(new PerformanceApiManager());
+            }
+
+            // Now loop through each one and see if the api works (calling once will create the manager)
+            for(const manager of managers) {
+                expect(manager.api).toBeInstanceOf(PerformanceApi);
+            }
+
+            // Now that the apis are created, check that they were properly added to the global symbol
+            for(const manager of managers) {
+                expect(getGlobal().get((manager as any)._instanceSymbol)).toBe((manager as any)._api);
+            }
         });
     });
 
