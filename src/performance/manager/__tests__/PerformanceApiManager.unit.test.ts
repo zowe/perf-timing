@@ -47,7 +47,7 @@ describe("PerformanceApiManager", () => {
     /**
      * Calls the function registered to process.on("exit") by an api manager.
      * @param process The process mock instance where process.on exit was called
-     * 
+     *
      * @returns the process call that is executed in the case that there might be a promise.
      */
     const triggerExit = (process: jest.Mock<any>) => {
@@ -319,7 +319,7 @@ describe("PerformanceApiManager", () => {
                 await triggerExit(mocks.processOn);
 
                 expect(mocks.saveMetrics).toHaveBeenCalledTimes(1);
-                
+
                 // Validate that the manager was the one that called the function
                 expect(mocks.saveMetrics.mock.calls[0][0].nodeTiming).toContain("manager 0:");
                 expect(mocks.saveMetrics.mock.calls[0][0].systemInformation).toContain("manager 0:");
