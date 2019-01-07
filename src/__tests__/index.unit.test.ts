@@ -15,6 +15,6 @@ import { PerfTiming } from "../index";
 describe("public exports", () => {
     it("should export a constructed api manager", () => {
         // Simply checks that we've exported the API manager object.
-        expect(PerfTiming instanceof PerformanceApiManager).toBe(true);
+        expect(PerfTiming).toBeInstanceOf(PerformanceApiManager);
     });
 });

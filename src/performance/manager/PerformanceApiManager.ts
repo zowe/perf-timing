@@ -57,11 +57,18 @@ declare namespace NodeJS {
 }
 
 /**
- * This variable is exported so that unit tests can have access to the type.
+ * Definition of the global typings needed for this class.
  *
  * @internal
  */
-export declare var global: NodeJS.Global;
+declare var global: NodeJS.Global;
+
+/**
+ * Exported so tests can make use of the global type defined here.
+ * 
+ * @internal
+ */
+export type _GlobalType = typeof global;
 // tslint:enable
 
 //////////////////////////////////////////
@@ -222,7 +229,6 @@ export class PerformanceApiManager implements IPerformanceApiManager {
 
             // Place into an array to handle the case where the same
             // package might have existed twice.
-
             if (outputMetrics.metrics[symbolValue] == null) {
                 outputMetrics.metrics[symbolValue] = [];
             }
