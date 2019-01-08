@@ -61,6 +61,9 @@ describe("PerformanceApi", () => {
 
             expect(_PerformanceApi._errors).toBe(errors);
             expect(_PerformanceApi._errorImport).toBe(errors);
+
+            // Tests the else path of the get function
+            expect(_PerformanceApi._errors).toBe(errors);
         });
 
         describe("_aggregateData", () => {
