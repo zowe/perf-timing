@@ -31,7 +31,7 @@ import {
  *
  * @internal
  */
-type CollectionMap<T extends ICollectionObserver<IPerformanceEntry>> = Map<string, T>;
+export type CollectionMap<T extends ICollectionObserver<IPerformanceEntry>> = Map<string, T>;
 
 /**
  * The underlying api that provides hooks into
@@ -460,10 +460,11 @@ export class PerformanceApi implements IPerformanceApi {
      * if (PerfTiming.enabled) // Check if performance is enabled before assigning
      *   fn = PerfTiming.api.unwatch(fn);
      *
-     *
      * @param fn The function to unwatch.
      * @param name The name that the observer was given, only relevant if the observer was given a name
      *             on the {@link watch}. If omitted, the value of fn.name will be used as the name.
+     *
+     * @param T The type of the function passed in the first parameter.
      *
      * @returns The original implementation of the function that was wrapped in watch or the value
      *          of fn if performance is not enabled.
@@ -471,7 +472,7 @@ export class PerformanceApi implements IPerformanceApi {
      * @throws {@link TimerDoesNotExistError} when performance is enabled and there isn't an observer
      *         with the name passed into the function.
      */
-    public unwatch(fn: ((...args: any[]) => any), name?: string) {
+    public unwatch<T extends (...args: any[]) => any>(fn: T, name?: string): T {
         if (this._manager.isEnabled) {
             let timer = fn.name;
 
@@ -489,7 +490,7 @@ export class PerformanceApi implements IPerformanceApi {
             if (timerRef !== undefined) {
                 timerRef.observer.disconnect();
                 timerRef.isConnected = false;
-                return timerRef.originalFunction;
+                return timerRef.originalFunction as T;
             } else {
                 throw new PerformanceApi._errors.TimerDoesNotExistError(timer);
             }
@@ -579,13 +580,15 @@ export class PerformanceApi implements IPerformanceApi {
      * @param name An optional name to give the timer. If the name is not specified, then the value
      *             of fn.name will be used for tracking.
      *
+     * @param T The type of the function passed in the first parameter.
+     *
      * @returns The watched function (that must replace the original implementation) or the value of
      *          fn if performance is not enabled.
      *
      * @throws {@link TimerNameConflictError} when there is already an active timer of the evaluated
      *         name.
      */
-    public watch(fn: (...args: any[]) => any, name?: string) {
+    public watch<T extends (...args: any[]) => any>(fn: T, name?: string): T {
         if (this._manager.isEnabled) {
             // Check if we should use the function name or the passed name for tracking.
             if (name == null) {
