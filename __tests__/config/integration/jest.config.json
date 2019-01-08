@@ -14,7 +14,7 @@
         "cobertura"
     ],
     "modulePathIgnorePatterns": [
-        "__tests__/__snapshots__/"
+        "__tests__.*/__snapshots__/"
     ],
     "preset": "./__tests__/config/jest.preset.json",
     "rootDir": "../../../",

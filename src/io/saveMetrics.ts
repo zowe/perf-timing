@@ -23,7 +23,6 @@ import { IPerformanceMetrics } from "../performance/manager";
  */
 const ENV_IO_MAX_HISTORY = `${ENV_PREFIX}_IO_MAX_HISTORY`;
 
-// @TODO need to test the save dir
 /**
  * Environment key prefix for where the logs are saved.
  *

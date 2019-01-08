@@ -240,8 +240,6 @@ export class PerformanceApiManager implements IPerformanceApiManager {
         // requires in the calling library when performance monitoring
         // is not enabled.
         (await import("../../io")).saveMetrics(outputMetrics);
-
-        // @TODO ensure there are no running timers before we print metrics
     }
 }
 

@@ -9,8 +9,13 @@
  *
  */
 
+import { PerformanceApiError, TimerDoesNotExistError } from "../../errors";
+
 describe("TimerDoesNotExistError", () => {
-    it("should have tests", () => {
-        pending();
+    it("should remain unchanged", () => {
+        const error = new TimerDoesNotExistError("timer-a");
+
+        expect(error).toBeInstanceOf(PerformanceApiError);
+        expect(error).toMatchSnapshot();
     });
 });

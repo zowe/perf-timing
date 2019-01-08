@@ -9,8 +9,13 @@
  *
  */
 
+import { PerformanceApiError, TimerNameConflictError } from "../../errors";
+
 describe("TimerNameConflictError", () => {
-    it("should have tests", () => {
-        pending();
+    it("should remain unchanged", () => {
+        const error = new TimerNameConflictError("timer-b");
+
+        expect(error).toBeInstanceOf(PerformanceApiError);
+        expect(error).toMatchSnapshot();
     });
 });

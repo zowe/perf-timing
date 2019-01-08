@@ -9,8 +9,13 @@
  *
  */
 
+import { PerformanceApiError, PerformanceNotCapturedError } from "../../errors";
+
 describe("PerformanceNotCapturedError", () => {
-    it("should have tests", () => {
-        pending();
+    it("should remain unchanged", () => {
+        const error = new PerformanceNotCapturedError();
+
+        expect(error).toBeInstanceOf(PerformanceApiError);
+        expect(error).toMatchSnapshot();
     });
 });

@@ -9,8 +9,10 @@
  *
  */
 
+import { PerformanceApiError } from "../../errors";
+
 describe("PerformanceApiError", () => {
-    it("should have tests", () => {
-        pending();
+    it("should remain unchanged", () => {
+        expect(new PerformanceApiError("This message should remain unchanged")).toMatchSnapshot();
     });
 });
