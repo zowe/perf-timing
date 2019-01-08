@@ -36,13 +36,13 @@ type PerformanceApiType = { [K in keyof PerformanceApi]: PerformanceApi[K] }
  * Strongly typed access to the private instance methods of the PerformanceApi. For
  * documentation on these methods, see the corresponding item in the {@link PerformanceApi}.
  */
-// interface IPerformanceApiPrivate extends PerformanceApiType {
-//     _functionObservers: CollectionMap<IFunctionObserver>;
-//     readonly _manager: IPerformanceApiManager;
-//     _measurementObservers: CollectionMap<IMeasurementObserver>;
-//     readonly _perfHooks: typeof import("perf_hooks");
-//     _addPackageNamespace(value: string): string;
-// }
+interface IPerformanceApiPrivate extends PerformanceApiType {
+    _functionObservers: CollectionMap<IFunctionObserver>;
+    readonly _manager: IPerformanceApiManager;
+    _measurementObservers: CollectionMap<IMeasurementObserver>;
+    readonly _perfHooks: typeof import("perf_hooks");
+    _addPackageNamespace(value: string): string;
+}
 
 describe("PerformanceApi", () => {
     // This gives us an all access pass to the performance timing api.
@@ -70,8 +70,42 @@ describe("PerformanceApi", () => {
     });
 
     describe("private instance functions/variables", () => {
-        it("should properly initialize private variables (manager disabled)", () => pending());
-        it("should properly initialize private variables (manager enabled)", () => pending());
+        it("should properly initialize private variables (manager disabled)", () => {
+            const manager: IPerformanceApiManager = {
+                isEnabled: false,
+                packageUUID: "Malkin@71"
+            };
+
+            const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+            expect(api._functionObservers).toBeInstanceOf(Map);
+            expect(api._functionObservers.size).toBe(0);
+
+            expect(api._measurementObservers).toBeInstanceOf(Map);
+            expect(api._measurementObservers.size).toBe(0);
+
+            expect(api._perfHooks).toBeUndefined();
+            expect(api._manager).toBe(manager);
+
+        });
+        it("should properly initialize private variables (manager enabled)", () => {
+            const manager: IPerformanceApiManager = {
+                isEnabled: true,
+                packageUUID: "Guentzel@59"
+            };
+
+            const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+            expect(api._functionObservers).toBeInstanceOf(Map);
+            expect(api._functionObservers.size).toBe(0);
+
+            expect(api._measurementObservers).toBeInstanceOf(Map);
+            expect(api._measurementObservers.size).toBe(0);
+
+            expect(api._perfHooks).toBe(require("perf_hooks"));
+            expect(api._manager).toBe(manager);
+        });
+
         it("should properly add the package namespace", () => pending());
     });
 
