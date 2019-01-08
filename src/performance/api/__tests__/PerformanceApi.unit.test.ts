@@ -40,7 +40,14 @@ describe("PerformanceApi", () => {
     });
 
     describe("private static functions", () => {
-        it("should load errors on demand", () => pending());
+        it("should load errors on demand", () => {
+            expect(_PerformanceApi._errorImport).toBeUndefined();
+
+            const errors = require("../errors");
+
+            expect(_PerformanceApi._errors).toBe(errors);
+            expect(_PerformanceApi._errorImport).toBe(errors);
+        });
 
         describe("_aggregateData", () => {
             it("should convert a collection map to the proper format.", () => pending());
