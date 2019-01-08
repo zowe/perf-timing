@@ -17,4 +17,8 @@ describe("public exports", () => {
         // Simply checks that we've exported the API manager object.
         expect(PerfTiming).toBeInstanceOf(PerformanceApiManager);
     });
+
+    it("should have unchanged public exports", () => {
+        expect(require("../index")).toMatchSnapshot();
+    })
 });
