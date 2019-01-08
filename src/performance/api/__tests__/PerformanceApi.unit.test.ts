@@ -12,9 +12,12 @@
 import { CollectionMap, PerformanceApi } from "../PerformanceApi";
 import {
     ICollectionObserver,
+    IFunctionObserver,
+    IMeasurementObserver,
     IMetric,
     IPerformanceEntry
 } from "../interfaces";
+import { IPerformanceApiManager } from "../../manager/interfaces";
 
 /**
  * Strongly typed access to the private static methods of the PerformanceApi. For
@@ -26,8 +29,19 @@ interface IPerformanceApiStaticPrivate {
     _aggregateData<T extends IPerformanceEntry>(map: CollectionMap<ICollectionObserver<T>>): Array<IMetric<T>>;
 }
 
-// interface IPerformanceApiPrivate {
-//     // @TODO Fill this out later
+type PerformanceApiType = { [K in keyof PerformanceApi]: PerformanceApi[K] }
+
+
+/**
+ * Strongly typed access to the private instance methods of the PerformanceApi. For
+ * documentation on these methods, see the corresponding item in the {@link PerformanceApi}.
+ */
+// interface IPerformanceApiPrivate extends PerformanceApiType {
+//     _functionObservers: CollectionMap<IFunctionObserver>;
+//     readonly _manager: IPerformanceApiManager;
+//     _measurementObservers: CollectionMap<IMeasurementObserver>;
+//     readonly _perfHooks: typeof import("perf_hooks");
+//     _addPackageNamespace(value: string): string;
 // }
 
 describe("PerformanceApi", () => {
@@ -91,8 +105,27 @@ describe("PerformanceApi", () => {
     });
 
     describe("watching a function", () => {
-        it("should map timerify to watch", () => pending());
-        it("should map untimerify to unwatch", () => pending());
+        it("should map timerify to watch", () => {
+            const manager: IPerformanceApiManager = {
+                isEnabled: false,
+                packageUUID: "ABCDE"
+            };
+
+            const api = new PerformanceApi(manager);
+
+            expect(api.timerify).toBe(api.watch);
+        });
+
+        it("should map untimerify to unwatch", () => {
+            const manager: IPerformanceApiManager = {
+                isEnabled: false,
+                packageUUID: "ABCDE"
+            };
+
+            const api = new PerformanceApi(manager);
+
+            expect(api.untimerify).toBe(api.unwatch);
+        });
 
         describe("watching a function", () => {
             it("should watch a function", () => pending());
