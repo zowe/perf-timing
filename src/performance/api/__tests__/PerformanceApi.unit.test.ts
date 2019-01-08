@@ -29,7 +29,7 @@ interface IPerformanceApiStaticPrivate {
     _aggregateData<T extends IPerformanceEntry>(map: CollectionMap<ICollectionObserver<T>>): Array<IMetric<T>>;
 }
 
-type PerformanceApiType = { [K in keyof PerformanceApi]: PerformanceApi[K] }
+type PerformanceApiType = { [K in keyof PerformanceApi]: PerformanceApi[K] };
 
 
 /**

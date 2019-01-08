@@ -20,5 +20,5 @@ describe("public exports", () => {
 
     it("should have unchanged public exports", () => {
         expect(require("../index")).toMatchSnapshot();
-    })
+    });
 });
