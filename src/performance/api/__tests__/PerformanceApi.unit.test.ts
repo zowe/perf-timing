@@ -44,6 +44,21 @@ interface IPerformanceApiPrivate extends PerformanceApiType {
     _addPackageNamespace(value: string): string;
 }
 
+/**
+ * Gets a dummy api manager object for testing.
+ *
+ * @param packageUUID The uuid of the package manager
+ * @param isEnabled Is the manager enabled
+ * 
+ * @returns A manager object that can be passed to the api
+ */
+function getManager(packageUUID: string, isEnabled = true): IPerformanceApiManager {
+    return {
+        isEnabled,
+        packageUUID
+    };
+}
+
 describe("PerformanceApi", () => {
     // This gives us an all access pass to the performance timing api.
     const _PerformanceApi: IPerformanceApiStaticPrivate = PerformanceApi as any;
@@ -74,10 +89,7 @@ describe("PerformanceApi", () => {
 
     describe("private instance functions/variables", () => {
         it("should properly initialize private variables (manager disabled)", () => {
-            const manager: IPerformanceApiManager = {
-                isEnabled: false,
-                packageUUID: "Malkin@71"
-            };
+            const manager = getManager("Malkin@71", false);
 
             const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
 
@@ -92,10 +104,7 @@ describe("PerformanceApi", () => {
 
         });
         it("should properly initialize private variables (manager enabled)", () => {
-            const manager: IPerformanceApiManager = {
-                isEnabled: true,
-                packageUUID: "Guentzel@59"
-            };
+            const manager = getManager("Guentzel@59");
 
             const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
 
@@ -109,7 +118,15 @@ describe("PerformanceApi", () => {
             expect(api._manager).toBe(manager);
         });
 
-        it("should properly add the package namespace", () => pending());
+        it("should properly add the package namespace", () => {
+            const manager = getManager("Letang@58", true);
+
+            const _api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+            for(const test of ["", "Value 1", "12345", "false"]) {
+                expect(_api._addPackageNamespace(test)).toBe(`${manager.packageUUID}: ${test}`);
+            }
+        });
     });
 
     describe("gathering metrics", () => {
@@ -143,10 +160,7 @@ describe("PerformanceApi", () => {
 
     describe("watching a function", () => {
         it("should map timerify to watch", () => {
-            const manager: IPerformanceApiManager = {
-                isEnabled: false,
-                packageUUID: "ABCDE"
-            };
+            const manager = getManager("ABCDE", false);
 
             const api = new PerformanceApi(manager);
 
@@ -154,10 +168,7 @@ describe("PerformanceApi", () => {
         });
 
         it("should map untimerify to unwatch", () => {
-            const manager: IPerformanceApiManager = {
-                isEnabled: false,
-                packageUUID: "ABCDE"
-            };
+            const manager = getManager("ABCDE", false);
 
             const api = new PerformanceApi(manager);
 
