@@ -22,6 +22,7 @@ import {
 } from "../interfaces";
 import { IPerformanceApiManager } from "../../manager/interfaces";
 
+import { randomHexString, randomInteger, randomNumber } from "../../../../__tests__/utilities";
 
 /**
  * Strongly typed access to the private static methods of the PerformanceApi. For
@@ -141,7 +142,69 @@ describe("PerformanceApi", () => {
             });
 
             it("should convert a randomized map to the proper output", () => {
-                pending();
+                // tslint:disable:no-magic-numbers
+
+                const numCollectionItems = randomInteger(5, 20);
+                const expectedArray: Array<IMetric<IPerformanceEntry>> = [];
+                const map = generateCollectionMap([]); // I'm too lazy to keep typing this
+
+                // Create a random number of items in the map, between 5 and 20 will be created
+                for(let itemCounter = 0; itemCounter < numCollectionItems; itemCounter++) {
+                    // Create a unique key name for each item
+                    const keyName = `${itemCounter}_${randomHexString(randomInteger(10, 20))}`;
+                    let totalDuration = 0;
+
+                    // Default to 0 entries
+                    let min = 0;
+                    let max = 0;
+
+                    const entries: IPerformanceEntry[] = [];
+
+                    if (itemCounter === 1) {
+                        min = 1;
+                        max = 1;
+                    } else if (itemCounter > 1) {
+                        min = 2;
+                        max = 10;
+                    }
+
+                    // For item 0 there will be no entries so that might blow up.
+                    // For item 1 there will be 1 entry
+                    // For items 2+ there will be between 2 and 10 entries
+                    const numEntries = randomInteger(min, max);
+                    for (let entryCounter = 0; entryCounter < numEntries; entryCounter++) {
+                        const insertObj = {
+                            duration: randomNumber(0, 15),
+                            startTime: randomNumber(0, 15),
+                            name: randomHexString(randomInteger(10, 20))
+                        };
+
+                        // Keep track of the duration for this run
+                        totalDuration += insertObj.duration;
+
+                        entries.push(insertObj);
+                    }
+
+                    // Add the item to the map
+                    map.set(keyName, {
+                        entries,
+                        isConnected: false,
+                        observer: getDummyObserver()
+                    });
+
+                    // Now add the item to the expected array as well
+                    expectedArray.push({
+                        name: keyName,
+                        calls: entries.length,
+                        totalDuration,
+                        averageDuration: totalDuration / entries.length,
+                        entries
+                    });
+                }
+
+                expect(_PerformanceApi._aggregateData(map)).toEqual(expectedArray);
+
+                // tslint:enable:no-magic-numbers
             });
 
             it("should return an empty array when there is no data", () => {

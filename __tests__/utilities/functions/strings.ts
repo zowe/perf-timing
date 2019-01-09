@@ -14,9 +14,9 @@ import * as crypto from "crypto";
 /**
  * Returns a random hex string.
  * @param length The length of the string.
- * 
+ *
  * @returns the random hex string.
  */
-export function getRandomHexString(length: number) {
+export function randomHexString(length: number) {
     return crypto.randomBytes(length * 2).toString("hex");
 }
