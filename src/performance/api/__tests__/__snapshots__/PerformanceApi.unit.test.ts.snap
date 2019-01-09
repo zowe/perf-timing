@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PerformanceApi point to point measurement measure should collect metrics from the observer: measure data collection is unchanged 1`] = `
+Array [
+  Object {
+    "duration": 456,
+    "endMarkName": "Mario: End Mark",
+    "name": "Measure Name",
+    "startMarkName": "Mario: Start Mark",
+    "startTime": 123,
+  },
+  Object {
+    "duration": 123,
+    "endMarkName": "Mario: End Mark",
+    "name": "Measure Name",
+    "startMarkName": "Mario: Start Mark",
+    "startTime": 789,
+  },
+]
+`;

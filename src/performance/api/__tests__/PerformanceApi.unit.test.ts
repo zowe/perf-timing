@@ -362,6 +362,8 @@ describe("PerformanceApi", () => {
                 expect(mapObj.entries).toEqual([]);
                 expect(mapObj.isConnected).toBe(true);
                 expect(mapObj.observer).toBeInstanceOf(perfHooks.PerformanceObserver);
+                expect(mapObj.observer.observe).toHaveBeenCalledTimes(1);
+                expect(mapObj.observer.observe).toHaveBeenCalledWith({ entryTypes: ["measure"], buffered: true });
 
                 expect(perfHooks.performance.measure).toHaveBeenCalledTimes(1);
                 expect(perfHooks.performance.measure).toHaveBeenCalledWith(
@@ -409,8 +411,60 @@ describe("PerformanceApi", () => {
             });
 
             it("should collect metrics from the observer", () => {
-                pending();
-            })
+                // tslint:disable:no-magic-numbers
+                // This should be a simple function to test that a measurement was called
+                const manager = getManager("Mario");
+                const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+                const name = "Measure Name";
+                const startMark = "Start Mark";
+                const endMark = "End Mark";
+
+                api.measure(name, startMark, endMark);
+
+                const mapObj = api._measurementObservers.get(name);
+
+                const observerFunction = (perfHooks.PerformanceObserver as jest.Mock<any>).mock.calls[0][0];
+                const listObj = {
+                    getEntriesByName: jest.fn()
+                };
+
+                listObj.getEntriesByName.mockReturnValue([]);
+
+                observerFunction(listObj);
+
+                expect(mapObj.isConnected).toBe(true);
+                expect(mapObj.observer.disconnect).not.toHaveBeenCalled();
+
+                expect(listObj.getEntriesByName).toHaveBeenCalledTimes(1);
+                expect(listObj.getEntriesByName).toHaveBeenCalledWith(api._addPackageNamespace(name));
+
+                // Perform a second measure and give it data this time
+                const entries = [
+                    {
+                        name,
+                        startTime: 123,
+                        duration: 456
+                    },
+                    {
+                        name,
+                        startTime: 789,
+                        duration: 123
+                    }
+                ];
+
+                listObj.getEntriesByName.mockReturnValueOnce(entries);
+
+                observerFunction(listObj);
+
+                expect(mapObj.isConnected).toBe(false);
+                expect(mapObj.observer.disconnect).toHaveBeenCalled();
+
+                // Check that the data object output remains unchanged.
+                expect(mapObj.entries).toMatchSnapshot("measure data collection is unchanged");
+
+                // tslint:enable:no-magic-numbers
+            });
         });
     });
 
