@@ -22,7 +22,7 @@ import {
 } from "../interfaces";
 import { IPerformanceApiManager } from "../../manager/interfaces";
 
-import * as perf_hooks from "perf_hooks";
+import * as perfHooks from "perf_hooks";
 
 import { randomHexString, randomInteger, randomNumber } from "../../../../__tests__/utilities";
 
@@ -282,13 +282,13 @@ describe("PerformanceApi", () => {
             const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
 
             api.mark("Should not have marked");
-            expect(perf_hooks.performance.mark).not.toHaveBeenCalled();
+            expect(perfHooks.performance.mark).not.toHaveBeenCalled();
 
             api.clearMarks("Should not have cleared marks");
-            expect(perf_hooks.performance.clearMarks).not.toHaveBeenCalled();
+            expect(perfHooks.performance.clearMarks).not.toHaveBeenCalled();
 
             api.measure("Should not have measured", "a", "b");
-            expect(perf_hooks.performance.measure).not.toHaveBeenCalled();
+            expect(perfHooks.performance.measure).not.toHaveBeenCalled();
         });
 
         it("should clear all marks", () => {
@@ -300,8 +300,8 @@ describe("PerformanceApi", () => {
             api.clearMarks();
 
             expect(api._addPackageNamespace).not.toHaveBeenCalled();
-            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledTimes(1);
-            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledWith(undefined);
+            expect(perfHooks.performance.clearMarks).toHaveBeenCalledTimes(1);
+            expect(perfHooks.performance.clearMarks).toHaveBeenCalledWith(undefined);
         });
 
         it("should clear a single mark", () => {
@@ -316,8 +316,8 @@ describe("PerformanceApi", () => {
             api.clearMarks(name);
 
             expect(api._addPackageNamespace).toHaveBeenCalledWith(name);
-            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledTimes(1);
-            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledWith(`${uuid}: ${name}`);
+            expect(perfHooks.performance.clearMarks).toHaveBeenCalledTimes(1);
+            expect(perfHooks.performance.clearMarks).toHaveBeenCalledWith(`${uuid}: ${name}`);
         });
 
         it("should create a single mark", () => {
@@ -332,14 +332,85 @@ describe("PerformanceApi", () => {
             api.mark(name);
 
             expect(api._addPackageNamespace).toHaveBeenCalledWith(name);
-            expect(perf_hooks.performance.mark).toHaveBeenCalledTimes(1);
-            expect(perf_hooks.performance.mark).toHaveBeenCalledWith(`${uuid}: ${name}`);
+            expect(perfHooks.performance.mark).toHaveBeenCalledTimes(1);
+            expect(perfHooks.performance.mark).toHaveBeenCalledWith(`${uuid}: ${name}`);
         });
 
         describe("measure", () => {
-            it("should measure between two marks", () => pending());
-            it("should reuse a measurement name in the map", () => pending());
-            it("should not create another observer if one is connected", () => pending());
+            it("should measure between two marks", () => {
+                // This should be a simple function to test that a measurement was called
+                const manager = getManager("Mario");
+                const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+                const name = "Measure Name";
+                const startMark = "Start Mark";
+                const endMark = "End Mark";
+
+                jest.spyOn(api, "_addPackageNamespace");
+
+                api.measure(name, startMark, endMark);
+
+                expect(perfHooks.PerformanceObserver).toHaveBeenCalledTimes(1);
+                expect(perfHooks.PerformanceObserver).toHaveBeenCalledWith(expect.any(Function));
+
+                expect(api._addPackageNamespace).toHaveBeenCalledWith(name);
+                expect(api._addPackageNamespace).toHaveBeenCalledWith(startMark);
+                expect(api._addPackageNamespace).toHaveBeenCalledWith(endMark);
+
+                const mapObj = api._measurementObservers.get(name);
+
+                expect(mapObj.entries).toEqual([]);
+                expect(mapObj.isConnected).toBe(true);
+                expect(mapObj.observer).toBeInstanceOf(perfHooks.PerformanceObserver);
+
+                expect(perfHooks.performance.measure).toHaveBeenCalledTimes(1);
+                expect(perfHooks.performance.measure).toHaveBeenCalledWith(
+                    api._addPackageNamespace(name),
+                    api._addPackageNamespace(startMark),
+                    api._addPackageNamespace(endMark)
+                );
+            });
+
+            it("should not create another observer if one is connected", () => {
+                // This should be a simple function to test that a measurement was called
+                const manager = getManager("Mario");
+                const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+                const name = "Measure Name";
+
+                const startMark1 = "Start Mark 1";
+                const endMark1 = "End Mark 1";
+
+                const startMark2 = "Start Mark 2";
+                const endMark2 = "End Mark 2";
+
+                jest.spyOn(api, "_addPackageNamespace");
+                jest.spyOn(api._measurementObservers, "set");
+
+                api.measure(name, startMark1, endMark1);
+                api.measure(name, startMark2, endMark2);
+
+                expect(api._measurementObservers.set).toHaveBeenCalledTimes(1);
+                expect(perfHooks.PerformanceObserver).toHaveBeenCalledTimes(1);
+
+                expect(perfHooks.performance.measure).toHaveBeenNthCalledWith(
+                    1,
+                    api._addPackageNamespace(name),
+                    api._addPackageNamespace(startMark1),
+                    api._addPackageNamespace(endMark1)
+                );
+
+                expect(perfHooks.performance.measure).toHaveBeenNthCalledWith(
+                    2,
+                    api._addPackageNamespace(name),
+                    api._addPackageNamespace(startMark2),
+                    api._addPackageNamespace(endMark2)
+                );
+            });
+
+            it("should collect metrics from the observer", () => {
+                pending();
+            })
         });
     });
 
