@@ -22,6 +22,8 @@ import {
 } from "../interfaces";
 import { IPerformanceApiManager } from "../../manager/interfaces";
 
+import * as perf_hooks from "perf_hooks";
+
 import { randomHexString, randomInteger, randomNumber } from "../../../../__tests__/utilities";
 
 /**
@@ -83,6 +85,8 @@ describe("PerformanceApi", () => {
     beforeEach(() => {
         // Clear out the value of the error import for each test.
         _PerformanceApi._errorImport = undefined;
+
+        jest.clearAllMocks();
     });
 
     describe("private static functions", () => {
@@ -273,9 +277,64 @@ describe("PerformanceApi", () => {
     });
 
     describe("point to point measurement", () => {
-        it("should clear all marks", () => pending());
-        it("should clear a single mark", () => pending());
-        it("should create a single mark", () => pending());
+        it("should do nothing when performance is not enabled", () => {
+            const manager = getManager("PerformanceDisabled", false);
+            const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+            api.mark("Should not have marked");
+            expect(perf_hooks.performance.mark).not.toHaveBeenCalled();
+
+            api.clearMarks("Should not have cleared marks");
+            expect(perf_hooks.performance.clearMarks).not.toHaveBeenCalled();
+
+            api.measure("Should not have measured", "a", "b");
+            expect(perf_hooks.performance.measure).not.toHaveBeenCalled();
+        });
+
+        it("should clear all marks", () => {
+            const manager = getManager("Jeff");
+            const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+            (api as any)._addPackageNamespace = jest.fn();
+
+            api.clearMarks();
+
+            expect(api._addPackageNamespace).not.toHaveBeenCalled();
+            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledTimes(1);
+            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledWith(undefined);
+        });
+
+        it("should clear a single mark", () => {
+            const uuid = "Matt";
+            const name = "Murray";
+
+            const manager = getManager(uuid);
+            const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+            jest.spyOn(api, "_addPackageNamespace");
+
+            api.clearMarks(name);
+
+            expect(api._addPackageNamespace).toHaveBeenCalledWith(name);
+            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledTimes(1);
+            expect(perf_hooks.performance.clearMarks).toHaveBeenCalledWith(`${uuid}: ${name}`);
+        });
+
+        it("should create a single mark", () => {
+            const uuid = "Matt";
+            const name = "Murray";
+
+            const manager = getManager(uuid);
+            const api: IPerformanceApiPrivate = new PerformanceApi(manager) as any;
+
+            jest.spyOn(api, "_addPackageNamespace");
+
+            api.mark(name);
+
+            expect(api._addPackageNamespace).toHaveBeenCalledWith(name);
+            expect(perf_hooks.performance.mark).toHaveBeenCalledTimes(1);
+            expect(perf_hooks.performance.mark).toHaveBeenCalledWith(`${uuid}: ${name}`);
+        });
 
         describe("measure", () => {
             it("should measure between two marks", () => pending());
