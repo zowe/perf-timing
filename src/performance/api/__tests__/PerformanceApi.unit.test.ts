@@ -9,15 +9,19 @@
  *
  */
 
+jest.mock("perf_hooks");
+
 import { CollectionMap, PerformanceApi } from "../PerformanceApi";
 import {
     ICollectionObserver,
     IFunctionObserver,
     IMeasurementObserver,
     IMetric,
-    IPerformanceEntry
+    IPerformanceEntry,
+    IPerformanceObserver
 } from "../interfaces";
 import { IPerformanceApiManager } from "../../manager/interfaces";
+
 
 /**
  * Strongly typed access to the private static methods of the PerformanceApi. For
@@ -49,13 +53,25 @@ interface IPerformanceApiPrivate extends PerformanceApiType {
  *
  * @param packageUUID The uuid of the package manager
  * @param isEnabled Is the manager enabled
- * 
+ *
  * @returns A manager object that can be passed to the api
  */
 function getManager(packageUUID: string, isEnabled = true): IPerformanceApiManager {
     return {
         isEnabled,
         packageUUID
+    };
+}
+
+/**
+ * Generates a dummy performance observer for testing.
+ *
+ * @returns a dummy performance observer.
+ */
+function getDummyObserver(): IPerformanceObserver {
+    return {
+        disconnect: jest.fn(),
+        observe: jest.fn()
     };
 }
 
@@ -82,8 +98,55 @@ describe("PerformanceApi", () => {
         });
 
         describe("_aggregateData", () => {
-            it("should convert a collection map to the proper format.", () => pending());
-            it("should return an empty array when there is no data", () => pending());
+            const generateCollectionMap = (mapData: Array<[string, IPerformanceEntry[]]>): CollectionMap<ICollectionObserver<IPerformanceEntry>> => {
+                const map: ReturnType<typeof generateCollectionMap> = new Map();
+
+                for (const data of mapData) {
+                    map.set(data[0], {
+                        entries: data[1],
+                        isConnected: false,
+                        observer: getDummyObserver()
+                    });
+                }
+
+                return map;
+            };
+
+            it("should convert a collection map to the proper format. (1 map entry)", () => {
+                const testMap = generateCollectionMap([
+                    ["test element 1", [
+                        {
+                            duration: 5.325,
+                            name: "test",
+                            startTime: 12
+                        }
+                    ]]
+                ]);
+
+                // Hard coded test to see if we get the right data from a single
+                // metric.
+                expect(_PerformanceApi._aggregateData(testMap)).toEqual([
+                    {
+                        averageDuration: 5.325,
+                        calls: 1,
+                        entries: [{
+                            duration: 5.325,
+                            name: "test",
+                            startTime: 12
+                        }],
+                        name: "test element 1",
+                        totalDuration: 5.325
+                    }
+                ]);
+            });
+
+            it("should convert a randomized map to the proper output", () => {
+                pending();
+            });
+
+            it("should return an empty array when there is no data", () => {
+                expect(_PerformanceApi._aggregateData(new Map())).toEqual([]);
+            });
         });
     });
 
