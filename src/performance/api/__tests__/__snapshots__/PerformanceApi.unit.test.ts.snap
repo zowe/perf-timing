@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PerformanceApi gathering metrics getSysInfo should return system information 1`] = `
+Object {
+  "argv": Array [
+    "a",
+    "b",
+    "c",
+    "d",
+  ],
+  "cpus": "CPU Information",
+  "loadavg": "Load Avg Information",
+  "memory": Object {
+    "free": 1,
+    "total": 1,
+    "usage": 0,
+    "usagePercentage": 0,
+  },
+  "network": Object {
+    "hostname": "Hostname Information",
+    "interfaces": "Network Interfaces Information",
+  },
+  "os": "OS Type Information OS Arch Information OS Release Information",
+  "platform": "OS Platform Information",
+  "shell": "User Shell Information",
+  "uptime": "Uptime Information",
+}
+`;
+
 exports[`PerformanceApi point to point measurement measure should collect metrics from the observer: measure data collection is unchanged 1`] = `
 Array [
   Object {

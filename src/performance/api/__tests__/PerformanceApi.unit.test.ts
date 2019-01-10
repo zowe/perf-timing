@@ -10,6 +10,7 @@
  */
 
 jest.mock("perf_hooks");
+jest.mock("os");
 
 import { CollectionMap, PerformanceApi } from "../PerformanceApi";
 import {
@@ -23,8 +24,10 @@ import {
 import { IPerformanceApiManager } from "../../manager/interfaces";
 
 import * as perfHooks from "perf_hooks";
+import * as os from "os";
 
-import { randomHexString, randomInteger, randomNumber } from "../../../../__tests__/utilities";
+import { randomHexString, randomInteger, randomNumber, getMockWrapper } from "../../../../__tests__/utilities";
+import { PerformanceNotCapturedError } from "../errors";
 
 /**
  * Strongly typed access to the private static methods of the PerformanceApi. For
@@ -260,19 +263,133 @@ describe("PerformanceApi", () => {
     });
 
     describe("gathering metrics", () => {
+        let mocks = getMockWrapper({
+            aggregateData: _PerformanceApi._aggregateData
+        });
+
+        beforeAll(() => {
+            jest.spyOn(_PerformanceApi, "_aggregateData");
+            mocks = getMockWrapper({
+                aggregateData: _PerformanceApi._aggregateData
+            });
+        });
+        beforeEach(() => {
+            mocks.aggregateData.mockClear();
+            mocks.aggregateData.mockImplementation(() => undefined);
+        });
+        afterAll(() => mocks.aggregateData.mockRestore());
+
         describe("getMetrics", () => {
             it("should return gathered metrics", () => pending());
-            it("should throw PerformanceNotCapturedError", () => pending());
+            it("should throw PerformanceNotCapturedError", () => {
+                const api = new PerformanceApi(getManager("NotEnabled", false));
+
+                expect(() => {
+                    api.getMetrics();
+                }).toThrowError(PerformanceNotCapturedError);
+
+                expect(_PerformanceApi._aggregateData).not.toHaveBeenCalled();
+            });
         });
 
         describe("getNodeTiming", () => {
+            Object.defineProperty(perfHooks.performance, "nodeTiming", {
+                get() {
+                    return {};
+                },
+                configurable: true
+            });
+
+            const spy = jest.spyOn(perfHooks.performance, "nodeTiming", "get");
+
             it("should return node timing information", () => pending());
-            it("should throw PerformanceNotCapturedError", () => pending());
+            it("should throw PerformanceNotCapturedError", () => {
+                const api = new PerformanceApi(getManager("NotEnabled", false));
+
+                expect(() => {
+                    api.getNodeTiming();
+                }).toThrowError(PerformanceNotCapturedError);
+
+                expect(spy).not.toHaveBeenCalled();
+            });
         });
 
         describe("getSysInfo", () => {
-            it("should return system information", () => pending());
-            it("should throw PerformanceNotCapturedError", () => pending());
+            it("should return system information", () => {
+                const osMock = getMockWrapper(os);
+
+                const argv = process.argv;
+                process.argv = ["a", "b", "c", "d"];
+
+                osMock.cpus.mockReturnValue("CPU Information");
+                osMock.loadavg.mockReturnValue("Load Avg Information");
+                osMock.hostname.mockReturnValue("Hostname Information");
+                osMock.networkInterfaces.mockReturnValue("Network Interfaces Information");
+                osMock.type.mockReturnValue("OS Type Information");
+                osMock.arch.mockReturnValue("OS Arch Information");
+                osMock.release.mockReturnValue("OS Release Information");
+                osMock.platform.mockReturnValue("OS Platform Information");
+                osMock.userInfo.mockReturnValue({shell: "User Shell Information"});
+                osMock.uptime.mockReturnValue("Uptime Information");
+
+                osMock.freemem.mockReturnValue(1);
+                osMock.totalmem.mockReturnValue(1);
+
+                // First test that the object format is unchanged
+                const api = new PerformanceApi(getManager("SysInfoTest"));
+                expect(api.getSysInfo()).toMatchSnapshot();
+
+                const testSet: Set<{free: number, total: number}> = new Set([
+                    {free: 0, total: 0},
+                    {free: 1, total: 0},
+                    {free: 0, total: 1},
+                    {free: 1, total: 1}
+                ]);
+
+                // Define some normal min/max ranges to be expected from os.freemem/os.totalmem
+                const additionalTests = 50;
+                const freeMin = 0;
+                const freeMax = freeMin + additionalTests - 1;
+                const totalMin = freeMax + 1;
+                const totalMax = totalMin + additionalTests - 1;
+
+                // Add more randomized tests
+                for (let i = 0; i < additionalTests; i ++) {
+                    testSet.add({
+                        free: randomInteger(freeMin, freeMax),
+                        total: randomInteger(totalMin, totalMax)
+                    });
+                }
+
+                // Next do some testing with the memory calculations.
+                for (const [{free, total}] of testSet.entries()) {
+                    osMock.freemem.mockReturnValueOnce(free);
+                    osMock.totalmem.mockReturnValueOnce(total);
+
+                    const usage = total - free;
+                    const usagePercentage = (usage / total) * 100; // tslint:disable-line:no-magic-numbers
+
+                    expect(api.getSysInfo().memory).toEqual({
+                        free,
+                        total,
+                        usage,
+                        usagePercentage
+                    });
+                }
+
+                process.argv = argv;
+            });
+
+            it("should throw PerformanceNotCapturedError", () => {
+                const api = new PerformanceApi(getManager("NotEnabled", false));
+
+                expect(() => {
+                    api.getSysInfo();
+                }).toThrowError(PerformanceNotCapturedError);
+
+                // Just sanity check that one of the os functions wasn't called
+                expect(os.freemem).not.toHaveBeenCalled();
+            });
         });
     });
 
