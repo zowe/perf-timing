@@ -26,7 +26,7 @@ import { IPerformanceApiManager } from "../../manager/interfaces";
 import * as perfHooks from "perf_hooks";
 import * as os from "os";
 
-import { randomHexString, randomInteger, randomNumber, getMockWrapper } from "../../../../__tests__/utilities";
+import { getMockWrapper, randomHexString, randomInteger, randomNumber } from "../../../../__tests__/utilities";
 import { PerformanceNotCapturedError, TimerNameConflictError } from "../errors";
 
 /**
