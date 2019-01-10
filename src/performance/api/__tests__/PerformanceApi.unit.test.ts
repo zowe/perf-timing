@@ -27,7 +27,7 @@ import * as perfHooks from "perf_hooks";
 import * as os from "os";
 
 import { getMockWrapper, randomHexString, randomInteger, randomNumber } from "../../../../__tests__/utilities";
-import { PerformanceNotCapturedError, TimerNameConflictError } from "../errors";
+import { PerformanceNotCapturedError, TimerNameConflictError, TimerDoesNotExistError } from "../errors";
 
 /**
  * Strongly typed access to the private static methods of the PerformanceApi. For
@@ -636,6 +636,9 @@ describe("PerformanceApi", () => {
         });
 
         describe("watching a function", () => {
+            const enabled = getManager("WatchEnabled");
+            const disabled = getManager("WatchDisabled", false);
+
             const testFcn = () => true;
             const timerify = () => {
                 return testFcn();
@@ -656,9 +659,6 @@ describe("PerformanceApi", () => {
 
                 mocks.timerify.mockReturnValue(timerify);
             });
-
-            const enabled = getManager("WatchEnabled");
-            const disabled = getManager("WatchDisabled", false);
 
             it("should watch a function", () => {
                 expect(api.watch(testFcn)).toBe(timerify);
@@ -763,11 +763,91 @@ describe("PerformanceApi", () => {
         });
 
         describe("unwatching a function", () => {
-            it("should return the input function", () => pending());
-            it("should return the original function implementation", () => pending());
-            it("should disconnect the observer", () => pending()); // Test that calling the function doesn't trigger the observer
-            it("should throw a TimerDoesNotExistError if a timer doesn't exist", () => pending());
-            it("should throw a TimerDoesNotExistError if a timer is unwatched", () => pending());
+            const enabled = getManager("WatchEnabled");
+            const disabled = getManager("WatchDisabled", false);
+
+            const testFcn = () => true;
+            const timerified = () => {
+                return testFcn();
+            };
+
+            Object.defineProperty(timerified, "name", {
+                value: `timerified ${testFcn.name}`
+            });
+
+            const getMocks = () => getMockWrapper({
+                timerify: perfHooks.performance.timerify,
+                PerformanceObserver: perfHooks.PerformanceObserver
+            });
+
+            let api: IPerformanceApiPrivate;
+            let mocks = getMocks();
+
+            beforeEach(() => {
+                api = new PerformanceApi(enabled) as any;
+                mocks = getMocks();
+
+                mocks.timerify.mockReturnValue(timerified);
+            });
+
+            it("should return the input function", () => {
+                expect((new PerformanceApi(disabled)).unwatch(testFcn)).toBe(testFcn);
+            });
+
+            it("should return the original function implementation", () => {
+                expect(api.watch(testFcn)).toBe(timerified);
+                expect(api.unwatch(timerified)).toBe(testFcn);
+
+                const timerKey = "Renamed testFunction timer";
+
+                expect(api.watch(testFcn, timerKey)).toBe(timerified);
+                expect(api.unwatch(timerified, timerKey)).toBe(testFcn);
+
+                expect(api._functionObservers.get(testFcn.name).observer.disconnect).toHaveBeenCalledTimes(1);
+                expect(api._functionObservers.get(timerKey).observer.disconnect).toHaveBeenCalledTimes(1);
+
+                expect(api._functionObservers.get(testFcn.name).isConnected).toBe(false);
+                expect(api._functionObservers.get(timerKey).isConnected).toBe(false);
+            });
+
+            it("should throw a TimerDoesNotExistError if a timer doesn't exist", () => {
+                expect(() => {
+                    api.unwatch(timerified);
+                }).toThrow(TimerDoesNotExistError);
+
+                expect(() => {
+                    api.unwatch(timerified, "BOOM");
+                }).toThrow(TimerDoesNotExistError);
+            });
+
+            it("should throw a TimerDoesNotExistError when a function is unwatched with a name", () => {
+                expect(() => {
+                    api.watch(testFcn);
+                    api.unwatch(timerified, "Should not work");
+                }).toThrow(TimerDoesNotExistError);
+            });
+
+            it("should throw a TimerDoesNotExistError when a named timer is unwatched with a function", () => {
+                expect(() => {
+                    api.watch(testFcn, "Should not work");
+                    api.unwatch(timerified);
+                }).toThrow(TimerDoesNotExistError);
+            });
+
+            it("should throw a TimerDoesNotExistError if a timer is unwatched", () => {
+                const timerKey = "Test Timer Key";
+
+                api.unwatch(api.watch(testFcn));
+                api.unwatch(api.watch(testFcn, timerKey), timerKey);
+
+                expect(() => {
+                    api.unwatch(timerified);
+                }).toThrow(TimerDoesNotExistError);
+
+                expect(() => {
+                    api.unwatch(timerified, timerKey);
+                }).toThrow(TimerDoesNotExistError);
+            });
         });
     });
 });
