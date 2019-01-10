@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PerformanceApi gathering metrics getNodeTiming should return node timing information 1`] = `
+Object {
+  "bootstrapComplete": 0,
+  "duration": 1,
+  "loopExit": 3,
+  "loopStart": 2,
+  "name": "Some Name",
+  "nodeStart": 4,
+  "startTime": 5,
+  "v8Start": 6,
+}
+`;
+
 exports[`PerformanceApi gathering metrics getSysInfo should return system information 1`] = `
 Object {
   "argv": Array [

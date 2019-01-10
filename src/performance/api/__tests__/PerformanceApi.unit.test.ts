@@ -295,14 +295,29 @@ describe("PerformanceApi", () => {
         describe("getNodeTiming", () => {
             Object.defineProperty(perfHooks.performance, "nodeTiming", {
                 get() {
-                    return {};
+                    return {
+                        bootstrapComplete: 0,
+                        duration: 1,
+                        loopStart: 2,
+                        loopExit: 3,
+                        name: "Some Name",
+                        nodeStart: 4,
+                        startTime: 5,
+                        v8Start: 6
+                    };
                 },
                 configurable: true
             });
 
             const spy = jest.spyOn(perfHooks.performance, "nodeTiming", "get");
 
-            it("should return node timing information", () => pending());
+            it("should return node timing information", () => {
+                const api = new PerformanceApi(getManager("NodeTiming"));
+
+                // Check that the resulting call is consistent
+                expect(api.getNodeTiming()).toMatchSnapshot();
+            });
+
             it("should throw PerformanceNotCapturedError", () => {
                 const api = new PerformanceApi(getManager("NotEnabled", false));
 
