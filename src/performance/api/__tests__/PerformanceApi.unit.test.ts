@@ -637,8 +637,53 @@ describe("PerformanceApi", () => {
         });
 
         describe("watching a function", () => {
-            it("should watch a function", () => pending());
-            it("should return the proper function", () => pending()); // Handle enabled vs disabled here
+            const testFcn = () => true;
+            const timerify = () => {
+                return testFcn();
+            };
+
+            const getMocks = () => getMockWrapper({
+                timerify: perfHooks.performance.timerify,
+                PerformanceObserver: perfHooks.PerformanceObserver
+            });
+
+
+            let api: IPerformanceApiPrivate;
+            let mocks = getMocks();
+
+            beforeEach(() => {
+                api = new PerformanceApi(enabled) as any;
+                mocks = getMocks();
+
+                mocks.timerify.mockReturnValue(timerify);
+            });
+
+            const enabled = getManager("WatchEnabled");
+            const disabled = getManager("WatchDisabled", false);
+
+            it("should watch a function", () => {
+                expect(api.watch(testFcn)).toBe(timerify);
+                expect(api._functionObservers.get(testFcn.name)).toEqual({
+                    observer: expect.any(perfHooks.PerformanceObserver),
+                    isConnected: true,
+                    entries: [],
+                    originalFunction: testFcn
+                });
+
+                expect(api._functionObservers.get(testFcn.name).observer.observe)
+                    .toHaveBeenCalledTimes(1);
+                expect(api._functionObservers.get(testFcn.name).observer.observe)
+                    .toHaveBeenCalledWith({ entryTypes: ["function"], buffered: true });
+
+                expect(mocks.timerify).toHaveBeenCalledTimes(1);
+                expect(mocks.timerify).toHaveBeenCalledWith(testFcn);
+            });
+
+            it("should return the proper function", () => {
+                expect(api.watch(testFcn)).toBe(timerify);
+                expect((new PerformanceApi(disabled)).watch(testFcn)).toBe(testFcn);
+            });
+
             it("should gather metrics on the watched function", () => pending());
             it("should throw a TimerNameConflictError", () => pending());
             it("should allow the timer to be saved under a different name", () => pending()); // Note this might cause problems with 2
@@ -649,7 +694,8 @@ describe("PerformanceApi", () => {
             it("should return the input function", () => pending());
             it("should return the original function implementation", () => pending());
             it("should disconnect the observer", () => pending()); // Test that calling the function doesn't trigger the observer
-            it("should accept the name of the timer that is unwatched", () => pending());
+            it("should throw a TimerDoesNotExistError if a timer doesn't exist", () => pending());
+            it("should throw a TimerDoesNotExistError if a timer is unwatched", () => pending());
         });
     });
 });
