@@ -41,7 +41,6 @@ interface IPerformanceApiStaticPrivate {
 
 type PerformanceApiType = { [K in keyof PerformanceApi]: PerformanceApi[K] };
 
-
 /**
  * Strongly typed access to the private instance methods of the PerformanceApi. For
  * documentation on these methods, see the corresponding item in the {@link PerformanceApi}.
@@ -684,7 +683,59 @@ describe("PerformanceApi", () => {
                 expect((new PerformanceApi(disabled)).watch(testFcn)).toBe(testFcn);
             });
 
-            it("should gather metrics on the watched function", () => pending());
+            it("should gather metrics on the watched function", () => {
+                api.watch(testFcn);
+
+                const observerFcn = mocks.PerformanceObserver.mock.calls[0][0];
+
+                const listObj = {
+                    getEntriesByName: jest.fn()
+                };
+
+                const entries1: any[] = ["a", "b", "c", "d", "e"];
+                const entries2: any[] = [];
+                const entries3: any[] = ["d", "A", 1, 2, 0];
+
+                listObj.getEntriesByName
+                    .mockReturnValueOnce(entries1)
+                    .mockReturnValueOnce(entries2)
+                    .mockReturnValueOnce(entries3);
+
+                observerFcn(listObj);
+                observerFcn(listObj);
+                observerFcn(listObj);
+
+                expect(api._functionObservers.get(testFcn.name).isConnected).toBe(true);
+                expect(api._functionObservers.get(testFcn.name).entries).toEqual(entries1.concat(entries2, entries3));
+            });
+
+            it("should gather metrics on the watched function with a named timer", () => {
+                const key = "MAP KEY";
+
+                api.watch(testFcn, key);
+
+                const observerFcn = mocks.PerformanceObserver.mock.calls[0][0];
+
+                const listObj = {
+                    getEntriesByName: jest.fn()
+                };
+
+                const entries1: any[] = ["Sidney Crosby", "Jake Guentzel", "Justin Schultz"];
+                const entries2: any[] = ["87", "59", "4"];
+                const entries3: any[] = [];
+
+                listObj.getEntriesByName
+                    .mockReturnValueOnce(entries1)
+                    .mockReturnValueOnce(entries2)
+                    .mockReturnValueOnce(entries3);
+
+                observerFcn(listObj);
+                observerFcn(listObj);
+                observerFcn(listObj);
+
+                expect(api._functionObservers.get(key).isConnected).toBe(true);
+                expect(api._functionObservers.get(key).entries).toEqual(entries1.concat(entries2, entries3));
+            });
 
             it("should throw a TimerNameConflictError", () => {
                 api.watch(testFcn);
