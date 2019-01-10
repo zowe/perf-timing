@@ -27,7 +27,7 @@ import * as perfHooks from "perf_hooks";
 import * as os from "os";
 
 import { randomHexString, randomInteger, randomNumber, getMockWrapper } from "../../../../__tests__/utilities";
-import { PerformanceNotCapturedError } from "../errors";
+import { PerformanceNotCapturedError, TimerNameConflictError } from "../errors";
 
 /**
  * Strongly typed access to the private static methods of the PerformanceApi. For
@@ -685,9 +685,30 @@ describe("PerformanceApi", () => {
             });
 
             it("should gather metrics on the watched function", () => pending());
-            it("should throw a TimerNameConflictError", () => pending());
-            it("should allow the timer to be saved under a different name", () => pending()); // Note this might cause problems with 2
-                                                                                               // functions of the same name so we get to test it
+
+            it("should throw a TimerNameConflictError", () => {
+                api.watch(testFcn);
+
+                expect(mocks.timerify).toHaveBeenCalled();
+
+                mocks.timerify.mockClear();
+
+                expect(() => {
+                    api.watch(testFcn);
+                }).toThrowError(TimerNameConflictError);
+
+                expect(mocks.timerify).not.toHaveBeenCalled();
+            });
+
+            it("should allow the timer to be saved under a different name", () => {
+                expect(api.watch(testFcn)).toBe(timerify);
+                expect(api.watch(testFcn, "DUMMY NAME")).toBe(timerify);
+
+                expect(mocks.timerify).toHaveBeenCalledTimes(2);
+                expect(api._functionObservers.size).toBe(2);
+                expect(api._functionObservers.has("DUMMY NAME")).toBe(true);
+                expect(api._functionObservers.has(testFcn.name)).toBe(true);
+            });
         });
 
         describe("unwatching a function", () => {
