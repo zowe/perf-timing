@@ -275,12 +275,31 @@ describe("PerformanceApi", () => {
         });
         beforeEach(() => {
             mocks.aggregateData.mockClear();
-            mocks.aggregateData.mockImplementation(() => undefined);
+            mocks.aggregateData.mockImplementation((parm) => parm);
         });
         afterAll(() => mocks.aggregateData.mockRestore());
 
         describe("getMetrics", () => {
-            it("should return gathered metrics", () => pending());
+            it("should return gathered metrics", () => {
+                const api: IPerformanceApiPrivate = new PerformanceApi(getManager("GetMetrics")) as any;
+
+                (api._functionObservers as any) = "Function Observers Map";
+                (api._measurementObservers as any) = "Measurement Observers Map";
+
+                const result = api.getMetrics();
+
+                // Check that the aggregate data was called with the correct functions
+                expect(mocks.aggregateData).toHaveBeenCalledWith(api._functionObservers);
+                expect(mocks.aggregateData).toHaveBeenCalledWith(api._measurementObservers);
+                expect(mocks.aggregateData).toHaveBeenCalledTimes(2);
+
+                // Check that the output of the function remains unchanged
+                expect(result).toEqual({
+                    functions: api._functionObservers,
+                    measurements: api._measurementObservers
+                });
+            });
+
             it("should throw PerformanceNotCapturedError", () => {
                 const api = new PerformanceApi(getManager("NotEnabled", false));
 

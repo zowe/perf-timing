@@ -594,8 +594,8 @@ export class PerformanceApi implements IPerformanceApi {
             if (name == null) {
                 name = fn.name;
             }
-
-            // @TODO allow for a name to be reconnected if the observer has been disconnected.
+            // @FUTURE Remap fn.name to the name passed into the function.
+            // @FUTURE allow for a name to be reconnected if the observer has been disconnected.
             // Throw an error if the timer already exists in the map.
             if (this._functionObservers.has(name)) {
                 throw new PerformanceApi._errors.TimerNameConflictError(name);
