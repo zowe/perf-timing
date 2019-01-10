@@ -487,7 +487,7 @@ export class PerformanceApi implements IPerformanceApi {
 
             const timerRef = this._functionObservers.get(timer);
 
-            if (timerRef !== undefined) {
+            if (timerRef !== undefined && timerRef.isConnected) {
                 timerRef.observer.disconnect();
                 timerRef.isConnected = false;
                 return timerRef.originalFunction as T;
