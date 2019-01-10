@@ -27,7 +27,7 @@ import * as perfHooks from "perf_hooks";
 import * as os from "os";
 
 import { getMockWrapper, randomHexString, randomInteger, randomNumber } from "../../../../__tests__/utilities";
-import { PerformanceNotCapturedError, TimerNameConflictError, TimerDoesNotExistError } from "../errors";
+import { PerformanceNotCapturedError, TimerDoesNotExistError, TimerNameConflictError } from "../errors";
 
 /**
  * Strongly typed access to the private static methods of the PerformanceApi. For
