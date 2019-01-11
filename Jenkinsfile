@@ -8,6 +8,5 @@ node('ca-jenkins-agent') {
     stage('setup 3') {
         echo "this will do something..."
         sh "ls -al"
-        echo "${CHANGE_TITLE}"
     }
 }
