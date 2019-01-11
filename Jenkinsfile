@@ -1,6 +1,4 @@
 @Library('shared-pipelines@zowe/zowe-cli/139_declarative-to-scripted') import org.zowe.pipelines.NodeJS
 
-node {
-    def nodejs = new NodeJS(this)
-    nodejs.setup('this is a test string')
-}
+def nodejs = new NodeJS(this)
+nodejs.setup('this is a test string')
