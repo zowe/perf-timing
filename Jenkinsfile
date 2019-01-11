@@ -2,5 +2,5 @@
 
 node('ca-jenkins-agent') {
     def nodejs = new NodeJS(this)
-    nodejs.setup('this is a test string')
+    nodejs.setup()
 }
