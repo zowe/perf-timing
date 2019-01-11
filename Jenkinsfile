@@ -15,5 +15,16 @@ node('ca-jenkins-agent') {
         master: 'daily'
     ]
 
+    nodejs.gitConfig = [
+        user: 'zowe-robot',
+        email: 'zowe.robot@gmail.com',
+        credentialId: 'zowe-robot-github'
+    ]
+
+    nodejs.publishConfig = [
+        email: nodejs.gitConfig.email,
+        credentialId: 'GizaArtifactory'
+    ]
+
     nodejs.setup()
 }
