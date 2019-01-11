@@ -1,5 +1,5 @@
 ---
-name: Feature Proposal
+name: Feature proposal
 about: Formal proposal for a new feature
 title: "[PROPOSAL]"
 labels: enhancement

@@ -1,6 +1,6 @@
 {
   "name": "@zowe/perf-timing",
-  "version": "1.0.0-next.201812071838",
+  "version": "1.0.0-alpha.201812071838",
   "description": "Wrapper around the Node JS Performance Timing APIs",
   "license": "EPL-2.0",
   "repository": "https://github.com/zowe/perf-timing",
@@ -20,74 +20,46 @@
   "typings": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "npm run lint:src && npm run lint:tests",
-    "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\"",
+    "build:rules": "tsc --build ./lint-rules/tsconfig.json",
+    "predoc": "ts-node ./docs/build-utilities/typedoc-includes/buildIncludes.ts",
+    "doc": "ncp ./docs/build-utilities/typedoc-includes/resolved/README.md ./README.md && npm run typedoc",
+    "typedoc": "typedoc --options ./typedoc.json --internal-aliases external --external-aliases internal --plugin \"typedoc-plugin-example-tag,typedoc-plugin-nojekyll,typedoc-plugin-internal-external\"",
+    "lint": "npm run lint:rules && npm run lint:src && npm run lint:tests",
+    "lint:src": "tslint --format stylish -c ./tslint-src.json \"src/**/*.ts\" --project \"tsconfig.json\"",
     "lint:tests": "tslint --format stylish -c ./tslint-tests.json \"**/__tests__/**/*.ts\"",
-    "watch": "gulp watch"
+    "lint:rules": "tslint --format stylish -c ./lint-rules/tslint.json \"./lint-rules/src/**/*.ts\" --project ./lint-rules/tsconfig.json",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:integration": "env-cmd ./__tests__/config/integration/.env.js --no-override jest -c ./__tests__/config/integration/jest.config.json",
+    "test:unit": "env-cmd ./__tests__/config/unit/.env.js --no-override jest -c ./__tests__/config/unit/jest.config.json"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fs-extra": "7.0.1",
+    "pkg-up": "2.0.0"
+  },
   "devDependencies": {
-    "@types/jest": "23.3.9",
+    "@types/fs-extra": "5.0.4",
+    "@types/jest": "23.3.11",
     "@types/node": "8.10.37",
+    "@types/pkg-up": "2.0.0",
+    "env-cmd": "^8.0.2",
     "jest": "23.6.0",
-    "jest-environment-node": "23.4.0",
-    "jest-environment-node-debug": "2.0.0",
     "jest-html-reporter": "2.4.2",
     "jest-junit": "5.2.0",
-    "jsdoc": "3.5.5",
-    "ts-jest": "23.10.4",
+    "jest-stare": "^1.9.1",
+    "ncp": "^2.0.0",
+    "ts-jest": "23.10.5",
+    "ts-node": "7.0.1",
     "tslint": "5.11.0",
+    "tslint-consistent-codestyle": "1.14.1",
+    "tslint-eslint-rules": "5.4.0",
     "typedoc": "0.13.0",
-    "typescript": "3.1.6"
+    "typedoc-plugin-example-tag": "1.0.2",
+    "typedoc-plugin-internal-external": "1.0.10",
+    "typedoc-plugin-nojekyll": "1.0.1",
+    "typedoc-plugin-sourcefile-url": "1.0.3",
+    "typescript": "3.2.1"
   },
   "engines": {
     "node": ">=8.5.0"
-  },
-  "jest-html-reporter": {
-    "pageTitle": "Perf Timing Tests",
-    "outputPath": "__tests__/__results__/unit/results.html",
-    "includeFailureMsg": true,
-    "executionMode": "reporter"
-  },
-  "jest-junit": {
-    "output": "./__tests__/__results__/junit/junit.xml"
-  },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "__tests__/__snapshots__/"
-    ],
-    "transform": {
-      ".(ts)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testResultsProcessor": "jest-junit",
-    "reporters": [
-      "default",
-      "jest-html-reporter"
-    ],
-    "testRegex": "(test|spec)\\.ts$",
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/__tests__/__results__"
-    ],
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "packages/**/*.ts",
-      "!**/__tests__/**",
-      "!packages/**/doc/**/I*.ts",
-      "!**/index.ts",
-      "!__tests__/"
-    ],
-    "mapCoverage": true,
-    "collectCoverage": false,
-    "coverageReporters": [
-      "json",
-      "lcov",
-      "text",
-      "cobertura"
-    ],
-    "coverageDirectory": "<rootDir>/__tests__/__results__/unit/coverage"
   }
 }

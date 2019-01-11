@@ -7,11 +7,6 @@
 def TEST_RESULTS_FOLDER = "__tests__/__results__/ci"
 
 /**
- * The location of the unit test results
- */
-def UNIT_RESULTS = "${TEST_RESULTS_FOLDER}/unit"
-
-/**
  * The location of the integration test results
  */
 def INTEGRATION_RESULTS = "${TEST_RESULTS_FOLDER}/integration"
@@ -202,6 +197,39 @@ pipeline {
         /************************************************************************
          * STAGE
          * -----
+         * Lint
+         *
+         * TIMEOUT
+         * -------
+         * 10 Minutes
+         *
+         * EXECUTION CONDITIONS
+         * --------------------
+         * - SHOULD_BUILD is true
+         * - The build is still successful
+         *
+         * DESCRIPTION
+         * -----------
+         * Executes the `npm run lint` command to generate the application code.
+         *
+         ************************************************************************/
+        stage('Lint') {
+            when {
+                expression {
+                    return SHOULD_BUILD == 'true'
+                }
+            }
+            steps {
+                timeout(time: 10, unit: 'MINUTES') {
+                    echo 'Lint'
+                    sh 'npm run lint'
+                }
+            }
+        }
+
+        /************************************************************************
+         * STAGE
+         * -----
          * Build
          *
          * TIMEOUT
@@ -254,26 +282,9 @@ pipeline {
          *
          * ENVIRONMENT VARIABLES
          * ---------------------
-         * JEST_JUNIT_OUTPUT:
-         * Configures the jest junit reporter's output location.
-         *
-         * JEST_SUITE_NAME:
-         * Configures the test suite name.
-         *
-         * JEST_JUNIT_ANCESTOR_SEPARATOR
-         * Configures the separator used for nested describe blocks.
-         *
-         * JEST_JUNIT_CLASSNAME:
-         * Configures how test class names are output.
-         *
-         * JEST_JUNIT_TITLE:
-         * Configures the title of the tests.
-         *
-         * JEST_HTML_REPORTER_OUTPUT_PATH:
-         * Configures the jest html reporter's output location.
-         *
-         * JEST_HTML_REPORTER_PAGE_TITLE:
-         * Configures the jset html reporter's page title.
+         * TEST_RESULTS:
+         * A constant value that indicates where test results are output. This
+         * directory is determined by the unit test configuration.
          *
          * DESCRIPTION
          * -----------
@@ -286,64 +297,60 @@ pipeline {
          * HTML: Unit Test Report
          * HTML: Unit Test Code Coverage Report
          ************************************************************************/
-        // stage('Test: Unit') {
-        //     when {
-        //         expression {
-        //             return SHOULD_BUILD == 'true'
-        //         }
-        //     }
-        //     environment {
-        //         JEST_JUNIT_OUTPUT = "${UNIT_RESULTS}/junit.xml"
-        //         JEST_SUITE_NAME = "Unit Tests"
-        //         JEST_JUNIT_ANCESTOR_SEPARATOR = " > "
-        //         JEST_JUNIT_CLASSNAME="Unit.{classname}"
-        //         JEST_JUNIT_TITLE="{title}"
-        //         JEST_HTML_REPORTER_OUTPUT_PATH = "${UNIT_RESULTS}/index.html"
-        //         JEST_HTML_REPORTER_PAGE_TITLE = "${BRANCH_NAME} - Unit Test"
-        //     }
-        //     steps {
-        //         timeout(time: 10, unit: 'MINUTES') {
-        //             echo 'Unit Test'
-        //             sh "npm run test:unit"
+        stage('Test: Unit') {
+            when {
+                expression {
+                    return SHOULD_BUILD == 'true'
+                }
+            }
+            environment {
+                TEST_RESULTS = "__tests__/__results__/unit"
+            }
+            steps {
+                timeout(time: 10, unit: 'MINUTES') {
+                    echo 'Unit Test'
+                    sh "npm run test:unit"
 
-        //             // Capture test report
-        //             junit JEST_JUNIT_OUTPUT
+                    // Capture test report
+                    junit "${TEST_RESULTS}/junit/junit.xml"
 
-        //             cobertura autoUpdateHealth: false,
-        //                     autoUpdateStability: false,
-        //                     coberturaReportFile: '__tests__/__results__/unit/coverage/cobertura-coverage.xml',
-        //                     conditionalCoverageTargets: '70, 0, 0',
-        //                     failUnhealthy: false,
-        //                     failUnstable: false,
-        //                     lineCoverageTargets: '80, 0, 0',
-        //                     maxNumberOfBuilds: 20,
-        //                     methodCoverageTargets: '80, 0, 0',
-        //                     onlyStable: false,
-        //                     sourceEncoding: 'ASCII',
-        //                     zoomCoverageChart: false
+                    cobertura autoUpdateHealth: true,
+                            autoUpdateStability: true,
+                            coberturaReportFile: "${TEST_RESULTS}/coverage/cobertura-coverage.xml",
+                            classCoverageTargets: '85, 80, 75',
+                            conditionalCoverageTargets: '70, 65, 60',
+                            failUnhealthy: false,
+                            failUnstable: false,
+                            fileCoverageTargets: '100, 95, 90',
+                            lineCoverageTargets: '80, 70, 50',
+                            maxNumberOfBuilds: 20,
+                            methodCoverageTargets: '80, 70, 50',
+                            onlyStable: false,
+                            sourceEncoding: 'ASCII',
+                            zoomCoverageChart: false
 
 
-        //             // Publish HTML report
-        //             publishHTML(target: [
-        //                     allowMissing         : false,
-        //                     alwaysLinkToLastBuild: true,
-        //                     keepAll              : true,
-        //                     reportDir            : UNIT_RESULTS,
-        //                     reportFiles          : 'index.html',
-        //                     reportName           : 'Imperative - Unit Test Report'
-        //             ])
+                    // Publish HTML report
+                    publishHTML(target: [
+                            allowMissing         : false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll              : true,
+                            reportDir            : "${TEST_RESULTS}/html",
+                            reportFiles          : 'index.html',
+                            reportName           : 'Imperative - Unit Test Report'
+                    ])
 
-        //             publishHTML(target: [
-        //                     allowMissing         : false,
-        //                     alwaysLinkToLastBuild: true,
-        //                     keepAll              : true,
-        //                     reportDir            : "__tests__/__results__/unit/coverage/lcov-report",
-        //                     reportFiles          : 'index.html',
-        //                     reportName           : 'Imperative - Unit Test Coverage Report'
-        //             ])
-        //         }
-        //     }
-        // }
+                    publishHTML(target: [
+                            allowMissing         : false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll              : true,
+                            reportDir            : "${TEST_RESULTS}/coverage/lcov-report",
+                            reportFiles          : 'index.html',
+                            reportName           : 'Imperative - Unit Test Coverage Report'
+                    ])
+                }
+            }
+        }
 
         /************************************************************************
          * STAGE
@@ -445,7 +452,7 @@ pipeline {
         /************************************************************************
          * STAGE
          * -----
-         * Bump Pre-release Version
+         * Create Release Build
          *
          * TIMEOUT
          * -------
@@ -460,7 +467,8 @@ pipeline {
          * DESCRIPTION
          * -----------
          * Bumps the pre-release version in preparation for publishing to an npm
-         * registry. It will clean out any pending changes and switch to the real
+         * registry and updates the code documentation using `npm run typedoc`.
+         * It will clean out any pending changes and switch to the real
          * branch that was published (currently the pipeline would be in a
          * detached HEAD at the commit) before executing the npm command to bump
          * the version.
@@ -481,7 +489,7 @@ pipeline {
          *         Commit Message:
          *         Bumped pre-release version <VERSION_HERE> [ci skip]
          ************************************************************************/
-        stage('Bump Pre-release Version') {
+        stage('Create Release Build') {
             when {
                 allOf {
                     expression {
@@ -497,12 +505,13 @@ pipeline {
             }
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
-                    echo "Bumping Version"
+                    echo "Cleaning Repo"
 
                     // Blow away any pending changes and pull down the master branch...
                     // this should be the same as our current commit since concurrency builds are turned
                     // off for that branch
                     sh "git reset --hard HEAD"
+                    sh "git clean -f"
                     sh "git checkout ${MASTER_BRANCH}"
 
                     // Make sure that the revision of the build and the current revision of the MASTER_BRANCH match
@@ -520,11 +529,17 @@ pipeline {
                     sh "git config user.email \"${GIT_USER_EMAIL}\""
                     sh "git config push.default simple"
 
+                    // Build the documentation before comitting
+                    echo "Building Documentation"
+                    sh "npm run doc"
+
+                    sh "git add ."
+
                     // This script block does the version bump, and a git commit and tag
                     script {
                         def baseVersion = sh returnStdout: true, script: 'node -e "console.log(require(\'./package.json\').version.split(\'-\')[0])"'
-                        def preReleaseVersion = baseVersion.trim() + "-next." + new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC")) 
-                        sh "npm version ${preReleaseVersion} -m \"Bumped pre-release version to ${preReleaseVersion} [ci skip]\""
+                        def preReleaseVersion = baseVersion.trim() + "-alpha." + new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("UTC")) 
+                        sh "npm version ${preReleaseVersion} --force -m \"Bumped pre-release version to ${preReleaseVersion} [ci skip]\""
                     }
 
                     // For debugging purposes
@@ -607,7 +622,7 @@ pipeline {
                         else{
                             withCredentials([usernamePassword(credentialsId: ARTIFACTORY_CREDENTIALS_ID, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                                 sh "expect -f ./jenkins/npm_login.expect $USERNAME $PASSWORD \"$ARTIFACTORY_EMAIL\""
-                                sh 'npm publish --tag beta'
+                                sh 'npm publish --tag daily'
                                 sh 'npm logout || exit 0'
                             }
                         }
@@ -647,7 +662,7 @@ pipeline {
                         def subject = "${currentBuild.currentResult}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
                         def consoleOutput = """
                         <p>Branch: <b>${BRANCH_NAME}</b></p>
-                        <p>Check console output at "<a href="${RUN_DISPLAY_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>
+                        <p>Check console output at <a href="${RUN_DISPLAY_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
                         """
 
                         def details = ""
@@ -698,6 +713,7 @@ pipeline {
                                     subject: subject,
                                     to: recipients,
                                     body: "${details} ${consoleOutput}",
+                                    mimeType: "text/html",
                                     recipientProviders: [[$class: 'DevelopersRecipientProvider'],
                                                          [$class: 'UpstreamComitterRecipientProvider'],
                                                          [$class: 'CulpritsRecipientProvider'],

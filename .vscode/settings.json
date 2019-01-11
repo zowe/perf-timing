@@ -1,0 +1,57 @@
+{
+    "psi-header.templates": [
+        {
+            "language": "typescript",
+            "template": [
+                " This program and the accompanying materials are made available under the terms of the",
+                " Eclipse Public License v2.0 which accompanies this distribution, and is available at",
+                " https://www.eclipse.org/legal/epl-v20.html",
+                "",
+                " SPDX-License-Identifier: EPL-2.0",
+                "",
+                " Copyright Contributors to the Zowe Project.",
+                ""
+            ]
+        }
+    ],
+    "psi-header.lang-config": [
+        {
+            "begin": "/*!",
+            "language": "typescript",
+            "prefix": " *",
+            "forceToTop": true,
+            "blankLinesAfter": 1
+        }
+    ],
+    "psi-header.changes-tracking": {
+        "autoHeader": "autoSave",
+        "include": ["typescript"]
+    },
+    "todo-tree.defaultHighlight": {
+        "foreground": "yellow",
+        "icon": "alert",
+        "type": "text"
+    },
+    "todo-tree.customHighlight": {
+        "@?FIXME": {
+            "foreground": "red",
+            "icon": "x"
+        },
+        "@?FUTURE": {
+            "foreground": "cyan",
+            "icon": "check"
+        }
+    },
+    "todo-tree.tags": [
+        "@?TODO",
+        "@?FIXME",
+        "@?FUTURE"
+    ],
+    "cSpell.words": [
+        "timerified",
+        "timerifing",
+        "timerify",
+        "untimerify"
+    ],
+    "jest.pathToJest": "npm run test:unit -- --coverage=false"
+}

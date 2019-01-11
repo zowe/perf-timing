@@ -1,0 +1,8 @@
+{
+    "moduleFileExtensions": ["ts","js"],
+    "reporters": ["default", "jest-junit", "jest-stare"],
+    "testEnvironment": "node",
+    "transform": {
+        ".(ts)": "ts-jest"
+    }
+}

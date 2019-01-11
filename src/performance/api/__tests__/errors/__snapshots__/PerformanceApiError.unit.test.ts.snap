@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PerformanceApiError should remain unchanged 1`] = `
+[Error: Performance Error
+This message should remain unchanged]
+`;

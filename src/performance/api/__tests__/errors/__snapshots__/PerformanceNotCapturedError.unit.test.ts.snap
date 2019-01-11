@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PerformanceNotCapturedError should remain unchanged 1`] = `
+[Error: Performance Error
+Unable to access performance metrics when performance monitoring is not enabled!]
+`;

@@ -1,0 +1,1064 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>PerformanceApi | @zowe/perf-timing</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@zowe/perf-timing</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" />
+							<label class="tsd-widget" for="tsd-filter-externals">Internals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="performanceapi.html">PerformanceApi</a>
+				</li>
+			</ul>
+			<h1>Class PerformanceApi</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The underlying api that provides hooks into
+						<a href="https://nodejs.org/api/perf_hooks.html" class="external">Node&#39;s Performance Timing APIs</a>.</p>
+					</div>
+					<p>Use this class in place of relying on Node&#39;s experimental APIs.</p>
+					<p><strong>NOTE:</strong></p>
+					<p>This class is not intended to be instantiated directly. It should be accessed
+						through the <a href="../globals.html#perftiming">PerfTiming</a> variable instantiated by this package. Failure
+					to do so will result in lost metrics in the final file output.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">PerformanceApi</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/iperformanceapi.html" class="tsd-signature-type">IPerformanceApi</a></li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="performanceapi.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="performanceapi.html#_functionobservers" class="tsd-kind-icon">_function<wbr>Observers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="performanceapi.html#_manager" class="tsd-kind-icon">_manager</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="performanceapi.html#_measurementobservers" class="tsd-kind-icon">_measurement<wbr>Observers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external"><a href="performanceapi.html#_perfhooks" class="tsd-kind-icon">_perf<wbr>Hooks</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="performanceapi.html#timerify" class="tsd-kind-icon">timerify</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="performanceapi.html#untimerify" class="tsd-kind-icon">untimerify</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external"><a href="performanceapi.html#_errorimport" class="tsd-kind-icon">_error<wbr>Import</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-external">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external"><a href="performanceapi.html#_errors" class="tsd-kind-icon">_errors</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="performanceapi.html#_addpackagenamespace" class="tsd-kind-icon">_add<wbr>Package<wbr>Namespace</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#clearmarks" class="tsd-kind-icon">clear<wbr>Marks</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#getmetrics" class="tsd-kind-icon">get<wbr>Metrics</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#getnodetiming" class="tsd-kind-icon">get<wbr>Node<wbr>Timing</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#getsysinfo" class="tsd-kind-icon">get<wbr>Sys<wbr>Info</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#mark" class="tsd-kind-icon">mark</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#measure" class="tsd-kind-icon">measure</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#unwatch" class="tsd-kind-icon">unwatch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="performanceapi.html#watch" class="tsd-kind-icon">watch</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private tsd-is-static tsd-is-external"><a href="performanceapi.html#_aggregatedata" class="tsd-kind-icon">_aggregate<wbr>Data</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Performance<wbr>Api<span class="tsd-signature-symbol">(</span>_manager<span class="tsd-signature-symbol">: </span><a href="../interfaces/iperformanceapimanager.html" class="tsd-signature-type">IPerformanceApiManager</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="performanceapi.html" class="tsd-signature-type">PerformanceApi</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L152">performance/api/PerformanceApi.ts:152</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Construct the performance API. The constructor is not intended to be used
+									by any class except for the <a href="performanceapimanager.html">PerformanceApiManager</a> of this class.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>_manager: <a href="../interfaces/iperformanceapimanager.html" class="tsd-signature-type">IPerformanceApiManager</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The manager of this API class.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="performanceapi.html" class="tsd-signature-type">PerformanceApi</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_functionobservers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _function<wbr>Observers</h3>
+					<div class="tsd-signature tsd-kind-icon">_function<wbr>Observers<span class="tsd-signature-symbol">:</span> <a href="../globals.html#collectionmap" class="tsd-signature-type">CollectionMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/ifunctionobserver.html" class="tsd-signature-type">IFunctionObserver</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Map()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L136">performance/api/PerformanceApi.ts:136</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Internal map of all created function timers. The key represents the name
+							and the value is an <a href="../interfaces/ifunctionobserver.html">IFunctionObserver</a> instance.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_manager" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _manager</h3>
+					<div class="tsd-signature tsd-kind-icon">_manager<span class="tsd-signature-symbol">:</span> <a href="../interfaces/iperformanceapimanager.html" class="tsd-signature-type">IPerformanceApiManager</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L162">performance/api/PerformanceApi.ts:162</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The manager of this API class.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_measurementobservers" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _measurement<wbr>Observers</h3>
+					<div class="tsd-signature tsd-kind-icon">_measurement<wbr>Observers<span class="tsd-signature-symbol">:</span> <a href="../globals.html#collectionmap" class="tsd-signature-type">CollectionMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/imeasurementobserver.html" class="tsd-signature-type">IMeasurementObserver</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;new Map()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L144">performance/api/PerformanceApi.ts:144</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Internal map of all created measurement timers. The key represents the name
+							and the value is an <a href="../interfaces/imeasurementobserver.html">IMeasurementObserver</a> instance.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+					<a name="_perfhooks" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _perf<wbr>Hooks</h3>
+					<div class="tsd-signature tsd-kind-icon">_perf<wbr>Hooks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;perf_hooks&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L152">performance/api/PerformanceApi.ts:152</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>This variable holds the import from the Node JS performance hooks
+							library.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="timerify" class="tsd-anchor"></a>
+					<h3>timerify</h3>
+					<div class="tsd-signature tsd-kind-icon">timerify<span class="tsd-signature-symbol">:</span> <a href="performanceapi.html#watch" class="tsd-signature-type">watch</a><span class="tsd-signature-symbol"> =&nbsp;this.watch</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L121">performance/api/PerformanceApi.ts:121</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Created for consistent reference to Node Performance Timing API.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="performanceapi.html#watch">PerformanceApi.watch</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="untimerify" class="tsd-anchor"></a>
+					<h3>untimerify</h3>
+					<div class="tsd-signature tsd-kind-icon">untimerify<span class="tsd-signature-symbol">:</span> <a href="performanceapi.html#unwatch" class="tsd-signature-type">unwatch</a><span class="tsd-signature-symbol"> =&nbsp;this.unwatch</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L128">performance/api/PerformanceApi.ts:128</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Created for consistent reference to Node Performance Timing API.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="performanceapi.html#unwatch">PerformanceApi.unwatch</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
+					<a name="_errorimport" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> _error<wbr>Import</h3>
+					<div class="tsd-signature tsd-kind-icon">_error<wbr>Import<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;C:/Users/WRICH04/Documents/GitHub/perf-timing/src/performance/api/errors/index&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L69">performance/api/PerformanceApi.ts:69</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Cache of loaded error objects. Only populated on first call to <a href="performanceapi.html#_errors">PerformanceApi._errors</a></p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected tsd-is-external">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
+					<a name="_errors" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> _errors</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> _errors<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;C:/Users/WRICH04/Documents/GitHub/perf-timing/src/performance/api/errors/index&quot;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L56">performance/api/PerformanceApi.ts:56</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Internal method for getting the errors that can be thrown. It is smart
+									and will only do the require once and cache the results for later calls.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">&quot;C:/Users/WRICH04/Documents/GitHub/perf-timing/src/performance/api/errors/index&quot;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="_addpackagenamespace" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _add<wbr>Package<wbr>Namespace</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">_add<wbr>Package<wbr>Namespace<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L638">performance/api/PerformanceApi.ts:638</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a namespace scoped string from an input string.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The string to prepend the namespace to.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>The value with the namespace.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="clearmarks" class="tsd-anchor"></a>
+					<h3>clear<wbr>Marks</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clear<wbr>Marks<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L183">performance/api/PerformanceApi.ts:183</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Clears marks created using <a href="performanceapi.html#mark">mark</a>.</p>
+								</div>
+								<p>This method does nothing if the Performance API is not enabled. It also takes advantage
+									of the namespace applied within mark; however, if name is not specified, all marks
+								will be cleared from all package.</p>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_clearmarks_name">https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_clearmarks_name</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the mark to clear. If not specified, all marks are
+										cleared.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getmetrics" class="tsd-anchor"></a>
+					<h3>get<wbr>Metrics</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Metrics<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/imetrics.html" class="tsd-signature-type">IMetrics</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/iperformanceapi.html">IPerformanceApi</a>.<a href="../interfaces/iperformanceapi.html#getmetrics">getMetrics</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L202">performance/api/PerformanceApi.ts:202</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Aggregate metrics that have been captured for this instance of the API
+									and return them back in a data format.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p><a href="performancenotcapturederror.html">PerformanceNotCapturedError</a> when the method is called and performance captures
+										are not enabled.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/imetrics.html" class="tsd-signature-type">IMetrics</a></h4>
+							<p>An object representing metrics that have been prepared to be
+							written to a file.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getnodetiming" class="tsd-anchor"></a>
+					<h3>get<wbr>Node<wbr>Timing</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Node<wbr>Timing<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/inodetiming.html" class="tsd-signature-type">INodeTiming</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/iperformanceapi.html">IPerformanceApi</a>.<a href="../interfaces/iperformanceapi.html#getnodetiming">getNodeTiming</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L223">performance/api/PerformanceApi.ts:223</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the node timing information provided by the underlying node APIs.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p><a href="performancenotcapturederror.html">PerformanceNotCapturedError</a> when the method is called and performance captures
+										are not enabled.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/inodetiming.html" class="tsd-signature-type">INodeTiming</a></h4>
+							<p>The node timing information.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsysinfo" class="tsd-anchor"></a>
+					<h3>get<wbr>Sys<wbr>Info</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Sys<wbr>Info<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/isysteminformation.html" class="tsd-signature-type">ISystemInformation</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/iperformanceapi.html">IPerformanceApi</a>.<a href="../interfaces/iperformanceapi.html#getsysinfo">getSysInfo</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L251">performance/api/PerformanceApi.ts:251</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gathers and returns valuable system information to help understand the environment
+									where the data was captured.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p><a href="performancenotcapturederror.html">PerformanceNotCapturedError</a> when the method is called and performance captures
+										are not enabled.</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/isysteminformation.html" class="tsd-signature-type">ISystemInformation</a></h4>
+							<p>System information formatted in an object ready to write to a file.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="mark" class="tsd-anchor"></a>
+					<h3>mark</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">mark<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L298">performance/api/PerformanceApi.ts:298</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a mark entry in the Performance Timeline. The time between 2 marks
+									created with this function can be measured in the <a href="performanceapi.html#measure">measure</a> function.</p>
+								</div>
+								<p>If performance monitoring is not enabled, this function will do nothing.</p>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_mark_name">https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_mark_name</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the mark to create. This name will be prefixed with
+											the namespace calculated by <a href="performanceapi.html#_addpackagenamespace">_addPackageNamespace</a> to
+											avoid conflicts in the data. This doesn&#39;t change how the mark
+											is referenced. When referencing the mark in the <a href="performanceapi.html#measure">measure</a>
+										function, you must use the name passed into this function.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="measure" class="tsd-anchor"></a>
+					<h3>measure</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">measure<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, startMark<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, endMark<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L375">performance/api/PerformanceApi.ts:375</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The measure method is used to create a new measurement between 2 marks.</p>
+								</div>
+								<p>The measurement name does not have to be unique. Using the same name will add another entry
+									to the corresponding name present in the <a href="../interfaces/imetrics.html#measurements">IMetrics.measurements</a> array in the
+								formatted run output.</p>
+								<p>Also, just like <a href="performanceapi.html#mark">mark</a> and <a href="performanceapi.html#clearmarks">clearMarks</a> the names passed into this function are
+									prefixed with a package namespace. This is due to the possibility of multiple instances of
+									the performance api being present because of being part of multiple dependencies of a project.
+								The namespace will attempt to reduce the clashes between packages.</p>
+								<p><strong>For example:</strong>
+								Assume that the measure method was called like so:</p>
+								<pre><code class="language-TypeScript"><span class="hljs-comment">// marks were created above</span>
+<span class="hljs-comment">// api instantiated as api</span>
+api.measure(<span class="hljs-string">"name1"</span>, <span class="hljs-string">"start1"</span>, <span class="hljs-string">"end1"</span>);
+api.measure(<span class="hljs-string">"name2"</span>, <span class="hljs-string">"start2"</span>, <span class="hljs-string">"end2"</span>);
+api.measure(<span class="hljs-string">"name2"</span>, <span class="hljs-string">"start3"</span>, <span class="hljs-string">"end3"</span>);
+api.measure(<span class="hljs-string">"name1"</span>, <span class="hljs-string">"start4"</span>, <span class="hljs-string">"end4"</span>);</code></pre>
+								<p>The final result of <a href="performanceapi.html#getmetrics">getMetrics</a> would look something like this:</p>
+								<pre><code class="language-JSON">{
+  <span class="hljs-attr">"measurements"</span>: [
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"name1"</span>,
+      <span class="hljs-attr">"entries"</span>: [
+        {<span class="hljs-attr">"startMark"</span>: <span class="hljs-string">"start1"</span>, <span class="hljs-attr">"endMark"</span>: <span class="hljs-string">"end1"</span>},
+        {<span class="hljs-attr">"startMark"</span>: <span class="hljs-string">"start4"</span>, <span class="hljs-attr">"endMark"</span>: <span class="hljs-string">"end4"</span>}
+      ]
+    },
+    {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"name2"</span>,
+      <span class="hljs-attr">"entries"</span>: [
+        {<span class="hljs-attr">"startMark"</span>: <span class="hljs-string">"start2"</span>, <span class="hljs-attr">"endMark"</span>: <span class="hljs-string">"end2"</span>},
+        {<span class="hljs-attr">"startMark"</span>: <span class="hljs-string">"start3"</span>, <span class="hljs-attr">"endMark"</span>: <span class="hljs-string">"end3"</span>}
+      ]
+    }
+  ]
+}</code></pre>
+								<h4 id="example">Example</h4>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { PerfTiming } <span class="hljs-keyword">from</span> <span class="hljs-string">"@zowe/perf-timing"</span>;
+
+<span class="hljs-comment">// Assume package is example@1.0.0</span>
+
+<span class="hljs-comment">// Tracked internally by node as "example@1.0.0: before loop"</span>
+PerfTiming.api.mark(<span class="hljs-string">"before loop"</span>);
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) {}
+
+<span class="hljs-comment">// Tracked internally by node as "example@1.0.0: after loop"</span>
+PerfTiming.api.mark(<span class="hljs-string">"after loop"</span>); <span class="hljs-comment">// This will be tracked by node as "example@1.0.0: after loop"</span>
+
+<span class="hljs-comment">// References the internally tracked "before loop" and "after loop" marks and creates a measurement</span>
+<span class="hljs-comment">// tracked internally as "example@1.0.0: loop".</span>
+PerfTiming.api.measure(<span class="hljs-string">"loop"</span>, <span class="hljs-string">"before loop"</span>, <span class="hljs-string">"after loop"</span>);</code></pre>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the measurement. Use this to track multiple measurements under
+										the same final array output.</p>
+									</div>
+								</li>
+								<li>
+									<h5>startMark: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the start mark created with <a href="performanceapi.html#mark">mark</a></p>
+									</div>
+								</li>
+								<li>
+									<h5>endMark: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name of the end mark created with <a href="performanceapi.html#mark">mark</a></p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="unwatch" class="tsd-anchor"></a>
+					<h3>unwatch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">unwatch<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L474">performance/api/PerformanceApi.ts:474</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Unwatch a function that was <a href="performanceapi.html#watch">watch</a>ed. It performance is not enabled, it will return
+									the function passed as parameter 1.</p>
+								</div>
+								<p>It is recommended to first check manually if performance is enabled before using the watch
+								and unwatch methods for performance reasons.</p>
+								<h4 id="example-1">Example 1</h4>
+								<pre><code class="language-typescript"><span class="hljs-keyword">import</span> { PerfTiming } <span class="hljs-keyword">from</span> <span class="hljs-string">"@zowe/perf-timing"</span>;
+
+<span class="hljs-keyword">let</span> fn = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-string">"test"</span>;
+
+fn = PerfTiming.api.watch(fn);
+
+fn();
+
+fn = PerfTiming.api.unwatch(fn);</code></pre>
+								<h4 id="example-2">Example 2</h4>
+								<pre><code class="language-typescript"><span class="hljs-comment">// Recommended to check if performance is enabled first due to the need</span>
+<span class="hljs-comment">// to assign values.</span>
+<span class="hljs-keyword">import</span> { PerfTiming } <span class="hljs-keyword">from</span> <span class="hljs-string">"@zowe/perf-timing"</span>;
+
+<span class="hljs-keyword">let</span> fn = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-string">"test"</span>;
+
+<span class="hljs-keyword">if</span> (PerfTiming.enabled) <span class="hljs-comment">// Check if performance is enabled before assigning</span>
+  fn = PerfTiming.api.watch(fn);
+
+fn();
+
+<span class="hljs-keyword">if</span> (PerfTiming.enabled) <span class="hljs-comment">// Check if performance is enabled before assigning</span>
+  fn = PerfTiming.api.unwatch(fn);
+</code></pre>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The function to unwatch.</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The name that the observer was given, only relevant if the observer was given a name
+										on the <a href="performanceapi.html#watch">watch</a>. If omitted, the value of fn.name will be used as the name.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">function</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-siganture">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="watch" class="tsd-anchor"></a>
+					<h3>watch</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">watch<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L588">performance/api/PerformanceApi.ts:588</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Wraps a function in a node monitoring function. This allows metrics to be captured about the
+									watched function.</p>
+								</div>
+								<p>Watching a function allows the collection of the following items:</p>
+								<ul>
+									<li>The total number of calls to the function while watched.</li>
+									<li>The time each individual call took and the parameters sent in.</li>
+									<li>The total time spent in the function across all calls.</li>
+									<li>The average time per function call.</li>
+								</ul>
+								<p><strong>NOTE:</strong></p>
+								<p>For proper time tracking to occur, the watch function will return the original function wrapped
+									in a Node tracking function. It is important that the original implementation of the passed
+									function be set equal to the return value of this method for metrics to be gathered. Unlike
+									most languages, there is no way for a parameter to be truly passed by reference in JavaScript.
+									Had this been the case, this function would have directly modified the reference in the first
+								parameter so no extra work would have to be done by the programmer.</p>
+								<p><strong>NOTE:</strong></p>
+								<p>Since Node only uses the function name as the measurement name, it is recommended to ensure
+									that the fn.name passed into this function is unique compared to all functions that you are
+									watching (including those from other packages). Failure to do so will result in a measurement
+								being applied to multiple watches.</p>
+								<p><strong>For Example:</strong> In the code example below, a call to either of the functions will result
+								in both watches capturing the call.</p>
+								<pre><code class="language-TypeScript"><span class="hljs-keyword">import</span> { PerfTiming } <span class="hljs-keyword">from</span> <span class="hljs-string">"@zowe/perf-timing"</span>;
+
+<span class="hljs-keyword">let</span> fn1 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"fn1"</span>);
+}
+
+<span class="hljs-keyword">let</span> fn2 = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"fn2"</span>);
+}
+
+fn1 = PerfTiming.api.watch(fn1, <span class="hljs-string">"name 1"</span>);
+fn2 = PerfTiming.api.watch(fn2, <span class="hljs-string">"name 2"</span>);
+
+<span class="hljs-comment">// The below line will log fn1 but will trigger a metric entry in the watch</span>
+<span class="hljs-comment">// for both fn1 and fn2 because fn1.name === fn2.name. To counteract this,</span>
+<span class="hljs-comment">// simply choose a different name between the two functions.</span>
+fn1();</code></pre>
+								<p><strong>NOTE:</strong></p>
+								<p>It is recommended to first check manually if performance is enabled before using the watch
+								and unwatch methods for performance reasons.</p>
+								<h4 id="example">Example</h4>
+								<pre><code class="language-typescript"><span class="hljs-comment">// Track time spent in require calls</span>
+<span class="hljs-keyword">import</span> { PerfTiming } <span class="hljs-keyword">from</span> <span class="hljs-string">"@zowe/perf-timing"</span>;
+
+<span class="hljs-keyword">if</span> (PerfTiming.enabled) {
+  <span class="hljs-keyword">const</span> Module = <span class="hljs-built_in">require</span>(<span class="hljs-string">"module"</span>);
+  <span class="hljs-comment">// Store the reference to the original require.</span>
+  <span class="hljs-keyword">const</span> originalRequire = Module.prototype.require;
+
+  <span class="hljs-comment">// Watch a wrapper named function so we can be sure that not just</span>
+  <span class="hljs-comment">// any anonymous function gets checked.</span>
+  Module.prototype.require = PerfTiming.api.timerify(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">NodeModuleLoader</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> originalRequire.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
+  });
+}
+
+<span class="hljs-comment">// Continue your application code. Also note, there is no need to unwatch a function.</span>
+<span class="hljs-comment">// If a function is not unwatched, this will be handled internally by the data collection</span>
+<span class="hljs-comment">// functions.</span></code></pre>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The function to watch. This function will be sent into the
+											<a href="https://nodejs.org/api/perf_hooks.html#perf_hooks_performance_timerify_fn" class="external">Node Timerify</a>
+										function. This will wrap the function passed in a monitoring function.</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An optional name to give the timer. If the name is not specified, then the value
+										of fn.name will be used for tracking.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">function</span></h4>
+							<ul class="tsd-parameters">
+								<li class="tsd-parameter-siganture">
+									<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+										<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+									</ul>
+									<ul class="tsd-descriptions">
+										<li class="tsd-description">
+											<h4 class="tsd-parameters-title">Parameters</h4>
+											<ul class="tsd-parameters">
+												<li>
+													<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+												</li>
+											</ul>
+											<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private tsd-is-static tsd-is-external">
+					<a name="_aggregatedata" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> _aggregate<wbr>Data</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private tsd-is-static tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_aggregate<wbr>Data&lt;T&gt;<span class="tsd-signature-symbol">(</span>map<span class="tsd-signature-symbol">: </span><a href="../globals.html#collectionmap" class="tsd-signature-type">CollectionMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/icollectionobserver.html" class="tsd-signature-type">ICollectionObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/imetric.html" class="tsd-signature-type">IMetric</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/f08ee21/src/performance/api/PerformanceApi.ts#L89">performance/api/PerformanceApi.ts:89</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Aggregate all entries present in a <a href="../globals.html#collectionmap">CollectionMap</a> into an array output.</p>
+								</div>
+								<p>Each item present in the map will correspond to a single entry in the final array output. The
+									strings will now become the name property and each data point will be stored in the final
+									object. The statistical analysis present is generated from the IPerformanceEntry instances
+								present in the entries portion of that element.</p>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/iperformanceentry.html" class="tsd-signature-type">IPerformanceEntry</a></h4>
+									<div class="tsd-comment tsd-typography">
+										<p>The type representing the raw data stored in the observer. It is important that this
+										data extends <a href="../interfaces/iperformanceentry.html">IPerformanceEntry</a> for proper data processing.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>map: <a href="../globals.html#collectionmap" class="tsd-signature-type">CollectionMap</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/icollectionobserver.html" class="tsd-signature-type">ICollectionObserver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A <a href="../globals.html#collectionmap">CollectionMap</a> of observers containing entries to process.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/imetric.html" class="tsd-signature-type">IMetric</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>An array of <a href="../interfaces/imetric.html">IMetric</a> data points representing each key/value present in the
+							CollectionMap.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="performanceapi.html" class="tsd-kind-icon">Performance<wbr>Api</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+								<a href="performanceapi.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="performanceapi.html#_functionobservers" class="tsd-kind-icon">_function<wbr>Observers</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="performanceapi.html#_manager" class="tsd-kind-icon">_manager</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="performanceapi.html#_measurementobservers" class="tsd-kind-icon">_measurement<wbr>Observers</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-external">
+								<a href="performanceapi.html#_perfhooks" class="tsd-kind-icon">_perf<wbr>Hooks</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="performanceapi.html#timerify" class="tsd-kind-icon">timerify</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="performanceapi.html#untimerify" class="tsd-kind-icon">untimerify</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
+								<a href="performanceapi.html#_errorimport" class="tsd-kind-icon">_error<wbr>Import</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-private tsd-is-static tsd-is-external">
+								<a href="performanceapi.html#_errors" class="tsd-kind-icon">_errors</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="performanceapi.html#_addpackagenamespace" class="tsd-kind-icon">_add<wbr>Package<wbr>Namespace</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#clearmarks" class="tsd-kind-icon">clear<wbr>Marks</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#getmetrics" class="tsd-kind-icon">get<wbr>Metrics</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#getnodetiming" class="tsd-kind-icon">get<wbr>Node<wbr>Timing</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#getsysinfo" class="tsd-kind-icon">get<wbr>Sys<wbr>Info</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#mark" class="tsd-kind-icon">mark</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#measure" class="tsd-kind-icon">measure</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#unwatch" class="tsd-kind-icon">unwatch</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="performanceapi.html#watch" class="tsd-kind-icon">watch</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-private tsd-is-static tsd-is-external">
+								<a href="performanceapi.html#_aggregatedata" class="tsd-kind-icon">_aggregate<wbr>Data</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

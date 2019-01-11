@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimerDoesNotExistError should remain unchanged 1`] = `
+[Error: Performance Error
+A function timer with the name "timer-a", does not exist. Please create the timer first.]
+`;

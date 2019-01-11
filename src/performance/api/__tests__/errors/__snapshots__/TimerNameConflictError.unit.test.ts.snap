@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimerNameConflictError should remain unchanged 1`] = `
+[Error: Performance Error
+A timer with the name "timer-b was previously created. Please create unique timer names.]
+`;

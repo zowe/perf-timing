@@ -1,20 +1,45 @@
 {
   "extends": "tslint:latest",
+  "rulesDirectory": ["tslint-consistent-codestyle", "node_modules/tslint-eslint-rules/dist/rules", "./lint-rules/lib"],
   "rules": {
-    "object-literal-sort-keys": false,
-    "ordered-imports": false,
-    "one-line": false,
-    "space-within-parens": false,
-    "no-var-requires": false,
-    "trailing-comma": false,
-    "space-before-function-paren": false,
-    "no-submodule-imports": [
-      true,
-      "csv-parse/lib/sync"
-    ],
+    "completed-docs": true,
+    "indent": false,
+    "jsdoc-format": true,
     "max-line-length": [
       true,
       150
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "protected-static-field",
+          "private-static-field",
+          "public-static-method",
+          "protected-static-method",
+          "private-static-method",
+          "public-instance-field",
+          "protected-instance-field",
+          "private-instance-field",
+          "constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ],
+        "alphabetize": true
+      }
+    ],
+    "naming-convention": [
+      true,
+      {"type": "member", "modifiers": "private", "leadingUnderscore": "require"},
+      {"type": "member", "modifiers": ["static", "readonly"], "format": "UPPER_CASE"},
+      {"type": "member", "modifiers": ["readonly"], "format": "camelCase"},
+      {"type": "class", "modifiers": "abstract", "prefix": "Abstract"}
+    ],
+    "no-consecutive-blank-lines": [
+      true,
+      2
     ],
     "no-magic-numbers": [
       true,
@@ -23,12 +48,40 @@
       1,
       2
     ],
-    "no-consecutive-blank-lines": [
+    "no-redundant-jsdoc": true,
+    "no-static-this": true,
+    "no-submodule-imports": true,
+    "no-unnecessary-class": true,
+    "no-unused": true,
+    "no-var-requires": false,
+    "object-literal-sort-keys": false,
+    "one-line": false,
+    "ordered-imports": [
       true,
-      2
+      {
+        "import-sources-order": "any",
+        "grouped-imports": false
+      }
     ],
     "prefer-conditional-expression": false,
-    "indent": [true, "spaces", 4],
+    "space-before-function-paren": false,
+    "space-within-parens": false,
+    "ter-indent": [true, 4],
+    "trailing-comma": false,
+    "valid-jsdoc": [true, {
+        "prefer": {
+          "return": "returns",
+          "throw": "throws"
+        },
+        "requireReturn": false,
+        "requireParamDescription": true,
+        "requireReturnDescription": true,
+        "matchDescription": "[^.]*\\.(\\r?\\n|$)",
+        "requireParamType": false,
+        "requireReturnType": false
+    }],
+    "valid-license-header": [true, "LICENSE_HEADER"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
     "whitespace": [true, "check-module"]
   },
   "type-check": true

@@ -1,7 +1,10 @@
 {
     "out": "./docs/typedoc/",
     "exclude": "**/__tests__/**",
-    "disableOutputCheck": true,
     "ignoreCompilerErrors": true,
-    "mode": "file"
+    "mode": "file",
+    "plugin": ["typedoc-plugin-example-tag"],
+    "excludeExternals": false,
+    "includes": "./docs/build-utilities/typedoc-includes/resolved",
+    "theme": "./docs/build-utilities/typedoc-theme"
 }

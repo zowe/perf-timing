@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PerformanceApi gathering metrics getNodeTiming should return node timing information 1`] = `
+Object {
+  "bootstrapComplete": 0,
+  "duration": 1,
+  "loopExit": 3,
+  "loopStart": 2,
+  "name": "Some Name",
+  "nodeStart": 4,
+  "startTime": 5,
+  "v8Start": 6,
+}
+`;
+
+exports[`PerformanceApi gathering metrics getSysInfo should return system information 1`] = `
+Object {
+  "argv": Array [
+    "a",
+    "b",
+    "c",
+    "d",
+  ],
+  "cpus": "CPU Information",
+  "loadavg": "Load Avg Information",
+  "memory": Object {
+    "free": 1,
+    "total": 1,
+    "usage": 0,
+    "usagePercentage": 0,
+  },
+  "network": Object {
+    "hostname": "Hostname Information",
+    "interfaces": "Network Interfaces Information",
+  },
+  "os": "OS Type Information OS Arch Information OS Release Information",
+  "platform": "OS Platform Information",
+  "shell": "User Shell Information",
+  "uptime": "Uptime Information",
+}
+`;
+
+exports[`PerformanceApi point to point measurement measure should collect metrics from the observer: measure data collection is unchanged 1`] = `
+Array [
+  Object {
+    "duration": 456,
+    "endMarkName": "Mario: End Mark",
+    "name": "Measure Name",
+    "startMarkName": "Mario: Start Mark",
+    "startTime": 123,
+  },
+  Object {
+    "duration": 123,
+    "endMarkName": "Mario: End Mark",
+    "name": "Measure Name",
+    "startMarkName": "Mario: Start Mark",
+    "startTime": 789,
+  },
+]
+`;
