@@ -12,7 +12,7 @@ You install the utility as a dependency using npm: `npm install @zowe/perf-timin
 
 ## Overview
 
-the perf-timing library provides functions that are called within a node application. The functions gather metrics on the run times of the application. The utility can capture the following metrics (this is not an exhaustive list):
+The perf-timing library provides functions that are called within a node application. The functions gather metrics on the run times of the application. The utility can capture the following metrics (this is not an exhaustive list):
 
 - The length of time that an application spends requiring other modules before execution.
 - The length of time that elapsed in a block of an application.

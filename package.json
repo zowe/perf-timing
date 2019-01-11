@@ -1,6 +1,6 @@
 {
   "name": "@zowe/perf-timing",
-  "version": "1.0.0-alpha.201901111518",
+  "version": "1.0.0-alpha.201901111613",
   "description": "Wrapper around the Node JS Performance Timing APIs",
   "license": "EPL-2.0",
   "repository": "https://github.com/zowe/perf-timing",
