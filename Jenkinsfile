@@ -28,10 +28,10 @@ node('ca-jenkins-agent') {
 
     nodejs.setup()
 
-    nodejs.createStage("lint", {
+    nodejs.createStage(name: "lint", stage: {
         sh "npm run lint"
     })
 
-    nodejs.buildStage(name: "test", test: "hello")
+    nodejs.buildStage()
     nodejs.testStage()
 }
