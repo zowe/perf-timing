@@ -32,6 +32,6 @@ node('ca-jenkins-agent') {
         sh "npm run lint"
     })
 
-    nodejs.buildStage()
+    nodejs.buildStage(name: "test", test: "hello")
     nodejs.testStage()
 }
