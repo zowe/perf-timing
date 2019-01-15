@@ -13,7 +13,8 @@ node('ca-jenkins-agent') {
     ]
 
     nodejs.protectedBranches = [
-        master: 'daily'
+        master: 'daily',
+        email_notify: 'test'
     ]
 
     nodejs.gitConfig = [
