@@ -4,9 +4,8 @@ node('ca-jenkins-agent') {
     def nodejs = new NodeJS(this)
 
     nodejs.adminEmails = [
-        // "christopher.wright@broadcom.com",
+        "christopher.wright@broadcom.com",
         // "fernando.rijocedeno@broadcom.com",
-        "christopher.boehm@broadcom.com" //,
         // "michael.bauer2@broadcom.com",
         // "mark.ackert@broadcom.com",
         // "daniel.kelosky@broadcom.com"
@@ -34,7 +33,7 @@ node('ca-jenkins-agent') {
     })
 
     nodejs.buildStage()
-    nodejs.testStage()
+    // nodejs.testStage()
 
     nodejs.end()
 }
