@@ -30,6 +30,7 @@ node('ca-jenkins-agent') {
 
     nodejs.createStage(name: "lint", stage: {
         sh "npm run lint"
+        error "Hiya"
     })
 
     nodejs.buildStage()
