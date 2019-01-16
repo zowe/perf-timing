@@ -35,4 +35,6 @@ node('ca-jenkins-agent') {
 
     nodejs.buildStage()
     // nodejs.testStage()
+
+    nodejs.end()
 }
