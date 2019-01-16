@@ -6,7 +6,6 @@ node('ca-jenkins-agent') {
     nodejs.adminEmails = [
         "christopher.wright@broadcom.com",
         // "fernando.rijocedeno@broadcom.com",
-        // "christopher.boehm@broadcom.com" //,
         // "michael.bauer2@broadcom.com",
         // "mark.ackert@broadcom.com",
         // "daniel.kelosky@broadcom.com"
