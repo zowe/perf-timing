@@ -39,7 +39,10 @@ node('ca-jenkins-agent') {
         ]
     )
 
-    nodejs.buildStage()
+    nodejs.buildStage(timeout: [
+        time: 5,
+        unit: 'Minutes'
+    ])
 
     def UNIT_TEST_ROOT = "__tests__/__results__/unit"
     
@@ -53,10 +56,6 @@ node('ca-jenkins-agent') {
         junitOutput: "${UNIT_TEST_ROOT}/junit/junit.xml",
         cobertura: [
             coberturaReportFile: "${UNIT_TEST_ROOT}/coverage/cobertura-coverage.xml"
-        ],
-        timeout: [
-            time: 5,
-            unit: 'SECONDS'
         ]
     )
 
