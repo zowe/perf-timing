@@ -42,7 +42,7 @@ node('ca-jenkins-agent') {
             sh "npm run test:unit"
         },
         testResults: [dir: "${UNIT_TEST_ROOT}/html", files: "index.html", name: "Perf Timing: Unit Test Report"],
-        coverageResults: [dir: "${TEST_RESULTS}/coverage/lcov-report", files: "index.html", name: "Perf Timing: Code Coverage Report"],
+        coverageResults: [dir: "${UNIT_TEST_ROOT}/coverage/lcov-report", files: "index.html", name: "Perf Timing: Code Coverage Report"],
         junitOutput: "${UNIT_TEST_ROOT}/junit/junit.xml",
         cobertura: [
             coberturaReportFile: "${UNIT_TEST_ROOT}/coverage/cobertura-coverage.xml"
