@@ -33,10 +33,12 @@ node('ca-jenkins-agent') {
     })
 
     nodejs.buildStage()
+
+    def UNIT_TEST_ROOT = "__tests__/__results__/unit"
     
     nodejs.testStage(name: "Unit", testOperation: {
         sh "npm run test:unit"
-    })
+    }, testResults: [dir: "${UNIT_TEST_ROOT}/html", files: "index.html", name: "Perf Timing: Unit Test Report"])
 
     nodejs.end()
 }
