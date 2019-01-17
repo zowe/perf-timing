@@ -34,7 +34,7 @@ node('ca-jenkins-agent') {
             sh "npm run lint"
         },
         timeout: [
-            time: 2
+            time: 2,
             unit: 'MINUTES'
         ]
     )
@@ -56,7 +56,7 @@ node('ca-jenkins-agent') {
         ],
         timeout: [
             time: 5,
-            unit: "SECONDS"
+            unit: 'SECONDS'
         ]
     )
 
