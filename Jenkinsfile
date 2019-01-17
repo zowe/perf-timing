@@ -46,6 +46,10 @@ node('ca-jenkins-agent') {
         junitOutput: "${UNIT_TEST_ROOT}/junit/junit.xml",
         cobertura: [
             coberturaReportFile: "${UNIT_TEST_ROOT}/coverage/cobertura-coverage.xml"
+        ],
+        timeout: [
+            time: 5,
+            unit: "seconds"
         ]
     )
 
