@@ -762,7 +762,7 @@ describe("PerformanceApi", () => {
             });
         });
 
-        /*describe("unwatching a function", () => {
+        describe("unwatching a function", () => {
             const enabled = getManager("WatchEnabled");
             const disabled = getManager("WatchDisabled", false);
 
@@ -848,6 +848,6 @@ describe("PerformanceApi", () => {
                     api.unwatch(timerified, timerKey);
                 }).toThrow(TimerDoesNotExistError);
             });
-        });*/
+        });
     });
 });
