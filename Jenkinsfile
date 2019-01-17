@@ -34,7 +34,9 @@ node('ca-jenkins-agent') {
 
     nodejs.buildStage()
     
-    nodejs.testStage(name: "Unit")
+    nodejs.testStage(name: "Unit", testOperation: {
+        sh "npm run test:unit"
+    })
 
     nodejs.end()
 }
