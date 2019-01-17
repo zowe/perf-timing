@@ -28,9 +28,16 @@ node('ca-jenkins-agent') {
 
     nodejs.setup()
 
-    nodejs.createStage(name: "Lint", stage: {
-        sh "npm run lint"
-    })
+    nodejs.createStage(
+        name: "Lint",
+        stage: {
+            sh "npm run lint"
+        },
+        timeout: [
+            time: 2
+            unit: 'MINUTES'
+        ]
+    )
 
     nodejs.buildStage()
 
@@ -49,7 +56,7 @@ node('ca-jenkins-agent') {
         ],
         timeout: [
             time: 5,
-            unit: "seconds"
+            unit: "SECONDS"
         ]
     )
 
