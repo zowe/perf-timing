@@ -20,6 +20,6 @@ describe("TimerNameConflictError", () => {
     });
 
     it("should fail", () => {
-        fail("boom")
+        fail("boom");
     });
 });
