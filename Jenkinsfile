@@ -1,7 +1,7 @@
-@Library('shared-pipelines@zowe/zowe-cli/139_declarative-to-scripted') import org.zowe.pipelines.NodeJS
+@Library('shared-pipelines@zowe/zowe-cli/139_declarative-to-scripted') import org.zowe.pipelines.nodejs.NodeJSRunner
 
 node('ca-jenkins-agent') {
-    def nodejs = new NodeJS(this)
+    def nodejs = new NodeJSRunner(this)
 
     nodejs.adminEmails = [
         "christopher.wright@broadcom.com",
@@ -61,7 +61,7 @@ node('ca-jenkins-agent') {
     )
 
     nodejs.testStage(
-        name: "Unit 2",
+        name: "Unit 2", //@TODO failing tests
         testOperation: {
             sh "npm run test:unit"
         },
