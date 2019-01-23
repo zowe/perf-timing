@@ -18,8 +18,4 @@ describe("TimerNameConflictError", () => {
         expect(error).toBeInstanceOf(PerformanceApiError);
         expect(error).toMatchSnapshot();
     });
-
-    it("should fail", () => {
-        fail("boom");
-    });
 });
