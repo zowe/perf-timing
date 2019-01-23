@@ -26,6 +26,10 @@ node('ca-jenkins-agent') {
         credentialId: 'GizaArtifactory'
     ]
 
+    nodejs.registryConfig = [
+        [email: nodejs.gitConfig.email]
+    ]
+
     nodejs.setup()
 
     nodejs.createStage(
