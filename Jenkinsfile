@@ -1,14 +1,14 @@
-@Library('shared-pipelines@zowe/zowe-cli/139_declarative-to-scripted') import org.zowe.pipelines.nodejs.NodeJSRunner
+@Library('shared-pipelines') import org.zowe.pipelines.nodejs.NodeJSRunner
 
 node('ca-jenkins-agent') {
     def nodejs = new NodeJSRunner(this)
 
     nodejs.adminEmails = [
         "christopher.wright@broadcom.com",
-        // "fernando.rijocedeno@broadcom.com",
-        // "michael.bauer2@broadcom.com",
-        // "mark.ackert@broadcom.com",
-        // "daniel.kelosky@broadcom.com"
+        "fernando.rijocedeno@broadcom.com",
+        "michael.bauer2@broadcom.com",
+        "mark.ackert@broadcom.com",
+        "daniel.kelosky@broadcom.com"
     ]
 
     nodejs.protectedBranches = [
