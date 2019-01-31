@@ -1,4 +1,4 @@
-@Library('shared-pipelines') import org.zowe.pipelines.nodejs.NodeJSRunner
+@Library('shared-pipelines@zowe/zowe-cli/142') import org.zowe.pipelines.nodejs.NodeJSRunner
 
 node('ca-jenkins-agent') {
     def nodejs = new NodeJSRunner(this)
