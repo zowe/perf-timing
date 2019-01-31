@@ -1,7 +1,7 @@
-@Library('shared-pipelines@zowe/zowe-cli/142') import org.zowe.pipelines.nodejs.NodeJSRunner
+@Library('shared-pipelines@zowe/zowe-cli/142') import org.zowe.pipelines.nodejs.NodeJSPipeline
 
 node('ca-jenkins-agent') {
-    def nodejs = new NodeJSRunner(this)
+    def nodejs = new NodeJSPipeline(this)
 
     nodejs.adminEmails = [
         "christopher.wright@broadcom.com",
