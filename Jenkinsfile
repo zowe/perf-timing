@@ -1,7 +1,5 @@
 @Library('shared-pipelines@zowe/zowe-cli/142') import org.zowe.pipelines.nodejs.NodeJSPipeline
 
-import org.zowe.pipelines.base.models.ProtectedBranchProperties
-
 node('ca-jenkins-agent') {
     def nodejs = new NodeJSPipeline(this)
 
