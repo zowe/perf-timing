@@ -4,16 +4,18 @@ node('ca-jenkins-agent') {
     def nodejs = new NodeJSPipeline(this)
 
     nodejs.adminEmails = [
-        "christopher.wright@broadcom.com",
-        "fernando.rijocedeno@broadcom.com",
-        "michael.bauer2@broadcom.com",
-        "mark.ackert@broadcom.com",
-        "daniel.kelosky@broadcom.com"
+        "christopher.wright@broadcom.com"
+        // "fernando.rijocedeno@broadcom.com",
+        // "michael.bauer2@broadcom.com",
+        // "mark.ackert@broadcom.com",
+        // "daniel.kelosky@broadcom.com"
     ]
 
     nodejs.protectedBranches.addListMap([
-        [name: "master"],
-        [name: "beta"]
+        [name: "master", tag: "daily"],
+        [name: "beta", tag: "beta"],
+        [name: "latest", tag: "beta"],
+        [name: "zowe/zowe-cli/142", tag:"testing-deploy"]
     ])
 
     nodejs.gitConfig = [
