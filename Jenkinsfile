@@ -15,7 +15,11 @@ node('ca-jenkins-agent') {
         [name: "master", tag: "daily"],
         [name: "beta", tag: "beta"],
         [name: "latest", tag: "beta"],
-        [name: "zowe/zowe-cli/142", tag:"testing-deploy"]
+        [
+            name: "zowe/zowe-cli/142",
+            tag: "testing-deploy",
+            dependencies: ["@brightside/core": "@latest"]
+        ]
     ])
 
     nodejs.gitConfig = [
