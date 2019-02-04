@@ -18,7 +18,7 @@ node('ca-jenkins-agent') {
         [
             name: "zowe/zowe-cli/142",
             tag: "testing-deploy",
-            dependencies: ["@brightside/core": "@latest"]
+            dependencies: ["@brightside/core": "latest"]
         ]
     ])
 
