@@ -13,7 +13,10 @@ node('ca-jenkins-agent') {
         "daniel.kelosky@broadcom.com"
     ]
 
-    nodejs.protectedBranches.add(name: "master")
+    nodejs.protectedBranches.addListMap([
+        [name: "master"],
+        [name: "beta"]
+    ])
 
     nodejs.gitConfig = [
         user: 'zowe-robot',
