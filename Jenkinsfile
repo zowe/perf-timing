@@ -28,6 +28,14 @@ node('ca-jenkins-agent') {
         credentialsId: 'zowe-robot-github'
     ]
 
+    nodejs.registryConfig = [
+        [
+            email: nodejs.gitConfig.email,
+            credentialsId: 'GizaArtifactory',
+            url: "https://gizaartifactory.jfrog.io/gizaartifactory/api/npm/npm-release/"
+        ]
+    ]
+
     nodejs.publishConfig = [
         email: nodejs.gitConfig.email,
         credentialsId: 'GizaArtifactory'
