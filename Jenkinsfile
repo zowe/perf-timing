@@ -54,7 +54,7 @@ node('ca-jenkins-agent') {
     
     nodejs.test(
         name: "Unit",
-        testOperation: {
+        operation: {
             sh "npm run test:unit"
         },
         testResults: [dir: "${UNIT_TEST_ROOT}/html", files: "index.html", name: "Perf Timing: Unit Test Report"],
