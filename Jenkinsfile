@@ -74,5 +74,7 @@ node('ca-jenkins-agent') {
         ]
     )
 
+    nodejs.deploy()
+
     nodejs.end()
 }
