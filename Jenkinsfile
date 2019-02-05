@@ -1,5 +1,7 @@
 @Library('shared-pipelines@zowe/zowe-cli/142') import org.zowe.pipelines.nodejs.NodeJSPipeline
 
+import org.zowe.pipelines.nodejs.models.SemverLevel
+
 node('ca-jenkins-agent') {
     def nodejs = new NodeJSPipeline(this)
 
@@ -12,12 +14,15 @@ node('ca-jenkins-agent') {
     ]
 
     nodejs.protectedBranches.addListMap([
-        [name: "master", tag: "daily"],
-        [name: "beta", tag: "beta"],
+        [name: "master", tag: "daily", prerelease: "alpha"],
+        [name: "beta", tag: "beta", prerelease: "beta"],
         [name: "latest", tag: "beta"],
+        [name: "lts-incremental", tag: "lts-incremental", level: SemverLevel.MINOR],
+        [name: "lts-stable", tag: "lts-stable", level: SemverLevel.PATCH],
         [
             name: "zowe/zowe-cli/142",
-            tag: "testing-deploy"
+            tag: "testing-deploy",
+            prerelease: "donotuse"
         ]
     ])
 
