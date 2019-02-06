@@ -15,8 +15,6 @@ node('ca-jenkins-agent') {
 
     nodejs.admins.add("wrich04")
 
-    nodejs.approverIds = ["wrich04"]
-
     nodejs.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
         [name: "beta", tag: "beta", prerelease: "beta"],
