@@ -13,7 +13,7 @@ node('ca-jenkins-agent') {
     //     // "daniel.kelosky@broadcom.com"
     // ]
 
-    nodejs.admins.add("wrich04")
+    nodejs.admins.add("wrich04", "zfernand0")
 
     nodejs.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
