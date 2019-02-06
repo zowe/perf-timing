@@ -13,6 +13,8 @@ node('ca-jenkins-agent') {
         // "daniel.kelosky@broadcom.com"
     ]
 
+    nodejs.approverIds = ["test"]
+
     nodejs.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
         [name: "beta", tag: "beta", prerelease: "beta"],
