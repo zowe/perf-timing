@@ -72,6 +72,8 @@ node('ca-jenkins-agent') {
         ]
     )
 
+    // @TODO add doc task before deploy
+
     nodejs.deploy()
 
     nodejs.end()
