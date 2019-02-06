@@ -5,20 +5,22 @@ import org.zowe.pipelines.nodejs.models.SemverLevel
 node('ca-jenkins-agent') {
     def nodejs = new NodeJSPipeline(this)
 
-    nodejs.adminEmails = [
-        "christopher.wright@broadcom.com"
-        // "fernando.rijocedeno@broadcom.com",
-        // "michael.bauer2@broadcom.com",
-        // "mark.ackert@broadcom.com",
-        // "daniel.kelosky@broadcom.com"
-    ]
+    // nodejs.adminEmails = [
+    //     "christopher.wright@broadcom.com"
+    //     // "fernando.rijocedeno@broadcom.com",
+    //     // "michael.bauer2@broadcom.com",
+    //     // "mark.ackert@broadcom.com",
+    //     // "daniel.kelosky@broadcom.com"
+    // ]
 
-    nodejs.approverIds = ["test"]
+    nodejs.admins.add("wrich04")
+
+    nodejs.approverIds = ["wrich04"]
 
     nodejs.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
         [name: "beta", tag: "beta", prerelease: "beta"],
-        [name: "latest", tag: "beta"],
+        [name: "latest", tag: "latest"],
         [name: "lts-incremental", tag: "lts-incremental", level: SemverLevel.MINOR],
         [name: "lts-stable", tag: "lts-stable", level: SemverLevel.PATCH],
         [
