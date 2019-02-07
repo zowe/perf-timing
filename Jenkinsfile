@@ -24,7 +24,8 @@ node('ca-jenkins-agent') {
         [
             name: "zowe/zowe-cli/142",
             tag: "donotuse",
-            prerelease: "donotuse"
+            prerelease: "donotuse",
+            level: SemverLevel.MINOR
         ]
     ])
 
