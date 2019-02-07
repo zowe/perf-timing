@@ -72,7 +72,6 @@ node('ca-jenkins-agent') {
         ]
     )
 
-    // @TODO add doc task before deploy
     nodejs.createStage(
         name: "Generate Typedoc",
         shouldExecute: {
