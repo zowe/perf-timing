@@ -73,7 +73,7 @@ node('ca-jenkins-agent') {
     )
 
     // @TODO add doc task before deploy
-    // Test that the build can experience a commit comming in before the push
+    // Test that the build can experience a commit comming in before the push test
 
     nodejs.deploy()
 
