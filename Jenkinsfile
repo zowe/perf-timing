@@ -73,6 +73,21 @@ node('ca-jenkins-agent') {
     )
 
     // @TODO add doc task before deploy
+    nodejs.createStage(
+        name: "Generate Typedoc",
+        shouldExecute: {
+            // Only execute the doc generation when the branch is protected
+            return nodejs.protectedBranches.isProtected(BRANCH_NAME)
+        },
+        timeout: [time: 5, unit: 'MINUTES'],
+        stage: {
+           echo "Building documentation"
+           sh "npm run doc"
+           sh "git add README.md ./docs/typedoc"
+           nodejs.gitCommit("Autogenerate Typedoc")
+        }
+    )
+
     nodejs.deploy(
         versionArguments: [timeout: [time: 30, unit: 'MINUTES']]
     )
