@@ -23,7 +23,7 @@ node('ca-jenkins-agent') {
         [name: "lts-stable", tag: "lts-stable", level: SemverLevel.PATCH],
         [
             name: "zowe/zowe-cli/142",
-            tag: "testing-deploy",
+            tag: "donotuse",
             prerelease: "donotuse"
         ]
     ])
@@ -73,7 +73,6 @@ node('ca-jenkins-agent') {
     )
 
     // @TODO add doc task before deploy
-    // TEST test
     nodejs.deploy()
 
     nodejs.end()
