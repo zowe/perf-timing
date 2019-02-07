@@ -20,12 +20,7 @@ node('ca-jenkins-agent') {
         [name: "beta", tag: "beta", prerelease: "beta"],
         [name: "latest", tag: "latest"],
         [name: "lts-incremental", tag: "lts-incremental", level: SemverLevel.MINOR],
-        [name: "lts-stable", tag: "lts-stable", level: SemverLevel.PATCH],
-        [
-            name: "zowe/zowe-cli/142",
-            tag: "donotuse",
-            prerelease: "donotuse"
-        ]
+        [name: "lts-stable", tag: "lts-stable", level: SemverLevel.PATCH]
     ])
 
     nodejs.gitConfig = [
