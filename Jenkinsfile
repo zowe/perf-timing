@@ -24,8 +24,7 @@ node('ca-jenkins-agent') {
         [
             name: "zowe/zowe-cli/142",
             tag: "donotuse",
-            prerelease: "donotuse",
-            level: SemverLevel.MINOR
+            prerelease: "donotuse"
         ]
     ])
 
@@ -74,7 +73,9 @@ node('ca-jenkins-agent') {
     )
 
     // @TODO add doc task before deploy
-    nodejs.deploy()
+    nodejs.deploy(
+        versionArguments: [timeout: [time: 30, unit: 'MINUTES']]
+    )
 
     nodejs.end()
 }
