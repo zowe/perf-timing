@@ -3,14 +3,14 @@
 import org.zowe.pipelines.nodejs.models.SemverLevel
 
 node('ca-jenkins-agent') {
-    def nodejs = new NodeJSPipeline(this)
+    def pipeline = new NodeJSPipeline(this)
 
     // Build admins, users that can approve the build and receieve emails for 
     // all protected branch builds
-    nodejs.admins.add("wrich04", "zfernand0", "mikebauerca", "markackert", "dkelosky")
+    pipeline.admins.add("wrich04", "zfernand0", "mikebauerca", "markackert", "dkelosky")
 
     // Protected branch property definitions
-    nodejs.protectedBranches.addListMap([
+    pipeline.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
         [name: "beta", tag: "beta", prerelease: "beta"],
         [name: "latest", tag: "latest"],
@@ -19,22 +19,22 @@ node('ca-jenkins-agent') {
     ])
 
     // Git configuration information
-    nodejs.gitConfig = [
+    pipeline.gitConfig = [
         email: 'zowe.robot@gmail.com',
         credentialsId: 'zowe-robot-github'
     ]
 
     // npm publish configuration
-    nodejs.publishConfig = [
-        email: nodejs.gitConfig.email,
+    pipeline.publishConfig = [
+        email: pipeline.gitConfig.email,
         credentialsId: 'GizaArtifactory'
     ]
 
     // Initialize the pipeline library, should create 5 steps
-    nodejs.setup()
+    pipeline.setup()
 
     // Create a custom lint stage that runs immediately after the setup.
-    nodejs.createStage(
+    pipeline.createStage(
         name: "Lint",
         stage: {
             sh "npm run lint"
@@ -46,7 +46,7 @@ node('ca-jenkins-agent') {
     )
 
     // Build the application
-    nodejs.build(timeout: [
+    pipeline.build(timeout: [
         time: 5,
         unit: 'MINUTES'
     ])
@@ -54,7 +54,7 @@ node('ca-jenkins-agent') {
     def UNIT_TEST_ROOT = "__tests__/__results__/unit"
     
     // Perform a unit test and capture the results
-    nodejs.test(
+    pipeline.test(
         name: "Unit",
         operation: {
             sh "npm run test:unit"
@@ -69,11 +69,11 @@ node('ca-jenkins-agent') {
 
     // Custom stage to generate the typedoc output, this will only run for a protected
     // branch as long as the build is still successful.
-    nodejs.createStage(
+    pipeline.createStage(
         name: "Generate Typedoc",
         shouldExecute: {
             // Only execute the doc generation when the branch is protected
-            return nodejs.protectedBranches.isProtected(BRANCH_NAME)
+            return pipeline.protectedBranches.isProtected(BRANCH_NAME)
         },
         timeout: [time: 5, unit: 'MINUTES'],
         stage: {
@@ -86,11 +86,11 @@ node('ca-jenkins-agent') {
 
     // Deploys the application if on a protected branch. Give the version input
     // 30 minutes before an auto timeout approve.
-    nodejs.deploy(
+    pipeline.deploy(
         versionArguments: [timeout: [time: 30, unit: 'MINUTES']]
     )
 
     // Once called, no stages can be added and all added stages will be executed. On completion
     // appropriate emails will be sent out by the shared library.
-    nodejs.end()
+    pipeline.end()
 }
