@@ -9,6 +9,7 @@ node('ca-jenkins-agent') {
     // all protected branch builds
     nodejs.admins.add("wrich04", "zfernand0", "mikebauerca", "markackert", "dkelosky")
 
+    // Protected branch property definitions
     nodejs.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
         [name: "beta", tag: "beta", prerelease: "beta"],
@@ -17,18 +18,22 @@ node('ca-jenkins-agent') {
         [name: "lts-stable", tag: "lts-stable", level: SemverLevel.PATCH]
     ])
 
+    // Git configuration information
     nodejs.gitConfig = [
         email: 'zowe.robot@gmail.com',
         credentialsId: 'zowe-robot-github'
     ]
 
+    // npm publish configuration
     nodejs.publishConfig = [
         email: nodejs.gitConfig.email,
         credentialsId: 'GizaArtifactory'
     ]
 
+    // Initialize the pipeline library, should create 5 steps
     nodejs.setup()
 
+    // Create a custom lint stage that runs immediately after the setup.
     nodejs.createStage(
         name: "Lint",
         stage: {
@@ -40,6 +45,7 @@ node('ca-jenkins-agent') {
         ]
     )
 
+    // Build the application
     nodejs.build(timeout: [
         time: 5,
         unit: 'MINUTES'
@@ -47,6 +53,7 @@ node('ca-jenkins-agent') {
 
     def UNIT_TEST_ROOT = "__tests__/__results__/unit"
     
+    // Perform a unit test and capture the results
     nodejs.test(
         name: "Unit",
         operation: {
@@ -60,6 +67,8 @@ node('ca-jenkins-agent') {
         ]
     )
 
+    // Custom stage to generate the typedoc output, this will only run for a protected
+    // branch as long as the build is still successful.
     nodejs.createStage(
         name: "Generate Typedoc",
         shouldExecute: {
@@ -75,9 +84,13 @@ node('ca-jenkins-agent') {
         }
     )
 
+    // Deploys the application if on a protected branch. Give the version input
+    // 30 minutes before an auto timeout approve.
     nodejs.deploy(
         versionArguments: [timeout: [time: 30, unit: 'MINUTES']]
     )
 
+    // Once called, no stages can be added and all added stages will be executed. On completion
+    // appropriate emails will be sent out by the shared library.
     nodejs.end()
 }
