@@ -3,10 +3,11 @@
 import org.zowe.pipelines.nodejs.models.SemverLevel
 
 node('ca-jenkins-agent') {
+    // Initialize the pipeline
     def pipeline = new NodeJSPipeline(this)
 
     // Build admins, users that can approve the build and receieve emails for 
-    // all protected branch builds
+    // all protected branch builds.
     pipeline.admins.add("wrich04", "zfernand0", "mikebauerca", "markackert", "dkelosky")
 
     // Protected branch property definitions
@@ -80,7 +81,7 @@ node('ca-jenkins-agent') {
            echo "Building documentation"
            sh "npm run doc"
            sh "git add README.md ./docs/typedoc"
-           nodejs.gitCommit("Autogenerate Typedoc")
+           pipeline.gitCommit("Autogenerate Typedoc")
         }
     )
 
