@@ -24,7 +24,6 @@ node('ca-jenkins-agent') {
     ])
 
     nodejs.gitConfig = [
-        user: 'zowe-robot',
         email: 'zowe.robot@gmail.com',
         credentialsId: 'zowe-robot-github'
     ]
