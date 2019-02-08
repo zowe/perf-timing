@@ -86,7 +86,5 @@ node('ca-jenkins-agent') {
         versionArguments: [timeout: [time: 30, unit: 'MINUTES']]
     )
 
-    // Test
-
     nodejs.end()
 }
