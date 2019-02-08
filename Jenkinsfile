@@ -5,15 +5,9 @@ import org.zowe.pipelines.nodejs.models.SemverLevel
 node('ca-jenkins-agent') {
     def nodejs = new NodeJSPipeline(this)
 
-    // nodejs.adminEmails = [
-    //     "christopher.wright@broadcom.com"
-    //     // "fernando.rijocedeno@broadcom.com",
-    //     // "michael.bauer2@broadcom.com",
-    //     // "mark.ackert@broadcom.com",
-    //     // "daniel.kelosky@broadcom.com"
-    // ]
-
-    nodejs.admins.add("wrich04", "zfernand0")
+    // Build admins, users that can approve the build and receieve emails for 
+    // all protected branch builds
+    nodejs.admins.add("wrich04", "zfernand0", "mikebauerca", "markackert", "dkelosky")
 
     nodejs.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
