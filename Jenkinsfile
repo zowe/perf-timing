@@ -11,7 +11,7 @@ node('ca-jenkins-agent') {
     pipeline.admins.add("wrich04", "zfernand0", "mikebauerca", "markackert", "dkelosky")
 
     // Protected branch property definitions
-    pipeline.protectedBranches.add([
+    pipeline.protectedBranches.addListMap([
         [name: "master", tag: "daily", prerelease: "alpha"],
         [name: "beta", tag: "beta", prerelease: "beta"],
         [name: "latest", tag: "latest"],
