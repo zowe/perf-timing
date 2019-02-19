@@ -1,24 +1,20 @@
 {
   "name": "@zowe/perf-timing",
-  "version": "1.0.1-donotuse.201902071942",
+  "version": "1.0.2-alpha.201902191547",
   "description": "Wrapper around the Node JS Performance Timing APIs",
   "license": "EPL-2.0",
   "repository": "https://github.com/zowe/perf-timing",
   "author": "Broadcom",
-  "keywords": [
+  "keywords":   [
     "performance testing",
     "performance",
     "performance timing api"
   ],
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "registry": "https://gizaartifactory.jfrog.io/gizaartifactory/api/npm/npm-local-release/"
-  },
+  "files": ["lib"],
+  "publishConfig": {"registry": "https://gizaartifactory.jfrog.io/gizaartifactory/api/npm/npm-local-release/"},
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "scripts": {
+  "scripts":   {
     "build": "tsc",
     "build:rules": "tsc --build ./lint-rules/tsconfig.json",
     "predoc": "ts-node ./docs/build-utilities/typedoc-includes/buildIncludes.ts",
@@ -32,11 +28,11 @@
     "test:integration": "env-cmd ./__tests__/config/integration/.env.js --no-override jest -c ./__tests__/config/integration/jest.config.json",
     "test:unit": "env-cmd ./__tests__/config/unit/.env.js --no-override jest -c ./__tests__/config/unit/jest.config.json"
   },
-  "dependencies": {
+  "dependencies":   {
     "fs-extra": "7.0.1",
     "pkg-up": "2.0.0"
   },
-  "devDependencies": {
+  "devDependencies":   {
     "@types/fs-extra": "5.0.4",
     "@types/jest": "23.3.11",
     "@types/node": "8.10.37",
@@ -59,7 +55,5 @@
     "typedoc-plugin-sourcefile-url": "1.0.3",
     "typescript": "3.2.1"
   },
-  "engines": {
-    "node": ">=8.5.0"
-  }
+  "engines": {"node": ">=8.5.0"}
 }
