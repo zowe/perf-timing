@@ -23,8 +23,7 @@ node('ca-jenkins-agent') {
 
     // Protected branch property definitions
     pipeline.protectedBranches.addMap([
-        [name: "master", tag: "daily", prerelease: "alpha"],
-        [name: "latest", tag: "latest", autoDeploy: true],
+        [name: "master", tag: "latest"],
     ])
 
     // Git configuration information
