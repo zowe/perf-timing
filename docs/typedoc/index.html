@@ -68,11 +68,17 @@
  DO NOT MODIFY!
  Generated from /home/jenkins/workspace/we_CLI_-_Performance_master-XVR5DYY5FP3JVHYJIK5P7I4QGOKGZXWQFW7Z2O3UDAQCJCMKMKDQ/docs/build-utilities/typedoc-includes/src/README.md
 -->
-				<h1 id="performance-timing-utility">Performance Timing Utility</h1>
+				<a href="#performance-timing-utility" id="performance-timing-utility" style="color: inherit; text-decoration: none;">
+					<h1>Performance Timing Utility</h1>
+				</a>
 				<p>Use the performance timing utility to diagnose problem areas and bottlenecks in applications.</p>
-				<h2 id="installing">Installing</h2>
+				<a href="#installing" id="installing" style="color: inherit; text-decoration: none;">
+					<h2>Installing</h2>
+				</a>
 				<p>You install the utility as a dependency using npm: <code>npm install @zowe/perf-timing --save</code></p>
-				<h2 id="overview">Overview</h2>
+				<a href="#overview" id="overview" style="color: inherit; text-decoration: none;">
+					<h2>Overview</h2>
+				</a>
 				<p>The perf-timing library provides functions that are called within a node application. The functions gather metrics on the run times of the application. The utility can capture the following metrics (this is not an exhaustive list):</p>
 				<ul>
 					<li>The length of time that an application spends requiring other modules before execution.</li>
@@ -82,10 +88,14 @@
 				</ul>
 				<p>After the desired metric gathering calls are in place, you must enable the performance measurements.</p>
 				<p>By default, the utility does not capture metrics, which allows the application to run without the interference from the overhead of capturing performance metrics. To enable metric gathering, you define the value of the <code>PERF_TIMING_ENABLED</code> environmental variable to true. When the application is finished executing, the utility outputs metrics to a JSON file in the directory specified by the <code>PERF_TIMING_IO_SAVE_DIR</code> environmental variable. For more information about environmental variables, see the following topics.</p>
-				<h3 id="environmental-variables">Environmental Variables</h3>
+				<a href="#environmental-variables" id="environmental-variables" style="color: inherit; text-decoration: none;">
+					<h3>Environmental Variables</h3>
+				</a>
 				<p>The <code>zowe/@perf-timing</code> library is controlled by the following environmental variables:</p>
 				<p><strong>Note:</strong> All environmental variables are prefixed with <code>PERF_TIMING</code>.</p>
-				<h4 id="performance-variables">Performance Variables</h4>
+				<a href="#performance-variables" id="performance-variables" style="color: inherit; text-decoration: none;">
+					<h4>Performance Variables</h4>
+				</a>
 				<p>The following environmental variables affect the operation of the library:</p>
 				<table>
 					<thead>
@@ -103,7 +113,9 @@
 							<td>Set the value of the variable to <code>TRUE</code> to enable the performance metric gathering. Any value other than <code>TRUE</code> disables performance monitoring. For implications of this, see the various method documentation in the <a href="classes/performanceapi.html">PerformanceApi</a> class.</td>
 						</tr>
 				</tbody></table>
-				<h4 id="io-variables">IO Variables</h4>
+				<a href="#io-variables" id="io-variables" style="color: inherit; text-decoration: none;">
+					<h4>IO Variables</h4>
+				</a>
 				<p>The following environmental variables affect the io operations of the library:</p>
 				<table>
 					<thead>
@@ -137,7 +149,9 @@
     <span class="hljs-built_in">set</span> PERF_TIMING_IO_SAVE_DIR=C:\<span class="hljs-built_in">path</span>\to\save\location
     <span class="hljs-keyword">call</span> node C:\<span class="hljs-built_in">path</span>\to\your\app.js
 <span class="hljs-built_in">endlocal</span></code></pre>
-				<h3 id="measuring-code-execution-time">Measuring Code Execution Time</h3>
+				<a href="#measuring-code-execution-time" id="measuring-code-execution-time" style="color: inherit; text-decoration: none;">
+					<h3>Measuring Code Execution Time</h3>
+				</a>
 				<p>As you discover performance issues within in a node application, the next step is to identify where the performance issues are occurring. One way to identify for issues is to examine how much time elapsed for a given piece of code to execute. <code>@zowe/perf-timing</code> provides a means to measure the time it takes to execute a piece of code.</p>
 				<p>For example, you have an application that loops 10,000 times and increments a counter variable.</p>
 				<pre><code class="language-TypeScript"><span class="hljs-keyword">let</span> value = <span class="hljs-number">0</span>;
@@ -177,7 +191,9 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li>See <a href="classes/performanceapi.html#mark">PerformanceApi.mark</a></li>
 					<li>See <a href="classes/performanceapi.html#measure">PerformanceApi.measure</a></li>
 				</ul>
-				<h3 id="measuring-time-spent-in-a-specific-function">Measuring Time Spent in a Specific Function</h3>
+				<a href="#measuring-time-spent-in-a-specific-function" id="measuring-time-spent-in-a-specific-function" style="color: inherit; text-decoration: none;">
+					<h3>Measuring Time Spent in a Specific Function</h3>
+				</a>
 				<p>Another utility that the tool provides is a hook into a specific function call. The utility hooks into the function call by watching the function.</p>
 				<p>While a function is watched, each call will be monitored by node and saved when the application exits. The following metrics are gathered while a function is watched:</p>
 				<ul>
@@ -248,7 +264,7 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li class=" tsd-kind-class">
 						<a href="classes/duplicatevarerror.html" class="tsd-kind-icon">Duplicate<wbr>Var<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-class tsd-is-external tsd-is-not-exported">
+					<li class=" tsd-kind-class tsd-is-not-exported">
 						<a href="classes/environmentmanager.html" class="tsd-kind-icon">Environment<wbr>Manager</a>
 					</li>
 					<li class=" tsd-kind-class">
@@ -275,16 +291,16 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li class=" tsd-kind-class">
 						<a href="classes/typemismatcherror.html" class="tsd-kind-icon">Type<wbr>Mismatch<wbr>Error</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter tsd-is-external">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/icollectionobserver.html" class="tsd-kind-icon">ICollection<wbr>Observer</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/ifunctionobserver.html" class="tsd-kind-icon">IFunction<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/imeasuremententry.html" class="tsd-kind-icon">IMeasurement<wbr>Entry</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/imeasurementobserver.html" class="tsd-kind-icon">IMeasurement<wbr>Observer</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter">
@@ -308,8 +324,11 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/iperformancemetrics.html" class="tsd-kind-icon">IPerformance<wbr>Metrics</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-is-external">
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/iperformanceobserver.html" class="tsd-kind-icon">IPerformance<wbr>Observer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iperformanceobserverobserveoptions.html" class="tsd-kind-icon">IPerformance<wbr>Observer<wbr>Observe<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/isysteminformation.html" class="tsd-kind-icon">ISystem<wbr>Information</a>
@@ -320,7 +339,7 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li class=" tsd-kind-interface tsd-is-not-exported">
 						<a href="interfaces/isystemnetwork.html" class="tsd-kind-icon">ISystem<wbr>Network</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-has-type-parameter tsd-is-external">
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 						<a href="globals.html#collectionmap" class="tsd-kind-icon">Collection<wbr>Map</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
@@ -329,16 +348,16 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#measurementmetric" class="tsd-kind-icon">Measurement<wbr>Metric</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
 						<a href="globals.html#validdefaults" class="tsd-kind-icon">Valid<wbr>Defaults</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
 						<a href="globals.html#validdefaultsstrings" class="tsd-kind-icon">Valid<wbr>Defaults<wbr>Strings</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external tsd-is-not-exported">
+					<li class=" tsd-kind-type-alias tsd-is-not-exported">
 						<a href="globals.html#validationfunction" class="tsd-kind-icon">Validation<wbr>Function</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-is-external">
+					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#_globaltype" class="tsd-kind-icon">_<wbr>Global<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-is-not-exported">
@@ -350,22 +369,22 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#env_prefix" class="tsd-kind-icon">ENV_<wbr>PREFIX</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-external">
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#environment" class="tsd-kind-icon">Environment</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-external">
+					<li class=" tsd-kind-variable">
 						<a href="globals.html#global_symbol" class="tsd-kind-icon">GLOBAL_<wbr>SYMBOL</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#perftiming" class="tsd-kind-icon">Perf<wbr>Timing</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-is-external tsd-is-not-exported">
+					<li class=" tsd-kind-variable tsd-is-not-exported">
 						<a href="globals.html#global" class="tsd-kind-icon">global</a>
 					</li>
-					<li class=" tsd-kind-function tsd-is-external tsd-is-not-exported">
+					<li class=" tsd-kind-function tsd-is-not-exported">
 						<a href="globals.html#getmetricfilename" class="tsd-kind-icon">get<wbr>Metric<wbr>File<wbr>Name</a>
 					</li>
-					<li class=" tsd-kind-function tsd-is-external">
+					<li class=" tsd-kind-function">
 						<a href="globals.html#savemetrics" class="tsd-kind-icon">save<wbr>Metrics</a>
 					</li>
 				</ul>
@@ -385,6 +404,7 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -433,7 +453,7 @@ api.measure(<span class="hljs-string">"Point A to B"</span>, <span class="hljs-s
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>

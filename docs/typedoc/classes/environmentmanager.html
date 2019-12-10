@@ -73,6 +73,10 @@
 							that while this class is not exported, a singleton object is exported via
 						<a href="../globals.html#environment">Environment</a>.</p>
 					</div>
+					<dl class="tsd-comment-tags">
+						<dt>internal</dt>
+						<dd></dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
@@ -114,7 +118,7 @@
 					<div class="tsd-signature tsd-kind-icon">_registered<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/a6e2f3a/src/environment/Environment.ts#L51">environment/Environment.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/environment/Environment.ts#L51">src/environment/Environment.ts:51</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -146,7 +150,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/a6e2f3a/src/environment/Environment.ts#L189">environment/Environment.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/environment/Environment.ts#L189">src/environment/Environment.ts:189</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -184,14 +188,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/a6e2f3a/src/environment/Environment.ts#L72">environment/Environment.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/environment/Environment.ts#L72">src/environment/Environment.ts:72</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Gets the numeric value of an environmental variable.</p>
 								</div>
-								<h4 id="example">Example</h4>
+								<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+									<h4>Example</h4>
+								</a>
 								<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"SOME_KEY"</span>, <span class="hljs-number">5</span>);
 
 <span class="hljs-comment">// Logs the numeric value of process.env["SOME_KEY"] if it is set and is a number.</span>
@@ -233,14 +239,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/a6e2f3a/src/environment/Environment.ts#L104">environment/Environment.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/environment/Environment.ts#L104">src/environment/Environment.ts:104</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Gets the string value of an environmental variable.</p>
 								</div>
-								<h4 id="example">Example</h4>
+								<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+									<h4>Example</h4>
+								</a>
 								<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"SOME_KEY"</span>, <span class="hljs-string">"THIS IS A TEST"</span>);
 
 <span class="hljs-comment">// Logs the numeric value of process.env["SOME_KEY"] if it is set.</span>
@@ -282,7 +290,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/a6e2f3a/src/environment/Environment.ts#L136">environment/Environment.ts:136</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/environment/Environment.ts#L136">src/environment/Environment.ts:136</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -296,7 +304,9 @@
 								<p>An environment variable must be first registered through the <a href="environmentmanager.html#register">register</a>
 									method. Any attempts to access a non-registered variable will lead to a
 								<a href="notregisterederror.html">NotRegisteredError</a>.</p>
-								<h4 id="example">Example</h4>
+								<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+									<h4>Example</h4>
+								</a>
 								<pre><code class="language-typescript">Environment.register(<span class="hljs-string">"SOME_KEY"</span>, <span class="hljs-string">"TEST"</span>);
 
 <span class="hljs-comment">// Logs the value of process.env["SOME_KEY"] if it exists</span>
@@ -338,7 +348,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/a6e2f3a/src/environment/Environment.ts#L172">environment/Environment.ts:172</a></li>
+									<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/environment/Environment.ts#L172">src/environment/Environment.ts:172</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -349,7 +359,9 @@
 									to the application with a default value. The default value will ensure
 									that type checking happens on the typed methods and that a valid value
 								is always returned by those methods in the absence of the environment key.</p>
-								<h4 id="example">Example</h4>
+								<a href="#example" id="example" style="color: inherit; text-decoration: none;">
+									<h4>Example</h4>
+								</a>
 								<pre><code class="language-typescript">Environment
   .register(<span class="hljs-string">"A"</span>, <span class="hljs-number">5</span>)
   .register(<span class="hljs-string">"B"</span>, <span class="hljs-string">"Hello"</span>)
@@ -398,7 +410,7 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-is-external tsd-is-not-exported">
+					<li class="current tsd-kind-class tsd-is-not-exported">
 						<a href="environmentmanager.html" class="tsd-kind-icon">Environment<wbr>Manager</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-not-exported">
@@ -440,6 +452,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -488,7 +501,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

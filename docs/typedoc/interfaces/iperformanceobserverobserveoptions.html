@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IFunctionObserver | @zowe/perf-timing</title>
+	<title>IPerformanceObserverObserveOptions | @zowe/perf-timing</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,38 +56,21 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="ifunctionobserver.html">IFunctionObserver</a>
+					<a href="iperformanceobserverobserveoptions.html">IPerformanceObserverObserveOptions</a>
 				</li>
 			</ul>
-			<h1>Interface IFunctionObserver</h1>
+			<h1>Interface IPerformanceObserverObserveOptions</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Properties of a named function observer that was created with the
-						<a href="../classes/performanceapi.html#watch">PerformanceApi.watch</a> function.</p>
-					</div>
-					<dl class="tsd-comment-tags">
-						<dt>internal</dt>
-						<dd></dd>
-					</dl>
-				</div>
-			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="icollectionobserver.html" class="tsd-signature-type">ICollectionObserver</a><span class="tsd-signature-symbol">&lt;</span><a href="iperformanceentry.html" class="tsd-signature-type">IPerformanceEntry</a><span class="tsd-signature-symbol">&gt;</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">IFunctionObserver</span>
-							</li>
-						</ul>
+						<span class="target">IPerformanceObserverObserveOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -98,10 +81,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="ifunctionobserver.html#entries" class="tsd-kind-icon">entries</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="ifunctionobserver.html#isconnected" class="tsd-kind-icon">is<wbr>Connected</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="ifunctionobserver.html#observer" class="tsd-kind-icon">observer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ifunctionobserver.html#originalfunction" class="tsd-kind-icon">original<wbr>Function</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iperformanceobserverobserveoptions.html#buffered" class="tsd-kind-icon">buffered</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iperformanceobserverobserveoptions.html#entrytypes" class="tsd-kind-icon">entry<wbr>Types</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,90 +90,35 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="entries" class="tsd-anchor"></a>
-					<h3>entries</h3>
-					<div class="tsd-signature tsd-kind-icon">entries<span class="tsd-signature-symbol">:</span> <a href="iperformanceentry.html" class="tsd-signature-type">IPerformanceEntry</a><span class="tsd-signature-symbol">[]</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="buffered" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> buffered</h3>
+					<div class="tsd-signature tsd-kind-icon">buffered<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="icollectionobserver.html">ICollectionObserver</a>.<a href="icollectionobserver.html#entries">entries</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/performance/api/interfaces/ICollectionObserver.ts#L30">src/performance/api/interfaces/ICollectionObserver.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/performance/api/interfaces/IPerformanceObserverObserveOptions.ts#L16">src/performance/api/interfaces/IPerformanceObserverObserveOptions.ts:16</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>A collection of performance data captured by the node performance observer.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="isconnected" class="tsd-anchor"></a>
-					<h3>is<wbr>Connected</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Connected<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="icollectionobserver.html">ICollectionObserver</a>.<a href="icollectionobserver.html#isconnected">isConnected</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/performance/api/interfaces/ICollectionObserver.ts#L36">src/performance/api/interfaces/ICollectionObserver.ts:36</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Is the current node performance observer connected. If it is not connected,
-							then a new one must be created to continue collection under this observer.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="observer" class="tsd-anchor"></a>
-					<h3>observer</h3>
-					<div class="tsd-signature tsd-kind-icon">observer<span class="tsd-signature-symbol">:</span> <a href="iperformanceobserver.html" class="tsd-signature-type">IPerformanceObserver</a></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="icollectionobserver.html">ICollectionObserver</a>.<a href="icollectionobserver.html#observer">observer</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/performance/api/interfaces/ICollectionObserver.ts#L41">src/performance/api/interfaces/ICollectionObserver.ts:41</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The underlying performance observer responsible for collecting metrics.</p>
+							<p>If true, the notification callback will be called using setImmediate() and multiple PerformanceEntry instance notifications
+							will be buffered internally. If false, notifications will be immediate and synchronous.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="originalfunction" class="tsd-anchor"></a>
-					<h3>original<wbr>Function</h3>
-					<div class="tsd-signature tsd-kind-icon">original<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<a name="entrytypes" class="tsd-anchor"></a>
+					<h3>entry<wbr>Types</h3>
+					<div class="tsd-signature tsd-kind-icon">entry<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/performance/api/interfaces/IFunctionObserver.ts#L26">src/performance/api/interfaces/IFunctionObserver.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/zowe/perf-timing/blob/ffac325/src/performance/api/interfaces/IPerformanceObserverObserveOptions.ts#L21">src/performance/api/interfaces/IPerformanceObserverObserveOptions.ts:21</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The original function that was watched. Used by <a href="../classes/performanceapi.html#unwatch">PerformanceApi.unwatch</a>
-							to reinstate the original function when requested.</p>
+							<p>An array of strings identifying the types of PerformanceEntry instances the observer is interested in.</p>
 						</div>
-					</div>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
 					</div>
 				</section>
 			</section>
@@ -210,19 +136,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="ifunctionobserver.html" class="tsd-kind-icon">IFunction<wbr>Observer</a>
+						<a href="iperformanceobserverobserveoptions.html" class="tsd-kind-icon">IPerformance<wbr>Observer<wbr>Observe<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="ifunctionobserver.html#entries" class="tsd-kind-icon">entries</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="ifunctionobserver.html#isconnected" class="tsd-kind-icon">is<wbr>Connected</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="ifunctionobserver.html#observer" class="tsd-kind-icon">observer</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iperformanceobserverobserveoptions.html#buffered" class="tsd-kind-icon">buffered</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="ifunctionobserver.html#originalfunction" class="tsd-kind-icon">original<wbr>Function</a>
+								<a href="iperformanceobserverobserveoptions.html#entrytypes" class="tsd-kind-icon">entry<wbr>Types</a>
 							</li>
 						</ul>
 					</li>
