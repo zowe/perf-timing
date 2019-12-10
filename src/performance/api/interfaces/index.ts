@@ -19,4 +19,5 @@ export * from "./IMetrics";
 export * from "./INodeTiming";
 export * from "./IPerformanceEntry";
 export * from "./IPerformanceObserver";
+export * from "./IPerformanceObserverObserveOptions";
 export * from "./ISystemInformation";

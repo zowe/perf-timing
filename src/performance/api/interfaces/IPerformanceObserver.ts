@@ -9,6 +9,8 @@
  *
  */
 
+import { IPerformanceObserverObserveOptions } from "./IPerformanceObserverObserveOptions";
+
 /**
  * This interface is a wrapper around the NodeJS PerformanceObserver class.
  *
@@ -21,12 +23,15 @@
  */
 export interface IPerformanceObserver {
     /**
+     * Disconnects the PerformanceObserver instance from all notifications
      * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver PerformanceObserver}
      */
     disconnect(): void;
 
     /**
+     * Subscribes the PerformanceObserver instance to notifications of new PerformanceEntry instances identified by options.entryTypes
      * @see {@link https://nodejs.org/api/perf_hooks.html#perf_hooks_class_performanceobserver PerformanceObserver}
+     * @param options Options object providing the entry types
      */
-    observe(options: { buffered?: boolean, entryTypes: string[] }): void;
+    observe(options: IPerformanceObserverObserveOptions): void;
 }
