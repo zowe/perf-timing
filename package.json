@@ -37,15 +37,15 @@
     "pkg-up": "2.0.0"
   },
   "devDependencies": {
-    "@types/fs-extra": "5.0.4",
-    "@types/jest": "23.3.11",
-    "@types/node": "8.10.37",
+    "@types/fs-extra": "5.1.0",
+    "@types/jest": "23.3.13",
+    "@types/node": "8.10.59",
     "@types/pkg-up": "2.0.0",
     "env-cmd": "^8.0.2",
     "jest": "^24.8.0",
-    "jest-html-reporter": "2.4.2",
+    "jest-html-reporter": "2.5.0",
     "jest-junit": "6.3.0",
-    "jest-stare": "^1.11.0",
+    "jest-stare": "^1.11.1",
     "ncp": "^2.0.0",
     "ts-jest": "24.2.0",
     "ts-node": "7.0.1",
@@ -56,7 +56,7 @@
     "typedoc-plugin-example-tag": "1.0.2",
     "typedoc-plugin-internal-external": "1.0.10",
     "typedoc-plugin-nojekyll": "1.0.1",
-    "typescript": "3.2.1"
+    "typescript": "3.2.2"
   },
   "engines": {
     "node": ">=8.5.0"
