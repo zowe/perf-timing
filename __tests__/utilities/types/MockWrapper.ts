@@ -14,7 +14,7 @@
  * easier types of jest mock objects in unit tests.
  */
 export type MockWrapper<T> = {
-    [M in keyof T]: jest.Mock<T[M]>
+    [M in keyof T]: jest.Mock<Partial<T[M]>>
 };
 
 /**
