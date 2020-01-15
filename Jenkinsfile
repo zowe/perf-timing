@@ -35,7 +35,8 @@ node('ca-jenkins-agent') {
     // npm publish configuration
     pipeline.publishConfig = [
         email: pipeline.gitConfig.email,
-        credentialsId: 'zowe.jfrog.io'
+        credentialsId: 'zowe.jfrog.io',
+        scope: '@zowe'
     ]
 
     // Initialize the pipeline library, should create 5 steps
