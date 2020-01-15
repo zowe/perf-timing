@@ -3,6 +3,7 @@
     "exclude": "**/__tests__/**",
     "ignoreCompilerErrors": true,
     "mode": "file",
+    "plugin": ["typedoc-plugin-example-tag"],
     "excludeExternals": false,
     "includes": "./docs/build-utilities/typedoc-includes/resolved",
     "theme": "./docs/build-utilities/typedoc-theme"
