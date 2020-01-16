@@ -17,14 +17,14 @@ node('ca-jenkins-agent') {
     // Initialize the pipeline
     def pipeline = new NodeJSPipeline(this)
 
-    // Build admins, users that can approve the build and receieve emails for 
+    // Build admins, users that can approve the build and receieve emails for
     // all protected branch builds.
     pipeline.admins.add("zfernand0", "mikebauerca", "markackert", "dkelosky")
 
     // Protected branch property definitions
     pipeline.protectedBranches.addMap([
-        [name: "master", tag: "latest"],
-        [name: "zowe-v1-lts", tag: "zowe-v1-lts"]
+        [name: "master", tag: "latest", aliasTags: ["zowe-v1-lts"]]
+        //[name: "zowe-v1-lts", tag: "zowe-v1-lts"]
     ])
 
     // Git configuration information
@@ -62,7 +62,7 @@ node('ca-jenkins-agent') {
     ])
 
     def UNIT_TEST_ROOT = "__tests__/__results__/unit"
-    
+
     // Perform a unit test and capture the results
     pipeline.test(
         name: "Unit",
