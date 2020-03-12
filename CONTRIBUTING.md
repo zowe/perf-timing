@@ -32,4 +32,4 @@ Versioning conventions for Zowe CLI and Plug-ins| [Versioning Guidelines](https:
 The following guidelines apply specifically to the perf-timing project:
 
 - Do not duplicate top level describes in different test files.
-- Do not use a . character in a describe name string. This affects the formatting of the JUnit output on Jenkins.
+- Do not use a `.` character in a describe name string. This affects the formatting of the JUnit output on Jenkins.
